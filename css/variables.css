@@ -1,0 +1,98 @@
+/* ============================================
+   CSS VARIABLES & THEME DEFINITIONS
+============================================ */
+
+:root, [data-theme="light"] {
+    /* Primary Colors */
+    --primary: #1e3a5f;
+    --primary-light: #2d5a87;
+    --primary-dark: #0f2744;
+    
+    /* Secondary & Accent Colors */
+    --secondary: #3498db;
+    --accent: #00bcd4;
+    --accent-yellow: #ffc107;
+    
+    /* Status Colors */
+    --danger: #e74c3c;
+    --success: #27ae60;
+    --warning: #f39c12;
+    
+    /* Background Colors */
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #e8eef5;
+    --bg-card: #ffffff;
+    --bg-hover: #e1e8f0;
+    
+    /* Text Colors */
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --text-inverse: #ffffff;
+    
+    /* Border & Shadow */
+    --border-color: #d2dae4;
+    --shadow-color: rgba(30, 58, 95, 0.1);
+    --shadow: 0 4px 15px var(--shadow-color);
+    --shadow-lg: 0 10px 30px var(--shadow-color);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-light));
+    --gradient-accent: linear-gradient(135deg, var(--secondary), var(--accent));
+    
+    /* Border Radius */
+    --border-radius: 16px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 24px;
+    
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    
+    /* Transitions */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+    /* Primary Colors */
+    --primary: #4a90d9;
+    --primary-light: #6ba3e0;
+    --primary-dark: #2d5a87;
+    
+    /* Secondary & Accent Colors */
+    --secondary: #5dade2;
+    --accent: #26c6da;
+    --accent-yellow: #ffd54f;
+    
+    /* Status Colors */
+    --danger: #ef5350;
+    --success: #66bb6a;
+    --warning: #ffca28;
+    
+    /* Background Colors */
+    --bg-primary: #0a1628;
+    --bg-secondary: #0f2744;
+    --bg-tertiary: #162d4a;
+    --bg-card: #1a3a5c;
+    --bg-hover: #1e4a6f;
+    
+    /* Text Colors */
+    --text-primary: #e8f0f8;
+    --text-secondary: #b8c8d8;
+    --text-muted: #8a9eb5;
+    --text-inverse: #0a1628;
+    
+    /* Border & Shadow */
+    --border-color: #2d4a6a;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --shadow: 0 4px 20px var(--shadow-color);
+    --shadow-lg: 0 10px 40px var(--shadow-color);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #1e3a5f, #2d5a87);
+    --gradient-accent: linear-gradient(135deg, #3498db, #00bcd4);
+}

@@ -1,0 +1,158 @@
+/* ============================================
+   CALCULATOR & REVENUE STYLES
+============================================ */
+
+/* Land Unit Selector */
+.land-unit-selector {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.land-unit-btn {
+    flex: 1;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.land-unit-btn.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.land-unit-btn:hover:not(.active) {
+    border-color: var(--primary-light);
+}
+
+.unit-conversion {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: var(--spacing-xs);
+    padding: var(--spacing-xs);
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius-sm);
+}
+
+/* Calculator Results */
+.results-container {
+    display: block;
+}
+
+.result-card {
+    background: var(--bg-tertiary);
+    border-left: 4px solid var(--primary);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+[data-theme="dark"] .result-card {
+    border-left-color: var(--accent);
+}
+
+.result-card .result-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.result-card .result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.total-card {
+    background: var(--gradient-primary);
+    color: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+[data-theme="dark"] .total-card {
+    background: var(--gradient-accent);
+}
+
+.total-card h3 {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: var(--spacing-xs);
+}
+
+.total-card .total-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Revenue Section */
+.revenue-card {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    text-align: center;
+}
+
+.revenue-card .revenue-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.revenue-card h3 {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.revenue-card .revenue-value {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: var(--spacing-sm) 0;
+}
+
+.revenue-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.breakdown-item {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.breakdown-item i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+[data-theme="dark"] .breakdown-item i {
+    color: var(--accent);
+}
+
+.breakdown-item .label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.breakdown-item .value {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}

@@ -1,0 +1,199 @@
+/* Session Dashboard Styles */
+.session-dashboard {
+    padding: var(--spacing-sm);
+}
+
+.session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.session-crop {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.crop-icon-large {
+    width: 60px;
+    height: 60px;
+    background: var(--bg-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.crop-details h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-success {
+    background: rgba(46, 204, 113, 0.15);
+    color: var(--success);
+}
+
+.session-dates {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: var(--bg-secondary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+}
+
+.date-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-item .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.date-item .value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.date-arrow {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.session-progress-container {
+    margin-bottom: var(--spacing-lg);
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.progress-track {
+    height: 10px;
+    background: var(--bg-secondary);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
+}
+
+.session-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.session-stat-item {
+    background: var(--bg-secondary);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+}
+
+.session-stat-item .label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-xs);
+}
+
+.session-stat-item .value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.session-stat-item.highlight-cost .value {
+    color: var(--danger);
+}
+
+.session-stat-item.highlight-revenue .value {
+    color: var(--success);
+}
+
+.session-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline-danger {
+    background: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+@media (max-width: 600px) {
+    .session-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .session-dates {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .session-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .session-actions {
+        flex-direction: column;
+    }
+    
+    .session-actions button {
+        width: 100%;
+    }
+}

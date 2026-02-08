@@ -1,0 +1,251 @@
+/* Subscription Modal Styles */
+
+/* Reuse modal overlay from other modals or define new */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-md);
+}
+
+.subscription-modal {
+    background: var(--bg-primary);
+    width: 100%;
+    max-width: 900px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 10;
+}
+
+.close-modal-btn:hover {
+    color: var(--danger);
+}
+
+.subscription-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.subscription-header h2 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.subscription-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.highlight-note {
+    display: inline-block;
+    background: rgba(255, 215, 0, 0.15);
+    color: #f39c12;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: var(--spacing-md);
+    border: 1px solid #f39c12;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-5px);
+    }
+
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+/* Pricing container */
+.pricing-container {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.pricing-card {
+    flex: 1;
+    min-width: 300px;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+
+.pricing-card.free {
+    border-color: var(--border-color);
+}
+
+.pricing-card.premium {
+    border-color: var(--primary);
+    background: linear-gradient(to bottom right, var(--bg-secondary), rgba(46, 204, 113, 0.05));
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.15);
+}
+
+.popular-tag {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-md);
+}
+
+.plan-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.price span {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.pricing-card.premium .price {
+    color: var(--primary);
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1;
+}
+
+.features-list li {
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+}
+
+.features-list li i {
+    color: var(--success);
+}
+
+.features-list li.disabled {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.features-list li.disabled i {
+    color: var(--text-muted);
+}
+
+/* Updated button styles specific to pricing */
+.disabled-btn {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.glow-effect {
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+    }
+
+    to {
+        box-shadow: 0 0 20px rgba(46, 204, 113, 0.8), 0 0 5px rgba(46, 204, 113, 0.5);
+    }
+}
+
+/* Header Button */
+.subscription-btn {
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 15px;
+    transition: transform 0.2s;
+}
+
+.subscription-btn:hover {
+    transform: scale(1.05);
+}
+
+.subscription-btn i {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .pricing-container {
+        flex-direction: column;
+    }
+}

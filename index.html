@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatFarm - Smart Agriculture Platform</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/scanner.css">
+    <link rel="stylesheet" href="css/weather.css">
+    <link rel="stylesheet" href="css/crops.css">
+    <link rel="stylesheet" href="css/calculator.css">
+    <link rel="stylesheet" href="css/roadmap.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/user-guide.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/session-dashboard.css">
+    <link rel="stylesheet" href="css/subscription.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/subscription.js" defer></script>
+</head>
+
+<body>
+    <!-- LOADING PAGE -->
+    <div class="loading-page" id="loadingPage">
+        <!-- Floating Particles -->
+        <div class="loading-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <i class="fas fa-leaf leaf-particle"></i>
+            <i class="fas fa-seedling leaf-particle"></i>
+            <i class="fas fa-leaf leaf-particle"></i>
+            <i class="fas fa-seedling leaf-particle"></i>
+            <i class="fas fa-leaf leaf-particle"></i>
+        </div>
+
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-logo-ring"></div>
+                <div class="loading-logo-ring-2"></div>
+                <i class="fas fa-seedling loading-logo-icon"></i>
+            </div>
+
+            <h1 class="loading-title">BharatFarm</h1>
+            <p class="loading-subtitle">Preparing your smart farming dashboard...</p>
+
+            <div class="loading-progress-container">
+                <div class="loading-progress-bar">
+                    <div class="loading-progress-fill" id="loadingProgressFill"></div>
+                </div>
+                <p class="loading-status"><span id="loadingStatus">Initializing...</span></p>
+            </div>
+
+            <div class="loading-features">
+                <div class="loading-feature">
+                    <div class="loading-feature-icon"><i class="fas fa-cloud-sun"></i></div>
+                    <span>Weather</span>
+                </div>
+                <div class="loading-feature">
+                    <div class="loading-feature-icon"><i class="fas fa-camera"></i></div>
+                    <span>Leaf Scanner</span>
+                </div>
+                <div class="loading-feature">
+                    <div class="loading-feature-icon"><i class="fas fa-calculator"></i></div>
+                    <span>Calculator</span>
+                </div>
+                <div class="loading-feature">
+                    <div class="loading-feature-icon"><i class="fas fa-road"></i></div>
+                    <span>Roadmap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN/REGISTER PAGE -->
+    <div class="login-container" id="authPage">
+        <div class="login-left">
+            <button class="theme-toggle-login" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="logo"><i class="fas fa-seedling"></i></div>
+            <h1>BharatFarm</h1>
+            <p>Your smart farming companion for better crop planning and higher productivity</p>
+        </div>
+        <div class="login-right">
+            <div class="login-box">
+                <h2 id="authTitle">Welcome Back</h2>
+                <p class="subtitle" id="authSubtitle">Login to access your farming dashboard</p>
+
+                <div class="auth-tabs">
+                    <button class="active" onclick="switchAuthTab('login')">Login</button>
+                    <button onclick="switchAuthTab('register')">Register</button>
+                    <button onclick="switchAuthTab('forgot')" style="display: none;" id="forgotPasswordTab">Forgot
+                        Password</button>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <div class="input-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="loginPhone" placeholder="Enter phone number" required
+                                pattern="[0-9]{10}" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="Enter password" required
+                                minlength="6">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <div style="text-align: center; margin-top: var(--spacing-md);">
+                        <a href="#" onclick="switchAuthTab('forgot'); return false;"
+                            style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">
+                            <i class="fas fa-key"></i> Forgot Password?
+                        </a>
+                    </div>
+                </form>
+
+                <!-- FORGOT PASSWORD FORM -->
+                <form id="forgotPasswordForm" style="display: none;" onsubmit="handleForgotPassword(event)">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <div class="input-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="forgotPhone" placeholder="Enter registered phone number" required
+                                pattern="[0-9]{10}" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-group" id="newPasswordGroup" style="display: none;">
+                        <label>New Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="newPassword" placeholder="Enter new password" minlength="6">
+                        </div>
+                    </div>
+                    <div class="form-group" id="confirmNewPasswordGroup" style="display: none;">
+                        <label>Confirm New Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmNewPassword" placeholder="Confirm new password"
+                                minlength="6">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="forgotPasswordBtn">
+                        <i class="fas fa-search"></i> Verify Phone Number
+                    </button>
+                    <div style="text-align: center; margin-top: var(--spacing-md);">
+                        <a href="#" onclick="switchAuthTab('login'); return false;"
+                            style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">
+                            <i class="fas fa-arrow-left"></i> Back to Login
+                        </a>
+                    </div>
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="input-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="regName" placeholder="Enter your name" required minlength="3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <div class="input-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="regPhone" placeholder="Enter phone number" required
+                                pattern="[0-9]{10}" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="regPassword" placeholder="Create password" required
+                                minlength="6">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="regConfirmPassword" placeholder="Confirm password" required
+                                minlength="6">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    <p>By continuing, you agree to our Terms of Service</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBSCRIPTION MODAL -->
+    <div class="modal-overlay" id="subscriptionModal" style="display: none;">
+        <div class="modal-content subscription-modal">
+            <button class="close-modal-btn" onclick="closeSubscription()"><i class="fas fa-times"></i></button>
+            <div class="subscription-header">
+                <h2>Choose Your Farming Plan</h2>
+                <p>Unlock advanced tools to maximize your yield</p>
+                <div class="highlight-note"><i class="fas fa-gift"></i> 1st month is FREE for all new users!</div>
+            </div>
+
+            <div class="pricing-container">
+                <!-- FREE PLAN -->
+                <div class="pricing-card free">
+                    <div class="plan-header">
+                        <h3>Free Version</h3>
+                        <div class="price">₹0<span>/month</span></div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Basic Dashboard</li>
+                        <li><i class="fas fa-check"></i> Weather Updates</li>
+                        <li><i class="fas fa-check"></i> Cost Calculator</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Leaf Disease Scanner</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Detailed Activity Roadmap</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Expert Support</li>
+                    </ul>
+                    <button class="btn btn-outline btn-block disabled-btn">Current Plan</button>
+                </div>
+
+                <!-- PREMIUM PLAN -->
+                <div class="pricing-card premium">
+                    <div class="popular-tag">RECOMMENDED</div>
+                    <div class="plan-header">
+                        <h3>Premium Version</h3>
+                        <div class="price">₹49<span>/month</span></div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Leaf Disease Scanner</strong></li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Farming Activity Roadmap</strong></li>
+                        <li><i class="fas fa-check"></i> Advanced Weather Alerts</li>
+                        <li><i class="fas fa-check"></i> Revenue Predictions</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Ad-free Experience</li>
+                    </ul>
+                    <button class="btn btn-primary btn-block glow-effect" onclick="handleSubscribe()">Subscribe
+                        Now!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE MODAL -->
+    <div class="about-page" id="aboutPage" style="display: none;">
+        <div class="about-content">
+            <button class="back-btn" onclick="hideAboutPage()" title="Back">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+            <div class="about-header">
+                <div class="about-logo">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h1>BharatFarm</h1>
+                <p class="tagline">Smart Agriculture Platform</p>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-info-circle"></i> About BharatFarm</h2>
+                <p>BharatFarm is a comprehensive web application designed to empower Indian farmers with modern
+                    technology and data-driven insights. Our platform provides intelligent tools for crop planning,
+                    disease detection, weather monitoring, and financial planning to help farmers make smarter decisions
+                    and increase productivity.</p>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-star"></i> Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-cloud-sun"></i>
+                        <h3>Weather Monitoring</h3>
+                        <p>Real-time weather data with farming safety alerts</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Disease Detection</h3>
+                        <p>AI-powered leaf scanner for plant disease identification</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Crop Planning</h3>
+                        <p>Detailed crop information and cultivation schedules</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Cost Calculator</h3>
+                        <p>Estimate farming costs and revenue predictions</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-road"></i>
+                        <h3>Activity Roadmap</h3>
+                        <p>Day-by-day farming activity schedules</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bell"></i>
+                        <h3>Smart Alerts</h3>
+                        <p>Personalized notifications for farming activities</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-users"></i> Development Team</h2>
+                <p class="team-intro">BharatFarm was developed by a dedicated team of students passionate about
+                    leveraging technology to support Indian agriculture:</p>
+                <div class="developers-grid">
+                    <div class="developer-card">
+                        <img src="assets/Souvik.jpeg" alt="Souvik Dey" class="developer-photo">
+                        <h3>Souvik Dey</h3>
+                        <p>Lead Developer</p>
+                        <a href="https://www.linkedin.com/in/souvik-dey-400497366/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                            class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
+                    </div>
+                    <div class="developer-card">
+                        <img src="assets/Partha.jpeg" alt="Partha Sarathi Sarkar" class="developer-photo">
+                        <h3>Partha Sarathi Sarkar</h3>
+                        <p>Full Stack Developer</p>
+                        <a href="https://www.linkedin.com/in/partha-sarathi-sarkar-7385a8367/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                            class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
+                    </div>
+                    <div class="developer-card">
+                        <img src="assets/Samrat.jpeg" alt="Samrat Chatterjee" class="developer-photo">
+                        <h3>Samrat Chatterjee</h3>
+                        <p>Backend Developer</p>
+                        <a href="https://www.linkedin.com/in/samrat-chatterjee-2aa543368/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                            class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
+                    </div>
+                    <div class="developer-card">
+                        <img src="assets/Snehasis.jpeg" alt="Snehasis Chakroborty" class="developer-photo">
+                        <h3>Snehasis Chakroborty</h3>
+                        <p>Frontend Developer</p>
+                        <a href="https://www.linkedin.com/in/snehasis-chakraborty-2b68823a6/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                            class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-heart"></i> Our Mission</h2>
+                <p>To bridge the gap between traditional farming practices and modern technology, making advanced
+                    agricultural tools accessible to every farmer in India. We believe that with the right information
+                    and tools, farmers can significantly improve their yields, reduce costs, and make more informed
+                    decisions.</p>
+            </div>
+
+            <div class="about-footer">
+                <p>&copy; 2026 BharatFarm - All Rights Reserved</p>
+                <p>Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for Indian Farmers</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div class="app-container" id="appContainer">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <h1>BharatFarm</h1>
+                </div>
+
+                <div class="header-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="subscription-btn" onclick="openSubscription()" title="Go Premium">
+                        <i class="fas fa-crown"></i> Premium
+                    </button>
+                    <div class="user-menu">
+                        <i class="fas fa-user-circle" style="font-size: 1.5rem;"></i>
+                        <span id="userName">User</span>
+                    </div>
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="active">
+                <div class="dashboard-hero"
+                    style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80'); background-size: cover; background-position: center; position: relative; padding: 4rem 2rem; border-radius: var(--border-radius-lg); overflow: hidden;">
+                    <!-- Dark overlay for better text readability -->
+                    <div
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 50, 0, 0.5)); z-index: 1;">
+                    </div>
+                    <!-- Content -->
+                    <div style="position: relative; z-index: 2;">
+                        <h2 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);"><i
+                                class="fas fa-tractor"></i> Welcome, <span id="welcomeName">Farmer</span>!</h2>
+                        <p
+                            style="color: rgba(255,255,255,0.95); text-shadow: 1px 1px 3px rgba(0,0,0,0.8); font-size: 1.1rem;">
+                            Your smart farming companion for better crop planning and higher productivity</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-5">
+                    <div class="card stat-card" onclick="showSection('weather')">
+                        <div class="icon weather"><i class="fas fa-cloud-sun"></i></div>
+                        <h3>Weather Status</h3>
+                        <div class="value" id="dashWeatherStatus">Loading...</div>
+                        <div class="status safe" id="dashWeatherSafety">Checking...</div>
+                    </div>
+                    <div class="card stat-card" onclick="showSection('scanner')">
+                        <div class="icon scanner"><i class="fas fa-camera"></i></div>
+                        <h3>Leaf Scanner</h3>
+                        <div class="value">Scan Now</div>
+                        <div class="status safe">Detect Disease</div>
+                    </div>
+                    <div class="card stat-card" onclick="showSection('roadmap')">
+                        <div class="icon activity"><i class="fas fa-tasks"></i></div>
+                        <h3>Next Activity</h3>
+                        <div class="value" id="dashNextActivity">Select crop</div>
+                        <div class="status safe">View Roadmap</div>
+                    </div>
+                    <div class="card stat-card" onclick="showSection('calculator')">
+                        <div class="icon cost"><i class="fas fa-rupee-sign"></i></div>
+                        <h3>Input Cost</h3>
+                        <div class="value" id="dashTotalCost">-</div>
+                        <div class="status safe">Calculate</div>
+                    </div>
+                    <div class="card stat-card" onclick="showSection('calculator')">
+                        <div class="icon revenue"><i class="fas fa-chart-line"></i></div>
+                        <h3>Revenue</h3>
+                        <div class="value" id="dashRevenue">-</div>
+                        <div class="status safe">View Details</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-lightbulb"></i>
+                        <h2>Quick Tips for Today</h2>
+                    </div>
+                    <div id="dashboardTips">
+                        <p><strong><i class="fas fa-check-circle" style="color: var(--success);"></i> Morning:</strong>
+                            Best time for watering - early morning reduces evaporation.</p>
+                        <p style="margin-top: var(--spacing-sm);"><strong><i class="fas fa-check-circle"
+                                    style="color: var(--success);"></i> Afternoon:</strong> Inspect crops for pests
+                            during warm hours.</p>
+                        <p style="margin-top: var(--spacing-sm);"><strong><i class="fas fa-check-circle"
+                                    style="color: var(--success);"></i> Evening:</strong> Apply fertilizers in cool
+                            evening for better absorption.</p>
+                    </div>
+                </div>
+
+                <!-- CURRENT FARMING SESSION DASHBOARD -->
+                <div class="card mt-lg" id="farmingSessionCard" style="display: none;">
+                    <div class="card-header">
+                        <i class="fas fa-tractor"></i>
+                        <h2>Current Farming Session</h2>
+                    </div>
+                    <div class="session-dashboard">
+                        <div class="session-header">
+                            <div class="session-crop">
+                                <div class="crop-icon-large" id="sessionCropIcon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="crop-details">
+                                    <h3 id="sessionCropName">Crop Name</h3>
+                                    <span class="badge badge-success">Active Session</span>
+                                </div>
+                            </div>
+                            <div class="session-dates">
+                                <div class="date-item">
+                                    <span class="label">Started</span>
+                                    <span class="value" id="sessionStartDate">-</span>
+                                </div>
+                                <div class="date-arrow"><i class="fas fa-arrow-right"></i></div>
+                                <div class="date-item">
+                                    <span class="label">Harvest</span>
+                                    <span class="value" id="sessionEndDate">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="session-progress-container">
+                            <div class="progress-labels">
+                                <span>Progress</span>
+                                <span id="sessionDaysRemaining">0 days remaining</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="sessionProgressBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="session-stats-grid">
+                            <div class="session-stat-item">
+                                <div class="label">Land Size</div>
+                                <div class="value" id="sessionLandSize">-</div>
+                            </div>
+                            <div class="session-stat-item">
+                                <div class="label">Expected Yield</div>
+                                <div class="value" id="sessionYield">-</div>
+                            </div>
+                            <div class="session-stat-item highlight-cost">
+                                <div class="label">Total Expenses</div>
+                                <div class="value" id="sessionExpenses">-</div>
+                            </div>
+                            <div class="session-stat-item highlight-revenue">
+                                <div class="label">Est. Revenue</div>
+                                <div class="value" id="sessionRevenue">-</div>
+                            </div>
+                        </div>
+
+                        <div class="session-actions">
+                            <button class="btn btn-outline" onclick="showSection('roadmap')">View Roadmap</button>
+                            <button class="btn btn-outline-danger" onclick="endFarmingSession()">End Session</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- USER PROFILE SECTION -->
+            <section id="profile">
+                <button class="section-back-btn" onclick="showSection('dashboard', null)" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+
+                <div class="profile-container">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-details">
+                                <h1 id="profileName">User Name</h1>
+                                <p id="profileUsername">@username</p>
+                                <p><i class="fas fa-envelope"></i> <span id="profileEmail">email@example.com</span></p>
+                                <p><i class="fas fa-map-marker-alt"></i> <span id="profileLocation">Location</span></p>
+                                <p><i class="fas fa-calendar"></i> Member since <span
+                                        id="profileMemberSince">2026</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="card">
+                        <div class="card-header"><i class="fas fa-chart-bar"></i>
+                            <h2>Farming Statistics</h2>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-icon"><i class="fas fa-camera"></i></div>
+                                <div class="stat-value" id="statScans">0</div>
+                                <div class="stat-label">Leaf Scans</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-icon"><i class="fas fa-cloud-sun"></i></div>
+                                <div class="stat-value" id="statWeather">0</div>
+                                <div class="stat-label">Weather Checks</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-icon"><i class="fas fa-calculator"></i></div>
+                                <div class="stat-value" id="statCalculations">0</div>
+                                <div class="stat-label">Calculations</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-icon"><i class="fas fa-leaf"></i></div>
+                                <div class="stat-value" id="statCrops">0</div>
+                                <div class="stat-label">Crops Tracked</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity History -->
+                    <div class="card activity-section">
+                        <div class="card-header"><i class="fas fa-history"></i>
+                            <h2>Farming History</h2>
+                        </div>
+                        <div class="activity-filters">
+                            <button class="filter-btn active" onclick="filterActivities('all')">All Activities</button>
+                            <button class="filter-btn" onclick="filterActivities('scan')">Scans</button>
+                            <button class="filter-btn" onclick="filterActivities('weather')">Weather</button>
+                            <button class="filter-btn" onclick="filterActivities('calculation')">Calculations</button>
+                            <button class="filter-btn" onclick="filterActivities('crop')">Crops</button>
+                        </div>
+                        <div class="activity-timeline" id="activityTimeline">
+                            <div class="empty-state">
+                                <i class="fas fa-history"></i>
+                                <p>No activities yet. Start using BharatFarm to see your farming history!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Preferences -->
+                    <div class="card">
+                        <div class="card-header"><i class="fas fa-cog"></i>
+                            <h2>Preferences</h2>
+                        </div>
+                        <div class="preferences-grid">
+                            <div class="preference-item">
+                                <h4><i class="fas fa-seedling"></i> Preferred Crops</h4>
+                                <p class="preference-value" id="prefCrops">None selected</p>
+                            </div>
+                            <div class="preference-item">
+                                <h4><i class="fas fa-ruler-combined"></i> Land Size</h4>
+                                <p class="preference-value" id="prefLandSize">Not set</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LEAF SCANNER SECTION -->
+            <section id="scanner">
+                <button class="section-back-btn" onclick="showSection('dashboard', null)" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-leaf"></i>
+                        <h2>Leaf Disease Scanner</h2>
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: var(--spacing-md);">Upload or capture a photo of
+                        any plant leaf to detect diseases and get fertilizer recommendations.</p>
+
+                    <div class="scanner-container">
+                        <div class="scanner-box" id="scannerBox" onclick="document.getElementById('leafInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Upload Leaf Image</h3>
+                            <p>Click to upload or drag and drop an image</p>
+                            <p style="margin-top: var(--spacing-sm); font-size: 0.85rem;">Supports: JPG, PNG, WEBP</p>
+                        </div>
+                        <input type="file" id="leafInput" accept="image/*" style="display: none;"
+                            onchange="handleLeafUpload(event)">
+
+                        <button class="camera-btn" onclick="openCamera()">
+                            <i class="fas fa-camera"></i> Open Camera
+                        </button>
+
+                        <div id="scannerPreview" class="scanner-preview" style="display: none;">
+                            <img id="leafPreviewImg" src="" alt="Leaf Preview">
+                        </div>
+
+                        <button id="analyzeBtn" class="btn btn-primary btn-lg"
+                            style="display: none; margin-top: var(--spacing-md);" onclick="analyzeLeaf()">
+                            <i class="fas fa-search"></i> Analyze Leaf
+                        </button>
+
+                        <div id="scanLoading" class="hidden">
+                            <div class="spinner"></div>
+                            <p class="text-center">Analyzing leaf image...</p>
+                        </div>
+
+                        <div id="scanResult" class="scan-result" style="display: none;">
+                            <h3 style="margin-bottom: var(--spacing-md);"><i class="fas fa-clipboard-check"></i>
+                                Analysis Result</h3>
+                            <div class="disease-badge" id="diseaseStatus">Healthy</div>
+                            <h4 id="diseaseName" style="font-size: 1.3rem; margin-bottom: var(--spacing-sm);">Plant
+                                Status</h4>
+                            <p id="diseaseDescription"
+                                style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Description will
+                                appear here.</p>
+
+                            <h4 style="margin-bottom: var(--spacing-sm);"><i class="fas fa-flask"></i> Recommended
+                                Fertilizers</h4>
+                            <div class="recommendation-list" id="fertilizerRecommendations"></div>
+
+                            <h4 style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-sm);"><i
+                                    class="fas fa-notes-medical"></i> Treatment Tips</h4>
+                            <div class="recommendation-list" id="treatmentTips"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WEATHER -->
+            <section id="weather">
+                <button class="section-back-btn" onclick="showSection('dashboard', null)" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-map-marker-alt"></i>
+                        <h2>Enter Your Location</h2>
+                    </div>
+                    <div class="location-input">
+                        <input type="text" id="locationInput" placeholder="Enter city name (e.g., Delhi, Mumbai)"
+                            value="Delhi">
+                        <button class="btn btn-primary btn-lg" onclick="fetchWeather()"><i class="fas fa-search"></i>
+                            Get Weather</button>
+                    </div>
+                </div>
+
+                <div id="weatherLoading" class="hidden">
+                    <div class="spinner"></div>
+                    <p class="text-center">Fetching weather data...</p>
+                </div>
+
+                <div id="weatherContent">
+                    <div class="weather-main">
+                        <div class="weather-icon"><i class="fas fa-sun" id="weatherIcon"></i></div>
+                        <div class="weather-temp"><span id="temperature">32</span>°C</div>
+                        <div class="weather-condition" id="weatherCondition">Clear Sky</div>
+                        <div class="weather-location"><i class="fas fa-map-marker-alt"></i><span
+                                id="weatherLocation">Delhi, India</span></div>
+                    </div>
+
+                    <div class="weather-details">
+                        <div class="weather-detail-card"><i class="fas fa-tint"></i>
+                            <div class="label">Rain Probability</div>
+                            <div class="value"><span id="rainProbability">25</span>%</div>
+                        </div>
+                        <div class="weather-detail-card"><i class="fas fa-water"></i>
+                            <div class="label">Humidity</div>
+                            <div class="value"><span id="humidity">45</span>%</div>
+                        </div>
+                        <div class="weather-detail-card"><i class="fas fa-wind"></i>
+                            <div class="label">Wind Speed</div>
+                            <div class="value"><span id="windSpeed">12</span> km/h</div>
+                        </div>
+                        <div class="weather-detail-card"><i class="fas fa-eye"></i>
+                            <div class="label">Visibility</div>
+                            <div class="value"><span id="visibility">10</span> km</div>
+                        </div>
+                    </div>
+
+                    <div class="weather-alert safe" id="weatherAlert">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h3>SAFE for Farming Activities</h3>
+                            <p>Weather conditions are suitable for farming activities.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CROPS -->
+            <section id="crops">
+                <button class="section-back-btn" onclick="showSection('dashboard', null)" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-seedling"></i>
+                        <h2>Crop Information</h2>
+                    </div>
+                    <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);">Choose a crop to see detailed
+                        farming recommendations.</p>
+                    <div class="crop-grid" id="cropGrid"></div>
+                </div>
+                <div class="crop-info" id="cropInfo">
+                    <div class="card">
+                        <div class="card-header"><i class="fas fa-info-circle"></i>
+                            <h2>Crop Information: <span id="selectedCropName">-</span></h2>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item"><i class="fas fa-clock"></i>
+                                <div class="info-content">
+                                    <h4>Total Duration</h4>
+                                    <p id="cropDuration">-</p>
+                                </div>
+                            </div>
+                            <div class="info-item"><i class="fas fa-tint"></i>
+                                <div class="info-content">
+                                    <h4>Watering Frequency</h4>
+                                    <p id="cropWatering">-</p>
+                                </div>
+                            </div>
+                            <div class="info-item"><i class="fas fa-flask"></i>
+                                <div class="info-content">
+                                    <h4>Recommended Fertilizers</h4>
+                                    <p id="cropFertilizers">-</p>
+                                </div>
+                            </div>
+                            <div class="info-item"><i class="fas fa-calendar-check"></i>
+                                <div class="info-content">
+                                    <h4>Fertilizer Schedule</h4>
+                                    <p id="cropFertSchedule">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-lg" style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                            <button class="btn btn-primary btn-lg" onclick="showSection('roadmap')"><i
+                                    class="fas fa-road"></i> View Roadmap</button>
+                            <button class="btn btn-secondary btn-lg" onclick="showSection('calculator')"><i
+                                    class="fas fa-calculator"></i> Calculate Costs</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CALCULATOR -->
+            <section id="calculator">
+                <button class="section-back-btn" onclick="showSection('dashboard', null)" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <div class="card-header"><i class="fas fa-calculator"></i>
+                            <h2>Seed & Fertilizer Cost Calculator</h2>
+                        </div>
+                        <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);"><i
+                                class="fas fa-info-circle"></i> Only seed and fertilizer costs. Labour, equipment NOT
+                            included.</p>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-leaf"></i> Select Crop</label>
+                            <select id="calcCrop"
+                                style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);">
+                                <option value="">-- Choose a crop --</option>
+                                <option value="rice">Rice</option>
+                                <option value="wheat">Wheat</option>
+                                <option value="potato">Potato</option>
+                                <option value="mustard">Mustard</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="maize">Maize (Corn)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-ruler-combined"></i> Select Land Unit</label>
+                            <div class="land-unit-selector">
+                                <button type="button" class="land-unit-btn active"
+                                    onclick="setLandUnit('acre')">Acre</button>
+                                <button type="button" class="land-unit-btn"
+                                    onclick="setLandUnit('bigha')">Bigha</button>
+                                <button type="button" class="land-unit-btn"
+                                    onclick="setLandUnit('katha')">Katha</button>
+                            </div>
+                            <div class="unit-conversion">
+                                <i class="fas fa-info-circle"></i> 1 Bigha = 20 Katha | 1 Bigha ≈ 0.62 Acre | 1 Acre ≈
+                                32.26 Katha
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-expand"></i> Land Size (<span
+                                    id="landUnitLabel">Acres</span>)</label>
+                            <input type="number" id="landSize" placeholder="Enter land size" min="0.1" step="0.1"
+                                value="1"
+                                style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);">
+                            <span id="landConversion"
+                                style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; display: block;">=
+                                1 Acre = 32.26 Katha = 1.61 Bigha</span>
+                        </div>
+
+                        <button class="btn btn-primary btn-lg btn-block" onclick="calculateCosts()"><i
+                                class="fas fa-calculator"></i> Calculate Total Cost</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header"><i class="fas fa-receipt"></i>
+                            <h2>Cost Breakdown</h2>
+                        </div>
+                        <div class="results-container" id="calcResults">
+                            <div class="result-card">
+                                <div class="result-label"><i class="fas fa-seedling"></i> Required Seed Quantity</div>
+                                <div class="result-value" id="seedQty">-</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label"><i class="fas fa-rupee-sign"></i> Total Seed Cost</div>
+                                <div class="result-value" id="seedCost">-</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label"><i class="fas fa-flask"></i> Required Fertilizer Quantity
+                                </div>
+                                <div class="result-value" id="fertQty">-</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label"><i class="fas fa-rupee-sign"></i> Total Fertilizer Cost</div>
+                                <div class="result-value" id="fertCost">-</div>
+                            </div>
+                            <div class="total-card">
+                                <h3><i class="fas fa-coins"></i> TOTAL FARMING INPUT COST</h3>
+                                <div class="total-value" id="totalCost">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-lg">
+                    <div class="card-header"><i class="fas fa-chart-line"></i>
+                        <h2>Revenue Prediction</h2>
+                    </div>
+                    <div class="revenue-card">
+                        <div class="revenue-icon"><i class="fas fa-coins"></i></div>
+                        <h3>Expected Revenue</h3>
+                        <div class="revenue-value" id="expectedRevenue">-</div>
+                        <p id="revenueExplanation">Select a crop and enter land size to see your expected revenue.</p>
+                    </div>
+                    <div class="revenue-breakdown">
+                        <div class="breakdown-item"><i class="fas fa-weight-hanging"></i>
+                            <div class="label">Expected Yield</div>
+                            <div class="value" id="expectedYield">-</div>
+                        </div>
+                        <div class="breakdown-item"><i class="fas fa-tag"></i>
+                            <div class="label">Market Price</div>
+                            <div class="value" id="marketPrice">-</div>
+                        </div>
+                        <div class="breakdown-item"><i class="fas fa-percentage"></i>
+                            <div class="label">Profit Margin</div>
+                            <div class="value" id="profitMargin">-</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROADMAP -->
+            <section id="roadmap">
+                <button class="section-back-btn" onclick="showSection('dashboard', null)" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="card">
+                    <div class="roadmap-header">
+                        <h2><i class="fas fa-road"></i> Farming Activity Roadmap</h2>
+                        <p id="roadmapCropName">Select a crop to view the detailed activity schedule</p>
+                    </div>
+                    <div id="noRoadmap" class="text-center">
+                        <i class="fas fa-seedling" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
+                        <p style="margin-top: var(--spacing-md); color: var(--text-muted);">Please select a crop first.
+                        </p>
+                        <button class="btn btn-primary btn-lg mt-lg" onclick="showSection('crops')"><i
+                                class="fas fa-leaf"></i> Select a Crop</button>
+                    </div>
+                    <div class="timeline" id="roadmapTimeline" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- NOTIFICATIONS -->
+            <section id="notifications">
+                <button class="section-back-btn" onclick="showSection('dashboard', null)" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-bell"></i>
+                        <h2>Notifications & Alerts</h2>
+                    </div>
+                    <div class="notification-list" id="notificationList"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 BharatFarm - Smart Agriculture Platform</p>
+            <p>Helping farmers make smarter decisions</p>
+            <div class="footer-links">
+                <a href="mailto:souvik.business18@gmail.com"><i class="fas fa-envelope"></i> Email Us</a>
+                <a href="#" onclick="showAboutPage(); return false;"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- TensorFlow.js and MobileNet -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script>
+
+    <!-- JavaScript Files -->
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/scanner.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/crops.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/roadmap.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/user-guide.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

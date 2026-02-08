@@ -1,0 +1,127 @@
+/* ============================================
+   LEAF SCANNER STYLES
+============================================ */
+
+.scanner-container {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.scanner-box {
+    border: 3px dashed var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-lg) 0;
+    background: var(--bg-tertiary);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.scanner-box:hover {
+    border-color: var(--primary);
+    background: var(--bg-hover);
+}
+
+.scanner-box.dragover {
+    border-color: var(--success);
+    background: rgba(39, 174, 96, 0.1);
+}
+
+.scanner-box i {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: var(--spacing-md);
+}
+
+[data-theme="dark"] .scanner-box i {
+    color: var(--accent);
+}
+
+.scanner-box h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.scanner-box p {
+    color: var(--text-muted);
+}
+
+.scanner-preview {
+    max-width: 400px;
+    margin: var(--spacing-lg) auto;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.scanner-preview img {
+    width: 100%;
+    display: block;
+}
+
+.scan-result {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.disease-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.disease-badge.healthy {
+    background: rgba(39, 174, 96, 0.15);
+    color: var(--success);
+}
+
+.disease-badge.diseased {
+    background: rgba(231, 76, 60, 0.15);
+    color: var(--danger);
+}
+
+.recommendation-list {
+    margin-top: var(--spacing-md);
+}
+
+.recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.recommendation-item i {
+    color: var(--success);
+    font-size: 1.2rem;
+    margin-top: 4px;
+}
+
+.camera-btn {
+    background: var(--gradient-accent);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: var(--spacing-md);
+    transition: var(--transition);
+}
+
+.camera-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 188, 212, 0.4);
+}
