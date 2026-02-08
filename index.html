@@ -226,7 +226,36 @@
             </div>
         </div>
     </div>
-
+        <!-- LANGUAGE SELECTION MODAL -->
+    <div class="language-modal" id="languageModal">
+        <div class="language-box">
+            <h2><i class="fas fa-globe"></i> Select Language</h2>
+            <p>Choose your preferred language / अपनी भाषा चुनें / আপনার ভাষা নির্বাচন করুন</p>
+            <div class="language-options">
+                <div class="language-btn" onclick="selectLanguage('en')">
+                    <span class="flag">🇬🇧</span>
+                    <div class="lang-info">
+                        <h3>English</h3>
+                        <p>Continue in English</p>
+                    </div>
+                </div>
+                <div class="language-btn" onclick="selectLanguage('hi')">
+                    <span class="flag">🇮🇳</span>
+                    <div class="lang-info">
+                        <h3>हिन्दी</h3>
+                        <p>हिंदी में जारी रखें</p>
+                    </div>
+                </div>
+                <div class="language-btn" onclick="selectLanguage('bn')">
+                    <span class="flag">🇧🇩</span>
+                    <div class="lang-info">
+                        <h3>বাংলা</h3>
+                        <p>বাংলায় চালিয়ে যান</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- SUBSCRIPTION MODAL -->
     <div class="modal-overlay" id="subscriptionModal" style="display: none;">
         <div class="modal-content subscription-modal">
@@ -399,6 +428,9 @@
                 <div class="header-actions">
                     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
                         <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="language-toggle" onclick="showLanguageModal()" title="Change Language">
+                        <i class="fas fa-globe"></i>
                     </button>
                     <button class="subscription-btn" onclick="openSubscription()" title="Go Premium">
                         <i class="fas fa-crown"></i> Premium
@@ -1001,6 +1033,7 @@
     <script src="js/profile.js"></script>
     <script src="js/user-guide.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/lang.js"></script>
 </body>
 
 </html>
