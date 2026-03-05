@@ -178,13 +178,13 @@ Goal: Act as a friendly, knowledgeable, and reliable digital farming assistant f
   function checkApiKey() {
     // Check sessionStorage first, then the config constant
     const sessionKey = sessionStorage.getItem("bf_openrouter_key");
-    const configKey = typeof OPENROUTER_API_KEY !== "undefined" ? OPENROUTER_API_KEY : "";
+    const configKey = (typeof OPENROUTER_API_KEY !== "undefined" && OPENROUTER_API_KEY !== "YOUR_API_KEY_HERE" && OPENROUTER_API_KEY.trim().length > 10) ? OPENROUTER_API_KEY : "";
 
-    if (sessionKey && sessionKey.trim().length > 10) {
-      apiKeyReady = true;
-      document.getElementById("chatBadge").style.display = "flex";
-    } else if (configKey && configKey !== "YOUR_API_KEY_HERE" && configKey.trim().length > 10) {
-      apiKeyReady = true;
+    // Always ready because we now have a Vercel proxy fallback!
+    apiKeyReady = true;
+
+    if (sessionKey || configKey) {
+      document.getElementById("chatKeyBtn").style.display = "flex";
       document.getElementById("chatBadge").style.display = "flex";
     }
   }
@@ -447,25 +447,35 @@ Goal: Act as a friendly, knowledgeable, and reliable digital farming assistant f
     ];
 
     // ── Try models until one works ─────────
-    // If a working model was cached but fails, fall back to full list
     const candidates = workingModel
       ? [workingModel, ...MODEL_CANDIDATES.filter(m => m !== workingModel)]
       : MODEL_CANDIDATES;
     let lastError = "";
 
+    // Determine the target URL
+    // If we have a session key, we call OpenRouter directly
+    // Otherwise, we use our secure proxy /api/chat
+    const sessionKey = sessionStorage.getItem("bf_openrouter_key");
+    const useProxy = !sessionKey;
+    const apiUrl = useProxy ? '/api/chat' : 'https://openrouter.ai/api/v1/chat/completions';
+
     for (const model of candidates) {
       try {
-        const url = "https://openrouter.ai/api/v1/chat/completions";
-        console.log(`[KrishiBot] Trying model: ${model}`);
+        console.log(`[KrishiBot] Trying model: ${model} via ${useProxy ? 'Proxy' : 'Direct'}`);
 
-        const res = await fetch(url, {
+        const headers = {
+          "Content-Type": "application/json",
+        };
+
+        if (sessionKey) {
+          headers["Authorization"] = `Bearer ${sessionKey}`;
+          headers["HTTP-Referer"] = window.location.href;
+          headers["X-Title"] = "BharatFarm KrishiBot";
+        }
+
+        const res = await fetch(apiUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`,
-            "HTTP-Referer": window.location.href,
-            "X-Title": "BharatFarm KrishiBot",
-          },
+          headers: headers,
           body: JSON.stringify({
             model: model,
             messages: messages,
