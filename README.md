@@ -113,45 +113,36 @@ graph TD
 
 ## 📁 Project Structure
 
-```
-BharatFarm/
-├── server.js              # Node.js backend server (port 5000)
-├── .env                   # Environment variables (API keys)
-├── sample.env             # Environment template
-├── package.json           # Node.js dependencies
-├── index.html             # Landing page
-├── app.html               # Main application (SPA)
-├── info.html              # About page
-│
-├── js/
-│   ├── config.js          # API configuration & shared AI helper
-│   ├── auth.js            # Login/Register/Forgot password
-│   ├── weather.js         # Weather integration (Open-Meteo)
-│   ├── crops.js           # Crop database & search
-│   ├── roadmap.js         # AI-powered farming roadmap
-│   ├── chatbot.js         # KrishiBot AI chat interface
-│   ├── gamification.js    # XP engine, leveling, leaderboard
-│   ├── gamification-ui.js # Quiz UI, leaderboard display, GSAP animations
-│   ├── lang.js            # Multilingual translations (EN/HI/BN)
-│   └── ...
-│
-├── css/
-│   ├── style.css          # Main application styles
-│   ├── gamification.css   # XP, leaderboard & quiz styles
-│   └── ...
-│
-├── data/
-│   ├── quizzes.json       # Daily quiz question bank (8 questions)
-│   ├── achievements.json  # Badge definitions
-│   ├── agriculture_diseases.json  # Crop Health Wiki (34 entries)
-│   └── ...
-│
-├── api/
-│   └── chat.js            # Vercel serverless function (production)
-│
-├── assets/                # Images and media
-└── Landing_Page/          # Standalone landing page
-```
+| File / Folder | Description |
+| :--- | :--- |
+| `server.js` | Node.js backend server (port 5000) |
+| `.env` | Environment variables (API keys) |
+| `sample.env` | Environment template |
+| `package.json` | Node.js dependencies |
+| `index.html` | Landing page |
+| `app.html` | Main application (SPA) |
+| `info.html` | About page |
+| **`js/`** | **Frontend JavaScript modules** |
+| `js/config.js` | API configuration & shared AI helper |
+| `js/auth.js` | Login / Register / Forgot password |
+| `js/weather.js` | Weather integration (Open-Meteo) |
+| `js/crops.js` | Crop database & search |
+| `js/roadmap.js` | AI-powered farming roadmap |
+| `js/chatbot.js` | KrishiBot AI chat interface |
+| `js/gamification.js` | XP engine, leveling, leaderboard |
+| `js/gamification-ui.js` | Quiz UI, leaderboard display, GSAP animations |
+| `js/lang.js` | Multilingual translations (EN / HI / BN) |
+| **`css/`** | **Stylesheets** |
+| `css/style.css` | Main application styles |
+| `css/gamification.css` | XP, leaderboard & quiz styles |
+| **`data/`** | **Static data files** |
+| `data/quizzes.json` | Daily quiz question bank (8 questions) |
+| `data/achievements.json` | Badge definitions |
+| `data/agriculture_diseases.json` | Crop Health Wiki (34 entries) |
+| **`api/`** | **Serverless functions (Vercel production)** |
+| `api/chat.js` | Vercel serverless AI proxy |
+| **`assets/`** | Images and media |
+| **`Landing_Page/`** | Standalone landing page |
 
 ---
 
