@@ -208,7 +208,7 @@ By adopting the BharatFarm ecosystem, a typical rural farming community can expe
 | **Deployment** | Vercel (serverless functions for production) |
 
 ---
-
+ 
 ## 👥 Meet the Architects
 
 | Developer | Role | Profile |
