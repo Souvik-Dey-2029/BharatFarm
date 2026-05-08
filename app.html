@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/dashboard-mobile.css">
+    <link rel="stylesheet" href="css/session-dashboard.css">
     <link rel="stylesheet" href="css/scanner.css">
     <link rel="stylesheet" href="css/weather.css">
     <link rel="stylesheet" href="css/crops.css">
@@ -244,7 +245,9 @@
     <!-- LANGUAGE SELECTION MODAL -->
     <div class="language-modal" id="languageModal" onclick="if(event.target===this) closeLanguageModal()">
         <div class="language-box">
-            <button class="close-modal-btn" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer;" onclick="closeLanguageModal()"><i class="fas fa-times"></i></button>
+            <button class="close-modal-btn"
+                style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer;"
+                onclick="closeLanguageModal()"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-globe"></i> Select Language</h2>
             <p>Choose your preferred language / अपनी भाषा चुनें / আপনার ভাষা নির্বাচন করুন</p>
             <div class="language-options">
@@ -294,8 +297,10 @@
                         <li id="freeWeather"><i class="fas fa-check"></i> Weather Updates</li>
                         <li id="freeCalculator"><i class="fas fa-check"></i> Cost Calculator</li>
                         <li id="freeMarketplace"><i class="fas fa-check"></i> Browse Marketplace</li>
-                        <li id="lockedLeafScanner" class="disabled"><i class="fas fa-times"></i> Leaf Disease Scanner</li>
-                        <li id="lockedRoadmap" class="disabled"><i class="fas fa-times"></i> Detailed Activity Roadmap</li>
+                        <li id="lockedLeafScanner" class="disabled"><i class="fas fa-times"></i> Leaf Disease Scanner
+                        </li>
+                        <li id="lockedRoadmap" class="disabled"><i class="fas fa-times"></i> Detailed Activity Roadmap
+                        </li>
                         <li id="lockedSupport" class="disabled"><i class="fas fa-times"></i> Expert Support</li>
                     </ul>
                     <button class="btn btn-outline btn-block disabled-btn">Current Plan</button>
@@ -309,9 +314,12 @@
                         <div class="price">₹49<span>/month</span></div>
                     </div>
                     <ul class="features-list">
-                        <li id="premiumLeafScanner"><i class="fas fa-check-circle"></i> <strong>Leaf Disease Scanner</strong></li>
-                        <li id="premiumRoadmap"><i class="fas fa-check-circle"></i> <strong>Farming Activity Roadmap</strong></li>
-                        <li id="premiumMarketplace"><i class="fas fa-check-circle"></i> <strong>AI-Driven Marketplace</strong></li>
+                        <li id="premiumLeafScanner"><i class="fas fa-check-circle"></i> <strong>Leaf Disease
+                                Scanner</strong></li>
+                        <li id="premiumRoadmap"><i class="fas fa-check-circle"></i> <strong>Farming Activity
+                                Roadmap</strong></li>
+                        <li id="premiumMarketplace"><i class="fas fa-check-circle"></i> <strong>AI-Driven
+                                Marketplace</strong></li>
                         <li id="premiumTrade"><i class="fas fa-check"></i> Direct-to-Buyer Trade</li>
                         <li id="premiumCommission"><i class="fas fa-check"></i> Zero Commission Sales</li>
                         <li id="premiumWeather"><i class="fas fa-check"></i> Advanced Weather Alerts</li>
@@ -464,7 +472,8 @@
                 <!-- ── HERO ──────────────────────────────────── -->
                 <div class="dash-hero">
                     <div class="dash-hero-bg">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80" alt="Farm" loading="eager">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80" alt="Farm"
+                            loading="eager">
                     </div>
                     <div class="dash-hero-overlay"></div>
 
@@ -473,13 +482,17 @@
                             <span id="dashHeroTitle">Your AI Companion for</span><br>
                             <span class="dash-hero-accent" id="dashHeroAccent">Smarter Farming</span>
                         </h2>
-                        <p class="dash-hero-sub" id="dashHeroSub">Welcome, <strong><span id="welcomeName">Farmer</span></strong>! Empowering Indian agriculture with real-time intelligence, voice-first
+                        <p class="dash-hero-sub" id="dashHeroSub">Welcome, <strong><span
+                                    id="welcomeName">Farmer</span></strong>! Empowering Indian agriculture with
+                            real-time intelligence, voice-first
                             assistance, and direct market access.</p>
                         <div class="dash-hero-cta">
-                            <button class="dash-btn dash-btn-primary" onclick="showSection('crops')" id="dashHeroBtnStart">
+                            <button class="dash-btn dash-btn-primary" onclick="showSection('crops')"
+                                id="dashHeroBtnStart">
                                 <i class="fas fa-seedling"></i> Get Started
                             </button>
-                            <button class="dash-btn dash-btn-outline" onclick="showSection('scanner')" id="dashHeroBtnExplore">
+                            <button class="dash-btn dash-btn-outline" onclick="showSection('scanner')"
+                                id="dashHeroBtnExplore">
                                 <i class="fas fa-leaf"></i> Explore Ecosystem
                             </button>
                         </div>
@@ -499,7 +512,8 @@
                     <div class="dash-feature-card gamification-card" onclick="openDailyQuiz()">
                         <div class="g-card-header">
                             <div class="level-badge" id="gami-level"><i class="fas fa-medal"></i> Lvl 1</div>
-                            <div class="xp-total-badge"><i class="fas fa-star xp-icon"></i> <span id="gami-total-xp">0</span> XP</div>
+                            <div class="xp-total-badge"><i class="fas fa-star xp-icon"></i> <span
+                                    id="gami-total-xp">0</span> XP</div>
                             <div class="rank-badge"><i class="fas fa-trophy"></i> <span id="gami-rank">#--</span></div>
                         </div>
                         <div class="xp-container">
@@ -511,10 +525,12 @@
                                 <div class="xp-bar-fill" id="gami-xp-fill"></div>
                             </div>
                         </div>
-                        <button class="btn-gami btn-daily" id="gami-daily-btn-wrapper" onclick="event.stopPropagation(); openDailyQuiz()">
+                        <button class="btn-gami btn-daily" id="gami-daily-btn-wrapper"
+                            onclick="event.stopPropagation(); openDailyQuiz()">
                             <i class="fas fa-brain"></i> <span id="gami-daily-btn">Take Daily Quiz</span>
                         </button>
-                        <div id="quiz-countdown" style="display:none; text-align:center; font-size:0.75rem; color:var(--text-muted); margin-top:4px;">
+                        <div id="quiz-countdown"
+                            style="display:none; text-align:center; font-size:0.75rem; color:var(--text-muted); margin-top:4px;">
                             <!-- Countdown timer injected by JS -->
                         </div>
                     </div>
@@ -524,7 +540,9 @@
                         <div class="dash-feature-text">
                             <h3 id="dashFloatActivityLabel">Next Activity</h3>
                             <div style="margin-bottom: 12px;">
-                                <strong style="font-size: 1.4rem; color: var(--text-primary); display: block; margin-bottom: 4px;" id="dashNextActivity">Select crop</strong>
+                                <strong
+                                    style="font-size: 1.4rem; color: var(--text-primary); display: block; margin-bottom: 4px;"
+                                    id="dashNextActivity">Select crop</strong>
                                 <span class="dash-float-status safe" id="dashNextActivityStatus">View Roadmap</span>
                             </div>
                             <p>Smart task scheduling based on precise crop lifecycles and hyper-local data.</p>
@@ -533,7 +551,8 @@
                             </button>
                         </div>
                         <div class="dash-feature-visual dash-visual-activity">
-                            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=500&q=80" alt="Next Activity" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=500&q=80"
+                                alt="Next Activity" loading="lazy">
                         </div>
                     </div>
 
@@ -542,7 +561,9 @@
                         <div class="dash-feature-text">
                             <h3 id="dashFloatWeatherLabel">Weather Alert</h3>
                             <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;">
-                                <span style="font-size: 2.2rem; font-weight: 900; color: var(--text-primary); line-height: 1;" id="dashWeatherStatus">32°C</span>
+                                <span
+                                    style="font-size: 2.2rem; font-weight: 900; color: var(--text-primary); line-height: 1;"
+                                    id="dashWeatherStatus">32°C</span>
                                 <span class="dash-float-status" id="dashWeatherSafety">SAFE</span>
                             </div>
                             <p>Real-time hyper-local weather tracking to protect your yield.</p>
@@ -551,7 +572,8 @@
                             </button>
                         </div>
                         <div class="dash-feature-visual dash-visual-weather">
-                            <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=500&q=80" alt="Weather" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=500&q=80"
+                                alt="Weather" loading="lazy">
                         </div>
                     </div>
 
@@ -559,28 +581,36 @@
                     <div class="dash-feature-card dash-card-krishibot" onclick="showSection('dashboard')">
                         <div class="dash-feature-text">
                             <h3 id="dashKbTitle">KrishiBot: Voice First AI</h3>
-                            <p id="dashKbDesc">Talk to your farm. Get advice in your local dialect on irrigation, pest control, and market trends.</p>
+                            <p id="dashKbDesc">Talk to your farm. Get advice in your local dialect on irrigation, pest
+                                control, and market trends.</p>
                             <div class="dash-waveform">
                                 <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
                             </div>
-                            <button class="dash-feature-cta" onclick="event.stopPropagation(); if(typeof openVoiceOverlay!=='undefined') openVoiceOverlay()" id="dashKbBtn">
-                                <i class="fas fa-microphone"></i><span class="cta-label" id="dashKbCtaLabel"> Talk Now</span>
+                            <button class="dash-feature-cta"
+                                onclick="event.stopPropagation(); if(typeof openVoiceOverlay!=='undefined') openVoiceOverlay()"
+                                id="dashKbBtn">
+                                <i class="fas fa-microphone"></i><span class="cta-label" id="dashKbCtaLabel"> Talk
+                                    Now</span>
                             </button>
                         </div>
                         <div class="dash-feature-visual dash-visual-krishibot">
-                            <img src="https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=500&q=80" alt="Farmer using smartphone" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=500&q=80"
+                                alt="Farmer using smartphone" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Leaf Scanner -->
                     <div class="dash-feature-card dash-card-scanner" onclick="showSection('scanner')">
                         <div class="dash-feature-visual dash-visual-scanner">
-                            <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=500&q=80" alt="Leaf disease scanning" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=500&q=80"
+                                alt="Leaf disease scanning" loading="lazy">
                         </div>
                         <div class="dash-feature-text">
                             <h3 id="dashLsTitle">Leaf Scanner</h3>
-                            <p id="dashLsDesc">Instant Gemini-powered crop disease diagnosis from a single photograph.</p>
-                            <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('scanner')" id="dashLsBtn">
+                            <p id="dashLsDesc">Instant Gemini-powered crop disease diagnosis from a single photograph.
+                            </p>
+                            <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('scanner')"
+                                id="dashLsBtn">
                                 <i class="fas fa-camera"></i> <span id="dashLsCtaLabel">Launch Scan</span>
                             </button>
                         </div>
@@ -597,7 +627,8 @@
                                 <span class="dash-avatar">🧑‍🌾</span>
                                 <span class="dash-avatar-count">+89</span>
                             </div>
-                            <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('marketplace')" id="dashSmBtn">
+                            <button class="dash-feature-cta"
+                                onclick="event.stopPropagation(); showSection('marketplace')" id="dashSmBtn">
                                 <i class="fas fa-store"></i> <span id="dashSmCtaLabel">Open Market</span>
                             </button>
                         </div>
@@ -607,7 +638,8 @@
                     <div class="dash-feature-card dash-card-analytics" onclick="showSection('calculator')">
                         <div class="dash-feature-text">
                             <h3 id="dashHaTitle">Hyperlocal Analytics</h3>
-                            <p id="dashHaDesc">Soil moisture, nutrient levels, and precision weather forecasting for your specific coordinates.</p>
+                            <p id="dashHaDesc">Soil moisture, nutrient levels, and precision weather forecasting for
+                                your specific coordinates.</p>
                             <div class="dash-analytics-stats">
                                 <div class="dash-stat-pill">
                                     <span class="dash-stat-label" id="dashHaInputLabel">Input Cost</span>
@@ -621,9 +653,16 @@
                         </div>
                         <div class="dash-feature-visual dash-visual-analytics">
                             <svg class="dash-chart-svg" viewBox="0 0 120 60" preserveAspectRatio="none">
-                                <polyline points="0,55 20,45 35,50 50,30 65,35 80,15 100,25 120,10" fill="none" stroke="rgba(76,175,80,0.6)" stroke-width="2"/>
-                                <polyline points="0,55 20,45 35,50 50,30 65,35 80,15 100,25 120,10" fill="url(#chartGrad)" stroke="none"/>
-                                <defs><linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(76,175,80,0.3)"/><stop offset="100%" stop-color="rgba(76,175,80,0)"/></linearGradient></defs>
+                                <polyline points="0,55 20,45 35,50 50,30 65,35 80,15 100,25 120,10" fill="none"
+                                    stroke="rgba(76,175,80,0.6)" stroke-width="2" />
+                                <polyline points="0,55 20,45 35,50 50,30 65,35 80,15 100,25 120,10"
+                                    fill="url(#chartGrad)" stroke="none" />
+                                <defs>
+                                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="rgba(76,175,80,0.3)" />
+                                        <stop offset="100%" stop-color="rgba(76,175,80,0)" />
+                                    </linearGradient>
+                                </defs>
                             </svg>
                         </div>
                     </div>
@@ -633,7 +672,8 @@
                         <div class="dash-feature-text">
                             <h3><i class="fas fa-book-medical"></i> <span id="dashCwTitle">Crop Health Wiki</span></h3>
                             <p id="dashCwDesc">AI-powered encyclopedia for plant diseases, pests, and soil health.</p>
-                            <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('wiki')" id="dashCwBtn">
+                            <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('wiki')"
+                                id="dashCwBtn">
                                 <i class="fas fa-book-open"></i> <span id="dashCwCtaLabel">Open Wiki</span>
                             </button>
                         </div>
@@ -644,7 +684,8 @@
                         <div class="dash-feature-text">
                             <h3><i class="fas fa-landmark"></i> <span id="dashGsTitle">Govt Schemes</span></h3>
                             <p id="dashGsDesc">Check eligibility for PM-KISAN, PMFBY, and state-specific subsidies.</p>
-                            <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('schemes')" id="dashGsBtn">
+                            <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('schemes')"
+                                id="dashGsBtn">
                                 <i class="fas fa-search"></i> <span id="dashGsCtaLabel">Matchmaker</span>
                             </button>
                         </div>
@@ -655,7 +696,8 @@
                 <div class="dash-impact-section">
                     <div class="dash-impact-text">
                         <h2 class="dash-impact-title" id="dashImpactTitle">From Soil to<br>Soul.</h2>
-                        <p class="dash-impact-desc" id="dashImpactDesc">We don't just provide data; we provide a bridge between the
+                        <p class="dash-impact-desc" id="dashImpactDesc">We don't just provide data; we provide a bridge
+                            between the
                             hardworking farmer and the conscious consumer. Join an ecosystem that respects the land and
                             rewards the labor.</p>
                         <div class="dash-impact-stats">
@@ -663,20 +705,23 @@
                                 <div class="dash-impact-stat-icon"><i class="fas fa-leaf"></i></div>
                                 <div>
                                     <strong id="dashImpactStat1Title">Sustainability First</strong>
-                                    <p id="dashImpactStat1Desc">Reducing fertilizer waste by 30% through AI precision</p>
+                                    <p id="dashImpactStat1Desc">Reducing fertilizer waste by 30% through AI precision
+                                    </p>
                                 </div>
                             </div>
                             <div class="dash-impact-stat">
                                 <div class="dash-impact-stat-icon"><i class="fas fa-rupee-sign"></i></div>
                                 <div>
                                     <strong id="dashImpactStat2Title">Fair Pricing</strong>
-                                    <p id="dashImpactStat2Desc">Direct distribution ensures farmers get 85% of retail price</p>
+                                    <p id="dashImpactStat2Desc">Direct distribution ensures farmers get 85% of retail
+                                        price</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="dash-impact-image">
-                        <img src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&q=80" alt="Sustainable Farming" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&q=80"
+                            alt="Sustainable Farming" loading="lazy">
                     </div>
                 </div>
 
@@ -878,7 +923,8 @@
                                     </div>
                                     <div class="sell-form-group">
                                         <label id="mkLabelPrice">Price (Rs.)</label>
-                                        <input type="number" name="price" placeholder="e.g. 65" id="mkInputPrice" required min="1">
+                                        <input type="number" name="price" placeholder="e.g. 65" id="mkInputPrice"
+                                            required min="1">
                                     </div>
                                 </div>
                                 <div class="sell-form-row">
@@ -893,7 +939,8 @@
                                     </div>
                                     <div class="sell-form-group">
                                         <label id="mkLabelQuantity">Quantity</label>
-                                        <input type="text" name="quantity" placeholder="e.g. 500 kg" id="mkInputQuantity" required>
+                                        <input type="text" name="quantity" placeholder="e.g. 500 kg"
+                                            id="mkInputQuantity" required>
                                     </div>
                                 </div>
                                 <div class="sell-form-row">
@@ -912,7 +959,8 @@
                                 </div>
                                 <div class="sell-form-group">
                                     <label id="mkLabelLocality">Locality</label>
-                                    <input type="text" name="locality" placeholder="Enter village or area name" id="mkInputLocality" required>
+                                    <input type="text" name="locality" placeholder="Enter village or area name"
+                                        id="mkInputLocality" required>
                                 </div>
                                 <div class="sell-form-group">
                                     <label>Location (Google Maps Link)</label>
@@ -948,884 +996,880 @@
                         </div>
                     </div>
                 </div>
-                </div>
-            </section>
+    </div>
+    </section>
 
-            <!-- SCHEMES SECTION -->
-            <section id="schemes">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <div class="schemes-container">
-                    <div class="schemes-header">
-                        <h2><i class="fas fa-landmark" style="color: var(--primary);"></i> Scheme Matchmaker</h2>
-                        <p>Find government agricultural schemes you are eligible for</p>
-                    </div>
-
-                    <div id="schemesWizard" class="schemes-wizard">
-                        <div class="wizard-progress">
-                            <div class="progress-step active">1</div>
-                            <div class="progress-step">2</div>
-                            <div class="progress-step">3</div>
-                        </div>
-
-                        <!-- Step 1: Land -->
-                        <div id="schemeStep1" class="wizard-step active">
-                            <h3 class="step-title"><i class="fas fa-map"></i> Land Details</h3>
-                            <div class="schemes-form-group">
-                                <label>How much cultivable land do you own? (in Acres)</label>
-                                <input type="number" id="schemeLandSize" placeholder="e.g. 2.5" min="0" step="0.1">
-                                <small style="color: var(--text-muted); margin-top: 5px; display: block;">Enter 0 if you are a landless farmer or sharecropper.</small>
-                            </div>
-                            <div class="wizard-actions" style="justify-content: flex-end;">
-                                <button class="btn-wizard btn-next" onclick="nextSchemesStep()">Next <i class="fas fa-arrow-right"></i></button>
-                            </div>
-                        </div>
-
-                        <!-- Step 2: Location -->
-                        <div id="schemeStep2" class="wizard-step">
-                            <h3 class="step-title"><i class="fas fa-map-marker-alt"></i> Location</h3>
-                            <div class="schemes-form-group">
-                                <label>State</label>
-                                <select id="schemeStateSelect">
-                                    <option value="" disabled selected>Select State</option>
-                                </select>
-                            </div>
-                            <div class="wizard-actions">
-                                <button class="btn-wizard btn-prev" onclick="prevSchemesStep()"><i class="fas fa-arrow-left"></i> Back</button>
-                                <button class="btn-wizard btn-next" onclick="nextSchemesStep()">Next <i class="fas fa-arrow-right"></i></button>
-                            </div>
-                        </div>
-
-                        <!-- Step 3: Crop -->
-                        <div id="schemeStep3" class="wizard-step">
-                            <h3 class="step-title"><i class="fas fa-seedling"></i> Crop Information</h3>
-                            <div class="schemes-form-group">
-                                <label>What is your primary crop? (Optional)</label>
-                                <input type="text" id="schemeCropSelect" placeholder="e.g. Rice, Wheat, Potato">
-                            </div>
-                            <div class="wizard-actions">
-                                <button class="btn-wizard btn-prev" onclick="prevSchemesStep()"><i class="fas fa-arrow-left"></i> Back</button>
-                                <button class="btn-wizard btn-next" onclick="submitSchemesForm()"><i class="fas fa-search"></i> Find Schemes</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Loader -->
-                    <div id="schemesLoader" class="schemes-loader">
-                        <div class="spinner-wrap"></div>
-                        <h3 id="schemesLoaderTitle">Searching...</h3>
-                        <p style="color: var(--text-secondary); display: none;" id="schemesLoaderMsg"></p>
-                        <div class="loader-ai-dots" style="margin-top: 12px;">
-                            <span></span><span></span><span></span>
-                        </div>
-                    </div>
-
-
-                    <!-- Results Dashboard -->
-                    <div id="schemesResults" class="schemes-results">
-                        <div class="results-header">
-                            <h3><i class="fas fa-clipboard-check" style="color: var(--primary);"></i> Eligible Schemes</h3>
-                            <span id="matchedCount" style="background: rgba(76,175,80,0.1); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: 600;">0 Matched</span>
-                        </div>
-                        <div id="schemesGrid" class="results-grid">
-                            <!-- Cards inserted via JS -->
-                        </div>
-                        <div style="text-align: center; margin-top: 30px;">
-                            <button class="btn btn-outline" style="padding: 10px 20px; font-weight: 600;" onclick="resetSchemesForm()"><i class="fas fa-redo"></i> Check Another Profile</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CART OVERLAY -->
-            <div class="cart-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
-
-            <!-- CART DRAWER -->
-            <div class="cart-drawer" id="cartDrawer">
-                <div class="cart-header">
-                    <div class="cart-header-left">
-                        <i class="fas fa-shopping-cart"></i>
-                        <h3>My Cart</h3>
-                    </div>
-                    <button class="cart-close-btn" onclick="closeCartDrawer()"><i class="fas fa-times"></i></button>
-                </div>
-                <div class="cart-body" id="cartBody">
-                    <div class="cart-empty">
-                        <i class="fas fa-shopping-basket"></i>
-                        <h3>Your cart is empty</h3>
-                        <p>Add items from the marketplace to begin</p>
-                    </div>
-                </div>
-                <div class="cart-footer" id="cartFooter" style="display:none;">
-                    <div class="cart-total-row">
-                        <span>Total</span>
-                        <span class="cart-total-price" id="cartTotal">&#8377;0</span>
-                    </div>
-                    <button class="cart-checkout-btn" onclick="openCheckout()">
-                        <i class="fas fa-lock"></i> Proceed to Checkout
-                    </button>
-                </div>
+    <!-- SCHEMES SECTION -->
+    <section id="schemes">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="schemes-container">
+            <div class="schemes-header">
+                <h2><i class="fas fa-landmark" style="color: var(--primary);"></i> Scheme Matchmaker</h2>
+                <p>Find government agricultural schemes you are eligible for</p>
             </div>
 
-            <!-- CHECKOUT MODAL -->
-            <div class="checkout-modal-overlay" id="checkoutModal" style="display:none;">
-                <div class="checkout-modal">
-                    <div class="checkout-header">
-                        <h2><i class="fas fa-lock"></i> Secure Checkout</h2>
-                        <button class="cart-close-btn" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
+            <div id="schemesWizard" class="schemes-wizard">
+                <div class="wizard-progress">
+                    <div class="progress-step active">1</div>
+                    <div class="progress-step">2</div>
+                    <div class="progress-step">3</div>
+                </div>
+
+                <!-- Step 1: Land -->
+                <div id="schemeStep1" class="wizard-step active">
+                    <h3 class="step-title"><i class="fas fa-map"></i> Land Details</h3>
+                    <div class="schemes-form-group">
+                        <label>How much cultivable land do you own? (in Acres)</label>
+                        <input type="number" id="schemeLandSize" placeholder="e.g. 2.5" min="0" step="0.1">
+                        <small style="color: var(--text-muted); margin-top: 5px; display: block;">Enter 0 if you are a
+                            landless farmer or sharecropper.</small>
                     </div>
-                    <div class="checkout-body" id="checkoutBody">
-                        <div class="checkout-columns">
-                            <!-- Order Summary -->
-                            <div class="co-summary-panel">
-                                <div class="co-section-title"><i class="fas fa-receipt"></i> Order Summary</div>
-                                <div id="checkoutItems" class="co-items-list"></div>
-                                <div class="co-total-block">
-                                    <div class="co-row"><span>Subtotal</span><span id="coSubtotal">&#8377;0</span></div>
-                                    <div class="co-row"><span>Delivery</span><span class="co-free">Direct from
-                                            Farmer</span></div>
-                                    <div class="co-row co-row-total"><span>Total</span><span
-                                            id="coTotal">&#8377;0</span></div>
-                                </div>
-                            </div>
-                            <!-- Buyer Details -->
-                            <div class="co-buyer-panel">
-                                <div class="co-section-title"><i class="fas fa-user"></i> Your Details</div>
-                                <div class="sell-form-group">
-                                    <label>Your Full Name</label>
-                                    <input type="text" id="buyerName" placeholder="e.g. Rohit Sharma" required>
-                                </div>
-                                <div class="sell-form-group">
-                                    <label>Your WhatsApp Number</label>
-                                    <input type="tel" id="buyerPhone" placeholder="10-digit number" maxlength="10"
-                                        pattern="[0-9]{10}" required>
-                                </div>
-                                <div class="sell-form-group">
-                                    <label>Delivery Address (Optional)</label>
-                                    <input type="text" id="buyerAddress" placeholder="Village / City / Pincode">
-                                </div>
-                                <div class="co-note">
-                                    <i class="fas fa-info-circle"></i>
-                                    Your order will be sent via WhatsApp to each farmer. They will confirm availability
-                                    and arrange delivery directly.
-                                </div>
-                                <button class="cart-checkout-btn" onclick="placeOrder()">
-                                    <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
-                                </button>
-                            </div>
-                        </div>
+                    <div class="wizard-actions" style="justify-content: flex-end;">
+                        <button class="btn-wizard btn-next" onclick="nextSchemesStep()">Next <i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Location -->
+                <div id="schemeStep2" class="wizard-step">
+                    <h3 class="step-title"><i class="fas fa-map-marker-alt"></i> Location</h3>
+                    <div class="schemes-form-group">
+                        <label>State</label>
+                        <select id="schemeStateSelect">
+                            <option value="" disabled selected>Select State</option>
+                        </select>
+                    </div>
+                    <div class="wizard-actions">
+                        <button class="btn-wizard btn-prev" onclick="prevSchemesStep()"><i
+                                class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn-wizard btn-next" onclick="nextSchemesStep()">Next <i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Crop -->
+                <div id="schemeStep3" class="wizard-step">
+                    <h3 class="step-title"><i class="fas fa-seedling"></i> Crop Information</h3>
+                    <div class="schemes-form-group">
+                        <label>What is your primary crop? (Optional)</label>
+                        <input type="text" id="schemeCropSelect" placeholder="e.g. Rice, Wheat, Potato">
+                    </div>
+                    <div class="wizard-actions">
+                        <button class="btn-wizard btn-prev" onclick="prevSchemesStep()"><i
+                                class="fas fa-arrow-left"></i> Back</button>
+                        <button class="btn-wizard btn-next" onclick="submitSchemesForm()"><i class="fas fa-search"></i>
+                            Find Schemes</button>
                     </div>
                 </div>
             </div>
 
-            <!-- USER PROFILE SECTION -->
-            <section id="profile">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
+            <!-- Loader -->
+            <div id="schemesLoader" class="schemes-loader">
+                <div class="spinner-wrap"></div>
+                <h3 id="schemesLoaderTitle">Searching...</h3>
+                <p style="color: var(--text-secondary); display: none;" id="schemesLoaderMsg"></p>
+                <div class="loader-ai-dots" style="margin-top: 12px;">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
 
-                <div class="profile-container">
-                    <!-- Profile Header -->
-                    <div class="profile-header">
-                        <div class="profile-info">
-                            <div class="profile-avatar"
-                                style="position: relative; overflow: hidden; padding: 0; display: flex; align-items: center; justify-content: center;">
-                                <img id="mainProfileImg" src="" alt="Profile"
-                                    style="width: 100%; height: 100%; object-fit: cover; display: none;">
-                                <i id="mainProfileIcon" class="fas fa-user"></i>
 
-                                <!-- Hover Overlay for Upload -->
-                                <label for="profileUploadInput"
-                                    style="position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.6); color: white; font-size: 0.8rem; padding: 5px 0; text-align: center; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px;">
-                                    <i class="fas fa-camera"></i> Edit
-                                </label>
-                                <input type="file" id="profileUploadInput" accept="image/*" style="display: none;"
-                                    onchange="updateProfileImage(event)">
-                            </div>
-                            <div class="profile-details">
-                                <!-- Editable Name Row -->
-                                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                                    <h1 id="profileName" style="margin: 0;">User Name</h1>
-                                    <button id="editNameBtn" onclick="startNameEdit()" title="Edit Name"
-                                        style="background: none; border: 1px solid #ccc; border-radius: 50%; width:30px; height:30px; cursor: pointer; color: #555; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
-                                </div>
-                                <!-- Edit Mode – hidden by default -->
-                                <div id="nameEditRow"
-                                    style="display:none; margin-top: 8px; align-items: center; gap: 8px; flex-wrap: wrap;">
-                                    <input type="text" id="nameEditInput" placeholder="Enter new name"
-                                        style="padding: 6px 12px; border: 2px solid var(--primary); border-radius: 8px; font-size: 1rem; outline: none; min-width: 180px;">
-                                    <button onclick="saveNameEdit()"
-                                        style="background: var(--primary); color: white; border: none; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: 0.9rem;">
-                                        <i class="fas fa-check"></i> Save
-                                    </button>
-                                    <button onclick="cancelNameEdit()"
-                                        style="background: #eee; color: #555; border: none; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 0.9rem;">
-                                        <i class="fas fa-times"></i> Cancel
-                                    </button>
-                                </div>
-                                <p><i class="fas fa-phone"></i> <span id="profilePhone">+91-XXXXXXXXXX</span></p>
-                                <p><i class="fas fa-map-marker-alt"></i> <span id="profileLocation">Location</span></p>
-                            </div>
+            <!-- Results Dashboard -->
+            <div id="schemesResults" class="schemes-results">
+                <div class="results-header">
+                    <h3><i class="fas fa-clipboard-check" style="color: var(--primary);"></i> Eligible Schemes</h3>
+                    <span id="matchedCount"
+                        style="background: rgba(76,175,80,0.1); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: 600;">0
+                        Matched</span>
+                </div>
+                <div id="schemesGrid" class="results-grid">
+                    <!-- Cards inserted via JS -->
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-outline" style="padding: 10px 20px; font-weight: 600;"
+                        onclick="resetSchemesForm()"><i class="fas fa-redo"></i> Check Another Profile</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CART OVERLAY -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+
+    <!-- CART DRAWER -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <div class="cart-header-left">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>My Cart</h3>
+            </div>
+            <button class="cart-close-btn" onclick="closeCartDrawer()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <h3>Your cart is empty</h3>
+                <p>Add items from the marketplace to begin</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display:none;">
+            <div class="cart-total-row">
+                <span>Total</span>
+                <span class="cart-total-price" id="cartTotal">&#8377;0</span>
+            </div>
+            <button class="cart-checkout-btn" onclick="openCheckout()">
+                <i class="fas fa-lock"></i> Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="checkout-modal-overlay" id="checkoutModal" style="display:none;">
+        <div class="checkout-modal">
+            <div class="checkout-header">
+                <h2><i class="fas fa-lock"></i> Secure Checkout</h2>
+                <button class="cart-close-btn" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="checkout-body" id="checkoutBody">
+                <div class="checkout-columns">
+                    <!-- Order Summary -->
+                    <div class="co-summary-panel">
+                        <div class="co-section-title"><i class="fas fa-receipt"></i> Order Summary</div>
+                        <div id="checkoutItems" class="co-items-list"></div>
+                        <div class="co-total-block">
+                            <div class="co-row"><span>Subtotal</span><span id="coSubtotal">&#8377;0</span></div>
+                            <div class="co-row"><span>Delivery</span><span class="co-free">Direct from
+                                    Farmer</span></div>
+                            <div class="co-row co-row-total"><span>Total</span><span id="coTotal">&#8377;0</span></div>
                         </div>
                     </div>
-
-                    <!-- Statistics -->
-                    <div class="card">
-                        <div class="card-header"><i class="fas fa-chart-bar"></i>
-                            <h2>Farming Statistics</h2>
+                    <!-- Buyer Details -->
+                    <div class="co-buyer-panel">
+                        <div class="co-section-title"><i class="fas fa-user"></i> Your Details</div>
+                        <div class="sell-form-group">
+                            <label>Your Full Name</label>
+                            <input type="text" id="buyerName" placeholder="e.g. Rohit Sharma" required>
                         </div>
-                        <div class="stats-grid">
-                            <div class="stat-box">
-                                <div class="stat-icon"><i class="fas fa-camera"></i></div>
-                                <div class="stat-value" id="statScans">0</div>
-                                <div class="stat-label">Leaf Scans</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-icon"><i class="fas fa-cloud-sun"></i></div>
-                                <div class="stat-value" id="statWeather">0</div>
-                                <div class="stat-label">Weather Checks</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-icon"><i class="fas fa-calculator"></i></div>
-                                <div class="stat-value" id="statCalculations">0</div>
-                                <div class="stat-label">Calculations</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-icon"><i class="fas fa-leaf"></i></div>
-                                <div class="stat-value" id="statCrops">0</div>
-                                <div class="stat-label">Crops Tracked</div>
-                            </div>
+                        <div class="sell-form-group">
+                            <label>Your WhatsApp Number</label>
+                            <input type="tel" id="buyerPhone" placeholder="10-digit number" maxlength="10"
+                                pattern="[0-9]{10}" required>
                         </div>
+                        <div class="sell-form-group">
+                            <label>Delivery Address (Optional)</label>
+                            <input type="text" id="buyerAddress" placeholder="Village / City / Pincode">
+                        </div>
+                        <div class="co-note">
+                            <i class="fas fa-info-circle"></i>
+                            Your order will be sent via WhatsApp to each farmer. They will confirm availability
+                            and arrange delivery directly.
+                        </div>
+                        <button class="cart-checkout-btn" onclick="placeOrder()">
+                            <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
+                        </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <!-- Activity History -->
-                    <div class="card activity-section">
-                        <div class="card-header"
-                            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                            <div>
-                                <i class="fas fa-history"></i>
-                                <h2 style="display: inline-block; margin: 0; margin-left: 8px;">Farming History</h2>
-                            </div>
-                            <button class="btn btn-primary" onclick="exportActivityPDF()"
-                                style="border-radius: 20px; font-weight: 600; font-size: 0.9rem; padding: 6px 16px;">
-                                <i class="fas fa-file-pdf"></i> Export PDF
+    <!-- USER PROFILE SECTION -->
+    <section id="profile">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <div class="profile-container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar"
+                        style="position: relative; overflow: hidden; padding: 0; display: flex; align-items: center; justify-content: center;">
+                        <img id="mainProfileImg" src="" alt="Profile"
+                            style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                        <i id="mainProfileIcon" class="fas fa-user"></i>
+
+                        <!-- Hover Overlay for Upload -->
+                        <label for="profileUploadInput"
+                            style="position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.6); color: white; font-size: 0.8rem; padding: 5px 0; text-align: center; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px;">
+                            <i class="fas fa-camera"></i> Edit
+                        </label>
+                        <input type="file" id="profileUploadInput" accept="image/*" style="display: none;"
+                            onchange="updateProfileImage(event)">
+                    </div>
+                    <div class="profile-details">
+                        <!-- Editable Name Row -->
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <h1 id="profileName" style="margin: 0;">User Name</h1>
+                            <button id="editNameBtn" onclick="startNameEdit()" title="Edit Name"
+                                style="background: none; border: 1px solid #ccc; border-radius: 50%; width:30px; height:30px; cursor: pointer; color: #555; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
-                        <div class="activity-filters">
-                            <button class="filter-btn active" onclick="filterActivities('all')">All Activities</button>
-                            <button class="filter-btn" onclick="filterActivities('scan')">Scans</button>
-                            <button class="filter-btn" onclick="filterActivities('weather')">Weather</button>
-                            <button class="filter-btn" onclick="filterActivities('calculation')">Calculations</button>
-                            <button class="filter-btn" onclick="filterActivities('crop')">Crops</button>
+                        <!-- Edit Mode – hidden by default -->
+                        <div id="nameEditRow"
+                            style="display:none; margin-top: 8px; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <input type="text" id="nameEditInput" placeholder="Enter new name"
+                                style="padding: 6px 12px; border: 2px solid var(--primary); border-radius: 8px; font-size: 1rem; outline: none; min-width: 180px;">
+                            <button onclick="saveNameEdit()"
+                                style="background: var(--primary); color: white; border: none; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: 0.9rem;">
+                                <i class="fas fa-check"></i> Save
+                            </button>
+                            <button onclick="cancelNameEdit()"
+                                style="background: #eee; color: #555; border: none; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 0.9rem;">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
                         </div>
-                        <div class="activity-timeline" id="activityTimeline">
-                            <div class="empty-state">
-                                <i class="fas fa-history"></i>
-                                <p>No activities yet. Start using BharatFarm to see your farming history!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- User Preferences -->
-                    <div class="card">
-                        <div class="card-header"><i class="fas fa-cog"></i>
-                            <h2>Preferences</h2>
-                        </div>
-                        <div class="preferences-grid">
-                            <div class="preference-item">
-                                <h4><i class="fas fa-seedling"></i> Preferred Crops</h4>
-                                <p class="preference-value" id="prefCrops">None selected</p>
-                            </div>
-                            <div class="preference-item">
-                                <h4><i class="fas fa-ruler-combined"></i> Land Size</h4>
-                                <p class="preference-value" id="prefLandSize">Not set</p>
-                            </div>
-                        </div>
+                        <p><i class="fas fa-phone"></i> <span id="profilePhone">+91-XXXXXXXXXX</span></p>
+                        <p><i class="fas fa-map-marker-alt"></i> <span id="profileLocation">Location</span></p>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- LEAF SCANNER SECTION -->
-            <section id="scanner">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
+            <!-- Statistics -->
+            <div class="card">
+                <div class="card-header"><i class="fas fa-chart-bar"></i>
+                    <h2>Farming Statistics</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fas fa-camera"></i></div>
+                        <div class="stat-value" id="statScans">0</div>
+                        <div class="stat-label">Leaf Scans</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fas fa-cloud-sun"></i></div>
+                        <div class="stat-value" id="statWeather">0</div>
+                        <div class="stat-label">Weather Checks</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fas fa-calculator"></i></div>
+                        <div class="stat-value" id="statCalculations">0</div>
+                        <div class="stat-label">Calculations</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="stat-value" id="statCrops">0</div>
+                        <div class="stat-label">Crops Tracked</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity History -->
+            <div class="card activity-section">
+                <div class="card-header"
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <i class="fas fa-history"></i>
+                        <h2 style="display: inline-block; margin: 0; margin-left: 8px;">Farming History</h2>
+                    </div>
+                    <button class="btn btn-primary" onclick="exportActivityPDF()"
+                        style="border-radius: 20px; font-weight: 600; font-size: 0.9rem; padding: 6px 16px;">
+                        <i class="fas fa-file-pdf"></i> Export PDF
+                    </button>
+                </div>
+                <div class="activity-filters">
+                    <button class="filter-btn active" onclick="filterActivities('all')">All Activities</button>
+                    <button class="filter-btn" onclick="filterActivities('scan')">Scans</button>
+                    <button class="filter-btn" onclick="filterActivities('weather')">Weather</button>
+                    <button class="filter-btn" onclick="filterActivities('calculation')">Calculations</button>
+                    <button class="filter-btn" onclick="filterActivities('crop')">Crops</button>
+                </div>
+                <div class="activity-timeline" id="activityTimeline">
+                    <div class="empty-state">
+                        <i class="fas fa-history"></i>
+                        <p>No activities yet. Start using BharatFarm to see your farming history!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Preferences -->
+            <div class="card">
+                <div class="card-header"><i class="fas fa-cog"></i>
+                    <h2>Preferences</h2>
+                </div>
+                <div class="preferences-grid">
+                    <div class="preference-item">
+                        <h4><i class="fas fa-seedling"></i> Preferred Crops</h4>
+                        <p class="preference-value" id="prefCrops">None selected</p>
+                    </div>
+                    <div class="preference-item">
+                        <h4><i class="fas fa-ruler-combined"></i> Land Size</h4>
+                        <p class="preference-value" id="prefLandSize">Not set</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEAF SCANNER SECTION -->
+    <section id="scanner">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-leaf"></i>
+                <h2>Leaf Disease Scanner</h2>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: var(--spacing-md);">Upload or capture a photo of
+                any plant leaf to detect diseases and get fertilizer recommendations.</p>
+
+            <div class="scanner-container">
+                <div class="scanner-box" id="scannerBox" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Upload Leaf Image</h3>
+                    <p>Click to upload or drag and drop an image</p>
+                    <p style="margin-top: var(--spacing-sm); font-size: 0.85rem;">Supports: JPG, PNG, WEBP</p>
+                </div>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;"
+                    onchange="handleLeafUpload(event)">
+
+                <button class="camera-btn" onclick="openCamera()">
+                    <i class="fas fa-camera"></i> Open Camera
                 </button>
-                <div class="card">
-                    <div class="card-header"><i class="fas fa-leaf"></i>
-                        <h2>Leaf Disease Scanner</h2>
-                    </div>
-                    <p style="color: var(--text-muted); margin-bottom: var(--spacing-md);">Upload or capture a photo of
-                        any plant leaf to detect diseases and get fertilizer recommendations.</p>
 
-                    <div class="scanner-container">
-                        <div class="scanner-box" id="scannerBox" onclick="document.getElementById('fileInput').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <h3>Upload Leaf Image</h3>
-                            <p>Click to upload or drag and drop an image</p>
-                            <p style="margin-top: var(--spacing-sm); font-size: 0.85rem;">Supports: JPG, PNG, WEBP</p>
-                        </div>
-                        <input type="file" id="fileInput" accept="image/*" style="display: none;"
-                            onchange="handleLeafUpload(event)">
+                <!-- CAMERA MODAL -->
+                <div id="cameraModal" class="modal-overlay"
+                    style="display: none; z-index: 1000; align-items: center; justify-content: center;">
+                    <div class="modal-content camera-modal"
+                        style="width: 90%; max-width: 500px; text-align: center; background: white; padding: 20px; border-radius: 12px; position: relative;">
+                        <button class="close-modal-btn" onclick="closeCamera()"
+                            style="position: absolute; right: 15px; top: 15px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #555;"><i
+                                class="fas fa-times"></i></button>
+                        <h3 style="margin-bottom: 15px;"><i class="fas fa-camera"></i> Take Photo</h3>
 
-                        <button class="camera-btn" onclick="openCamera()">
-                            <i class="fas fa-camera"></i> Open Camera
-                        </button>
-
-                        <!-- CAMERA MODAL -->
-                        <div id="cameraModal" class="modal-overlay"
-                            style="display: none; z-index: 1000; align-items: center; justify-content: center;">
-                            <div class="modal-content camera-modal"
-                                style="width: 90%; max-width: 500px; text-align: center; background: white; padding: 20px; border-radius: 12px; position: relative;">
-                                <button class="close-modal-btn" onclick="closeCamera()"
-                                    style="position: absolute; right: 15px; top: 15px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #555;"><i
-                                        class="fas fa-times"></i></button>
-                                <h3 style="margin-bottom: 15px;"><i class="fas fa-camera"></i> Take Photo</h3>
-
-                                <div class="video-container"
-                                    style="position: relative; width: 100%; border-radius: 8px; overflow: hidden; background: #000; margin-bottom: 15px; min-height: 300px;">
-                                    <video id="cameraVideo" autoplay playsinline
-                                        style="width: 100%; display: block;"></video>
-                                    <canvas id="cameraCanvas" style="display: none; width: 100%;"></canvas>
-                                    <img id="cameraPreviewImg" src=""
-                                        style="display: none; width: 100%; object-fit: contain;">
-                                </div>
-
-                                <div class="camera-actions" style="display: flex; gap: 10px; justify-content: center;">
-                                    <button id="captureBtn" class="btn btn-primary" onclick="capturePhoto()">
-                                        <i class="fas fa-camera"></i> Capture
-                                    </button>
-                                    <button id="retakeBtn" class="btn btn-outline" style="display: none;"
-                                        onclick="retakePhoto()">
-                                        <i class="fas fa-redo"></i> Retake
-                                    </button>
-                                    <button id="usePhotoBtn" class="btn btn-primary glow-effect"
-                                        style="display: none; background-color: var(--success);" onclick="usePhoto()">
-                                        <i class="fas fa-check"></i> Use Photo
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="video-container"
+                            style="position: relative; width: 100%; border-radius: 8px; overflow: hidden; background: #000; margin-bottom: 15px; min-height: 300px;">
+                            <video id="cameraVideo" autoplay playsinline style="width: 100%; display: block;"></video>
+                            <canvas id="cameraCanvas" style="display: none; width: 100%;"></canvas>
+                            <img id="cameraPreviewImg" src="" style="display: none; width: 100%; object-fit: contain;">
                         </div>
 
-                        <div id="scannerPreview" class="scanner-preview" style="display: none;">
-                            <img id="leafPreviewImg" src="" alt="Leaf Preview">
-                        </div>
-
-                        <button id="analyzeBtn" class="btn btn-primary btn-lg"
-                            style="display: none; margin-top: var(--spacing-md);" onclick="analyzeLeaf()">
-                            <i class="fas fa-search"></i> Analyze Leaf
-                        </button>
-
-                        <div id="scanLoading" class="hidden">
-                            <div class="spinner"></div>
-                            <p class="text-center">Analyzing leaf image...</p>
-                        </div>
-
-                        <div id="scanResult" class="scan-result" style="display: none;">
-                            <h3 style="margin-bottom: var(--spacing-md);"><i class="fas fa-clipboard-check"></i>
-                                Analysis Result</h3>
-                            <div class="disease-badge" id="diseaseStatus">Healthy</div>
-                            <h4 id="diseaseName" style="font-size: 1.3rem; margin-bottom: var(--spacing-sm);">Plant
-                                Status</h4>
-                            <p id="diseaseDescription"
-                                style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">Description will
-                                appear here.</p>
-
-                            <h4 style="margin-bottom: var(--spacing-sm);"><i class="fas fa-flask"></i> Recommended
-                                Fertilizers</h4>
-                            <div class="recommendation-list" id="fertilizerRecommendations"></div>
-
-                            <h4 style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-sm);"><i
-                                    class="fas fa-notes-medical"></i> Treatment Tips</h4>
-                            <div class="recommendation-list" id="treatmentTips"></div>
+                        <div class="camera-actions" style="display: flex; gap: 10px; justify-content: center;">
+                            <button id="captureBtn" class="btn btn-primary" onclick="capturePhoto()">
+                                <i class="fas fa-camera"></i> Capture
+                            </button>
+                            <button id="retakeBtn" class="btn btn-outline" style="display: none;"
+                                onclick="retakePhoto()">
+                                <i class="fas fa-redo"></i> Retake
+                            </button>
+                            <button id="usePhotoBtn" class="btn btn-primary glow-effect"
+                                style="display: none; background-color: var(--success);" onclick="usePhoto()">
+                                <i class="fas fa-check"></i> Use Photo
+                            </button>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- WEATHER -->
-            <section id="weather">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
+                <div id="scannerPreview" class="scanner-preview" style="display: none;">
+                    <img id="leafPreviewImg" src="" alt="Leaf Preview">
+                </div>
+
+                <button id="analyzeBtn" class="btn btn-primary btn-lg"
+                    style="display: none; margin-top: var(--spacing-md);" onclick="analyzeLeaf()">
+                    <i class="fas fa-search"></i> Analyze Leaf
                 </button>
-                <div class="card">
-                    <div class="card-header"><i class="fas fa-map-marker-alt"></i>
-                        <h2>Enter Your Location</h2>
-                    </div>
-                    <div class="location-input">
-                        <input type="text" id="locationInput" placeholder="Enter village or city name" value="">
-                        <button class="btn btn-primary btn-lg" onclick="fetchWeather()" style="border-radius: 8px;">
-                            <i class="fas fa-search"></i> Get Weather
-                        </button>
-                    </div>
-                </div>
 
-                <div id="weatherLoading" class="hidden">
+                <div id="scanLoading" class="hidden">
                     <div class="spinner"></div>
-                    <p class="text-center">Fetching weather data...</p>
+                    <p class="text-center">Analyzing leaf image...</p>
                 </div>
 
-                <div id="weatherContent">
-                    <div class="weather-main">
-                        <div class="weather-icon"><i class="fas fa-sun" id="weatherIcon"></i></div>
-                        <div class="weather-temp"><span id="temperature">32</span>°C</div>
-                        <div class="weather-condition" id="weatherCondition">Clear Sky</div>
-                        <div class="weather-location"><i class="fas fa-map-marker-alt"></i><span
-                                id="weatherLocation">Jashdighi, West Bengal</span></div>
-                    </div>
+                <div id="scanResult" class="scan-result" style="display: none;">
+                    <h3 style="margin-bottom: var(--spacing-md);"><i class="fas fa-clipboard-check"></i>
+                        Analysis Result</h3>
+                    <div class="disease-badge" id="diseaseStatus">Healthy</div>
+                    <h4 id="diseaseName" style="font-size: 1.3rem; margin-bottom: var(--spacing-sm);">Plant
+                        Status</h4>
+                    <p id="diseaseDescription" style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                        Description will
+                        appear here.</p>
 
-                    <div class="weather-details">
-                        <div class="weather-detail-card"><i class="fas fa-tint"></i>
-                            <div class="label">Rain Probability</div>
-                            <div class="value"><span id="rainProbability">25</span>%</div>
-                        </div>
-                        <div class="weather-detail-card"><i class="fas fa-water"></i>
-                            <div class="label">Humidity</div>
-                            <div class="value"><span id="humidity">45</span>%</div>
-                        </div>
-                        <div class="weather-detail-card"><i class="fas fa-wind"></i>
-                            <div class="label">Wind Speed</div>
-                            <div class="value"><span id="windSpeed">12</span> km/h</div>
-                        </div>
-                        <div class="weather-detail-card"><i class="fas fa-eye"></i>
-                            <div class="label">Visibility</div>
-                            <div class="value"><span id="visibility">10</span> km</div>
-                        </div>
-                    </div>
+                    <h4 style="margin-bottom: var(--spacing-sm);"><i class="fas fa-flask"></i> Recommended
+                        Fertilizers</h4>
+                    <div class="recommendation-list" id="fertilizerRecommendations"></div>
 
-                    <div class="weather-alert safe" id="weatherAlert">
-                        <i class="fas fa-check-circle"></i>
-                        <div>
-                            <h3>SAFE for Farming Activities</h3>
-                            <p>Weather conditions are suitable for farming activities.</p>
-                        </div>
-                    </div>
-
-                    <!-- Farming Tips -->
-                    <div class="weather-tips-container"
-                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                        <div class="weather-tip-card"
-                            style="background: #e6f4ea; padding: 15px; border-radius: 8px; border-left: 4px solid #34a853;">
-                            <h4 style="color: #137333; margin-bottom: 10px; font-size: 1rem;"><i
-                                    class="fas fa-check-circle"></i> What to Do</h4>
-                            <ul id="whatToDoList"
-                                style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #333;">
-                                <li>Loading...</li>
-                            </ul>
-                        </div>
-                        <div class="weather-tip-card"
-                            style="background: #fce8e6; padding: 15px; border-radius: 8px; border-left: 4px solid #ea4335;">
-                            <h4 style="color: #c5221f; margin-bottom: 10px; font-size: 1rem;"><i
-                                    class="fas fa-times-circle"></i> What Not to Do</h4>
-                            <ul id="whatNotToDoList"
-                                style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #333;">
-                                <li>Loading...</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- AI Farming Advice -->
-                    <div id="weatherAISummary"
-                        style="display:none; margin-top:1rem; padding:1rem 1.2rem; background:linear-gradient(135deg,#e3f2fd,#f0f9ff); border-radius:12px; border-left:4px solid #0288d1;">
-                        <div
-                            style="font-size:0.75rem; color:#0277bd; font-weight:700; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">
-                            <i class="fas fa-robot"></i> AI Farming Advice
-                        </div>
-                        <div id="weatherAIText" style="font-size:0.875rem; color:#333; line-height:1.6;">
-                            <span style="color:#999;"><i class="fas fa-spinner fa-spin"></i> Generating advice...</span>
-                        </div>
-                    </div>
+                    <h4 style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-sm);"><i
+                            class="fas fa-notes-medical"></i> Treatment Tips</h4>
+                    <div class="recommendation-list" id="treatmentTips"></div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- CROPS -->
-            <section id="crops">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
+    <!-- WEATHER -->
+    <section id="weather">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-map-marker-alt"></i>
+                <h2>Enter Your Location</h2>
+            </div>
+            <div class="location-input">
+                <input type="text" id="locationInput" placeholder="Enter village or city name" value="">
+                <button class="btn btn-primary btn-lg" onclick="fetchWeather()" style="border-radius: 8px;">
+                    <i class="fas fa-search"></i> Get Weather
                 </button>
-                <div class="card">
-                    <div class="card-header"><i class="fas fa-seedling"></i>
-                        <h2>Crop Information</h2>
-                    </div>
-                    <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);">Search for any crop to see
-                        detailed farming recommendations from the global database.</p>
+            </div>
+        </div>
 
-                    <div class="crop-controls">
-                        <div class="search-box">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="cropSearchInput" placeholder="Search crops (e.g., Tomato, Rice...)"
-                                oninput="debounceSearch()">
-                        </div>
-                        <div class="category-filters">
-                            <button class="filter-btn active" data-category="all"
-                                onclick="filterCrops('all')">All</button>
-                            <button class="filter-btn" data-category="cereal"
-                                onclick="filterCrops('cereal')">Cereal</button>
-                            <button class="filter-btn" data-category="vegetable"
-                                onclick="filterCrops('vegetable')">Vegetable</button>
-                            <button class="filter-btn" data-category="fruit"
-                                onclick="filterCrops('fruit')">Fruit</button>
-                            <button class="filter-btn" data-category="oilseed"
-                                onclick="filterCrops('oilseed')">Oilseed</button>
-                        </div>
-                    </div>
+        <div id="weatherLoading" class="hidden">
+            <div class="spinner"></div>
+            <p class="text-center">Fetching weather data...</p>
+        </div>
 
-                    <div id="cropLoading" class="hidden">
-                        <div class="spinner"></div>
-                        <p class="text-center">Searching crop database...</p>
-                    </div>
+        <div id="weatherContent">
+            <div class="weather-main">
+                <div class="weather-icon"><i class="fas fa-sun" id="weatherIcon"></i></div>
+                <div class="weather-temp"><span id="temperature">32</span>°C</div>
+                <div class="weather-condition" id="weatherCondition">Clear Sky</div>
+                <div class="weather-location"><i class="fas fa-map-marker-alt"></i><span id="weatherLocation">Jashdighi,
+                        West Bengal</span></div>
+            </div>
 
-                    <div id="cropEmptyState" class="hidden">
-                        <div class="empty-state">
-                            <i class="fas fa-search"></i>
-                            <p>No crops found matching your search. Try a different name or category.</p>
-                        </div>
-                    </div>
-
-                    <div class="crop-grid" id="cropGrid"></div>
+            <div class="weather-details">
+                <div class="weather-detail-card"><i class="fas fa-tint"></i>
+                    <div class="label">Rain Probability</div>
+                    <div class="value"><span id="rainProbability">25</span>%</div>
                 </div>
-
-                <!-- Pagination -->
-                <div id="cropPagination" class="pagination-container hidden">
-                    <button class="btn btn-outline" id="prevPageBtn" onclick="changePage(-1)">Previous</button>
-                    <span id="currentPage">Page 1</span>
-                    <button class="btn btn-outline" id="nextPageBtn" onclick="changePage(1)">Next</button>
+                <div class="weather-detail-card"><i class="fas fa-water"></i>
+                    <div class="label">Humidity</div>
+                    <div class="value"><span id="humidity">45</span>%</div>
                 </div>
-                <div class="crop-info" id="cropInfo">
-                    <div class="card">
-                        <div class="card-header"><i class="fas fa-info-circle"></i>
-                            <h2>Crop Information: <span id="selectedCropName">-</span></h2>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item"><i class="fas fa-microscope"></i>
-                                <div class="info-content">
-                                    <h4>Scientific Name</h4>
-                                    <p id="cropScientificName">-</p>
-                                </div>
-                            </div>
-                            <div class="info-item"><i class="fas fa-cloud-sun"></i>
-                                <div class="info-content">
-                                    <h4>Climate Requirement</h4>
-                                    <p id="cropClimate">-</p>
-                                </div>
-                            </div>
-                            <div class="info-item"><i class="fas fa-mountain"></i>
-                                <div class="info-content">
-                                    <h4>Soil Type</h4>
-                                    <p id="cropSoil">-</p>
-                                </div>
-                            </div>
-                            <div class="info-item"><i class="fas fa-clock"></i>
-                                <div class="info-content">
-                                    <h4>Total Duration</h4>
-                                    <p id="cropDuration">-</p>
-                                </div>
-                            </div>
-                            <div class="info-item"><i class="fas fa-tint"></i>
-                                <div class="info-content">
-                                    <h4>Water Requirement</h4>
-                                    <p id="cropWatering">-</p>
-                                </div>
-                            </div>
-                            <div class="info-item"><i class="fas fa-calendar-alt"></i>
-                                <div class="info-content">
-                                    <h4>Harvesting Period</h4>
-                                    <p id="cropHarvesting">-</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- AI Insights Panel -->
-                        <div id="cropAIInsights"
-                            style="display:none; margin-top:1.5rem; padding:1.2rem 1.5rem; background:linear-gradient(135deg, rgba(0,168,255,0.08), rgba(0,100,200,0.05)); border-radius:12px; border-left:4px solid var(--primary);">
-                            <div
-                                style="font-size:0.75rem; color:var(--primary); font-weight:700; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px;">
-                                <i class="fas fa-robot"></i> AI Growing Insights
-                            </div>
-                            <div id="cropAIText"
-                                style="font-size:0.875rem; color:var(--text-primary); line-height:1.7;">
-                                <span style="color:var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Generating
-                                    AI insights...</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-lg" style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
-                            <button class="btn btn-primary btn-lg" onclick="showSection('roadmap')"><i
-                                    class="fas fa-road"></i> View Roadmap</button>
-                            <button class="btn btn-secondary btn-lg" onclick="showSection('calculator')"><i
-                                    class="fas fa-calculator"></i> Calculate Costs</button>
-                        </div>
-                    </div>
+                <div class="weather-detail-card"><i class="fas fa-wind"></i>
+                    <div class="label">Wind Speed</div>
+                    <div class="value"><span id="windSpeed">12</span> km/h</div>
                 </div>
-            </section>
-
-            <!-- CALCULATOR -->
-            <section id="calculator">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <div class="grid grid-2">
-                    <div class="card">
-                        <div class="card-header"><i class="fas fa-calculator"></i>
-                            <h2>Seed & Fertilizer Cost Calculator</h2>
-                        </div>
-                        <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);"><i
-                                class="fas fa-info-circle"></i> Only seed and fertilizer costs. Labour, equipment NOT
-                            included.</p>
-
-                        <div class="form-group">
-                            <label><i class="fas fa-leaf"></i> Select Crop</label>
-                            <input type="text" id="calcCrop" list="calcCropList"
-                                placeholder="-- Search or Type a crop --"
-                                style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);"
-                                autocomplete="off">
-                            <datalist id="calcCropList">
-                                <option value="Rice"></option>
-                                <option value="Wheat"></option>
-                                <option value="Maize (Corn)"></option>
-                                <option value="Barley"></option>
-                                <option value="Oats"></option>
-                                <option value="Tomato"></option>
-                                <option value="Potato"></option>
-                                <option value="Onion"></option>
-                                <option value="Carrot"></option>
-                                <option value="Cabbage"></option>
-                                <option value="Spinach"></option>
-                                <option value="Brinjal (Eggplant)"></option>
-                                <option value="Cauliflower"></option>
-                                <option value="Okra (Lady's Finger)"></option>
-                                <option value="Capsicum (Bell Pepper)"></option>
-                                <option value="Mango"></option>
-                                <option value="Banana"></option>
-                                <option value="Apple"></option>
-                                <option value="Papaya"></option>
-                                <option value="Guava"></option>
-                                <option value="Orange"></option>
-                                <option value="Grapes"></option>
-                                <option value="Pomegranate"></option>
-                                <option value="Watermelon"></option>
-                                <option value="Pineapple"></option>
-                                <option value="Mustard"></option>
-                                <option value="Soybean"></option>
-                                <option value="Sunflower"></option>
-                                <option value="Groundnut (Peanut)"></option>
-                            </datalist>
-                            <div id="calcCropError"
-                                style="display:none; margin-top:8px; padding:10px 14px; background:#ffebee; border-left:4px solid #f44336; border-radius:8px; color:#d32f2f; font-weight:600; font-size:0.95rem;">
-                                <i class="fas fa-exclamation-triangle"></i> Please enter a valid crop
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label><i class="fas fa-ruler-combined"></i> Select Land Unit</label>
-                            <div class="land-unit-selector">
-                                <button type="button" class="land-unit-btn active"
-                                    onclick="setLandUnit('acre')">Acre</button>
-                                <button type="button" class="land-unit-btn"
-                                    onclick="setLandUnit('bigha')">Bigha</button>
-                                <button type="button" class="land-unit-btn"
-                                    onclick="setLandUnit('katha')">Katha</button>
-                            </div>
-                            <div class="unit-conversion">
-                                <i class="fas fa-info-circle"></i> 1 Bigha = 20 Katha | 1 Bigha ≈ 0.62 Acre | 1 Acre ≈
-                                32.26 Katha
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label><i class="fas fa-expand"></i> Land Size (<span
-                                    id="landUnitLabel">Acres</span>)</label>
-                            <input type="number" id="landSize" placeholder="Enter land size" min="0.1" step="0.1"
-                                value="1"
-                                style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);">
-                            <span id="landConversion"
-                                style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; display: block;">=
-                                1 Acre = 32.26 Katha = 1.61 Bigha</span>
-                        </div>
-
-                        <button class="btn btn-primary btn-lg btn-block" onclick="calculateCosts()"><i
-                                class="fas fa-calculator"></i> Calculate Total Cost</button>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header"><i class="fas fa-receipt"></i>
-                            <h2>Cost Breakdown</h2>
-                        </div>
-                        <div class="results-container" id="calcResults">
-                            <div class="result-card">
-                                <div class="result-label"><i class="fas fa-seedling"></i> Required Seed Quantity</div>
-                                <div class="result-value" id="seedQty">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label"><i class="fas fa-rupee-sign"></i> Total Seed Cost</div>
-                                <div class="result-value" id="seedCost">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label"><i class="fas fa-flask"></i> Required Fertilizer Quantity
-                                </div>
-                                <div class="result-value" id="fertQty">-</div>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-label"><i class="fas fa-rupee-sign"></i> Total Fertilizer Cost</div>
-                                <div class="result-value" id="fertCost">-</div>
-                            </div>
-                            <div class="total-card">
-                                <h3><i class="fas fa-coins"></i> TOTAL FARMING INPUT COST</h3>
-                                <div class="total-value" id="totalCost">-</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="weather-detail-card"><i class="fas fa-eye"></i>
+                    <div class="label">Visibility</div>
+                    <div class="value"><span id="visibility">10</span> km</div>
                 </div>
+            </div>
 
-                <div class="card mt-lg">
-                    <div class="card-header"><i class="fas fa-chart-line"></i>
-                        <h2>Revenue Prediction</h2>
-                    </div>
-                    <div class="revenue-card">
-                        <div class="revenue-icon"><i class="fas fa-coins"></i></div>
-                        <h3>Expected Revenue</h3>
-                        <div class="revenue-value" id="expectedRevenue">-</div>
-                        <p id="revenueExplanation">Select a crop and enter land size to see your expected revenue.</p>
-                    </div>
-                    <div class="revenue-breakdown">
-                        <div class="breakdown-item"><i class="fas fa-weight-hanging"></i>
-                            <div class="label">Expected Yield</div>
-                            <div class="value" id="expectedYield">-</div>
-                        </div>
-                        <div class="breakdown-item"><i class="fas fa-tag"></i>
-                            <div class="label">Market Price</div>
-                            <div class="value" id="marketPrice">-</div>
-                        </div>
-                        <div class="breakdown-item"><i class="fas fa-percentage"></i>
-                            <div class="label">Profit Margin</div>
-                            <div class="value" id="profitMargin">-</div>
-                        </div>
-                    </div>
+            <div class="weather-alert safe" id="weatherAlert">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h3>SAFE for Farming Activities</h3>
+                    <p>Weather conditions are suitable for farming activities.</p>
                 </div>
-            </section>
+            </div>
 
-            <!-- ROADMAP -->
-            <section id="roadmap">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <div class="card">
-                    <div class="roadmap-header">
-                        <h2><i class="fas fa-road"></i> Farming Activity Roadmap</h2>
-                        <p id="roadmapCropName">Select a crop to view the detailed activity schedule</p>
-                    </div>
-                    <div id="noRoadmap" class="text-center">
-                        <i class="fas fa-seedling" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
-                        <p style="margin-top: var(--spacing-md); color: var(--text-muted);">Please select a crop first.
-                        </p>
-                        <button class="btn btn-primary btn-lg mt-lg" onclick="showSection('crops')"><i
-                                class="fas fa-leaf"></i> Select a Crop</button>
-                    </div>
-                    <div class="timeline" id="roadmapTimeline" style="display: none;"></div>
-                </div>
-            </section>
-
-            <!-- CROP HEALTH WIKI -->
-            <section id="wiki">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-
-                <div class="wiki-hero">
-                    <div class="wiki-hero-bg"></div>
-                    <div class="wiki-hero-overlay"></div>
-                    <div class="wiki-hero-content">
-                        <div class="ai-branding-badge"><i class="fas fa-brain"></i> AI-Powered Knowledge Base</div>
-                        <h2>Crop Health Wiki</h2>
-                        <p>Comprehensive knowledge base for plant diseases, pests, and soil health</p>
-                    </div>
-                </div>
-
-                <div class="wiki-sticky-bar">
-                    <div class="wiki-controls-refined">
-                        <div class="search-wrapper">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="wikiSearch" placeholder="Search diseases, crops..." onkeyup="searchWiki(this.value)">
-                        </div>
-                        <div class="category-chips-container" id="wikiCategories">
-                            <button class="chip active" onclick="filterWiki('all', this)">All</button>
-                            <button class="chip" onclick="filterWiki('plant', this)"><i class="fas fa-seedling"></i> Plant</button>
-                            <button class="chip" onclick="filterWiki('pest', this)"><i class="fas fa-bug"></i> Pest</button>
-                            <button class="chip" onclick="filterWiki('soil', this)"><i class="fas fa-water"></i> Soil</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="wiki-grid" id="wikiGrid">
-                    <div class="wiki-loading"><i class="fas fa-spinner fa-spin"></i> Loading disease database...</div>
-                </div>
-            </section>
-
-            <!-- NOTIFICATIONS -->
-            <section id="notifications">
-                <button class="section-back-btn" onclick="goBack()" title="Go Back">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <div class="card">
-                    <div class="card-header"><i class="fas fa-bell"></i>
-                        <h2>Notifications & Alerts</h2>
-                    </div>
-                    <div class="notification-list" id="notificationList"></div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="main-footer">
-            <div class="footer-container">
-                <div class="footer-brand">
-                    <h2>Bharat <span>Farm</span></h2>
-                    <p>Intelligent Smart Farming platform empowering Indian farmers with AI-driven crop insights, disease detection, and direct marketplace access.</p>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Platform</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#dashboard" onclick="showSection('dashboard'); return false;">Dashboard</a></li>
-                        <li><a href="#" onclick="openSubscription(); return false;">Pricing Plans</a></li>
+            <!-- Farming Tips -->
+            <div class="weather-tips-container"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                <div class="weather-tip-card"
+                    style="background: #e6f4ea; padding: 15px; border-radius: 8px; border-left: 4px solid #34a853;">
+                    <h4 style="color: #137333; margin-bottom: 10px; font-size: 1rem;"><i
+                            class="fas fa-check-circle"></i> What to Do</h4>
+                    <ul id="whatToDoList" style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #333;">
+                        <li>Loading...</li>
                     </ul>
                 </div>
-
-                <div class="footer-col">
-                    <h3>Other Links</h3>
-                    <ul>
-                        <li><a href="info.html?page=disclaimer">Disclaimer</a></li>
-                        <li><a href="info.html?page=faq">FAQs</a></li>
-                        <li><a href="info.html?page=methodology">AI Methodology</a></li>
-
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="info.html?page=terms">Terms & Conditions</a></li>
-                        <li><a href="info.html?page=privacy">Privacy Policy</a></li>
-                        <li><a href="info.html?page=dataprotection">Data Protection</a></li>
-                        <li><a href="info.html?page=accessibility">Accessibility</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="#" onclick="showAboutPage(); return false;">About Section</a></li>
+                <div class="weather-tip-card"
+                    style="background: #fce8e6; padding: 15px; border-radius: 8px; border-left: 4px solid #ea4335;">
+                    <h4 style="color: #c5221f; margin-bottom: 10px; font-size: 1rem;"><i
+                            class="fas fa-times-circle"></i> What Not to Do</h4>
+                    <ul id="whatNotToDoList" style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #333;">
+                        <li>Loading...</li>
                     </ul>
                 </div>
             </div>
 
-            <div class="footer-bottom">
-                <div class="last-updated">Last updated: 16-03-2026</div>
-                <p>&copy; 2026 Bharat Farm. Empowering Indian Agriculture.</p>
+            <!-- AI Farming Advice -->
+            <div id="weatherAISummary"
+                style="display:none; margin-top:1rem; padding:1rem 1.2rem; background:linear-gradient(135deg,#e3f2fd,#f0f9ff); border-radius:12px; border-left:4px solid #0288d1;">
+                <div
+                    style="font-size:0.75rem; color:#0277bd; font-weight:700; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">
+                    <i class="fas fa-robot"></i> AI Farming Advice
+                </div>
+                <div id="weatherAIText" style="font-size:0.875rem; color:#333; line-height:1.6;">
+                    <span style="color:#999;"><i class="fas fa-spinner fa-spin"></i> Generating advice...</span>
+                </div>
             </div>
-        </footer>
+        </div>
+    </section>
+
+    <!-- CROPS -->
+    <section id="crops">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-seedling"></i>
+                <h2>Crop Information</h2>
+            </div>
+            <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);">Search for any crop to see
+                detailed farming recommendations from the global database.</p>
+
+            <div class="crop-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="cropSearchInput" placeholder="Search crops (e.g., Tomato, Rice...)"
+                        oninput="debounceSearch()">
+                </div>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all" onclick="filterCrops('all')">All</button>
+                    <button class="filter-btn" data-category="cereal" onclick="filterCrops('cereal')">Cereal</button>
+                    <button class="filter-btn" data-category="vegetable"
+                        onclick="filterCrops('vegetable')">Vegetable</button>
+                    <button class="filter-btn" data-category="fruit" onclick="filterCrops('fruit')">Fruit</button>
+                    <button class="filter-btn" data-category="oilseed" onclick="filterCrops('oilseed')">Oilseed</button>
+                </div>
+            </div>
+
+            <div id="cropLoading" class="hidden">
+                <div class="spinner"></div>
+                <p class="text-center">Searching crop database...</p>
+            </div>
+
+            <div id="cropEmptyState" class="hidden">
+                <div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <p>No crops found matching your search. Try a different name or category.</p>
+                </div>
+            </div>
+
+            <div class="crop-grid" id="cropGrid"></div>
+        </div>
+
+        <!-- Pagination -->
+        <div id="cropPagination" class="pagination-container hidden">
+            <button class="btn btn-outline" id="prevPageBtn" onclick="changePage(-1)">Previous</button>
+            <span id="currentPage">Page 1</span>
+            <button class="btn btn-outline" id="nextPageBtn" onclick="changePage(1)">Next</button>
+        </div>
+        <div class="crop-info" id="cropInfo">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-info-circle"></i>
+                    <h2>Crop Information: <span id="selectedCropName">-</span></h2>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-microscope"></i>
+                        <div class="info-content">
+                            <h4>Scientific Name</h4>
+                            <p id="cropScientificName">-</p>
+                        </div>
+                    </div>
+                    <div class="info-item"><i class="fas fa-cloud-sun"></i>
+                        <div class="info-content">
+                            <h4>Climate Requirement</h4>
+                            <p id="cropClimate">-</p>
+                        </div>
+                    </div>
+                    <div class="info-item"><i class="fas fa-mountain"></i>
+                        <div class="info-content">
+                            <h4>Soil Type</h4>
+                            <p id="cropSoil">-</p>
+                        </div>
+                    </div>
+                    <div class="info-item"><i class="fas fa-clock"></i>
+                        <div class="info-content">
+                            <h4>Total Duration</h4>
+                            <p id="cropDuration">-</p>
+                        </div>
+                    </div>
+                    <div class="info-item"><i class="fas fa-tint"></i>
+                        <div class="info-content">
+                            <h4>Water Requirement</h4>
+                            <p id="cropWatering">-</p>
+                        </div>
+                    </div>
+                    <div class="info-item"><i class="fas fa-calendar-alt"></i>
+                        <div class="info-content">
+                            <h4>Harvesting Period</h4>
+                            <p id="cropHarvesting">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Insights Panel -->
+                <div id="cropAIInsights"
+                    style="display:none; margin-top:1.5rem; padding:1.2rem 1.5rem; background:linear-gradient(135deg, rgba(0,168,255,0.08), rgba(0,100,200,0.05)); border-radius:12px; border-left:4px solid var(--primary);">
+                    <div
+                        style="font-size:0.75rem; color:var(--primary); font-weight:700; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px;">
+                        <i class="fas fa-robot"></i> AI Growing Insights
+                    </div>
+                    <div id="cropAIText" style="font-size:0.875rem; color:var(--text-primary); line-height:1.7;">
+                        <span style="color:var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Generating
+                            AI insights...</span>
+                    </div>
+                </div>
+
+                <div class="mt-lg" style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                    <button class="btn btn-primary btn-lg" onclick="showSection('roadmap')"><i class="fas fa-road"></i>
+                        View Roadmap</button>
+                    <button class="btn btn-secondary btn-lg" onclick="showSection('calculator')"><i
+                            class="fas fa-calculator"></i> Calculate Costs</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section id="calculator">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="grid grid-2">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-calculator"></i>
+                    <h2>Seed & Fertilizer Cost Calculator</h2>
+                </div>
+                <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);"><i
+                        class="fas fa-info-circle"></i> Only seed and fertilizer costs. Labour, equipment NOT
+                    included.</p>
+
+                <div class="form-group">
+                    <label><i class="fas fa-leaf"></i> Select Crop</label>
+                    <input type="text" id="calcCrop" list="calcCropList" placeholder="-- Search or Type a crop --"
+                        style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);"
+                        autocomplete="off">
+                    <datalist id="calcCropList">
+                        <option value="Rice"></option>
+                        <option value="Wheat"></option>
+                        <option value="Maize (Corn)"></option>
+                        <option value="Barley"></option>
+                        <option value="Oats"></option>
+                        <option value="Tomato"></option>
+                        <option value="Potato"></option>
+                        <option value="Onion"></option>
+                        <option value="Carrot"></option>
+                        <option value="Cabbage"></option>
+                        <option value="Spinach"></option>
+                        <option value="Brinjal (Eggplant)"></option>
+                        <option value="Cauliflower"></option>
+                        <option value="Okra (Lady's Finger)"></option>
+                        <option value="Capsicum (Bell Pepper)"></option>
+                        <option value="Mango"></option>
+                        <option value="Banana"></option>
+                        <option value="Apple"></option>
+                        <option value="Papaya"></option>
+                        <option value="Guava"></option>
+                        <option value="Orange"></option>
+                        <option value="Grapes"></option>
+                        <option value="Pomegranate"></option>
+                        <option value="Watermelon"></option>
+                        <option value="Pineapple"></option>
+                        <option value="Mustard"></option>
+                        <option value="Soybean"></option>
+                        <option value="Sunflower"></option>
+                        <option value="Groundnut (Peanut)"></option>
+                    </datalist>
+                    <div id="calcCropError"
+                        style="display:none; margin-top:8px; padding:10px 14px; background:#ffebee; border-left:4px solid #f44336; border-radius:8px; color:#d32f2f; font-weight:600; font-size:0.95rem;">
+                        <i class="fas fa-exclamation-triangle"></i> Please enter a valid crop
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-ruler-combined"></i> Select Land Unit</label>
+                    <div class="land-unit-selector">
+                        <button type="button" class="land-unit-btn active" onclick="setLandUnit('acre')">Acre</button>
+                        <button type="button" class="land-unit-btn" onclick="setLandUnit('bigha')">Bigha</button>
+                        <button type="button" class="land-unit-btn" onclick="setLandUnit('katha')">Katha</button>
+                    </div>
+                    <div class="unit-conversion">
+                        <i class="fas fa-info-circle"></i> 1 Bigha = 20 Katha | 1 Bigha ≈ 0.62 Acre | 1 Acre ≈
+                        32.26 Katha
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-expand"></i> Land Size (<span id="landUnitLabel">Acres</span>)</label>
+                    <input type="number" id="landSize" placeholder="Enter land size" min="0.1" step="0.1" value="1"
+                        style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);">
+                    <span id="landConversion"
+                        style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; display: block;">=
+                        1 Acre = 32.26 Katha = 1.61 Bigha</span>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block" onclick="calculateCosts()"><i
+                        class="fas fa-calculator"></i> Calculate Total Cost</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><i class="fas fa-receipt"></i>
+                    <h2>Cost Breakdown</h2>
+                </div>
+                <div class="results-container" id="calcResults">
+                    <div class="result-card">
+                        <div class="result-label"><i class="fas fa-seedling"></i> Required Seed Quantity</div>
+                        <div class="result-value" id="seedQty">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label"><i class="fas fa-rupee-sign"></i> Total Seed Cost</div>
+                        <div class="result-value" id="seedCost">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label"><i class="fas fa-flask"></i> Required Fertilizer Quantity
+                        </div>
+                        <div class="result-value" id="fertQty">-</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label"><i class="fas fa-rupee-sign"></i> Total Fertilizer Cost</div>
+                        <div class="result-value" id="fertCost">-</div>
+                    </div>
+                    <div class="total-card">
+                        <h3><i class="fas fa-coins"></i> TOTAL FARMING INPUT COST</h3>
+                        <div class="total-value" id="totalCost">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-lg">
+            <div class="card-header"><i class="fas fa-chart-line"></i>
+                <h2>Revenue Prediction</h2>
+            </div>
+            <div class="revenue-card">
+                <div class="revenue-icon"><i class="fas fa-coins"></i></div>
+                <h3>Expected Revenue</h3>
+                <div class="revenue-value" id="expectedRevenue">-</div>
+                <p id="revenueExplanation">Select a crop and enter land size to see your expected revenue.</p>
+            </div>
+            <div class="revenue-breakdown">
+                <div class="breakdown-item"><i class="fas fa-weight-hanging"></i>
+                    <div class="label">Expected Yield</div>
+                    <div class="value" id="expectedYield">-</div>
+                </div>
+                <div class="breakdown-item"><i class="fas fa-tag"></i>
+                    <div class="label">Market Price</div>
+                    <div class="value" id="marketPrice">-</div>
+                </div>
+                <div class="breakdown-item"><i class="fas fa-percentage"></i>
+                    <div class="label">Profit Margin</div>
+                    <div class="value" id="profitMargin">-</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="card">
+            <div class="roadmap-header">
+                <h2><i class="fas fa-road"></i> Farming Activity Roadmap</h2>
+                <p id="roadmapCropName">Select a crop to view the detailed activity schedule</p>
+            </div>
+            <div id="noRoadmap" class="text-center">
+                <i class="fas fa-seedling" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
+                <p style="margin-top: var(--spacing-md); color: var(--text-muted);">Please select a crop first.
+                </p>
+                <button class="btn btn-primary btn-lg mt-lg" onclick="showSection('crops')"><i class="fas fa-leaf"></i>
+                    Select a Crop</button>
+            </div>
+            <div class="timeline" id="roadmapTimeline" style="display: none;"></div>
+        </div>
+    </section>
+
+    <!-- CROP HEALTH WIKI -->
+    <section id="wiki">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <div class="wiki-hero">
+            <div class="wiki-hero-bg"></div>
+            <div class="wiki-hero-overlay"></div>
+            <div class="wiki-hero-content">
+                <div class="ai-branding-badge"><i class="fas fa-brain"></i> AI-Powered Knowledge Base</div>
+                <h2>Crop Health Wiki</h2>
+                <p>Comprehensive knowledge base for plant diseases, pests, and soil health</p>
+            </div>
+        </div>
+
+        <div class="wiki-sticky-bar">
+            <div class="wiki-controls-refined">
+                <div class="search-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="wikiSearch" placeholder="Search diseases, crops..."
+                        onkeyup="searchWiki(this.value)">
+                </div>
+                <div class="category-chips-container" id="wikiCategories">
+                    <button class="chip active" onclick="filterWiki('all', this)">All</button>
+                    <button class="chip" onclick="filterWiki('plant', this)"><i class="fas fa-seedling"></i>
+                        Plant</button>
+                    <button class="chip" onclick="filterWiki('pest', this)"><i class="fas fa-bug"></i> Pest</button>
+                    <button class="chip" onclick="filterWiki('soil', this)"><i class="fas fa-water"></i> Soil</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="wiki-grid" id="wikiGrid">
+            <div class="wiki-loading"><i class="fas fa-spinner fa-spin"></i> Loading disease database...</div>
+        </div>
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section id="notifications">
+        <button class="section-back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-bell"></i>
+                <h2>Notifications & Alerts</h2>
+            </div>
+            <div class="notification-list" id="notificationList"></div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>Bharat <span>Farm</span></h2>
+                <p>Intelligent Smart Farming platform empowering Indian farmers with AI-driven crop insights, disease
+                    detection, and direct marketplace access.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Platform</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#dashboard" onclick="showSection('dashboard'); return false;">Dashboard</a></li>
+                    <li><a href="#" onclick="openSubscription(); return false;">Pricing Plans</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Other Links</h3>
+                <ul>
+                    <li><a href="info.html?page=disclaimer">Disclaimer</a></li>
+                    <li><a href="info.html?page=faq">FAQs</a></li>
+                    <li><a href="info.html?page=methodology">AI Methodology</a></li>
+
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="info.html?page=terms">Terms & Conditions</a></li>
+                    <li><a href="info.html?page=privacy">Privacy Policy</a></li>
+                    <li><a href="info.html?page=dataprotection">Data Protection</a></li>
+                    <li><a href="info.html?page=accessibility">Accessibility</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#" onclick="showAboutPage(); return false;">About Section</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="last-updated">Last updated: 16-03-2026</div>
+            <p>&copy; 2026 Bharat Farm. Empowering Indian Agriculture.</p>
+        </div>
+    </footer>
     </div>
 
     <!-- Mobile Bottom Navigation (hidden) -->
@@ -2019,7 +2063,7 @@
                 <div class="quiz-options" id="qm-options">
                     <!-- Options injected via JS -->
                 </div>
-                
+
                 <div class="quiz-footer" id="qm-footer">
                     <div class="quiz-explanation" id="qm-explanation-text"></div>
                     <button class="btn btn-primary quiz-btn-close" onclick="closeQuizModal()">Awesome, Got It!</button>
@@ -2036,4 +2080,5 @@
     <script src="js/gamification-ui.js"></script>
 
 </body>
+
 </html>
