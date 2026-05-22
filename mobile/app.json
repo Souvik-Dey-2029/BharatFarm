@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "BharatFarm",
+    "slug": "bharatfarm",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "bharatfarm",
+    "splash": {
+      "backgroundColor": "#0A1A0F",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bharatfarm.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "BharatFarm needs camera access to scan plant leaves for disease detection.",
+        "NSPhotoLibraryUsageDescription": "BharatFarm needs photo library access to upload leaf images for analysis.",
+        "NSLocationWhenInUseUsageDescription": "BharatFarm uses your location for local weather data and marketplace listings.",
+        "NSMicrophoneUsageDescription": "BharatFarm uses your microphone for voice commands with KrishiBot."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0A1A0F"
+      },
+      "package": "com.bharatfarm.mobile",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "RECORD_AUDIO",
+        "INTERNET"
+      ]
+    },
+    "plugins": [
+      "expo-camera",
+      "expo-image-picker",
+      "expo-location",
+      "expo-font",
+      "expo-splash-screen"
+    ]
+  }
+}
