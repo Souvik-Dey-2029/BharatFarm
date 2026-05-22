@@ -193,6 +193,9 @@ By adopting the BharatFarm ecosystem, a typical rural farming community can expe
    ```
    Open **http://localhost:5000** in your browser.
 
+4. **Mobile onboarding configuration**
+  Set `BHARATFARM_EXPO_URL` to the active Expo session URL or host URI so the QR code always resolves to the live Expo Go session.
+
 ---
 
 ## ⚙️ Tech Stack

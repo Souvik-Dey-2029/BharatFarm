@@ -7,7 +7,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View, Text, StyleSheet, FlatList, KeyboardAvoidingView,
-  Platform, TextInput, Pressable, ActivityIndicator, Alert
+  Platform, TextInput, Pressable, ActivityIndicator
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
@@ -90,10 +90,9 @@ export default function KrishiBotScreen({ navigation }) {
     } catch (e) {
       const errorMsg = {
         id: (Date.now() + 1).toString(),
-        text: "Error connecting to server. Please check your Node.js backend configuration.",
+        text: "I'm in demo mode right now, but I can still help with crops, weather, schemes, and scanner guidance.",
         sender: 'ai',
         timestamp: new Date(),
-        isError: true
       };
       setMessages(prev => [...prev, errorMsg]);
     } finally {

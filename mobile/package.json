@@ -16,6 +16,7 @@
     "expo-haptics": "~15.0.8",
     "expo-image-picker": "~17.0.11",
     "expo-linear-gradient": "~15.0.8",
+    "expo-linking": "^56.0.11",
     "expo-location": "~19.0.8",
     "expo-speech": "~14.0.8",
     "expo-splash-screen": "~31.0.13",
@@ -35,8 +36,11 @@
   },
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start-stable": "node scripts/start-stable.js --clear",
+    "start-lan": "node scripts/start-stable.js",
+    "start-offline": "node scripts/start-stable.js --offline --clear",
+    "android": "expo start --android --lan",
+    "ios": "expo start --ios --lan",
     "web": "expo start --web"
   },
   "private": true

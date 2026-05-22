@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, RefreshControl, Dimensions, Pressable,
-  TextInput, ActivityIndicator, Alert
+  ActivityIndicator
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -31,82 +31,31 @@ export default function HomeScreen({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
   const insets = useSafeAreaInsets();
 
-  // Backend connection checking states
-  const [backendStatus, setBackendStatus] = useState('checking'); // 'checking' | 'connected' | 'disconnected'
-  const [showConfig, setShowConfig] = useState(false);
-  const [inputIp, setInputIp] = useState('');
+  const [bridgeState, setBridgeState] = useState('checking'); // 'checking' | 'live' | 'demo'
+  const [bridgeNote, setBridgeNote] = useState('Preparing demo session...');
   const [checking, setChecking] = useState(false);
 
   const firstName = currentUser?.name?.split(' ')[0] || 'Farmer';
   const greeting = getGreeting();
 
   useEffect(() => {
-    checkBackend();
+    syncBridgeState();
   }, []);
 
-  const checkBackend = async () => {
+  const syncBridgeState = async () => {
     setChecking(true);
     try {
       const res = await apiService.healthCheck();
-      if (res && res.status === 'ok') {
-        setBackendStatus('connected');
-      } else {
-        setBackendStatus('disconnected');
-      }
+      const mode = res?.mode === 'demo' ? 'demo' : 'live';
+      setBridgeState(mode);
+      setBridgeNote(
+        mode === 'demo'
+          ? 'Demo data is active. The dashboard stays functional without backend access.'
+          : 'Live backend bridge detected. Demo fallback remains ready.'
+      );
     } catch (e) {
-      setBackendStatus('disconnected');
-    } finally {
-      setChecking(false);
-    }
-  };
-
-  const handleUpdateIp = async () => {
-    if (!inputIp.trim()) {
-      Alert.alert('Error', 'Please enter a valid server URL');
-      return;
-    }
-
-    let url = inputIp.trim();
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = `http://${url}`;
-    }
-
-    setChecking(true);
-    try {
-      // Temporarily set baseUrl to verify connection
-      const oldBase = apiService.baseUrl;
-      apiService.baseUrl = url;
-      const res = await apiService.healthCheck();
-      
-      if (res && res.status === 'ok') {
-        await apiService.setBaseUrl(url);
-        setBackendStatus('connected');
-        setShowConfig(false);
-        Alert.alert('Connected', `Successfully connected to backend at: ${url}`);
-      } else {
-        apiService.baseUrl = oldBase; // revert
-        Alert.alert('Connection Failed', `Could not reach backend at ${url}. Verify address and port.`);
-      }
-    } catch (err) {
-      Alert.alert('Connection Failed', `Failed to reach backend at ${url}: ${err.message}`);
-    } finally {
-      setChecking(false);
-    }
-  };
-
-  const handleResetIp = async () => {
-    setChecking(true);
-    try {
-      await apiService.resetBaseUrl();
-      const res = await apiService.healthCheck();
-      if (res && res.status === 'ok') {
-        setBackendStatus('connected');
-      } else {
-        setBackendStatus('disconnected');
-      }
-      Alert.alert('Reset Complete', `Restored default API Base: ${apiService.baseUrl}`);
-    } catch (e) {
-      setBackendStatus('disconnected');
+      setBridgeState('demo');
+      setBridgeNote('Demo data is active. The dashboard stays functional without backend access.');
     } finally {
       setChecking(false);
     }
@@ -114,7 +63,7 @@ export default function HomeScreen({ navigation }) {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await checkBackend();
+    await syncBridgeState();
     await useGamificationStore.getState().loadState();
     setRefreshing(false);
   };
@@ -246,69 +195,34 @@ export default function HomeScreen({ navigation }) {
             </GradientCard>
           </View>
 
-          {/* Backend Connectivity Status Card */}
+          {/* Demo Bridge Status Card */}
           <GradientCard style={styles.connectivityCard}>
             <View style={styles.connectivityHeader}>
               <View style={styles.connectivityTitleRow}>
                 <View style={[
                   styles.statusDot,
-                  { backgroundColor: backendStatus === 'connected' ? '#10B981' : backendStatus === 'disconnected' ? '#EF4444' : '#F59E0B' }
+                  { backgroundColor: bridgeState === 'live' ? '#10B981' : '#F59E0B' }
                 ]} />
                 <Text style={[typography.body, { color: theme.text, fontWeight: '700' }]}>
-                  Backend Connectivity
+                  Live Demo Bridge
                 </Text>
               </View>
-              <Pressable style={styles.configToggle} onPress={() => setShowConfig(!showConfig)}>
-                <Ionicons name={showConfig ? "chevron-up" : "settings-outline"} size={18} color={theme.primary} />
+              <Pressable style={styles.configToggle} onPress={syncBridgeState} disabled={checking}>
+                {checking ? (
+                  <ActivityIndicator size="small" color={theme.primary} />
+                ) : (
+                  <Ionicons name="refresh-outline" size={18} color={theme.primary} />
+                )}
               </Pressable>
             </View>
 
             <Text style={[typography.caption, { color: theme.textSecondary, marginTop: 4 }]}>
-              Base URL: {apiService.baseUrl}
+              Demo-first launch with Expo session bridge and local fallback data.
             </Text>
 
-            {backendStatus === 'disconnected' && !showConfig && (
-              <Pressable onPress={() => setShowConfig(true)} style={styles.reconfigBanner}>
-                <Ionicons name="alert-circle" size={14} color="#EF4444" style={{ marginRight: 6 }} />
-                <Text style={[typography.caption, { color: '#EF4444', fontWeight: '700' }]}>
-                  Backend Offline. Tap here to configure IP address.
-                </Text>
-              </Pressable>
-            )}
-
-            {showConfig && (
-              <View style={styles.ipConfigArea}>
-                <TextInput
-                  style={[styles.ipInput, { color: theme.text, borderColor: theme.border, backgroundColor: theme.inputBg }]}
-                  placeholder="e.g. 192.168.1.15:5000"
-                  placeholderTextColor={theme.inputPlaceholder}
-                  value={inputIp}
-                  onChangeText={setInputIp}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                />
-                <View style={styles.ipActionRow}>
-                  <Pressable
-                    onPress={handleUpdateIp}
-                    disabled={checking}
-                    style={[styles.ipBtn, { backgroundColor: theme.primary }]}
-                  >
-                    {checking ? (
-                      <ActivityIndicator size="small" color="#FFF" />
-                    ) : (
-                      <Text style={styles.ipBtnText}>Test & Connect</Text>
-                    )}
-                  </Pressable>
-                  <Pressable
-                    onPress={handleResetIp}
-                    disabled={checking}
-                    style={[styles.ipBtn, { backgroundColor: 'transparent', borderWidth: 1, borderColor: theme.border }]}
-                  >
-                    <Text style={[styles.ipBtnText, { color: theme.text }]}>Reset Default</Text>
-                  </Pressable>
-                </View>
-              </View>
-            )}
+            <Text style={[typography.bodySmall, { color: theme.text, marginTop: 10, lineHeight: 19 }]}>
+              {bridgeNote}
+            </Text>
           </GradientCard>
 
           {/* Features Grid */}

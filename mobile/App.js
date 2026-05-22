@@ -9,6 +9,7 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
+import Constants from 'expo-constants';
 import * as SplashScreen from 'expo-splash-screen';
 import { Ionicons } from '@expo/vector-icons';
 import { useThemeStore } from './src/store/themeStore';
@@ -16,6 +17,7 @@ import { useAuthStore } from './src/store/authStore';
 import { useGamificationStore } from './src/store/gamificationStore';
 import AppNavigator from './src/navigation/AppNavigator';
 import AppButton from './src/components/AppButton';
+import { apiService } from './src/services/api';
 
 // ── GLOBAL ERROR BOUNDARY SYSTEM ─────────────────────────
 class ErrorBoundary extends Component {
@@ -71,7 +73,7 @@ class ErrorBoundary extends Component {
 }
 
 // Keep splash screen visible while loading initial state
-SplashScreen.preventAutoHideAsync().catch(() => {});
+SplashScreen.preventAutoHideAsync().catch(() => { });
 
 export default function App() {
   const loadTheme = useThemeStore(s => s.loadTheme);
@@ -94,11 +96,16 @@ export default function App() {
         console.warn('Initialization error:', e);
       } finally {
         setReady(true);
-        await SplashScreen.hideAsync().catch(() => {});
+        await SplashScreen.hideAsync().catch(() => { });
       }
     }
 
     prepare();
+  }, []);
+
+  useEffect(() => {
+    // Fire once and never block app startup on bridge publication.
+    apiService.publishExpoSession().catch(() => { });
   }, []);
 
   if (!ready) {

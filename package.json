@@ -1,26 +1,18 @@
 {
   "name": "bharatfarm",
-  "version": "2.0.0",
-  "description": "BharatFarm — Smart Agriculture Platform with SMS OTP Authentication",
+  "version": "1.0.0",
+  "description": "BharatFarm Local & Cloud Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "start-stable": "node server.js & cd mobile && node scripts/start-stable.js --clear"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
+    "express": "^4.19.2",
     "node-fetch": "^2.7.0",
-    "nodemailer": "^8.0.7"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "keywords": [
-    "agriculture",
-    "farming",
-    "otp",
-    "authentication",
-    "india"
-  ],
-  "author": "BharatFarm Team"
+    "qrcode": "^1.5.4"
+  }
 }

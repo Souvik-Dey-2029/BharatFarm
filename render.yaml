@@ -16,3 +16,7 @@ services:
         sync: false # Optional
       - key: PEXELS_API_KEY
         sync: false # Optional
+      - key: BHARATFARM_EXPO_URL
+        sync: false # Optional — LAN IP is auto-detected at runtime
+      - key: BHARATFARM_APK_URL
+        sync: false # Optional — production APK download URL
