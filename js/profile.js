@@ -11,9 +11,14 @@ function initUserProfile() {
     try { current = JSON.parse(currentUserRaw); } catch(e) { return; }
 
     const users = JSON.parse(localStorage.getItem('bharatfarm_users') || '[]');
-    const userIndex = users.findIndex(u => u.phone === current.phone || u.id === current.id);
+    let userIndex = users.findIndex(u => u.id === current.id || (current.email && u.email === current.email));
 
-    if (userIndex !== -1 && !users[userIndex].profile) {
+    if (userIndex === -1) {
+        users.push(current);
+        userIndex = users.length - 1;
+    }
+
+    if (!users[userIndex].profile) {
         users[userIndex].profile = {
             memberSince: new Date().toISOString().split('T')[0],
             location: '',
@@ -53,7 +58,7 @@ function getUserProfile() {
     }
 
     // If currentUser object exists (from auth.js), use it directly
-    if (currentUser && (currentUser.username || currentUser.phone || currentUser.id)) {
+    if (currentUser && (currentUser.id || currentUser.email || currentUser.phone || currentUser.username)) {
         console.log('Using current user object directly');
 
         // Initialize profile if it doesn't exist
@@ -78,11 +83,13 @@ function getUserProfile() {
             
             // Sync to global users array
             const users = JSON.parse(localStorage.getItem('bharatfarm_users') || '[]');
-            const userIndex = users.findIndex(u => u.phone === currentUser.phone || u.id === currentUser.id);
+            const userIndex = users.findIndex(u => u.id === currentUser.id || (currentUser.email && u.email === currentUser.email));
             if (userIndex !== -1) {
                 users[userIndex].profile = currentUser.profile;
-                localStorage.setItem('bharatfarm_users', JSON.stringify(users));
+            } else {
+                users.push(currentUser);
             }
+            localStorage.setItem('bharatfarm_users', JSON.stringify(users));
         }
 
         return currentUser;
@@ -157,7 +164,7 @@ function updateUserStatistic(statKey) {
 
     try {
         const currentUser = JSON.parse(currentUserData);
-        if (!currentUser || (!currentUser.username && !currentUser.phone)) return;
+        if (!currentUser || (!currentUser.id && !currentUser.email && !currentUser.username && !currentUser.phone)) return;
 
         // Initialize profile if needed
         if (!currentUser.profile) {
@@ -184,11 +191,13 @@ function updateUserStatistic(statKey) {
         
         // Sync to global users array
         const users = JSON.parse(localStorage.getItem('bharatfarm_users') || '[]');
-        const userIndex = users.findIndex(u => u.phone === currentUser.phone || u.id === currentUser.id);
+        const userIndex = users.findIndex(u => u.id === currentUser.id || (currentUser.email && u.email === currentUser.email));
         if (userIndex !== -1) {
             users[userIndex].profile = currentUser.profile;
-            localStorage.setItem('bharatfarm_users', JSON.stringify(users));
+        } else {
+            users.push(currentUser);
         }
+        localStorage.setItem('bharatfarm_users', JSON.stringify(users));
     } catch (e) {
         console.error('Error updating user statistic:', e);
     }
@@ -244,15 +253,15 @@ function showProfilePage() {
     try {
         // Update profile info
         const profileName = document.getElementById('profileName');
-        const profilePhone = document.getElementById('profilePhone');
+        const profileEmail = document.getElementById('profileEmail');
 
-        if (!profileName || !profilePhone) {
+        if (!profileName || !profileEmail) {
             console.error('Profile elements not found');
             return;
         }
 
         profileName.textContent = user.name || user.username;
-        profilePhone.textContent = user.phone || user.username || 'Not provided';
+        profileEmail.textContent = user.email || 'Not provided';
 
         const profile = user.profile || {};
         
@@ -279,7 +288,7 @@ function showProfilePage() {
                 },
                 (error) => {
                     console.warn("Geolocation failed in profile:", error);
-                    locElem.textContent = profile.location || 'Haldia, West Bengal'; // Fallback
+                    locElem.textContent = profile.location || 'Uluberia, West Bengal'; // Fallback
                 },
                 { enableHighAccuracy: true }
             );
@@ -458,6 +467,14 @@ function saveNameEdit() {
             const currentUser = JSON.parse(currentUserData);
             currentUser.name = newName;
             localStorage.setItem('bharatfarm_current_user', JSON.stringify(currentUser));
+
+            // Sync to global users list
+            const users = JSON.parse(localStorage.getItem('bharatfarm_users') || '[]');
+            const userIndex = users.findIndex(u => u.id === currentUser.id || (currentUser.email && u.email === currentUser.email));
+            if (userIndex !== -1) {
+                users[userIndex].name = newName;
+                localStorage.setItem('bharatfarm_users', JSON.stringify(users));
+            }
         }
     } catch (e) {
         console.error('Error saving name to localStorage:', e);

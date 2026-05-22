@@ -3,3 +3,7 @@ node_modules/
 .vscode/
 *.log
 .DS_Store
+-e 
+# User database (contains PII — never commit)
+data/users.json
+pending_payments/
