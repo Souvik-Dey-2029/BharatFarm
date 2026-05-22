@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: bharatfarm-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: OPENROUTER_API_KEY
+        sync: false # Must be entered securely in the Render Dashboard
+      - key: UNSPLASH_API_KEY
+        sync: false # Optional
+      - key: PEXELS_API_KEY
+        sync: false # Optional
