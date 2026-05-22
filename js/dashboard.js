@@ -7,19 +7,19 @@ function updateDashboard() {
 
     const safety = document.getElementById('dashWeatherSafety');
     if (currentWeather.rainProbability >= 70) {
-        safety.textContent = 'NOT SAFE';
-        safety.className = 'status unsafe';
+        safety.textContent = t('unsafe_farming');
+        safety.className = 'dash-float-status unsafe';
     } else {
-        safety.textContent = 'SAFE';
-        safety.className = 'status safe';
+        safety.textContent = t('safe_farming');
+        safety.className = 'dash-float-status safe';
     }
 
     if (typeof selectedCrop !== 'undefined' && selectedCrop) {
         const crop = cropData[selectedCrop];
         const nextActivity = (crop && crop.roadmap && crop.roadmap.length > 0) 
             ? crop.roadmap[0].activity 
-            : 'Check Roadmap';
-        document.getElementById('dashNextActivity').textContent = nextActivity;
+            : t('float_roadmap_status');
+        document.getElementById('dashNextActivity').textContent = t(nextActivity);
     }
 
     if (typeof calculatedCosts !== 'undefined' && calculatedCosts) {

@@ -81,31 +81,31 @@
             </div>
 
             <h1 class="loading-title">Bharat Farm</h1>
-            <p class="loading-subtitle">Preparing your smart farming dashboard...</p>
+            <p class="loading-subtitle" data-i18n="loading_subtitle">Preparing your smart farming dashboard...</p>
 
             <div class="loading-progress-container">
                 <div class="loading-progress-bar">
                     <div class="loading-progress-fill" id="loadingProgressFill"></div>
                 </div>
-                <p class="loading-status"><span id="loadingStatus">Initializing...</span></p>
+                <p class="loading-status"><span id="loadingStatus" data-i18n="loading_status_init">Initializing...</span></p>
             </div>
 
             <div class="loading-features">
                 <div class="loading-feature">
                     <div class="loading-feature-icon"><i class="fas fa-cloud-sun"></i></div>
-                    <span>Weather</span>
+                    <span data-i18n="loading_feature_weather">Weather</span>
                 </div>
                 <div class="loading-feature">
                     <div class="loading-feature-icon"><i class="fas fa-camera"></i></div>
-                    <span>Leaf Scanner</span>
+                    <span data-i18n="loading_feature_scanner">Leaf Scanner</span>
                 </div>
                 <div class="loading-feature">
                     <div class="loading-feature-icon"><i class="fas fa-calculator"></i></div>
-                    <span>Calculator</span>
+                    <span data-i18n="loading_feature_calculator">Calculator</span>
                 </div>
                 <div class="loading-feature">
                     <div class="loading-feature-icon"><i class="fas fa-road"></i></div>
-                    <span>Roadmap</span>
+                    <span data-i18n="loading_feature_roadmap">Roadmap</span>
                 </div>
             </div>
         </div>
@@ -119,44 +119,44 @@
             </button>
             <div class="logo"><i class="fas fa-seedling"></i></div>
             <h1>Bharat Farm</h1>
-            <p>Your smart farming companion for better crop planning and higher productivity</p>
+            <p data-i18n="login_tagline">Your smart farming companion for better crop planning and higher productivity</p>
         </div>
         <div class="login-right">
             <div class="login-box">
-                <h2 id="authTitle">Welcome Back</h2>
-                <p class="subtitle" id="authSubtitle">Login to access your farming dashboard</p>
+                <h2 id="authTitle" data-i18n="welcome_back">Welcome Back</h2>
+                <p class="subtitle" id="authSubtitle" data-i18n="login_subtitle">Login to access your farming dashboard</p>
 
                 <div class="auth-tabs">
-                    <button class="active" onclick="switchAuthTab('login')">Login</button>
-                    <button onclick="switchAuthTab('register')">Register</button>
-                    <button onclick="switchAuthTab('forgot')" style="display: none;" id="forgotPasswordTab">Forgot
+                    <button class="active" onclick="switchAuthTab('login')" data-i18n="login">Login</button>
+                    <button onclick="switchAuthTab('register')" data-i18n="register">Register</button>
+                    <button onclick="switchAuthTab('forgot')" style="display: none;" id="forgotPasswordTab" data-i18n="forgot_password">Forgot
                         Password</button>
                 </div>
 
                 <!-- LOGIN FORM -->
                 <form id="loginForm" onsubmit="handleLogin(event)">
                     <div class="form-group">
-                        <label>Phone Number</label>
+                        <label data-i18n="phone_number">Phone Number</label>
                         <div class="input-icon">
                             <i class="fas fa-phone"></i>
-                            <input type="tel" id="loginPhone" placeholder="Enter phone number" required
+                            <input type="tel" id="loginPhone" placeholder="Enter phone number" data-i18n="enter_phone_placeholder" required
                                 pattern="[0-9]{10}" maxlength="10">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
+                        <label data-i18n="password">Password</label>
                         <div class="input-icon">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="loginPassword" placeholder="Enter password" required
+                            <input type="password" id="loginPassword" placeholder="Enter password" data-i18n="enter_password_placeholder" required
                                 minlength="6">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" data-i18n="login">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </button>
                     <div style="text-align: center; margin-top: var(--spacing-md);">
                         <a href="#" onclick="switchAuthTab('forgot'); return false;"
-                            style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">
+                            style="color: var(--primary); text-decoration: none; font-size: 0.9rem;" data-i18n="forgot_password_link">
                             <i class="fas fa-key"></i> Forgot Password?
                         </a>
                     </div>
@@ -165,34 +165,34 @@
                 <!-- FORGOT PASSWORD FORM -->
                 <form id="forgotPasswordForm" style="display: none;" onsubmit="handleForgotPassword(event)">
                     <div class="form-group">
-                        <label>Phone Number</label>
+                        <label data-i18n="phone_number">Phone Number</label>
                         <div class="input-icon">
                             <i class="fas fa-phone"></i>
-                            <input type="tel" id="forgotPhone" placeholder="Enter registered phone number" required
+                            <input type="tel" id="forgotPhone" placeholder="Enter registered phone number" data-i18n="enter_registered_phone" required
                                 pattern="[0-9]{10}" maxlength="10">
                         </div>
                     </div>
                     <div class="form-group" id="newPasswordGroup" style="display: none;">
-                        <label>New Password</label>
+                        <label data-i18n="new_password_label">New Password</label>
                         <div class="input-icon">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="newPassword" placeholder="Enter new password" minlength="6">
+                            <input type="password" id="newPassword" placeholder="Enter new password" data-i18n="enter_new_password_placeholder" minlength="6">
                         </div>
                     </div>
                     <div class="form-group" id="confirmNewPasswordGroup" style="display: none;">
-                        <label>Confirm New Password</label>
+                        <label data-i18n="confirm_new_password_label">Confirm New Password</label>
                         <div class="input-icon">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="confirmNewPassword" placeholder="Confirm new password"
+                            <input type="password" id="confirmNewPassword" placeholder="Confirm new password" data-i18n="confirm_new_password_placeholder"
                                 minlength="6">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="forgotPasswordBtn">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="forgotPasswordBtn" data-i18n="verify_phone">
                         <i class="fas fa-search"></i> Verify Phone Number
                     </button>
                     <div style="text-align: center; margin-top: var(--spacing-md);">
                         <a href="#" onclick="switchAuthTab('login'); return false;"
-                            style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">
+                            style="color: var(--primary); text-decoration: none; font-size: 0.9rem;" data-i18n="back_to_login">
                             <i class="fas fa-arrow-left"></i> Back to Login
                         </a>
                     </div>
@@ -201,43 +201,43 @@
                 <!-- REGISTER FORM -->
                 <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
                     <div class="form-group">
-                        <label>Full Name</label>
+                        <label data-i18n="full_name">Full Name</label>
                         <div class="input-icon">
                             <i class="fas fa-user"></i>
-                            <input type="text" id="regName" placeholder="Enter your name" required minlength="3">
+                            <input type="text" id="regName" placeholder="Enter your name" data-i18n="enter_name_placeholder" required minlength="3">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Phone Number</label>
+                        <label data-i18n="phone_number">Phone Number</label>
                         <div class="input-icon">
                             <i class="fas fa-phone"></i>
-                            <input type="tel" id="regPhone" placeholder="Enter phone number" required
+                            <input type="tel" id="regPhone" placeholder="Enter phone number" data-i18n="enter_phone_placeholder" required
                                 pattern="[0-9]{10}" maxlength="10">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
+                        <label data-i18n="password">Password</label>
                         <div class="input-icon">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="regPassword" placeholder="Create password" required
+                            <input type="password" id="regPassword" placeholder="Create password" data-i18n="create_password_placeholder" required
                                 minlength="6">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Confirm Password</label>
+                        <label data-i18n="confirm_password">Confirm Password</label>
                         <div class="input-icon">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="regConfirmPassword" placeholder="Confirm password" required
+                            <input type="password" id="regConfirmPassword" placeholder="Confirm password" data-i18n="confirm_password_placeholder" required
                                 minlength="6">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" data-i18n="register">
                         <i class="fas fa-user-plus"></i> Register
                     </button>
                 </form>
 
                 <div class="login-footer">
-                    <p>By continuing, you agree to our Terms of Service</p>
+                    <p data-i18n="terms_footer">By continuing, you agree to our Terms of Service</p>
                 </div>
             </div>
         </div>
@@ -248,7 +248,7 @@
             <button class="close-modal-btn"
                 style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer;"
                 onclick="closeLanguageModal()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-globe"></i> Select Language</h2>
+            <h2><i class="fas fa-globe"></i> <span data-i18n="select_language">Select Language</span></h2>
             <p>Choose your preferred language / अपनी भाषा चुनें / আপনার ভাষা নির্বাচন করুন</p>
             <div class="language-options">
                 <div class="language-btn" onclick="selectLanguage('en')">
@@ -280,54 +280,54 @@
         <div class="modal-content subscription-modal">
             <button class="close-modal-btn" onclick="closeSubscription()"><i class="fas fa-times"></i></button>
             <div class="subscription-header">
-                <h2>Choose Your Farming Plan</h2>
-                <p>Unlock advanced tools to maximize your yield</p>
-                <div class="highlight-note"><i class="fas fa-gift"></i> 1st month is FREE for all new users!</div>
+                <h2 data-i18n="premium_plan_title">Choose Your Farming Plan</h2>
+                <p data-i18n="premium_plan_subtitle">Unlock advanced tools to maximize your yield</p>
+                <div class="highlight-note" data-i18n="premium_free_month"><i class="fas fa-gift"></i> 1st month is FREE for all new users!</div>
             </div>
 
             <div class="pricing-container">
                 <!-- FREE PLAN -->
                 <div class="pricing-card free">
                     <div class="plan-header">
-                        <h3>Free Version</h3>
-                        <div class="price">₹0<span>/month</span></div>
+                        <h3 data-i18n="free_version">Free Version</h3>
+                        <div class="price">₹0<span data-i18n="per_month">/month</span></div>
                     </div>
                     <ul class="features-list">
-                        <li id="freeDashboard"><i class="fas fa-check"></i> Basic Dashboard</li>
-                        <li id="freeWeather"><i class="fas fa-check"></i> Weather Updates</li>
-                        <li id="freeCalculator"><i class="fas fa-check"></i> Cost Calculator</li>
-                        <li id="freeMarketplace"><i class="fas fa-check"></i> Browse Marketplace</li>
-                        <li id="lockedLeafScanner" class="disabled"><i class="fas fa-times"></i> Leaf Disease Scanner
+                        <li id="freeDashboard" data-i18n="free_dashboard"><i class="fas fa-check"></i> Basic Dashboard</li>
+                        <li id="freeWeather" data-i18n="free_weather"><i class="fas fa-check"></i> Weather Updates</li>
+                        <li id="freeCalculator" data-i18n="free_calculator"><i class="fas fa-check"></i> Cost Calculator</li>
+                        <li id="freeMarketplace" data-i18n="free_marketplace"><i class="fas fa-check"></i> Browse Marketplace</li>
+                        <li id="lockedLeafScanner" class="disabled" data-i18n="premium_leaf_scanner"><i class="fas fa-times"></i> Leaf Disease Scanner
                         </li>
-                        <li id="lockedRoadmap" class="disabled"><i class="fas fa-times"></i> Detailed Activity Roadmap
+                        <li id="lockedRoadmap" class="disabled" data-i18n="free_roadmap"><i class="fas fa-times"></i> Detailed Activity Roadmap
                         </li>
-                        <li id="lockedSupport" class="disabled"><i class="fas fa-times"></i> Expert Support</li>
+                        <li id="lockedSupport" class="disabled" data-i18n="free_support"><i class="fas fa-times"></i> Expert Support</li>
                     </ul>
-                    <button class="btn btn-outline btn-block disabled-btn">Current Plan</button>
+                    <button class="btn btn-outline btn-block disabled-btn" data-i18n="current_plan">Current Plan</button>
                 </div>
 
                 <!-- PREMIUM PLAN -->
                 <div class="pricing-card premium" id="premiumCard">
-                    <div class="popular-tag">RECOMMENDED</div>
+                    <div class="popular-tag" data-i18n="recommended_tag">RECOMMENDED</div>
                     <div class="plan-header">
-                        <h3>Premium Version</h3>
-                        <div class="price">₹49<span>/month</span></div>
+                        <h3 data-i18n="premium_version">Premium Version</h3>
+                        <div class="price">₹49<span data-i18n="per_month">/month</span></div>
                     </div>
                     <ul class="features-list">
-                        <li id="premiumLeafScanner"><i class="fas fa-check-circle"></i> <strong>Leaf Disease
+                        <li id="premiumLeafScanner" data-i18n="premium_leaf_scanner"><i class="fas fa-check-circle"></i> <strong>Leaf Disease
                                 Scanner</strong></li>
-                        <li id="premiumRoadmap"><i class="fas fa-check-circle"></i> <strong>Farming Activity
+                        <li id="premiumRoadmap" data-i18n="premium_roadmap"><i class="fas fa-check-circle"></i> <strong>Farming Activity
                                 Roadmap</strong></li>
-                        <li id="premiumMarketplace"><i class="fas fa-check-circle"></i> <strong>AI-Driven
+                        <li id="premiumMarketplace" data-i18n="premium_marketplace"><i class="fas fa-check-circle"></i> <strong>AI-Driven
                                 Marketplace</strong></li>
-                        <li id="premiumTrade"><i class="fas fa-check"></i> Direct-to-Buyer Trade</li>
-                        <li id="premiumCommission"><i class="fas fa-check"></i> Zero Commission Sales</li>
-                        <li id="premiumWeather"><i class="fas fa-check"></i> Advanced Weather Alerts</li>
-                        <li id="premiumRevenue"><i class="fas fa-check"></i> Revenue Predictions</li>
-                        <li id="premiumSupport"><i class="fas fa-check"></i> Priority Support</li>
-                        <li id="premiumAdFree"><i class="fas fa-check"></i> Ad-free Experience</li>
+                        <li id="premiumTrade" data-i18n="premium_trade"><i class="fas fa-check"></i> Direct-to-Buyer Trade</li>
+                        <li id="premiumCommission" data-i18n="premium_commission"><i class="fas fa-check"></i> Zero Commission Sales</li>
+                        <li id="premiumWeather" data-i18n="premium_weather"><i class="fas fa-check"></i> Advanced Weather Alerts</li>
+                        <li id="premiumRevenue" data-i18n="premium_revenue"><i class="fas fa-check"></i> Revenue Predictions</li>
+                        <li id="premiumSupport" data-i18n="premium_support"><i class="fas fa-check"></i> Priority Support</li>
+                        <li id="premiumAdFree" data-i18n="premium_ad_free"><i class="fas fa-check"></i> Ad-free Experience</li>
                     </ul>
-                    <button class="btn btn-primary btn-block glow-effect" onclick="showPaymentModal()">Subscribe
+                    <button class="btn btn-primary btn-block glow-effect" onclick="showPaymentModal()" data-i18n="subscribe_now">Subscribe
                         Now!</button>
                 </div>
 
@@ -338,11 +338,11 @@
                     <!-- STATE 1: SELECTION -->
                     <div id="paymentSelectionState">
                         <button class="btn btn-outline" onclick="hidePaymentModal()"
-                            style="padding: 5px 10px; margin-bottom: 15px; align-self: flex-start; border: none; background: transparent;"><i
+                            style="padding: 5px 10px; margin-bottom: 15px; align-self: flex-start; border: none; background: transparent;" data-i18n="back_btn"><i
                                 class="fas fa-arrow-left"></i> Back</button>
                         <div class="plan-header" style="margin-bottom: 20px;">
-                            <h3>Select Payment Method</h3>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Amount to pay: ₹49</p>
+                            <h3 data-i18n="select_payment">Select Payment Method</h3>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="amount_to_pay">Amount to pay: ₹49</p>
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
@@ -355,8 +355,8 @@
                                         <i class="fas fa-mobile-alt"></i>
                                     </div>
                                     <div style="display: flex; flex-direction: column;">
-                                        <span style="font-weight: 600; font-size: 1rem; color: #333;">Pay via UPI</span>
-                                        <span style="font-size: 0.8rem; color: #666;">GPay, PhonePe, Paytm, etc.</span>
+                                        <span style="font-weight: 600; font-size: 1rem; color: #333;" data-i18n="pay_via_upi">Pay via UPI</span>
+                                        <span style="font-size: 0.8rem; color: #666;" data-i18n="upi_options">GPay, PhonePe, Paytm, etc.</span>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-right" style="color: #ccc;"></i>
@@ -371,9 +371,9 @@
                                         <i class="fas fa-credit-card"></i>
                                     </div>
                                     <div style="display: flex; flex-direction: column;">
-                                        <span style="font-weight: 600; font-size: 1rem; color: #333;">Credit / Debit
+                                        <span style="font-weight: 600; font-size: 1rem; color: #333;" data-i18n="credit_debit_card">Credit / Debit
                                             Card</span>
-                                        <span style="font-size: 0.8rem; color: #666;">Visa, Mastercard, RuPay</span>
+                                        <span style="font-size: 0.8rem; color: #666;" data-i18n="card_options">Visa, Mastercard, RuPay</span>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-right" style="color: #ccc;"></i>
@@ -388,8 +388,8 @@
                                         <i class="fas fa-university"></i>
                                     </div>
                                     <div style="display: flex; flex-direction: column;">
-                                        <span style="font-weight: 600; font-size: 1rem; color: #333;">Netbanking</span>
-                                        <span style="font-size: 0.8rem; color: #666;">All major Indian banks</span>
+                                        <span style="font-weight: 600; font-size: 1rem; color: #333;" data-i18n="netbanking">Netbanking</span>
+                                        <span style="font-size: 0.8rem; color: #666;" data-i18n="netbanking_options">All major Indian banks</span>
                                     </div>
                                 </div>
                                 <i class="fas fa-chevron-right" style="color: #ccc;"></i>
@@ -404,11 +404,11 @@
                         <div class="spinner"
                             style="margin: 0 auto 20px auto; width: 50px; height: 50px; border-radius: 50%; border: 4px solid rgba(76, 175, 80, 0.2); border-top-color: var(--primary); animation: spin 1s infinite linear;">
                         </div>
-                        <h3 style="margin-bottom: 10px;">Waiting for UPI App...</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Please check your phone and
+                        <h3 style="margin-bottom: 10px;" data-i18n="waiting_upi">Waiting for UPI App...</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;" data-i18n="complete_payment_msg">Please check your phone and
                             complete the payment of ₹49.</p>
                         <button class="btn btn-outline" onclick="hidePaymentModal()"
-                            style="margin-top: 30px; font-size: 0.9rem;">Cancel Request</button>
+                            style="margin-top: 30px; font-size: 0.9rem;" data-i18n="cancel_request">Cancel Request</button>
                     </div>
 
                     <!-- STATE 3: SUCCESS -->
@@ -417,10 +417,10 @@
                             style="width: 80px; height: 80px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto;">
                             <i class="fas fa-check" style="font-size: 40px; color: var(--success);"></i>
                         </div>
-                        <h2 style="color: var(--success); margin-bottom: 10px;">Payment Successful!</h2>
-                        <p style="color: var(--text-secondary); margin-bottom: 30px;">Your Premium subscription is now
+                        <h2 style="color: var(--success); margin-bottom: 10px;" data-i18n="payment_successful">Payment Successful!</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px;" data-i18n="premium_activated">Your Premium subscription is now
                             active. All features have been unlocked.</p>
-                        <button class="btn btn-primary btn-block glow-effect" onclick="closeSubscription()">Continue to
+                        <button class="btn btn-primary btn-block glow-effect" onclick="closeSubscription()" data-i18n="continue_dashboard">Continue to
                             Dashboard</button>
                     </div>
                 </div>
@@ -455,11 +455,11 @@
                         <i id="headerProfileIcon" class="fas fa-user" style="font-size: 1.2rem;"></i>
                     </button>
                     <button class="subscription-btn" onclick="openSubscription()" id="headerPremiumBtn">
-                        <i class="fas fa-crown"></i> <span id="headerPremiumLabel">Premium</span>
+                        <i class="fas fa-crown"></i> <span id="headerPremiumLabel" data-i18n="header_premium">Premium</span>
                     </button>
 
                     <button class="logout-btn" onclick="handleLogout()" id="headerLogoutBtn">
-                        <i class="fas fa-sign-out-alt"></i> <span id="headerLogoutLabel">Logout</span>
+                        <i class="fas fa-sign-out-alt"></i> <span id="headerLogoutLabel" data-i18n="header_logout">Logout</span>
                     </button>
                 </div>
             </div>
@@ -479,20 +479,20 @@
 
                     <div class="dash-hero-content">
                         <h2 class="dash-hero-title">
-                            <span id="dashHeroTitle">Your AI Companion for</span><br>
-                            <span class="dash-hero-accent" id="dashHeroAccent">Smarter Farming</span>
+                            <span id="dashHeroTitle" data-i18n="hero_title">Your AI Companion for</span><br>
+                            <span class="dash-hero-accent" id="dashHeroAccent" data-i18n="hero_accent">Smarter Farming</span>
                         </h2>
-                        <p class="dash-hero-sub" id="dashHeroSub">Welcome, <strong><span
+                        <p class="dash-hero-sub" id="dashHeroSub" data-i18n="hero_sub">Welcome, <strong><span
                                     id="welcomeName">Farmer</span></strong>! Empowering Indian agriculture with
                             real-time intelligence, voice-first
                             assistance, and direct market access.</p>
                         <div class="dash-hero-cta">
                             <button class="dash-btn dash-btn-primary" onclick="showSection('crops')"
-                                id="dashHeroBtnStart">
+                                id="dashHeroBtnStart" data-i18n="hero_get_started">
                                 <i class="fas fa-seedling"></i> Get Started
                             </button>
                             <button class="dash-btn dash-btn-outline" onclick="showSection('scanner')"
-                                id="dashHeroBtnExplore">
+                                id="dashHeroBtnExplore" data-i18n="hero_explore">
                                 <i class="fas fa-leaf"></i> Explore Ecosystem
                             </button>
                         </div>
@@ -502,8 +502,8 @@
 
                 <!-- ── FEATURE GRID ──────────────────────────── -->
                 <div class="dash-section-header">
-                    <span class="dash-section-tag" id="dashEcosystemTag">THE ECOSYSTEM</span>
-                    <h2 class="dash-section-title" id="dashEcosystemTitle">Cultivating the Future</h2>
+                    <span class="dash-section-tag" id="dashEcosystemTag" data-i18n="ecosystem_tag">THE ECOSYSTEM</span>
+                    <h2 class="dash-section-title" id="dashEcosystemTitle" data-i18n="ecosystem_title">Cultivating the Future</h2>
                 </div>
 
                 <div class="dash-feature-grid">
@@ -511,14 +511,14 @@
                     <!-- Gamification Card -->
                     <div class="dash-feature-card gamification-card" onclick="openDailyQuiz()">
                         <div class="g-card-header">
-                            <div class="level-badge" id="gami-level"><i class="fas fa-medal"></i> Lvl 1</div>
+                            <div class="level-badge" id="gami-level"><i class="fas fa-medal"></i> <span data-i18n="gami_lvl">Lvl</span> 1</div>
                             <div class="xp-total-badge"><i class="fas fa-star xp-icon"></i> <span
                                     id="gami-total-xp">0</span> XP</div>
                             <div class="rank-badge"><i class="fas fa-trophy"></i> <span id="gami-rank">#--</span></div>
                         </div>
                         <div class="xp-container">
                             <div class="xp-label">
-                                <span id="gami-xp-label">Experience</span>
+                                <span id="gami-xp-label" data-i18n="gami_xp">Experience</span>
                                 <span id="gami-xp-text">0 / 100 XP</span>
                             </div>
                             <div class="xp-bar-bg">
@@ -527,7 +527,7 @@
                         </div>
                         <button class="btn-gami btn-daily" id="gami-daily-btn-wrapper"
                             onclick="event.stopPropagation(); openDailyQuiz()">
-                            <i class="fas fa-brain"></i> <span id="gami-daily-btn">Take Daily Quiz</span>
+                            <i class="fas fa-brain"></i> <span id="gami-daily-btn" data-i18n="gami_take_quiz">Take Daily Quiz</span>
                         </button>
                         <div id="quiz-countdown"
                             style="display:none; text-align:center; font-size:0.75rem; color:var(--text-muted); margin-top:4px;">
@@ -538,16 +538,16 @@
                     <!-- Next Activity Card -->
                     <div class="dash-feature-card dash-card-activity" onclick="showSection('crops')">
                         <div class="dash-feature-text">
-                            <h3 id="dashFloatActivityLabel">Next Activity</h3>
+                            <h3 id="dashFloatActivityLabel" data-i18n="float_activity_label">Next Activity</h3>
                             <div style="margin-bottom: 12px;">
                                 <strong
                                     style="font-size: 1.4rem; color: var(--text-primary); display: block; margin-bottom: 4px;"
-                                    id="dashNextActivity">Select crop</strong>
-                                <span class="dash-float-status safe" id="dashNextActivityStatus">View Roadmap</span>
+                                    id="dashNextActivity" data-i18n="float_activity_value">Select crop</strong>
+                                <span class="dash-float-status safe" id="dashNextActivityStatus" data-i18n="float_roadmap_status">View Roadmap</span>
                             </div>
                             <p>Smart task scheduling based on precise crop lifecycles and hyper-local data.</p>
                             <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('crops')">
-                                <i class="fas fa-tasks"></i> <span>Open Roadmap</span>
+                                <i class="fas fa-tasks"></i> <span data-i18n="float_roadmap_status">Open Roadmap</span>
                             </button>
                         </div>
                         <div class="dash-feature-visual dash-visual-activity">
@@ -559,16 +559,16 @@
                     <!-- Weather Card -->
                     <div class="dash-feature-card dash-card-weather" onclick="showSection('weather')">
                         <div class="dash-feature-text">
-                            <h3 id="dashFloatWeatherLabel">Weather Alert</h3>
+                            <h3 id="dashFloatWeatherLabel" data-i18n="float_weather_label">Weather Alert</h3>
                             <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;">
                                 <span
                                     style="font-size: 2.2rem; font-weight: 900; color: var(--text-primary); line-height: 1;"
                                     id="dashWeatherStatus">32°C</span>
-                                <span class="dash-float-status" id="dashWeatherSafety">SAFE</span>
+                                <span class="dash-float-status" id="dashWeatherSafety" data-i18n="safe_farming">SAFE</span>
                             </div>
-                            <p>Real-time hyper-local weather tracking to protect your yield.</p>
+                            <p data-i18n="dash_weather_desc">Real-time hyper-local weather tracking to protect your yield.</p>
                             <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('weather')">
-                                <i class="fas fa-cloud-sun-rain"></i> <span>View Forecast</span>
+                                <i class="fas fa-cloud-sun-rain"></i> <span data-i18n="get_weather">View Forecast</span>
                             </button>
                         </div>
                         <div class="dash-feature-visual dash-visual-weather">
@@ -580,8 +580,8 @@
                     <!-- KrishiBot -->
                     <div class="dash-feature-card dash-card-krishibot" onclick="showSection('dashboard')">
                         <div class="dash-feature-text">
-                            <h3 id="dashKbTitle">KrishiBot: Voice First AI</h3>
-                            <p id="dashKbDesc">Talk to your farm. Get advice in your local dialect on irrigation, pest
+                            <h3 id="dashKbTitle" data-i18n="kb_title">KrishiBot: Voice First AI</h3>
+                            <p id="dashKbDesc" data-i18n="kb_desc">Talk to your farm. Get advice in your local dialect on irrigation, pest
                                 control, and market trends.</p>
                             <div class="dash-waveform">
                                 <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
@@ -589,7 +589,7 @@
                             <button class="dash-feature-cta"
                                 onclick="event.stopPropagation(); if(typeof openVoiceOverlay!=='undefined') openVoiceOverlay()"
                                 id="dashKbBtn">
-                                <i class="fas fa-microphone"></i><span class="cta-label" id="dashKbCtaLabel"> Talk
+                                <i class="fas fa-microphone"></i><span class="cta-label" id="dashKbCtaLabel" data-i18n="kb_cta"> Talk
                                     Now</span>
                             </button>
                         </div>
@@ -606,12 +606,12 @@
                                 alt="Leaf disease scanning" loading="lazy">
                         </div>
                         <div class="dash-feature-text">
-                            <h3 id="dashLsTitle">Leaf Scanner</h3>
-                            <p id="dashLsDesc">Instant Gemini-powered crop disease diagnosis from a single photograph.
+                            <h3 id="dashLsTitle" data-i18n="ls_title">Leaf Scanner</h3>
+                            <p id="dashLsDesc" data-i18n="ls_desc">Instant Gemini-powered crop disease diagnosis from a single photograph.
                             </p>
                             <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('scanner')"
                                 id="dashLsBtn">
-                                <i class="fas fa-camera"></i> <span id="dashLsCtaLabel">Launch Scan</span>
+                                <i class="fas fa-camera"></i> <span id="dashLsCtaLabel" data-i18n="ls_cta">Launch Scan</span>
                             </button>
                         </div>
                     </div>
@@ -619,8 +619,8 @@
                     <!-- Smart Market -->
                     <div class="dash-feature-card dash-card-market" onclick="showSection('marketplace')">
                         <div class="dash-feature-text">
-                            <h3 id="dashSmTitle">Smart Market</h3>
-                            <p id="dashSmDesc">Sell direct to urban clusters. Cut the middleman.</p>
+                            <h3 id="dashSmTitle" data-i18n="sm_title">Smart Market</h3>
+                            <p id="dashSmDesc" data-i18n="sm_desc">Sell direct to urban clusters. Cut the middleman.</p>
                             <div class="dash-market-avatars">
                                 <span class="dash-avatar">👨‍🌾</span>
                                 <span class="dash-avatar">👩‍🌾</span>
@@ -629,7 +629,7 @@
                             </div>
                             <button class="dash-feature-cta"
                                 onclick="event.stopPropagation(); showSection('marketplace')" id="dashSmBtn">
-                                <i class="fas fa-store"></i> <span id="dashSmCtaLabel">Open Market</span>
+                                <i class="fas fa-store"></i> <span id="dashSmCtaLabel" data-i18n="sm_cta">Open Market</span>
                             </button>
                         </div>
                     </div>
@@ -637,16 +637,16 @@
                     <!-- Hyperlocal Analytics -->
                     <div class="dash-feature-card dash-card-analytics" onclick="showSection('calculator')">
                         <div class="dash-feature-text">
-                            <h3 id="dashHaTitle">Hyperlocal Analytics</h3>
-                            <p id="dashHaDesc">Soil moisture, nutrient levels, and precision weather forecasting for
+                            <h3 id="dashHaTitle" data-i18n="ha_title">Hyperlocal Analytics</h3>
+                            <p id="dashHaDesc" data-i18n="ha_desc">Soil moisture, nutrient levels, and precision weather forecasting for
                                 your specific coordinates.</p>
                             <div class="dash-analytics-stats">
                                 <div class="dash-stat-pill">
-                                    <span class="dash-stat-label" id="dashHaInputLabel">Input Cost</span>
+                                    <span class="dash-stat-label" id="dashHaInputLabel" data-i18n="ha_input_label">Input Cost</span>
                                     <span class="dash-stat-value" id="dashTotalCost">-</span>
                                 </div>
                                 <div class="dash-stat-pill">
-                                    <span class="dash-stat-label" id="dashHaRevenueLabel">Revenue</span>
+                                    <span class="dash-stat-label" id="dashHaRevenueLabel" data-i18n="ha_revenue_label">Revenue</span>
                                     <span class="dash-stat-value" id="dashRevenue">-</span>
                                 </div>
                             </div>
@@ -670,11 +670,11 @@
                     <!-- Crop Health Wiki -->
                     <div class="dash-feature-card dash-card-wiki" onclick="showSection('wiki')">
                         <div class="dash-feature-text">
-                            <h3><i class="fas fa-book-medical"></i> <span id="dashCwTitle">Crop Health Wiki</span></h3>
-                            <p id="dashCwDesc">AI-powered encyclopedia for plant diseases, pests, and soil health.</p>
+                            <h3><i class="fas fa-book-medical"></i> <span id="dashCwTitle" data-i18n="dash_wiki_title">Crop Health Wiki</span></h3>
+                            <p id="dashCwDesc" data-i18n="dash_wiki_desc">AI-powered encyclopedia for plant diseases, pests, and soil health.</p>
                             <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('wiki')"
                                 id="dashCwBtn">
-                                <i class="fas fa-book-open"></i> <span id="dashCwCtaLabel">Open Wiki</span>
+                                <i class="fas fa-book-open"></i> <span id="dashCwCtaLabel" data-i18n="open_wiki">Open Wiki</span>
                             </button>
                         </div>
                     </div>
@@ -682,11 +682,11 @@
                     <!-- Quick Links Row -->
                     <div class="dash-feature-card dash-card-schemes" onclick="showSection('schemes')">
                         <div class="dash-feature-text">
-                            <h3><i class="fas fa-landmark"></i> <span id="dashGsTitle">Govt Schemes</span></h3>
-                            <p id="dashGsDesc">Check eligibility for PM-KISAN, PMFBY, and state-specific subsidies.</p>
+                            <h3><i class="fas fa-landmark"></i> <span id="dashGsTitle" data-i18n="gs_title">Govt Schemes</span></h3>
+                            <p id="dashGsDesc" data-i18n="gs_desc">Check eligibility for PM-KISAN, PMFBY, and state-specific subsidies.</p>
                             <button class="dash-feature-cta" onclick="event.stopPropagation(); showSection('schemes')"
                                 id="dashGsBtn">
-                                <i class="fas fa-search"></i> <span id="dashGsCtaLabel">Matchmaker</span>
+                                <i class="fas fa-search"></i> <span id="dashGsCtaLabel" data-i18n="gs_cta">Matchmaker</span>
                             </button>
                         </div>
                     </div>
@@ -695,8 +695,8 @@
                 <!-- ── IMPACT SECTION ── -->
                 <div class="dash-impact-section">
                     <div class="dash-impact-text">
-                        <h2 class="dash-impact-title" id="dashImpactTitle">From Soil to<br>Soul.</h2>
-                        <p class="dash-impact-desc" id="dashImpactDesc">We don't just provide data; we provide a bridge
+                        <h2 class="dash-impact-title" id="dashImpactTitle" data-i18n="impact_title">From Soil to<br>Soul.</h2>
+                        <p class="dash-impact-desc" id="dashImpactDesc" data-i18n="impact_desc">We don't just provide data; we provide a bridge
                             between the
                             hardworking farmer and the conscious consumer. Join an ecosystem that respects the land and
                             rewards the labor.</p>
@@ -704,16 +704,16 @@
                             <div class="dash-impact-stat">
                                 <div class="dash-impact-stat-icon"><i class="fas fa-leaf"></i></div>
                                 <div>
-                                    <strong id="dashImpactStat1Title">Sustainability First</strong>
-                                    <p id="dashImpactStat1Desc">Reducing fertilizer waste by 30% through AI precision
+                                    <strong id="dashImpactStat1Title" data-i18n="impact_stat1_title">Sustainability First</strong>
+                                    <p id="dashImpactStat1Desc" data-i18n="impact_stat1_desc">Reducing fertilizer waste by 30% through AI precision
                                     </p>
                                 </div>
                             </div>
                             <div class="dash-impact-stat">
                                 <div class="dash-impact-stat-icon"><i class="fas fa-rupee-sign"></i></div>
                                 <div>
-                                    <strong id="dashImpactStat2Title">Fair Pricing</strong>
-                                    <p id="dashImpactStat2Desc">Direct distribution ensures farmers get 85% of retail
+                                    <strong id="dashImpactStat2Title" data-i18n="impact_stat2_title">Fair Pricing</strong>
+                                    <p id="dashImpactStat2Desc" data-i18n="impact_stat2_desc">Direct distribution ensures farmers get 85% of retail
                                         price</p>
                                 </div>
                             </div>
@@ -728,15 +728,15 @@
                 <!-- ── QUICK TIPS & SESSION (existing) ── -->
                 <div class="card dash-tips-card">
                     <div class="card-header"><i class="fas fa-lightbulb"></i>
-                        <h2>Quick Tips for Today</h2>
+                        <h2 data-i18n="quick_tips">Quick Tips for Today</h2>
                     </div>
                     <div id="dashboardTips">
-                        <p><strong><i class="fas fa-check-circle" style="color: var(--success);"></i> Morning:</strong>
+                        <p data-i18n="tip_morning"><strong><i class="fas fa-check-circle" style="color: var(--success);"></i> Morning:</strong>
                             Best time for watering - early morning reduces evaporation.</p>
-                        <p style="margin-top: var(--spacing-sm);"><strong><i class="fas fa-check-circle"
+                        <p style="margin-top: var(--spacing-sm);" data-i18n="tip_afternoon"><strong><i class="fas fa-check-circle"
                                     style="color: var(--success);"></i> Afternoon:</strong> Inspect crops for pests
                             during warm hours.</p>
-                        <p style="margin-top: var(--spacing-sm);"><strong><i class="fas fa-check-circle"
+                        <p style="margin-top: var(--spacing-sm);" data-i18n="tip_evening"><strong><i class="fas fa-check-circle"
                                     style="color: var(--success);"></i> Evening:</strong> Apply fertilizers in cool
                             evening for better absorption.</p>
                     </div>
@@ -746,7 +746,7 @@
                 <div class="card mt-lg" id="farmingSessionCard" style="display: none;">
                     <div class="card-header">
                         <i class="fas fa-tractor"></i>
-                        <h2>Current Farming Session</h2>
+                        <h2 data-i18n="current_session">Current Farming Session</h2>
                     </div>
                     <div class="session-dashboard">
                         <div class="session-header">
@@ -812,19 +812,19 @@
             <!-- ROLE PICKER POPUP -->
             <div class="role-picker-overlay" id="rolePickerOverlay">
                 <div class="role-picker-card">
-                    <div class="role-picker-badge"><i class="fas fa-landmark"></i> Digital Agri-India Portal</div>
-                    <h2 class="role-picker-title">Welcome to the Marketplace</h2>
-                    <p class="role-picker-sub">Please select your role to continue</p>
+                    <div class="role-picker-badge"><i class="fas fa-landmark"></i> <span data-i18n="digital_agri_portal">Digital Agri-India Portal</span></div>
+                    <h2 class="role-picker-title" data-i18n="welcome_marketplace">Welcome to the Marketplace</h2>
+                    <p class="role-picker-sub" data-i18n="select_role_continue">Please select your role to continue</p>
                     <div class="role-picker-options">
                         <button class="role-option-btn" onclick="selectMarketplaceRole('buyer')">
                             <div class="role-icon buyer-icon"><i class="fas fa-shopping-basket"></i></div>
-                            <div class="role-label">I am a Buyer</div>
-                            <div class="role-desc">Browse &amp; contact farmers directly</div>
+                            <div class="role-label" data-i18n="i_am_buyer">I am a Buyer</div>
+                            <div class="role-desc" data-i18n="browse_contact_farmers">Browse &amp; contact farmers directly</div>
                         </button>
                         <button class="role-option-btn" onclick="selectMarketplaceRole('farmer')">
                             <div class="role-icon farmer-icon"><i class="fas fa-tractor"></i></div>
-                            <div class="role-label">I am a Farmer</div>
-                            <div class="role-desc">List your produce &amp; manage listings</div>
+                            <div class="role-label" data-i18n="i_am_farmer">I am a Farmer</div>
+                            <div class="role-desc" data-i18n="list_manage_produce">List your produce &amp; manage listings</div>
                         </button>
                     </div>
                 </div>
@@ -840,19 +840,19 @@
                     <div class="marketplace-hero-bg"></div>
                     <div class="marketplace-hero-overlay"></div>
                     <div class="marketplace-hero-content">
-                        <div class="gov-branding-badge"><i class="fas fa-landmark"></i> Digital Agri-India Portal</div>
-                        <h2>Agri-Marketplace</h2>
-                        <p>Empowering Indian Farmers with Direct Trade &amp; Premium Market Access</p>
+                        <div class="gov-branding-badge"><i class="fas fa-landmark"></i> <span data-i18n="digital_agri_portal">Digital Agri-India Portal</span></div>
+                        <h2 data-i18n="agri_marketplace">Agri-Marketplace</h2>
+                        <p data-i18n="marketplace_hero_desc">Empowering Indian Farmers with Direct Trade &amp; Premium Market Access</p>
                     </div>
                 </div>
 
                 <!-- Role Tabs -->
                 <div class="mk-tabs-bar">
                     <button class="mk-tab active" id="tabBuyer" onclick="switchMkTab('buyer')">
-                        <i class="fas fa-shopping-basket"></i> <span id="mkTabBrowseLabel">Browse Market</span>
+                        <i class="fas fa-shopping-basket"></i> <span id="mkTabBrowseLabel" data-i18n="mk_browse">Browse Market</span>
                     </button>
                     <button class="mk-tab" id="tabFarmer" onclick="switchMkTab('farmer')">
-                        <i class="fas fa-tractor"></i> <span id="mkTabSellLabel">Sell Produce</span>
+                        <i class="fas fa-tractor"></i> <span id="mkTabSellLabel" data-i18n="mk_sell">Sell Produce</span>
                     </button>
                     <div class="mk-tabs-right">
                         <button class="cart-icon-btn" onclick="openCartDrawer()" id="cartBtn">
@@ -860,10 +860,10 @@
                             <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
                         </button>
                         <div class="mk-role-badge" id="mkRoleBadge">
-                            <i class="fas fa-user-circle"></i> <span id="mkRoleLabel">Buyer</span>
+                            <i class="fas fa-user-circle"></i> <span id="mkRoleLabel" data-i18n="mk_role_buyer">Buyer</span>
                         </div>
                         <button class="mk-switch-role-btn" onclick="switchRole()" id="mkSwitchRoleBtn">
-                            <i class="fas fa-exchange-alt"></i> <span id="mkSwitchRoleLabel">Switch Role</span>
+                            <i class="fas fa-exchange-alt"></i> <span id="mkSwitchRoleLabel" data-i18n="mk_switch_role">Switch Role</span>
                         </button>
                     </div>
                 </div>
@@ -875,6 +875,7 @@
                             <div class="search-wrapper">
                                 <i class="fas fa-search"></i>
                                 <input type="text" id="marketplaceSearch"
+                                    data-i18n="mk_search_placeholder"
                                     placeholder="Search crops, farmers or regions..."
                                     onkeyup="searchMarketplace(this.value)">
                             </div>
@@ -889,13 +890,14 @@
                     <div class="farmer-tab-layout">
                         <div class="farmer-form-panel">
                             <div class="farmer-form-header">
-                                <i class="fas fa-plus-circle"></i> <span id="mkAddListingTitle">Add New Listing</span>
+                                <i class="fas fa-plus-circle"></i> <span id="mkAddListingTitle" data-i18n="mk_add_listing">Add New Listing</span>
                             </div>
                             <form id="farmerSellForm" onsubmit="handleSellSubmit(event)" class="farmer-sell-form">
                                 <div class="sell-form-row">
                                     <div class="sell-form-group" style="flex: 1;">
-                                        <label id="mkLabelProductName">Product Name</label>
+                                        <label id="mkLabelProductName" data-i18n="mk_product_name">Product Name</label>
                                         <input list="cropNamesList" name="name" id="sellProductName" required
+                                            data-i18n="mk_crop_placeholder"
                                             placeholder="Type or select a crop..." oninput="updateSellProductImage()"
                                             autocomplete="off">
                                         <datalist id="cropNamesList">
@@ -912,33 +914,33 @@
                                 </div>
                                 <div class="sell-form-row">
                                     <div class="sell-form-group">
-                                        <label id="mkLabelCategory">Category</label>
+                                        <label id="mkLabelCategory" data-i18n="mk_category">Category</label>
                                         <select name="category" id="mkSelectCategory" required>
-                                            <option value="vegetables" id="optVeg">Vegetables</option>
-                                            <option value="fruits" id="optFruits">Fruits</option>
-                                            <option value="grains" id="optGrains">Grains &amp; Pulses</option>
-                                            <option value="seeds" id="optSeeds">Seeds &amp; Fertilizers</option>
-                                            <option value="machinery" id="optMachinery">Machinery</option>
+                                            <option value="vegetables" id="optVeg" data-i18n="mk_cat_veg">Vegetables</option>
+                                            <option value="fruits" id="optFruits" data-i18n="mk_cat_fruit">Fruits</option>
+                                            <option value="grains" id="optGrains" data-i18n="mk_cat_grain">Grains &amp; Pulses</option>
+                                            <option value="seeds" id="optSeeds" data-i18n="mk_cat_seed">Seeds &amp; Fertilizers</option>
+                                            <option value="machinery" id="optMachinery" data-i18n="mk_cat_machinery">Machinery</option>
                                         </select>
                                     </div>
                                     <div class="sell-form-group">
-                                        <label id="mkLabelPrice">Price (Rs.)</label>
+                                        <label id="mkLabelPrice" data-i18n="mk_price">Price (Rs.)</label>
                                         <input type="number" name="price" placeholder="e.g. 65" id="mkInputPrice"
                                             required min="1">
                                     </div>
                                 </div>
                                 <div class="sell-form-row">
                                     <div class="sell-form-group">
-                                        <label id="mkLabelUnit">Unit</label>
+                                        <label id="mkLabelUnit" data-i18n="mk_unit">Unit</label>
                                         <select name="unit" id="mkSelectUnit">
-                                            <option value="kg" id="unitKg">Per kg</option>
-                                            <option value="quintal" id="unitQuintal">Per quintal</option>
-                                            <option value="piece" id="unitPiece">Per piece</option>
-                                            <option value="ton" id="unitTon">Per ton</option>
+                                            <option value="kg" id="unitKg" data-i18n="unit_kg">Per kg</option>
+                                            <option value="quintal" id="unitQuintal" data-i18n="unit_quintal">Per quintal</option>
+                                            <option value="piece" id="unitPiece" data-i18n="unit_piece">Per piece</option>
+                                            <option value="ton" id="unitTon" data-i18n="unit_ton">Per ton</option>
                                         </select>
                                     </div>
                                     <div class="sell-form-group">
-                                        <label id="mkLabelQuantity">Quantity</label>
+                                        <label id="mkLabelQuantity" data-i18n="mk_quantity">Quantity</label>
                                         <input type="text" name="quantity" placeholder="e.g. 500 kg"
                                             id="mkInputQuantity" required>
                                     </div>
@@ -1006,8 +1008,8 @@
         </button>
         <div class="schemes-container">
             <div class="schemes-header">
-                <h2><i class="fas fa-landmark" style="color: var(--primary);"></i> Scheme Matchmaker</h2>
-                <p>Find government agricultural schemes you are eligible for</p>
+                <h2><i class="fas fa-landmark" style="color: var(--primary);"></i> <span data-i18n="schemes_title">Scheme Matchmaker</span></h2>
+                <p data-i18n="schemes_subtitle">Find government agricultural schemes you are eligible for</p>
             </div>
 
             <div id="schemesWizard" class="schemes-wizard">
@@ -1019,48 +1021,48 @@
 
                 <!-- Step 1: Land -->
                 <div id="schemeStep1" class="wizard-step active">
-                    <h3 class="step-title"><i class="fas fa-map"></i> Land Details</h3>
+                    <h3 class="step-title"><i class="fas fa-map"></i> <span data-i18n="schemes_step1_title">Land Details</span></h3>
                     <div class="schemes-form-group">
-                        <label>How much cultivable land do you own? (in Acres)</label>
-                        <input type="number" id="schemeLandSize" placeholder="e.g. 2.5" min="0" step="0.1">
-                        <small style="color: var(--text-muted); margin-top: 5px; display: block;">Enter 0 if you are a
+                        <label data-i18n="schemes_step1_label">How much cultivable land do you own? (in Acres)</label>
+                        <input type="number" id="schemeLandSize" data-i18n="schemes_step1_placeholder" placeholder="e.g. 2.5" min="0" step="0.1">
+                        <small style="color: var(--text-muted); margin-top: 5px; display: block;" data-i18n="schemes_step1_note">Enter 0 if you are a
                             landless farmer or sharecropper.</small>
                     </div>
                     <div class="wizard-actions" style="justify-content: flex-end;">
-                        <button class="btn-wizard btn-next" onclick="nextSchemesStep()">Next <i
+                        <button class="btn-wizard btn-next" onclick="nextSchemesStep()"><span data-i18n="schemes_next">Next</span> <i
                                 class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
 
                 <!-- Step 2: Location -->
                 <div id="schemeStep2" class="wizard-step">
-                    <h3 class="step-title"><i class="fas fa-map-marker-alt"></i> Location</h3>
+                    <h3 class="step-title"><i class="fas fa-map-marker-alt"></i> <span data-i18n="schemes_step2_title">Location</span></h3>
                     <div class="schemes-form-group">
-                        <label>State</label>
+                        <label data-i18n="schemes_step2_label">State</label>
                         <select id="schemeStateSelect">
-                            <option value="" disabled selected>Select State</option>
+                            <option value="" disabled selected data-i18n="schemes_step2_placeholder">Select State</option>
                         </select>
                     </div>
                     <div class="wizard-actions">
                         <button class="btn-wizard btn-prev" onclick="prevSchemesStep()"><i
-                                class="fas fa-arrow-left"></i> Back</button>
-                        <button class="btn-wizard btn-next" onclick="nextSchemesStep()">Next <i
+                                class="fas fa-arrow-left"></i> <span data-i18n="schemes_prev">Back</span></button>
+                        <button class="btn-wizard btn-next" onclick="nextSchemesStep()"><span data-i18n="schemes_next">Next</span> <i
                                 class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
 
                 <!-- Step 3: Crop -->
                 <div id="schemeStep3" class="wizard-step">
-                    <h3 class="step-title"><i class="fas fa-seedling"></i> Crop Information</h3>
+                    <h3 class="step-title"><i class="fas fa-seedling"></i> <span data-i18n="schemes_step3_title">Crop Information</span></h3>
                     <div class="schemes-form-group">
-                        <label>What is your primary crop? (Optional)</label>
-                        <input type="text" id="schemeCropSelect" placeholder="e.g. Rice, Wheat, Potato">
+                        <label data-i18n="schemes_step3_label">What is your primary crop? (Optional)</label>
+                        <input type="text" id="schemeCropSelect" data-i18n="schemes_step3_placeholder" placeholder="e.g. Rice, Wheat, Potato">
                     </div>
                     <div class="wizard-actions">
                         <button class="btn-wizard btn-prev" onclick="prevSchemesStep()"><i
-                                class="fas fa-arrow-left"></i> Back</button>
+                                class="fas fa-arrow-left"></i> <span data-i18n="schemes_prev">Back</span></button>
                         <button class="btn-wizard btn-next" onclick="submitSchemesForm()"><i class="fas fa-search"></i>
-                            Find Schemes</button>
+                            <span data-i18n="schemes_find">Find Schemes</span></button>
                     </div>
                 </div>
             </div>
@@ -1068,7 +1070,7 @@
             <!-- Loader -->
             <div id="schemesLoader" class="schemes-loader">
                 <div class="spinner-wrap"></div>
-                <h3 id="schemesLoaderTitle">Searching...</h3>
+                <h3 id="schemesLoaderTitle" data-i18n="schemes_finding">Searching...</h3>
                 <p style="color: var(--text-secondary); display: none;" id="schemesLoaderMsg"></p>
                 <div class="loader-ai-dots" style="margin-top: 12px;">
                     <span></span><span></span><span></span>
@@ -1079,17 +1081,17 @@
             <!-- Results Dashboard -->
             <div id="schemesResults" class="schemes-results">
                 <div class="results-header">
-                    <h3><i class="fas fa-clipboard-check" style="color: var(--primary);"></i> Eligible Schemes</h3>
+                    <h3><i class="fas fa-clipboard-check" style="color: var(--primary);"></i> <span data-i18n="schemes_eligible">Eligible Schemes</span></h3>
                     <span id="matchedCount"
                         style="background: rgba(76,175,80,0.1); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-weight: 600;">0
-                        Matched</span>
+                        <span data-i18n="schemes_matched">Matched</span></span>
                 </div>
                 <div id="schemesGrid" class="results-grid">
                     <!-- Cards inserted via JS -->
                 </div>
                 <div style="text-align: center; margin-top: 30px;">
                     <button class="btn btn-outline" style="padding: 10px 20px; font-weight: 600;"
-                        onclick="resetSchemesForm()"><i class="fas fa-redo"></i> Check Another Profile</button>
+                        onclick="resetSchemesForm()"><i class="fas fa-redo"></i> <span data-i18n="schemes_back">Check Another Profile</span></button>
                 </div>
             </div>
         </div>
@@ -1103,14 +1105,14 @@
         <div class="cart-header">
             <div class="cart-header-left">
                 <i class="fas fa-shopping-cart"></i>
-                <h3>My Cart</h3>
+                <h3 data-i18n="my_cart">My Cart</h3>
             </div>
             <button class="cart-close-btn" onclick="closeCartDrawer()"><i class="fas fa-times"></i></button>
         </div>
         <div class="cart-body" id="cartBody">
             <div class="cart-empty">
                 <i class="fas fa-shopping-basket"></i>
-                <h3>Your cart is empty</h3>
+                <h3 data-i18n="cart_empty">Your cart is empty</h3>
                 <p>Add items from the marketplace to begin</p>
             </div>
         </div>
@@ -1129,7 +1131,7 @@
     <div class="checkout-modal-overlay" id="checkoutModal" style="display:none;">
         <div class="checkout-modal">
             <div class="checkout-header">
-                <h2><i class="fas fa-lock"></i> Secure Checkout</h2>
+                <h2><i class="fas fa-lock"></i> <span data-i18n="secure_checkout">Secure Checkout</span></h2>
                 <button class="cart-close-btn" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
             </div>
             <div class="checkout-body" id="checkoutBody">
@@ -1231,7 +1233,7 @@
             <!-- Statistics -->
             <div class="card">
                 <div class="card-header"><i class="fas fa-chart-bar"></i>
-                    <h2>Farming Statistics</h2>
+                    <h2 data-i18n="farming_statistics">Farming Statistics</h2>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-box">
@@ -1263,7 +1265,7 @@
                     style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <div>
                         <i class="fas fa-history"></i>
-                        <h2 style="display: inline-block; margin: 0; margin-left: 8px;">Farming History</h2>
+                        <h2 style="display: inline-block; margin: 0; margin-left: 8px;" data-i18n="farming_history">Farming History</h2>
                     </div>
                     <button class="btn btn-primary" onclick="exportActivityPDF()"
                         style="border-radius: 20px; font-weight: 600; font-size: 0.9rem; padding: 6px 16px;">
@@ -1288,15 +1290,15 @@
             <!-- User Preferences -->
             <div class="card">
                 <div class="card-header"><i class="fas fa-cog"></i>
-                    <h2>Preferences</h2>
+                    <h2 data-i18n="preferences_title">Preferences</h2>
                 </div>
                 <div class="preferences-grid">
                     <div class="preference-item">
-                        <h4><i class="fas fa-seedling"></i> Preferred Crops</h4>
+                        <h4><i class="fas fa-seedling"></i> <span data-i18n="preferred_crops">Preferred Crops</span></h4>
                         <p class="preference-value" id="prefCrops">None selected</p>
                     </div>
                     <div class="preference-item">
-                        <h4><i class="fas fa-ruler-combined"></i> Land Size</h4>
+                        <h4><i class="fas fa-ruler-combined"></i> <span data-i18n="land_size">Land Size</span></h4>
                         <p class="preference-value" id="prefLandSize">Not set</p>
                     </div>
                 </div>
@@ -1311,23 +1313,23 @@
         </button>
         <div class="card">
             <div class="card-header"><i class="fas fa-leaf"></i>
-                <h2>Leaf Disease Scanner</h2>
+                <h2 data-i18n="leaf_disease_scanner">Leaf Disease Scanner</h2>
             </div>
-            <p style="color: var(--text-muted); margin-bottom: var(--spacing-md);">Upload or capture a photo of
+            <p style="color: var(--text-muted); margin-bottom: var(--spacing-md);" data-i18n="scanner_full_desc">Upload or capture a photo of
                 any plant leaf to detect diseases and get fertilizer recommendations.</p>
 
             <div class="scanner-container">
                 <div class="scanner-box" id="scannerBox" onclick="document.getElementById('fileInput').click()">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>Upload Leaf Image</h3>
-                    <p>Click to upload or drag and drop an image</p>
-                    <p style="margin-top: var(--spacing-sm); font-size: 0.85rem;">Supports: JPG, PNG, WEBP</p>
+                    <h3 data-i18n="upload_leaf">Upload Leaf Image</h3>
+                    <p data-i18n="click_upload">Click to upload or drag and drop an image</p>
+                    <p style="margin-top: var(--spacing-sm); font-size: 0.85rem;" data-i18n="supports_formats">Supports: JPG, PNG, WEBP</p>
                 </div>
                 <input type="file" id="fileInput" accept="image/*" style="display: none;"
                     onchange="handleLeafUpload(event)">
 
                 <button class="camera-btn" onclick="openCamera()">
-                    <i class="fas fa-camera"></i> Open Camera
+                    <i class="fas fa-camera"></i> <span data-i18n="open_camera">Open Camera</span>
                 </button>
 
                 <!-- CAMERA MODAL -->
@@ -1338,7 +1340,7 @@
                         <button class="close-modal-btn" onclick="closeCamera()"
                             style="position: absolute; right: 15px; top: 15px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #555;"><i
                                 class="fas fa-times"></i></button>
-                        <h3 style="margin-bottom: 15px;"><i class="fas fa-camera"></i> Take Photo</h3>
+                        <h3 style="margin-bottom: 15px;"><i class="fas fa-camera"></i> <span data-i18n="take_photo_title">Take Photo</span></h3>
 
                         <div class="video-container"
                             style="position: relative; width: 100%; border-radius: 8px; overflow: hidden; background: #000; margin-bottom: 15px; min-height: 300px;">
@@ -1349,15 +1351,15 @@
 
                         <div class="camera-actions" style="display: flex; gap: 10px; justify-content: center;">
                             <button id="captureBtn" class="btn btn-primary" onclick="capturePhoto()">
-                                <i class="fas fa-camera"></i> Capture
+                                <i class="fas fa-camera"></i> <span data-i18n="capture_btn">Capture</span>
                             </button>
                             <button id="retakeBtn" class="btn btn-outline" style="display: none;"
                                 onclick="retakePhoto()">
-                                <i class="fas fa-redo"></i> Retake
+                                <i class="fas fa-redo"></i> <span data-i18n="retake_btn">Retake</span>
                             </button>
                             <button id="usePhotoBtn" class="btn btn-primary glow-effect"
                                 style="display: none; background-color: var(--success);" onclick="usePhoto()">
-                                <i class="fas fa-check"></i> Use Photo
+                                <i class="fas fa-check"></i> <span data-i18n="use_photo_btn">Use Photo</span>
                             </button>
                         </div>
                     </div>
@@ -1369,26 +1371,26 @@
 
                 <button id="analyzeBtn" class="btn btn-primary btn-lg"
                     style="display: none; margin-top: var(--spacing-md);" onclick="analyzeLeaf()">
-                    <i class="fas fa-search"></i> Analyze Leaf
+                    <i class="fas fa-search"></i> <span data-i18n="analyze_leaf">Analyze Leaf</span>
                 </button>
 
                 <div id="scanLoading" class="hidden">
                     <div class="spinner"></div>
-                    <p class="text-center">Analyzing leaf image...</p>
+                    <p class="text-center" data-i18n="analyzing_leaf">Analyzing leaf image...</p>
                 </div>
 
                 <div id="scanResult" class="scan-result" style="display: none;">
                     <h3 style="margin-bottom: var(--spacing-md);"><i class="fas fa-clipboard-check"></i>
-                        Analysis Result</h3>
+                        <span data-i18n="analysis_result">Analysis Result</span></h3>
                     <div class="disease-badge" id="diseaseStatus">Healthy</div>
-                    <h4 id="diseaseName" style="font-size: 1.3rem; margin-bottom: var(--spacing-sm);">Plant
+                    <h4 id="diseaseName" style="font-size: 1.3rem; margin-bottom: var(--spacing-sm);" data-i18n="plant_status">Plant
                         Status</h4>
                     <p id="diseaseDescription" style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
                         Description will
                         appear here.</p>
 
-                    <h4 style="margin-bottom: var(--spacing-sm);"><i class="fas fa-flask"></i> Recommended
-                        Fertilizers</h4>
+                    <h4 style="margin-bottom: var(--spacing-sm);"><i class="fas fa-flask"></i> <span data-i18n="recommended_fertilizers">Recommended
+                        Fertilizers</span></h4>
                     <div class="recommendation-list" id="fertilizerRecommendations"></div>
 
                     <h4 style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-sm);"><i
@@ -1406,19 +1408,19 @@
         </button>
         <div class="card">
             <div class="card-header"><i class="fas fa-map-marker-alt"></i>
-                <h2>Enter Your Location</h2>
+                <h2 data-i18n="enter_location">Enter Your Location</h2>
             </div>
             <div class="location-input">
-                <input type="text" id="locationInput" placeholder="Enter village or city name" value="">
+                <input type="text" id="locationInput" placeholder="Enter village or city name" data-i18n="enter_village_city" value="">
                 <button class="btn btn-primary btn-lg" onclick="fetchWeather()" style="border-radius: 8px;">
-                    <i class="fas fa-search"></i> Get Weather
+                    <i class="fas fa-search"></i> <span data-i18n="get_weather">Get Weather</span>
                 </button>
                 <button id="weatherRefreshBtn" class="btn btn-outline btn-lg weather-refresh-btn"
                     onclick="fetchWeather({ force: true })" style="border-radius: 8px;">
-                    <i class="fas fa-rotate-right"></i> Refresh
+                    <i class="fas fa-rotate-right"></i> <span data-i18n="refresh_btn">Refresh</span>
                 </button>
             </div>
-            <p id="weatherOfflineNote" class="weather-offline-note hidden"><i class="fas fa-wifi"></i> You are offline.
+            <p id="weatherOfflineNote" class="weather-offline-note hidden" data-i18n="offline_note"><i class="fas fa-wifi"></i> You are offline.
                 Cached weather will be shown when available.</p>
             <p id="weatherError" class="weather-error-banner hidden"></p>
         </div>
@@ -1431,7 +1433,7 @@
                 <div class="weather-skeleton-card weather-skeleton-shimmer"></div>
                 <div class="weather-skeleton-card weather-skeleton-shimmer"></div>
             </div>
-            <p class="text-center">Fetching weather data...</p>
+            <p class="text-center" data-i18n="fetching_weather">Fetching weather data...</p>
         </div>
 
         <div id="weatherContent">
@@ -1445,19 +1447,19 @@
 
             <div class="weather-details">
                 <div class="weather-detail-card"><i class="fas fa-tint"></i>
-                    <div class="label">Rain Probability</div>
+                    <div class="label" data-i18n="rain_probability">Rain Probability</div>
                     <div class="value"><span id="rainProbability">25</span>%</div>
                 </div>
                 <div class="weather-detail-card"><i class="fas fa-water"></i>
-                    <div class="label">Humidity</div>
+                    <div class="label" data-i18n="humidity_label">Humidity</div>
                     <div class="value"><span id="humidity">45</span>%</div>
                 </div>
                 <div class="weather-detail-card"><i class="fas fa-wind"></i>
-                    <div class="label">Wind Speed</div>
+                    <div class="label" data-i18n="wind_speed_label">Wind Speed</div>
                     <div class="value"><span id="windSpeed">12</span> km/h</div>
                 </div>
                 <div class="weather-detail-card"><i class="fas fa-eye"></i>
-                    <div class="label">Visibility</div>
+                    <div class="label" data-i18n="visibility_label">Visibility</div>
                     <div class="value"><span id="visibility">10</span> km</div>
                 </div>
             </div>
@@ -1465,8 +1467,8 @@
             <div class="weather-alert safe" id="weatherAlert">
                 <i class="fas fa-check-circle"></i>
                 <div>
-                    <h3>SAFE for Farming Activities</h3>
-                    <p>Weather conditions are suitable for farming activities.</p>
+                    <h3 data-i18n="safe_farming_title">SAFE for Farming Activities</h3>
+                    <p data-i18n="weather_suitable">Weather conditions are suitable for farming activities.</p>
                 </div>
             </div>
 
@@ -1496,10 +1498,10 @@
                 style="display:none; margin-top:1rem; padding:1rem 1.2rem; background:linear-gradient(135deg,#e3f2fd,#f0f9ff); border-radius:12px; border-left:4px solid #0288d1;">
                 <div
                     style="font-size:0.75rem; color:#0277bd; font-weight:700; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">
-                    <i class="fas fa-robot"></i> AI Farming Advice
+                    <i class="fas fa-robot"></i> <span data-i18n="ai_farming_advice">AI Farming Advice</span>
                 </div>
                 <div id="weatherAIText" style="font-size:0.875rem; color:#333; line-height:1.6;">
-                    <span style="color:#999;"><i class="fas fa-spinner fa-spin"></i> Generating advice...</span>
+                    <span style="color:#999;"><i class="fas fa-spinner fa-spin"></i> <span data-i18n="generating_advice">Generating advice...</span></span>
                 </div>
             </div>
         </div>
@@ -1512,36 +1514,36 @@
         </button>
         <div class="card">
             <div class="card-header"><i class="fas fa-seedling"></i>
-                <h2>Crop Information</h2>
+                <h2 data-i18n="crop_info_label">Crop Information</h2>
             </div>
-            <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);">Search for any crop to see
+            <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);" data-i18n="crop_search_desc">Search for any crop to see
                 detailed farming recommendations from the global database.</p>
 
             <div class="crop-controls">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="cropSearchInput" placeholder="Search crops (e.g., Tomato, Rice...)"
+                    <input type="text" id="cropSearchInput" data-i18n="crop_search_placeholder" placeholder="Search crops (e.g., Tomato, Rice...)"
                         oninput="debounceSearch()">
                 </div>
                 <div class="category-filters">
-                    <button class="filter-btn active" data-category="all" onclick="filterCrops('all')">All</button>
-                    <button class="filter-btn" data-category="cereal" onclick="filterCrops('cereal')">Cereal</button>
+                    <button class="filter-btn active" data-category="all" onclick="filterCrops('all')" data-i18n="cat_all" data-i18n="all_wiki">All</button>
+                    <button class="filter-btn" data-category="cereal" onclick="filterCrops('cereal')" data-i18n="cat_cereal">Cereal</button>
                     <button class="filter-btn" data-category="vegetable"
-                        onclick="filterCrops('vegetable')">Vegetable</button>
-                    <button class="filter-btn" data-category="fruit" onclick="filterCrops('fruit')">Fruit</button>
-                    <button class="filter-btn" data-category="oilseed" onclick="filterCrops('oilseed')">Oilseed</button>
+                        onclick="filterCrops('vegetable')" data-i18n="cat_vegetable">Vegetable</button>
+                    <button class="filter-btn" data-category="fruit" onclick="filterCrops('fruit')" data-i18n="cat_fruit">Fruit</button>
+                    <button class="filter-btn" data-category="oilseed" onclick="filterCrops('oilseed')" data-i18n="cat_oilseed">Oilseed</button>
                 </div>
             </div>
 
             <div id="cropLoading" class="hidden">
                 <div class="spinner"></div>
-                <p class="text-center">Searching crop database...</p>
+                <p class="text-center" data-i18n="searching_crops">Searching crop database...</p>
             </div>
 
             <div id="cropEmptyState" class="hidden">
                 <div class="empty-state">
                     <i class="fas fa-search"></i>
-                    <p>No crops found matching your search. Try a different name or category.</p>
+                    <p data-i18n="no_crops_found">No crops found matching your search. Try a different name or category.</p>
                 </div>
             </div>
 
@@ -1550,49 +1552,49 @@
 
         <!-- Pagination -->
         <div id="cropPagination" class="pagination-container hidden">
-            <button class="btn btn-outline" id="prevPageBtn" onclick="changePage(-1)">Previous</button>
+            <button class="btn btn-outline" id="prevPageBtn" onclick="changePage(-1)" data-i18n="prev_page">Previous</button>
             <span id="currentPage">Page 1</span>
-            <button class="btn btn-outline" id="nextPageBtn" onclick="changePage(1)">Next</button>
+            <button class="btn btn-outline" id="nextPageBtn" onclick="changePage(1)" data-i18n="next_page">Next</button>
         </div>
         <div class="crop-info" id="cropInfo">
             <div class="card">
                 <div class="card-header"><i class="fas fa-info-circle"></i>
-                    <h2>Crop Information: <span id="selectedCropName">-</span></h2>
+                    <h2><span data-i18n="crop_info_label">Crop Information</span>: <span id="selectedCropName">-</span></h2>
                 </div>
                 <div class="info-grid">
                     <div class="info-item"><i class="fas fa-microscope"></i>
                         <div class="info-content">
-                            <h4>Scientific Name</h4>
+                            <h4 data-i18n="scientific_name">Scientific Name</h4>
                             <p id="cropScientificName">-</p>
                         </div>
                     </div>
                     <div class="info-item"><i class="fas fa-cloud-sun"></i>
                         <div class="info-content">
-                            <h4>Climate Requirement</h4>
+                            <h4 data-i18n="climate_req">Climate Requirement</h4>
                             <p id="cropClimate">-</p>
                         </div>
                     </div>
                     <div class="info-item"><i class="fas fa-mountain"></i>
                         <div class="info-content">
-                            <h4>Soil Type</h4>
+                            <h4 data-i18n="soil_type">Soil Type</h4>
                             <p id="cropSoil">-</p>
                         </div>
                     </div>
                     <div class="info-item"><i class="fas fa-clock"></i>
                         <div class="info-content">
-                            <h4>Total Duration</h4>
+                            <h4 data-i18n="total_duration">Total Duration</h4>
                             <p id="cropDuration">-</p>
                         </div>
                     </div>
                     <div class="info-item"><i class="fas fa-tint"></i>
                         <div class="info-content">
-                            <h4>Water Requirement</h4>
+                            <h4 data-i18n="water_requirement">Water Requirement</h4>
                             <p id="cropWatering">-</p>
                         </div>
                     </div>
                     <div class="info-item"><i class="fas fa-calendar-alt"></i>
                         <div class="info-content">
-                            <h4>Harvesting Period</h4>
+                            <h4 data-i18n="harvesting_period">Harvesting Period</h4>
                             <p id="cropHarvesting">-</p>
                         </div>
                     </div>
@@ -1603,19 +1605,18 @@
                     style="display:none; margin-top:1.5rem; padding:1.2rem 1.5rem; background:linear-gradient(135deg, rgba(0,168,255,0.08), rgba(0,100,200,0.05)); border-radius:12px; border-left:4px solid var(--primary);">
                     <div
                         style="font-size:0.75rem; color:var(--primary); font-weight:700; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px;">
-                        <i class="fas fa-robot"></i> AI Growing Insights
+                        <i class="fas fa-robot"></i> <span data-i18n="ai_insights">AI Growing Insights</span>
                     </div>
                     <div id="cropAIText" style="font-size:0.875rem; color:var(--text-primary); line-height:1.7;">
-                        <span style="color:var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Generating
-                            AI insights...</span>
+                        <span style="color:var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> <span data-i18n="generating_insights">Generating AI insights...</span></span>
                     </div>
                 </div>
 
                 <div class="mt-lg" style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
                     <button class="btn btn-primary btn-lg" onclick="showSection('roadmap')"><i class="fas fa-road"></i>
-                        View Roadmap</button>
+                        <span data-i18n="view_roadmap_btn">View Roadmap</span></button>
                     <button class="btn btn-secondary btn-lg" onclick="showSection('calculator')"><i
-                            class="fas fa-calculator"></i> Calculate Costs</button>
+                            class="fas fa-calculator"></i> <span data-i18n="calculate_costs_btn">Calculate Costs</span></button>
                 </div>
             </div>
         </div>
@@ -1629,14 +1630,14 @@
         <div class="grid grid-2">
             <div class="card">
                 <div class="card-header"><i class="fas fa-calculator"></i>
-                    <h2>Seed & Fertilizer Cost Calculator</h2>
+                    <h2 data-i18n="cost_calculator">Seed & Fertilizer Cost Calculator</h2>
                 </div>
                 <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);"><i
-                        class="fas fa-info-circle"></i> Only seed and fertilizer costs. Labour, equipment NOT
-                    included.</p>
+                        class="fas fa-info-circle"></i> <span data-i18n="cost_note">Only seed and fertilizer costs. Labour, equipment NOT
+                    included.</span></p>
 
                 <div class="form-group">
-                    <label><i class="fas fa-leaf"></i> Select Crop</label>
+                    <label><i class="fas fa-leaf"></i> <span data-i18n="select_crop">Select Crop</span></label>
                     <input type="text" id="calcCrop" list="calcCropList" placeholder="-- Search or Type a crop --"
                         style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);"
                         autocomplete="off">
@@ -1678,11 +1679,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label><i class="fas fa-ruler-combined"></i> Select Land Unit</label>
+                    <label><i class="fas fa-ruler-combined"></i> <span data-i18n="select_land_unit">Select Land Unit</span></label>
                     <div class="land-unit-selector">
-                        <button type="button" class="land-unit-btn active" onclick="setLandUnit('acre')">Acre</button>
-                        <button type="button" class="land-unit-btn" onclick="setLandUnit('bigha')">Bigha</button>
-                        <button type="button" class="land-unit-btn" onclick="setLandUnit('katha')">Katha</button>
+                        <button type="button" class="land-unit-btn active" onclick="setLandUnit('acre')" data-i18n="acre_unit">Acre</button>
+                        <button type="button" class="land-unit-btn" onclick="setLandUnit('bigha')" data-i18n="bigha_unit">Bigha</button>
+                        <button type="button" class="land-unit-btn" onclick="setLandUnit('katha')" data-i18n="katha_unit">Katha</button>
                     </div>
                     <div class="unit-conversion">
                         <i class="fas fa-info-circle"></i> 1 Bigha = 20 Katha | 1 Bigha ≈ 0.62 Acre | 1 Acre ≈
@@ -1691,7 +1692,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label><i class="fas fa-expand"></i> Land Size (<span id="landUnitLabel">Acres</span>)</label>
+                    <label><i class="fas fa-expand"></i> <span data-i18n="land_size">Land Size</span> (<span id="landUnitLabel">Acres</span>)</label>
                     <input type="number" id="landSize" placeholder="Enter land size" min="0.1" step="0.1" value="1"
                         style="width:100%; padding: var(--spacing-sm); border: 2px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 1rem; background: var(--bg-secondary); color: var(--text-primary);">
                     <span id="landConversion"
@@ -1700,12 +1701,12 @@
                 </div>
 
                 <button class="btn btn-primary btn-lg btn-block" onclick="calculateCosts()"><i
-                        class="fas fa-calculator"></i> Calculate Total Cost</button>
+                        class="fas fa-calculator"></i> <span data-i18n="calculate_total_cost">Calculate Total Cost</span></button>
             </div>
 
             <div class="card">
                 <div class="card-header"><i class="fas fa-receipt"></i>
-                    <h2>Cost Breakdown</h2>
+                    <h2 data-i18n="cost_breakdown">Cost Breakdown</h2>
                 </div>
                 <div class="results-container" id="calcResults">
                     <div class="result-card">
@@ -1726,7 +1727,7 @@
                         <div class="result-value" id="fertCost">-</div>
                     </div>
                     <div class="total-card">
-                        <h3><i class="fas fa-coins"></i> TOTAL FARMING INPUT COST</h3>
+                        <h3><i class="fas fa-coins"></i> <span data-i18n="total_farming_input">TOTAL FARMING INPUT COST</span></h3>
                         <div class="total-value" id="totalCost">-</div>
                     </div>
                 </div>
@@ -1735,13 +1736,13 @@
 
         <div class="card mt-lg">
             <div class="card-header"><i class="fas fa-chart-line"></i>
-                <h2>Revenue Prediction</h2>
+                <h2 data-i18n="revenue_prediction">Revenue Prediction</h2>
             </div>
             <div class="revenue-card">
                 <div class="revenue-icon"><i class="fas fa-coins"></i></div>
-                <h3>Expected Revenue</h3>
+                <h3 data-i18n="expected_revenue">Expected Revenue</h3>
                 <div class="revenue-value" id="expectedRevenue">-</div>
-                <p id="revenueExplanation">Select a crop and enter land size to see your expected revenue.</p>
+                <p id="revenueExplanation" data-i18n="revenue_explanation">Select a crop and enter land size to see your expected revenue.</p>
             </div>
             <div class="revenue-breakdown">
                 <div class="breakdown-item"><i class="fas fa-weight-hanging"></i>
@@ -1767,15 +1768,15 @@
         </button>
         <div class="card">
             <div class="roadmap-header">
-                <h2><i class="fas fa-road"></i> Farming Activity Roadmap</h2>
-                <p id="roadmapCropName">Select a crop to view the detailed activity schedule</p>
+                <h2><i class="fas fa-road"></i> <span data-i18n="farming_activity_roadmap">Farming Activity Roadmap</span></h2>
+                <p id="roadmapCropName" data-i18n="select_crop_schedule">Select a crop to view the detailed activity schedule</p>
             </div>
             <div id="noRoadmap" class="text-center">
                 <i class="fas fa-seedling" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
-                <p style="margin-top: var(--spacing-md); color: var(--text-muted);">Please select a crop first.
+                <p style="margin-top: var(--spacing-md); color: var(--text-muted);" data-i18n="please_select_first">Please select a crop first.
                 </p>
                 <button class="btn btn-primary btn-lg mt-lg" onclick="showSection('crops')"><i class="fas fa-leaf"></i>
-                    Select a Crop</button>
+                    <span data-i18n="select_a_crop_btn">Select a Crop</span></button>
             </div>
             <div class="timeline" id="roadmapTimeline" style="display: none;"></div>
         </div>
@@ -1791,9 +1792,9 @@
             <div class="wiki-hero-bg"></div>
             <div class="wiki-hero-overlay"></div>
             <div class="wiki-hero-content">
-                <div class="ai-branding-badge"><i class="fas fa-brain"></i> AI-Powered Knowledge Base</div>
-                <h2>Crop Health Wiki</h2>
-                <p>Comprehensive knowledge base for plant diseases, pests, and soil health</p>
+                <div class="ai-branding-badge"><i class="fas fa-brain"></i> <span data-i18n="ai_knowledge_base">AI-Powered Knowledge Base</span></div>
+                <h2 data-i18n="crop_health_wiki">Crop Health Wiki</h2>
+                <p data-i18n="wiki_desc">Comprehensive knowledge base for plant diseases, pests, and soil health</p>
             </div>
         </div>
 
@@ -1801,21 +1802,21 @@
             <div class="wiki-controls-refined">
                 <div class="search-wrapper">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="wikiSearch" placeholder="Search diseases, crops..."
+                    <input type="text" id="wikiSearch" placeholder="Search diseases, crops..." data-i18n="search_diseases_crops"
                         onkeyup="searchWiki(this.value)">
                 </div>
                 <div class="category-chips-container" id="wikiCategories">
                     <button class="chip active" onclick="filterWiki('all', this)">All</button>
                     <button class="chip" onclick="filterWiki('plant', this)"><i class="fas fa-seedling"></i>
-                        Plant</button>
-                    <button class="chip" onclick="filterWiki('pest', this)"><i class="fas fa-bug"></i> Pest</button>
-                    <button class="chip" onclick="filterWiki('soil', this)"><i class="fas fa-water"></i> Soil</button>
+                        <span data-i18n="plant_wiki">Plant</span></button>
+                    <button class="chip" onclick="filterWiki('pest', this)"><i class="fas fa-bug"></i> <span data-i18n="pest_wiki">Pest</span></button>
+                    <button class="chip" onclick="filterWiki('soil', this)"><i class="fas fa-water"></i> <span data-i18n="soil_wiki">Soil</span></button>
                 </div>
             </div>
         </div>
 
         <div class="wiki-grid" id="wikiGrid">
-            <div class="wiki-loading"><i class="fas fa-spinner fa-spin"></i> Loading disease database...</div>
+            <div class="wiki-loading"><i class="fas fa-spinner fa-spin"></i> <span data-i18n="loading_disease_db">Loading disease database...</span></div>
         </div>
     </section>
 
@@ -1826,7 +1827,7 @@
         </button>
         <div class="card">
             <div class="card-header"><i class="fas fa-bell"></i>
-                <h2>Notifications & Alerts</h2>
+                <h2 data-i18n="notifications">Notifications & Alerts</h2>
             </div>
             <div class="notification-list" id="notificationList"></div>
         </div>
@@ -1837,50 +1838,50 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h2>Bharat <span>Farm</span></h2>
-                <p>Intelligent Smart Farming platform empowering Indian farmers with AI-driven crop insights, disease
+                <p data-i18n="footer_brand_desc">Intelligent Smart Farming platform empowering Indian farmers with AI-driven crop insights, disease
                     detection, and direct marketplace access.</p>
             </div>
 
             <div class="footer-col">
-                <h3>Platform</h3>
+                <h3 data-i18n="footer_platform">Platform</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#dashboard" onclick="showSection('dashboard'); return false;">Dashboard</a></li>
-                    <li><a href="#" onclick="openSubscription(); return false;">Pricing Plans</a></li>
+                    <li><a href="index.html" data-i18n="footer_home">Home</a></li>
+                    <li><a href="#dashboard" onclick="showSection('dashboard'); return false;" data-i18n="nav_home">Dashboard</a></li>
+                    <li><a href="#" onclick="openSubscription(); return false;" data-i18n="footer_pricing">Pricing Plans</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h3>Other Links</h3>
+                <h3 data-i18n="footer_links">Other Links</h3>
                 <ul>
-                    <li><a href="info.html?page=disclaimer">Disclaimer</a></li>
-                    <li><a href="info.html?page=faq">FAQs</a></li>
-                    <li><a href="info.html?page=methodology">AI Methodology</a></li>
+                    <li><a href="info.html?page=disclaimer" data-i18n="footer_disclaimer">Disclaimer</a></li>
+                    <li><a href="info.html?page=faq" data-i18n="footer_faq">FAQs</a></li>
+                    <li><a href="info.html?page=methodology" data-i18n="footer_ai_method">AI Methodology</a></li>
 
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h3>Legal</h3>
+                <h3 data-i18n="footer_legal">Legal</h3>
                 <ul>
-                    <li><a href="info.html?page=terms">Terms & Conditions</a></li>
-                    <li><a href="info.html?page=privacy">Privacy Policy</a></li>
-                    <li><a href="info.html?page=dataprotection">Data Protection</a></li>
-                    <li><a href="info.html?page=accessibility">Accessibility</a></li>
+                    <li><a href="info.html?page=terms" data-i18n="footer_terms">Terms & Conditions</a></li>
+                    <li><a href="info.html?page=privacy" data-i18n="footer_privacy">Privacy Policy</a></li>
+                    <li><a href="info.html?page=dataprotection" data-i18n="footer_data_protection">Data Protection</a></li>
+                    <li><a href="info.html?page=accessibility" data-i18n="footer_accessibility">Accessibility</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h3>About</h3>
+                <h3 data-i18n="footer_about">About</h3>
                 <ul>
-                    <li><a href="#" onclick="showAboutPage(); return false;">About Section</a></li>
+                    <li><a href="#" onclick="showAboutPage(); return false;" data-i18n="footer_about_section">About Section</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <div class="last-updated">Last updated: 16-03-2026</div>
-            <p>&copy; 2026 Bharat Farm. Empowering Indian Agriculture.</p>
+            <div class="last-updated" data-i18n="footer_last_updated">Last updated: 16-03-2026</div>
+            <p data-i18n="footer_copyright">&copy; 2026 Bharat Farm. Empowering Indian Agriculture.</p>
         </div>
     </footer>
     </div>
@@ -1889,35 +1890,35 @@
     <nav class="mobile-bottom-nav" style="display: none;">
         <button onclick="showSection('dashboard')" id="bottomNavDashboard">
             <i class="fas fa-home"></i>
-            <span>Home</span>
+            <span data-i18n="nav_home">Home</span>
         </button>
         <button onclick="showSection('weather')" id="bottomNavWeather">
             <i class="fas fa-cloud-sun"></i>
-            <span>Weather</span>
+            <span data-i18n="nav_weather">Weather</span>
         </button>
         <button onclick="showSection('marketplace')" id="bottomNavMarket">
             <i class="fas fa-store"></i>
-            <span>Market</span>
+            <span data-i18n="nav_market">Market</span>
         </button>
         <button onclick="showAboutPage()" id="bottomNavAbout">
             <i class="fas fa-info-circle"></i>
-            <span>About</span>
+            <span data-i18n="nav_about">About</span>
         </button>
         <button onclick="showSection('crops')" id="bottomNavCrops">
             <i class="fas fa-seedling"></i>
-            <span>Crops</span>
+            <span data-i18n="nav_crops">Crops</span>
         </button>
         <button onclick="showSection('wiki')" id="bottomNavWiki">
             <i class="fas fa-book-medical"></i>
-            <span>Wiki</span>
+            <span data-i18n="nav_wiki">Wiki</span>
         </button>
         <button onclick="openDailyQuiz()" id="bottomNavQuiz">
             <i class="fas fa-brain"></i>
-            <span>Quiz</span>
+            <span data-i18n="nav_quiz">Quiz</span>
         </button>
         <button onclick="showSection('calculator')" id="bottomNavCalc">
             <i class="fas fa-calculator"></i>
-            <span>Calc</span>
+            <span data-i18n="nav_calc">Calc</span>
         </button>
     </nav>
 
@@ -1958,83 +1959,83 @@
                     <i class="fas fa-seedling"></i>
                 </div>
                 <h1>Bharat Farm</h1>
-                <p class="tagline">Smart Agriculture Platform</p>
+                <p class="tagline" data-i18n="about_tagline">Smart Agriculture Platform</p>
             </div>
 
             <div class="about-section">
-                <h2><i class="fas fa-info-circle"></i> About BharatFarm</h2>
-                <p>BharatFarm is a comprehensive web application designed to empower Indian farmers with modern
+                <h2><i class="fas fa-info-circle"></i> <span data-i18n="about_heading">About BharatFarm</span></h2>
+                <p data-i18n="about_desc">BharatFarm is a comprehensive web application designed to empower Indian farmers with modern
                     technology and data-driven insights. Our platform provides intelligent tools for crop planning,
                     disease detection, weather monitoring, and financial planning to help farmers make smarter decisions
                     and increase productivity.</p>
             </div>
 
             <div class="about-section">
-                <h2><i class="fas fa-star"></i> Key Features</h2>
+                <h2><i class="fas fa-star"></i> <span data-i18n="key_features_title">Key Features</span></h2>
                 <div class="features-grid">
                     <div class="feature-item">
                         <i class="fas fa-robot"></i>
-                        <h3>AI Farming Assistant</h3>
+                        <h3 data-i18n="feat_ai_assistant">AI Farming Assistant</h3>
                         <p>24/7 smart chatbot for personalized agricultural expert advice</p>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-store"></i>
-                        <h3>Smart Marketplace</h3>
-                        <p>Integrated e-commerce portal for seeds, tools, and fertilizers</p>
+                        <h3 data-i18n="feat_smart_market">Smart Marketplace</h3>
+                        <p data-i18n="smart_market_about_desc">Integrated e-commerce portal for seeds, tools, and fertilizers</p>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-camera"></i>
-                        <h3>AI Disease Scanner</h3>
-                        <p>Advanced Gemini-powered diagnosis for crop health and diseases</p>
+                        <h3 data-i18n="feat_disease_scanner">AI Disease Scanner</h3>
+                        <p data-i18n="ai_scanner_about_desc">Advanced Gemini-powered diagnosis for crop health and diseases</p>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-cloud-sun"></i>
-                        <h3>Weather Monitoring</h3>
-                        <p>Real-time localized weather data with smart safety alerts</p>
+                        <h3 data-i18n="feat_weather">Weather Monitoring</h3>
+                        <p data-i18n="weather_monitor_about_desc">Real-time localized weather data with smart safety alerts</p>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-calculator"></i>
-                        <h3>Cost Calculator</h3>
+                        <h3 data-i18n="feat_cost_calc">Cost Calculator</h3>
                         <p>AI-augmented financial planning for crop investment and profit</p>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-road"></i>
-                        <h3>Activity Roadmap</h3>
-                        <p>Intelligent day-by-day scheduling for optimized cultivation</p>
+                        <h3 data-i18n="feat_activity_roadmap">Activity Roadmap</h3>
+                        <p data-i18n="activity_roadmap_about_desc">Intelligent day-by-day scheduling for optimized cultivation</p>
                     </div>
                 </div>
             </div>
 
             <div class="about-section">
-                <h2><i class="fas fa-users"></i> Development Team</h2>
-                <p class="team-intro">BharatFarm was developed by a dedicated team of students passionate about
+                <h2><i class="fas fa-users"></i> <span data-i18n="dev_team">Development Team</span></h2>
+                <p class="team-intro" data-i18n="team_intro_text">BharatFarm was developed by a dedicated team of students passionate about
                     leveraging technology to support Indian agriculture:</p>
                 <div class="developers-grid">
                     <div class="developer-card">
                         <img src="assets/Souvik.jpeg" alt="Souvik Dey" class="developer-photo">
                         <h3>Souvik Dey</h3>
-                        <p>Lead Developer</p>
+                        <p data-i18n="lead_dev">Lead Developer</p>
                         <a href="https://www.linkedin.com/in/souvik-dey-400497366/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                             class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
                     </div>
                     <div class="developer-card">
                         <img src="assets/Partha.jpeg" alt="Partha Sarathi Sarkar" class="developer-photo">
                         <h3>Partha Sarathi Sarkar</h3>
-                        <p>Full Stack Developer</p>
+                        <p data-i18n="full_stack_dev">Full Stack Developer</p>
                         <a href="https://www.linkedin.com/in/partha-sarathi-sarkar-7385a8367/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                             class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
                     </div>
                     <div class="developer-card">
                         <img src="assets/Samrat.jpeg" alt="Samrat Chatterjee" class="developer-photo">
                         <h3>Samrat Chatterjee</h3>
-                        <p>Backend Developer</p>
+                        <p data-i18n="backend_dev">Backend Developer</p>
                         <a href="https://www.linkedin.com/in/samrat-chatterjee-2aa543368/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                             class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
                     </div>
                     <div class="developer-card">
                         <img src="assets/Snehasis.jpeg" alt="Snehasis Chakroborty" class="developer-photo">
                         <h3>Snehasis Chakroborty</h3>
-                        <p>Frontend Developer</p>
+                        <p data-i18n="frontend_dev">Frontend Developer</p>
                         <a href="https://www.linkedin.com/in/snehasis-chakraborty-2b68823a6/?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                             class="connect-btn" target="_blank"><i class="fab fa-linkedin"></i> Connect</a>
                     </div>
@@ -2042,7 +2043,7 @@
             </div>
 
             <div class="about-section">
-                <h2><i class="fas fa-heart"></i> Our Mission</h2>
+                <h2><i class="fas fa-heart"></i> <span data-i18n="our_mission">Our Mission</span></h2>
                 <p>To bridge the gap between traditional farming practices and modern technology, making advanced
                     agricultural tools accessible to every farmer in India. We believe that with the right information
                     and tools, farmers can significantly improve their yields, reduce costs, and make more informed
@@ -2050,8 +2051,8 @@
             </div>
 
             <div class="about-footer">
-                <p>&copy; 2026 BharatFarm - All Rights Reserved</p>
-                <p>Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for Indian Farmers</p>
+                <p data-i18n="all_rights">&copy; 2026 BharatFarm - All Rights Reserved</p>
+                <p data-i18n="made_with_love">Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for Indian Farmers</p>
             </div>
         </div>
     </div> <!-- Close About container if any? Actually just appending -->
@@ -2072,14 +2073,14 @@
                 </div>
             </div>
             <div class="quiz-body">
-                <h3 class="quiz-question" id="qm-question">Loading question...</h3>
+                <h3 class="quiz-question" id="qm-question" data-i18n="quiz_loading_q">Loading question...</h3>
                 <div class="quiz-options" id="qm-options">
                     <!-- Options injected via JS -->
                 </div>
 
                 <div class="quiz-footer" id="qm-footer">
                     <div class="quiz-explanation" id="qm-explanation-text"></div>
-                    <button class="btn btn-primary quiz-btn-close" onclick="closeQuizModal()">Awesome, Got It!</button>
+                    <button class="btn btn-primary quiz-btn-close" onclick="closeQuizModal()" data-i18n="gami_got_it">Awesome, Got It!</button>
                 </div>
                 <!-- Leaderboard section (shown after answering) -->
                 <div class="quiz-leaderboard" id="qm-leaderboard" style="display:none;"></div>

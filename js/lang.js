@@ -12,6 +12,35 @@ const translations = {
         login_tagline: "Your smart farming companion for better crop planning and higher productivity",
         welcome_back: "Welcome Back", 
         login_subtitle: "Login to access your farming dashboard",
+        my_cart: "My Cart",
+        cart_empty: "Your cart is empty",
+        farming_history: "Farming History",
+        preferred_crops: "Preferred Crops",
+        footer_platform: "Platform",
+        footer_links: "Other Links",
+        footer_legal: "Legal",
+        footer_about: "About",
+        feat_ai_assistant: "AI Farming Assistant",
+        feat_smart_market: "Smart Marketplace",
+        feat_disease_scanner: "AI Disease Scanner",
+        feat_weather: "Weather Monitoring",
+        feat_cost_calc: "Cost Calculator",
+        feat_activity_roadmap: "Activity Roadmap",
+        select_language: "Select Language",
+        schemes_step1_note: "Enter 0 if you are a landless farmer or sharecropper.",
+        click_upload: "Click to upload or drag and drop an image",
+        analyzing_leaf: "Analyzing leaf image...",
+        humidity_label: "Humidity",
+        wind_speed_label: "Wind Speed",
+        visibility_label: "Visibility",
+        weather_suitable: "Weather conditions are suitable for farming activities.",
+        prev_page: "Previous",
+        next_page: "Next",
+        climate_req: "Climate Requirement",
+        generating_insights: "Generating AI insights...",
+        select_land_unit: "Select Land Unit",
+        revenue_explanation: "Select a crop and enter land size to see your expected revenue.",
+        quiz_loading_q: "Loading question...",
         login: "Login", 
         register: "Register", 
         phone_number: "Phone Number", 
@@ -257,13 +286,282 @@ const translations = {
         gami_correct: "Correct!",
         gami_incorrect: "Incorrect.",
         gami_got_it: "Awesome, Got It!",
-        gami_lvl: "Lvl"
+        gami_lvl: "Lvl",
+        // Loading Page
+        loading_status_init: "Initializing...",
+        loading_feature_weather: "Weather",
+        loading_feature_scanner: "Leaf Scanner",
+        loading_feature_calculator: "Calculator",
+        loading_feature_roadmap: "Roadmap",
+        // Auth Extras
+        forgot_password: "Forgot Password",
+        forgot_password_link: "Forgot Password?",
+        verify_phone: "Verify Phone Number",
+        back_to_login: "Back to Login",
+        new_password_label: "New Password",
+        confirm_new_password_label: "Confirm New Password",
+        enter_phone_placeholder: "Enter phone number",
+        enter_password_placeholder: "Enter password",
+        enter_name_placeholder: "Enter your name",
+        create_password_placeholder: "Create password",
+        confirm_password_placeholder: "Confirm password",
+        enter_registered_phone: "Enter registered phone number",
+        enter_new_password_placeholder: "Enter new password",
+        confirm_new_password_placeholder: "Confirm new password",
+        terms_footer: "By continuing, you agree to our Terms of Service",
+        // Subscription & Payment
+        current_plan: "Current Plan",
+        subscribe_now: "Subscribe Now!",
+        recommended_tag: "RECOMMENDED",
+        premium_version: "Premium Version",
+        select_payment: "Select Payment Method",
+        amount_to_pay: "Amount to pay: ₹49",
+        pay_via_upi: "Pay via UPI",
+        upi_options: "GPay, PhonePe, Paytm, etc.",
+        credit_debit_card: "Credit / Debit Card",
+        card_options: "Visa, Mastercard, RuPay",
+        netbanking: "Netbanking",
+        netbanking_options: "All major Indian banks",
+        back_btn: "Back",
+        waiting_upi: "Waiting for UPI App...",
+        complete_payment_msg: "Please check your phone and complete the payment of ₹49.",
+        cancel_request: "Cancel Request",
+        payment_successful: "Payment Successful!",
+        premium_activated: "Your Premium subscription is now active. All features have been unlocked.",
+        continue_dashboard: "Continue to Dashboard",
+        per_month: "/month",
+        // Marketplace Extras
+        digital_agri_portal: "Digital Agri-India Portal",
+        welcome_marketplace: "Welcome to the Marketplace",
+        select_role_continue: "Please select your role to continue",
+        i_am_buyer: "I am a Buyer",
+        browse_contact_farmers: "Browse & contact farmers directly",
+        i_am_farmer: "I am a Farmer",
+        list_manage_produce: "List your produce & manage listings",
+        agri_marketplace: "Agri-Marketplace",
+        marketplace_hero_desc: "Empowering Indian Farmers with Direct Trade & Premium Market Access",
+        publish_listing: "Publish Listing",
+        my_active_listings: "My Active Listings",
+        listings_appear_here: "Your published listings will appear here",
+        location_map_label: "Location (Google Maps Link)",
+        paste_map_link: "Paste Map Link or Get GPS",
+        whatsapp_number: "WhatsApp Number",
+        ten_digit_placeholder: "10-digit number",
+        select_state: "Select State",
+        select_district: "Select District",
+        enter_village_area: "Enter village or area name",
+        // Cart & Checkout
+        my_cart: "My Cart",
+        your_cart_empty: "Your cart is empty",
+        add_items_begin: "Add items from the marketplace to begin",
+        total_label: "Total",
+        proceed_checkout: "Proceed to Checkout",
+        secure_checkout: "Secure Checkout",
+        order_summary: "Order Summary",
+        subtotal: "Subtotal",
+        delivery: "Delivery",
+        direct_from_farmer: "Direct from Farmer",
+        your_details: "Your Details",
+        your_full_name: "Your Full Name",
+        your_whatsapp: "Your WhatsApp Number",
+        delivery_address: "Delivery Address (Optional)",
+        village_city_pin: "Village / City / Pincode",
+        order_whatsapp_note: "Your order will be sent via WhatsApp to each farmer. They will confirm availability and arrange delivery directly.",
+        send_order_whatsapp: "Send Order via WhatsApp",
+        // Profile
+        farming_statistics: "Farming Statistics",
+        leaf_scans_stat: "Leaf Scans",
+        weather_checks_stat: "Weather Checks",
+        calculations_stat: "Calculations",
+        crops_tracked_stat: "Crops Tracked",
+        farming_history: "Farming History",
+        export_pdf: "Export PDF",
+        all_activities: "All Activities",
+        scans_filter: "Scans",
+        weather_filter: "Weather",
+        calculations_filter: "Calculations",
+        crops_filter: "Crops",
+        no_activities_yet: "No activities yet. Start using BharatFarm to see your farming history!",
+        preferences_title: "Preferences",
+        preferred_crops: "Preferred Crops",
+        none_selected: "None selected",
+        not_set: "Not set",
+        edit_label: "Edit",
+        save_label: "Save",
+        cancel_label: "Cancel",
+        // Scanner Extras
+        scanner_full_desc: "Upload or capture a photo of any plant leaf to detect diseases and get fertilizer recommendations.",
+        supports_formats: "Supports: JPG, PNG, WEBP",
+        open_camera: "Open Camera",
+        take_photo_title: "Take Photo",
+        capture_btn: "Capture",
+        retake_btn: "Retake",
+        use_photo_btn: "Use Photo",
+        analysis_result: "Analysis Result",
+        plant_status: "Plant Status",
+        desc_appear_here: "Description will appear here.",
+        // Weather Extras
+        enter_village_city: "Enter village or city name",
+        refresh_btn: "Refresh",
+        offline_note: "You are offline. Cached weather will be shown when available.",
+        fetching_weather: "Fetching weather data...",
+        safe_farming_title: "SAFE for Farming Activities",
+        what_to_do: "What to Do",
+        what_not_to_do: "What Not to Do",
+        ai_farming_advice: "AI Farming Advice",
+        generating_advice: "Generating advice...",
+        // Calculator Extras
+        cost_only_note: "Only seed and fertilizer costs. Labour, equipment NOT included.",
+        search_type_crop: "-- Search or Type a crop --",
+        please_valid_crop: "Please enter a valid crop",
+        acre_unit: "Acre",
+        bigha_unit: "Bigha",
+        katha_unit: "Katha",
+        unit_conversion_info: "1 Bigha = 20 Katha | 1 Bigha ≈ 0.62 Acre | 1 Acre ≈ 32.26 Katha",
+        acres_label: "Acres",
+        enter_land_size_ph: "Enter land size",
+        calculate_total_cost: "Calculate Total Cost",
+        required_seed_qty: "Required Seed Quantity",
+        total_seed_cost: "Total Seed Cost",
+        required_fert_qty: "Required Fertilizer Quantity",
+        total_fert_cost: "Total Fertilizer Cost",
+        total_farming_input: "TOTAL FARMING INPUT COST",
+        // Roadmap Extras
+        farming_activity_roadmap: "Farming Activity Roadmap",
+        select_crop_schedule: "Select a crop to view the detailed activity schedule",
+        please_select_first: "Please select a crop first.",
+        select_a_crop_btn: "Select a Crop",
+        start_farming_session: "Start Farming Session",
+        end_session: "End Session",
+        // Wiki
+        ai_knowledge_base: "AI-Powered Knowledge Base",
+        crop_health_wiki: "Crop Health Wiki",
+        wiki_desc: "Comprehensive knowledge base for plant diseases, pests, and soil health",
+        search_diseases_crops: "Search diseases, crops...",
+        all_wiki: "All",
+        plant_wiki: "Plant",
+        pest_wiki: "Pest",
+        soil_wiki: "Soil",
+        loading_disease_db: "Loading disease database...",
+        // Footer
+        footer_brand_desc: "Intelligent Smart Farming platform empowering Indian farmers with AI-driven crop insights, disease detection, and direct marketplace access.",
+        footer_platform: "Platform",
+        footer_home: "Home",
+        footer_farmer_app: "Farmer App",
+        footer_pricing: "Pricing Plans",
+        footer_other_links: "Other Links",
+        footer_disclaimer: "Disclaimer",
+        footer_faq: "FAQs",
+        footer_ai_method: "AI Methodology",
+        footer_legal: "Legal",
+        footer_terms: "Terms & Conditions",
+        footer_privacy: "Privacy Policy",
+        footer_data_protection: "Data Protection",
+        footer_accessibility: "Accessibility",
+        footer_about: "About",
+        footer_about_section: "About Section",
+        footer_last_updated: "Last updated: 16-03-2026",
+        footer_copyright: "© 2026 Bharat Farm. Empowering Indian Agriculture.",
+        // Bottom Nav
+        nav_home: "Home",
+        nav_weather: "Weather",
+        nav_market: "Market",
+        nav_about: "About",
+        nav_crops: "Crops",
+        nav_wiki: "Wiki",
+        nav_quiz: "Quiz",
+        nav_calc: "Calc",
+        // About Page
+        about_tagline: "Smart Agriculture Platform",
+        about_heading: "About BharatFarm",
+        about_desc: "BharatFarm is a comprehensive web application designed to empower Indian farmers with modern technology and data-driven insights. Our platform provides intelligent tools for crop planning, disease detection, weather monitoring, and financial planning to help farmers make smarter decisions and increase productivity.",
+        key_features_title: "Key Features",
+        ai_assistant_title: "AI Farming Assistant",
+        ai_assistant_desc: "24/7 smart chatbot for personalized agricultural expert advice",
+        smart_market_about: "Smart Marketplace",
+        smart_market_about_desc: "Integrated e-commerce portal for seeds, tools, and fertilizers",
+        ai_scanner_about: "AI Disease Scanner",
+        ai_scanner_about_desc: "Advanced Gemini-powered diagnosis for crop health and diseases",
+        weather_monitor_about: "Weather Monitoring",
+        weather_monitor_about_desc: "Real-time localized weather data with smart safety alerts",
+        cost_calc_about: "Cost Calculator",
+        cost_calc_about_desc: "AI-augmented financial planning for crop investment and profit",
+        activity_roadmap_about: "Activity Roadmap",
+        activity_roadmap_about_desc: "Intelligent day-by-day scheduling for optimized cultivation",
+        dev_team: "Development Team",
+        team_intro_text: "BharatFarm was developed by a dedicated team of students passionate about leveraging technology to support Indian agriculture:",
+        lead_dev: "Lead Developer",
+        full_stack_dev: "Full Stack Developer",
+        backend_dev: "Backend Developer",
+        frontend_dev: "Frontend Developer",
+        connect_btn: "Connect",
+        our_mission: "Our Mission",
+        mission_desc: "To bridge the gap between traditional farming practices and modern technology, making advanced agricultural tools accessible to every farmer in India. We believe that with the right information and tools, farmers can significantly improve their yields, reduce costs, and make more informed decisions.",
+        all_rights: "© 2026 BharatFarm - All Rights Reserved",
+        made_with_love: "Made with ❤ for Indian Farmers",
+        // Schemes Extras
+        scheme_matchmaker_title: "Scheme Matchmaker",
+        find_govt_schemes_desc: "Find government agricultural schemes you are eligible for",
+        land_details_title: "Land Details",
+        how_much_land: "How much cultivable land do you own? (in Acres)",
+        landless_note: "Enter 0 if you are a landless farmer or sharecropper.",
+        location_step_title: "Location",
+        crop_info_step_title: "Crop Information",
+        primary_crop_q: "What is your primary crop? (Optional)",
+        searching_text: "Searching...",
+        check_another: "Check Another Profile",
+        matched_text: "Matched",
+        // Dashboard Extras
+        dash_activity_desc: "Smart task scheduling based on precise crop lifecycles and hyper-local data.",
+        open_roadmap_cta: "Open Roadmap",
+        dash_weather_desc: "Real-time hyper-local weather tracking to protect your yield.",
+        view_forecast: "View Forecast",
+        dash_wiki_title: "Crop Health Wiki",
+        dash_wiki_desc: "AI-powered encyclopedia for plant diseases, pests, and soil health.",
+        open_wiki: "Open Wiki",
+        // Session Dashboard
+        current_session: "Current Farming Session",
+        session_crop: "Crop",
+        session_started: "Started",
+        session_input_cost: "Input Cost",
+        session_revenue: "Revenue",
+        // Quiz
+        loading_question: "Loading question..."
     },
     hi: {
         loading_subtitle: "आपका स्मार्ट फार्मिंग डैशबोर्ड तैयार हो रहा है...",
         login_tagline: "बेहतर फसल योजना और उच्च उत्पादकता के लिए आपका स्मार्ट खेती साथी",
         welcome_back: "वापस स्वागत है", 
-        login_subtitle: "अपने खेती डैशबोर्ड तक पहुंचने के लिए लॉगिन करें",
+        login_subtitle: "अपने फार्मिंग डैशबोर्ड तक पहुंचने के लिए लॉगिन करें",
+        my_cart: "मेरी कार्ट",
+        cart_empty: "आपकी कार्ट खाली है",
+        farming_history: "खेती का इतिहास",
+        preferred_crops: "पसंदीदा फसलें",
+        footer_platform: "मंच",
+        footer_links: "अन्य लिंक",
+        footer_legal: "कानूनी",
+        footer_about: "बारे में",
+        feat_ai_assistant: "एआई कृषि सहायक",
+        feat_smart_market: "स्मार्ट मार्केटप्लेस",
+        feat_disease_scanner: "एआई रोग स्कैनर",
+        feat_weather: "मौसम की निगरानी",
+        feat_cost_calc: "लागत कैलकुलेटर",
+        feat_activity_roadmap: "गतिविधि रोडमैप",
+        select_language: "भाषा चुनें",
+        schemes_step1_note: "यदि आप भूमिहीन किसान या बटाईदार हैं तो 0 दर्ज करें।",
+        click_upload: "अपलोड करने के लिए क्लिक करें या छवि खींचकर छोड़ें",
+        analyzing_leaf: "पत्ती की छवि का विश्लेषण हो रहा है...",
+        humidity_label: "नमी",
+        wind_speed_label: "हवा की गति",
+        visibility_label: "दृश्यता",
+        weather_suitable: "मौसम की स्थिति खेती की गतिविधियों के लिए अनुकूल है।",
+        prev_page: "पिछला",
+        next_page: "अगला",
+        climate_req: "जलवायु आवश्यकता",
+        generating_insights: "एआई अंतर्दृष्टि उत्पन्न हो रही है...",
+        select_land_unit: "भूमि इकाई चुनें",
+        revenue_explanation: "अपेक्षित राजस्व देखने के लिए फसल चुनें और भूमि का आकार दर्ज करें।",
+        quiz_loading_q: "प्रश्न लोड हो रहा है...",
         login: "लॉगिन", 
         register: "रजिस्टर", 
         phone_number: "फोन नंबर", 
@@ -419,10 +717,10 @@ const translations = {
         schemes_check_eligibility: "पात्रता जांचें",
         schemes_matchmaker: "मैचमेकर",
         premium_marketplace: "एआई-संचालित बाज़ार",
-        premium_trade: "सीधे खरीদার से व्यापार",
+        premium_trade: "सीधे खरीदार से व्यापार",
         premium_commission: "जीरो कमीशन बिक्री",
         premium_leaf_scanner: "पत्ती रोग स्कैनर",
-        premium_roadmap: "खेती गतिविधि रोडमैপ",
+        premium_roadmap: "खेती गतिविधि रोडमैप",
         premium_weather: "उन्नत मौसम अलर्ट",
         premium_revenue: "राजस्व भविष्यवाणी",
         premium_support: "प्राथमिकता सहायता",
@@ -502,20 +800,91 @@ const translations = {
         unit_quintal: "प्रति क्विंटल",
         unit_piece: "प्रति नग",
         unit_ton: "प्रति टन",
-
         // Gamification
         gami_xp: "अनुभव",
         gami_take_quiz: "दैनिक प्रश्नोत्तरी लें",
         gami_correct: "सही!",
         gami_incorrect: "गलत।",
         gami_got_it: "बहुत बढ़िया, समझ गया!",
-        gami_lvl: "स्तर"
+        gami_lvl: "स्तर",
+        // Loading Page
+        loading_status_init: "प्रारंभ हो रहा है...",
+        loading_feature_weather: "मौसम",
+        loading_feature_scanner: "पत्ती स्कैनर",
+        loading_feature_calculator: "कैलकुलेटर",
+        loading_feature_roadmap: "रोडमैप",
+        // Auth Extras
+        forgot_password: "पासवर्ड भूल गए",
+        forgot_password_link: "पासवर्ड भूल गए?",
+        verify_phone: "फ़ोन नंबर सत्यापित करें",
+        back_to_login: "लॉगिन पर वापस जाएं",
+        new_password_label: "नया पासवर्ड",
+        confirm_new_password_label: "नए पासवर्ड की पुष्टि करें",
+        enter_phone_placeholder: "फ़ोन नंबर दर्ज करें",
+        enter_password_placeholder: "पासवर्ड दर्ज करें",
+        enter_name_placeholder: "अपना नाम दर्ज करें",
+        create_password_placeholder: "पासवर्ड बनाएं",
+        confirm_password_placeholder: "पासवर्ड की पुष्टि करें",
+        enter_registered_phone: "पंजीकृत फ़ोन नंबर दर्ज करें",
+        enter_new_password_placeholder: "नया पासवर्ड दर्ज करें",
+        confirm_new_password_placeholder: "नए पासवर्ड की पुष्टि करें",
+        terms_footer: "जारी रखकर, आप हमारी सेवा की शर्तों से सहमत हैं",
+        // Subscription & Payment
+        current_plan: "वर्तमान योजना",
+        subscribe_now: "अभी सदस्यता लें!",
+        recommended_tag: "अनुशंसित",
+        premium_version: "प्रीमियम संस्करण",
+        select_payment: "भुगतान विधि चुनें",
+        amount_to_pay: "भुगतान की जाने वाली राशि: ₹49",
+        pay_via_upi: "UPI के माध्यम से भुगतान करें",
+        upi_options: "GPay, PhonePe, Paytm, आदि",
+        credit_debit_card: "क्रेडिट / डेबिट कार्ड",
+        card_options: "Visa, Mastercard, RuPay",
+        netbanking: "नेटबैंकिंग",
+        netbanking_options: "सभी प्रमुख भारतीय बैंक",
+        back_btn: "वापस",
+        waiting_upi: "UPI ऐप की प्रतीक्षा कर रहा है...",
+        complete_payment_msg: "कृपया अपना फ़ोन जांचें और ₹49 का भुगतान पूरा करें।",
+        cancel_request: "अनुरोध रद्द करें",
+        payment_successful: "भुगतान सफल!",
+        premium_activated: "आपकी प्रीमियम सदस्यता अब सक्रिय है। सभी सुविधाएँ अनलॉक कर दी गई हैं।",
+        continue_dashboard: "डैशबोर्ड पर जारी रखें",
+        per_month: "/महीना"
     },
     bn: {
         loading_subtitle: "আপনার স্মার্ট ফার্মিং ড্যাশবোর্ড প্রস্তুত হচ্ছে...",
         login_tagline: "উন্নত ফসল পরিকল্পনা এবং উচ্চ উৎপাদনশীলতার জন্য আপনার স্মার্ট কৃষি সহায়ক",
         welcome_back: "স্বাগতম", 
-        login_subtitle: "আপনার কৃষি ড্যাশবোর্ডে প্রবেশ করতে লগইন করুন",
+        login_subtitle: "আপনার ফার্মিং ড্যাশবোর্ড অ্যাক্সেস করতে লগইন করুন",
+        my_cart: "আমার কার্ট",
+        cart_empty: "আপনার কার্ট খালি",
+        farming_history: "কৃষি ইতিহাস",
+        preferred_crops: "পছন্দের ফসল",
+        footer_platform: "প্ল্যাটফর্ম",
+        footer_links: "অন্যান্য লিঙ্ক",
+        footer_legal: "আইনি",
+        footer_about: "সম্পর্কে",
+        feat_ai_assistant: "এআই কৃষি সহকারী",
+        feat_smart_market: "স্মার্ট মার্কেটপ্লেস",
+        feat_disease_scanner: "এআই রোগ স্ক্যানার",
+        feat_weather: "আবহাওয়া পর্যবেক্ষণ",
+        feat_cost_calc: "খরচ ক্যালকুলেটর",
+        feat_activity_roadmap: "কার্যকলাপের রোডম্যাপ",
+        select_language: "ভাষা নির্বাচন করুন",
+        schemes_step1_note: "আপনি যদি ভূমিহীন কৃষক বা ভাগচাষী হন তাহলে 0 লিখুন।",
+        click_upload: "আপলোড করতে ক্লিক করুন বা ছবি টেনে আনুন",
+        analyzing_leaf: "পাতার ছবি বিশ্লেষণ করা হচ্ছে...",
+        humidity_label: "আর্দ্রতা",
+        wind_speed_label: "বায়ুর গতি",
+        visibility_label: "দৃশ্যমানতা",
+        weather_suitable: "আবহাওয়া পরিস্থিতি কৃষি কাজের জন্য উপযুক্ত।",
+        prev_page: "পূর্ববর্তী",
+        next_page: "পরবর্তী",
+        climate_req: "জলবায়ু প্রয়োজনীয়তা",
+        generating_insights: "এআই অন্তর্দৃষ্টি তৈরি হচ্ছে...",
+        select_land_unit: "জমির একক নির্বাচন করুন",
+        revenue_explanation: "প্রত্যাশিত আয় দেখতে ফসল নির্বাচন করুন এবং জমির আকার লিখুন।",
+        quiz_loading_q: "প্রশ্ন লোড হচ্ছে...",
         login: "লগইন", 
         register: "নিবন্ধন", 
         phone_number: "ফোন নম্বর", 
@@ -761,7 +1130,247 @@ const translations = {
         gami_correct: "সঠিক!",
         gami_incorrect: "ভুল।",
         gami_got_it: "চমৎকার, বুঝতে পেরেছি!",
-        gami_lvl: "স্তর"
+        gami_lvl: "স্তর",
+        // Loading Page
+        loading_status_init: "শুরু হচ্ছে...",
+        loading_feature_weather: "আবহাওয়া",
+        loading_feature_scanner: "পাতা স্ক্যানার",
+        loading_feature_calculator: "ক্যালকুলেটর",
+        loading_feature_roadmap: "রোডম্যাপ",
+        // Auth Extras
+        forgot_password: "পাসওয়ার্ড ভুলে গেছেন",
+        forgot_password_link: "পাসওয়ার্ড ভুলে গেছেন?",
+        verify_phone: "ফোন নম্বর যাচাই করুন",
+        back_to_login: "লগইনে ফিরে যান",
+        new_password_label: "নতুন পাসওয়ার্ড",
+        confirm_new_password_label: "নতুন পাসওয়ার্ড নিশ্চিত করুন",
+        enter_phone_placeholder: "ফোন নম্বর লিখুন",
+        enter_password_placeholder: "পাসওয়ার্ড লিখুন",
+        enter_name_placeholder: "আপনার নাম লিখুন",
+        create_password_placeholder: "পাসওয়ার্ড তৈরি করুন",
+        confirm_password_placeholder: "পাসওয়ার্ড নিশ্চিত করুন",
+        enter_registered_phone: "নিবন্ধিত ফোন নম্বর লিখুন",
+        enter_new_password_placeholder: "নতুন পাসওয়ার্ড লিখুন",
+        confirm_new_password_placeholder: "নতুন পাসওয়ার্ড নিশ্চিত করুন",
+        terms_footer: "চালিয়ে যাওয়ার মাধ্যমে, আপনি আমাদের পরিষেবার শর্তাবলীতে সম্মত হচ্ছেন",
+        // Subscription & Payment
+        current_plan: "বর্তমান প্ল্যান",
+        subscribe_now: "এখন সাবস্ক্রাইব করুন!",
+        recommended_tag: "প্রস্তাবিত",
+        premium_version: "প্রিমিয়াম সংস্করণ",
+        select_payment: "পেমেন্ট পদ্ধতি নির্বাচন করুন",
+        amount_to_pay: "পরিশোধের পরিমাণ: ₹৪৯",
+        pay_via_upi: "UPI-এর মাধ্যমে পেমেন্ট করুন",
+        upi_options: "GPay, PhonePe, Paytm, ইত্যাদি",
+        credit_debit_card: "ক্রেডিট / ডেবিট কার্ড",
+        card_options: "Visa, Mastercard, RuPay",
+        netbanking: "নেটব্যাংকিং",
+        netbanking_options: "সমস্ত প্রধান ভারতীয় ব্যাংক",
+        back_btn: "ফিরে যান",
+        waiting_upi: "UPI অ্যাপের জন্য অপেক্ষা করা হচ্ছে...",
+        complete_payment_msg: "অনুগ্রহ করে আপনার ফোন চেক করুন এবং ₹৪৯ পেমেন্ট সম্পূর্ণ করুন।",
+        cancel_request: "অনুরোধ বাতিল করুন",
+        payment_successful: "পেমেন্ট সফল!",
+        premium_activated: "আপনার প্রিমিয়াম সাবস্ক্রিপশন এখন সক্রিয়। সমস্ত বৈশিষ্ট্য আনলক করা হয়েছে।",
+        continue_dashboard: "ড্যাশবোর্ডে চালিয়ে যান",
+        per_month: "/মাস",
+        // Marketplace Extras
+        digital_agri_portal: "ডিজিটাল এগ্রি-ইন্ডিয়া পোর্টাল",
+        welcome_marketplace: "মার্কেটপ্লেসে স্বাগতম",
+        select_role_continue: "চালিয়ে যেতে অনুগ্রহ করে আপনার ভূমিকা নির্বাচন করুন",
+        i_am_buyer: "আমি একজন ক্রেতা",
+        browse_contact_farmers: "কৃষকদের ব্রাউজ করুন এবং সরাসরি যোগাযোগ করুন",
+        i_am_farmer: "আমি একজন কৃষক",
+        list_manage_produce: "আপনার পণ্য তালিকাভুক্ত করুন এবং পরিচালনা করুন",
+        agri_marketplace: "কৃষি মার্কেটপ্লেস",
+        marketplace_hero_desc: "সরাসরি বাণিজ্য এবং প্রিমিয়াম মার্কেট অ্যাক্সেসের মাধ্যমে ভারতীয় কৃষকদের ক্ষমতায়ন",
+        publish_listing: "লিস্টিং প্রকাশ করুন",
+        my_active_listings: "আমার সক্রিয় লিস্টিং",
+        listings_appear_here: "আপনার প্রকাশিত লিস্টিং এখানে উপস্থিত হবে",
+        location_map_label: "অবস্থান (Google Maps লিঙ্ক)",
+        paste_map_link: "ম্যাপ লিঙ্ক পেস্ট করুন বা জিপিএস পান",
+        whatsapp_number: "WhatsApp নম্বর",
+        ten_digit_placeholder: "১০-সংখ্যার নম্বর",
+        select_state: "রাজ্য নির্বাচন করুন",
+        select_district: "জেলা নির্বাচন করুন",
+        enter_village_area: "গ্রাম বা এলাকার নাম লিখুন",
+        // Cart & Checkout
+        my_cart: "আমার কার্ট",
+        your_cart_empty: "আপনার কার্ট খালি",
+        add_items_begin: "শুরু করতে মার্কেটপ্লেস থেকে আইটেম যোগ করুন",
+        total_label: "মোট",
+        proceed_checkout: "চেকআউটে এগিয়ে যান",
+        secure_checkout: "নিরাপদ চেকআউট",
+        order_summary: "অর্ডার সারাংশ",
+        subtotal: "উপমোট",
+        delivery: "ডেলিভারি",
+        direct_from_farmer: "সরাসরি কৃষকের কাছ থেকে",
+        your_details: "আপনার বিবরণ",
+        your_full_name: "আপনার পুরো নাম",
+        your_whatsapp: "আপনার WhatsApp নম্বর",
+        delivery_address: "ডেলিভারি ঠিকানা (ঐচ্ছিক)",
+        village_city_pin: "গ্রাম / শহর / পিনকোড",
+        order_whatsapp_note: "আপনার অর্ডার WhatsApp-এর মাধ্যমে প্রতিটি কৃষকের কাছে পাঠানো হবে। তারা প্রাপ্যতা নিশ্চিত করবে এবং সরাসরি ডেলিভারির ব্যবস্থা করবে।",
+        send_order_whatsapp: "WhatsApp-এর মাধ্যমে অর্ডার পাঠান",
+        // Profile
+        farming_statistics: "কৃষি পরিসংখ্যান",
+        leaf_scans_stat: "পাতা স্ক্যান",
+        weather_checks_stat: "আবহাওয়া চেক",
+        calculations_stat: "হিসাব",
+        crops_tracked_stat: "ট্র্যাক করা ফসল",
+        farming_history: "কৃষি ইতিহাস",
+        export_pdf: "পিডিএফ রপ্তানি করুন",
+        all_activities: "সমস্ত ক্রিয়াকলাপ",
+        scans_filter: "স্কैन",
+        weather_filter: "আবহাওয়া",
+        calculations_filter: "হিসাব",
+        crops_filter: "ফসল",
+        no_activities_yet: "এখনও কোনও কার্যকলাপ নেই। আপনার কৃষি ইতিহাস দেখতে ভারতফার্ম ব্যবহার শুরু করুন!",
+        preferences_title: "পছন্দসমূহ",
+        preferred_crops: "পছন্দের ফসল",
+        none_selected: "কিছুই নির্বাচিত হয়নি",
+        not_set: "সেট করা হয়নি",
+        edit_label: "সম্পাদনা করুন",
+        save_label: "সংরক্ষণ করুন",
+        cancel_label: "বাতিল করুন",
+        // Scanner Extras
+        scanner_full_desc: "রোগ নির্ণয় করতে এবং সারের সুপারিশ পেতে যেকোনো গাছের পাতার একটি ছবি আপলোড বা ক্যাপচার করুন।",
+        supports_formats: "সমর্থিত: JPG, PNG, WEBP",
+        open_camera: "ক্যামেরা খুলুন",
+        take_photo_title: "ছবি তুলুন",
+        capture_btn: "ক্যাপচার করুন",
+        retake_btn: "পুনরায় তুলুন",
+        use_photo_btn: "ছবি ব্যবহার করুন",
+        analysis_result: "বিশ্লেষণের ফলাফল",
+        plant_status: "উদ্ভিদের অবস্থা",
+        desc_appear_here: "বিবরণ এখানে উপস্থিত হবে।",
+        // Weather Extras
+        enter_village_city: "গ্রাম বা শহরের নাম লিখুন",
+        refresh_btn: "রিফ্রেশ করুন",
+        offline_note: "আপনি অফলাইনে আছেন। উপলব্ধ হলে ক্যাশ করা আবহাওয়া দেখানো হবে।",
+        fetching_weather: "আবহাওয়ার ডেটা আনা হচ্ছে...",
+        safe_farming_title: "কৃষিকাজের জন্য নিরাপদ",
+        what_to_do: "কী করবেন",
+        what_not_to_do: "কী করবেন না",
+        ai_farming_advice: "এআই কৃষি পরামর্শ",
+        generating_advice: "পরামর্শ তৈরি করা হচ্ছে...",
+        // Calculator Extras
+        cost_only_note: "শুধুমাত্র বীজ এবং সারের খরচ। শ্রম, সরঞ্জাম অন্তর্ভুক্ত নয়।",
+        search_type_crop: "-- খুঁজুন বা ফসলের নাম লিখুন --",
+        please_valid_crop: "অনুগ্রহ করে একটি বৈধ ফসল লিখুন",
+        acre_unit: "একর",
+        bigha_unit: "বিঘা",
+        katha_unit: "কাঠা",
+        unit_conversion_info: "১ বিঘা = ২০ কাঠা | ১ বিঘা ≈ ০.৬২ একর | ১ একর ≈ ৩২.২৬ কাঠা",
+        acres_label: "একর",
+        enter_land_size_ph: "জমির আকার লিখুন",
+        calculate_total_cost: "মোট খরচ হিসাব করুন",
+        required_seed_qty: "প্রয়োজনীয় বীজের পরিমাণ",
+        total_seed_cost: "মোট বীজের খরচ",
+        required_fert_qty: "প্রয়োজনীয় সারের পরিমাণ",
+        total_fert_cost: "মোট সারের খরচ",
+        total_farming_input: "মোট কৃষি ইনপুট খরচ",
+        // Roadmap Extras
+        farming_activity_roadmap: "কৃষি কার্যকলাপ রোডম্যাপ",
+        select_crop_schedule: "বিস্তারিত কার্যকলাপের সময়সূচী দেখতে একটি ফসল নির্বাচন করুন",
+        please_select_first: "অনুগ্রহ করে প্রথমে একটি ফসল নির্বাচন করুন।",
+        select_a_crop_btn: "একটি ফসল নির্বাচন করুন",
+        start_farming_session: "কৃষি সেশন শুরু করুন",
+        end_session: "সেশন শেষ করুন",
+        // Wiki
+        ai_knowledge_base: "এআই-চালিত নলেজ বেস",
+        crop_health_wiki: "ফসল স্বাস্থ্য উইকি",
+        wiki_desc: "উদ্ভিদের রোগ, কীটপতঙ্গ এবং মাটির স্বাস্থ্যের জন্য ব্যাপক জ্ঞানভান্ডার",
+        search_diseases_crops: "রোগ, ফসল খুঁজুন...",
+        all_wiki: "সমস্ত",
+        plant_wiki: "উদ্ভিদ",
+        pest_wiki: "কীটপতঙ্গ",
+        soil_wiki: "মাটি",
+        loading_disease_db: "রোগের ডেটাবেস লোড হচ্ছে...",
+        // Footer
+        footer_brand_desc: "এআই-চালিত ফসলের অন্তর্দৃষ্টি, রোগ নির্ণয় এবং সরাসরি মার্কেটপ্লেস অ্যাক্সেস দিয়ে ভারতীয় কৃষকদের ক্ষমতায়নের বুদ্ধিমান স্মার্ট ফার্মিং প্ল্যাটফর্ম।",
+        footer_platform: "প্ল্যাটফর্ম",
+        footer_home: "হোম",
+        footer_farmer_app: "কৃষক অ্যাপ",
+        footer_pricing: "মূল্য নির্ধারণ প্ল্যান",
+        footer_other_links: "অন্যান্য লিঙ্ক",
+        footer_disclaimer: "দাবিত্যাগ",
+        footer_faq: "প্রায়শই জিজ্ঞাসিত প্রশ্ন",
+        footer_ai_method: "এআই পদ্ধতি",
+        footer_legal: "আইনি",
+        footer_terms: "শর্তাবলী",
+        footer_privacy: "গোপনীয়তা নীতি",
+        footer_data_protection: "ডেটা সুরক্ষা",
+        footer_accessibility: "অ্যাক্সেসযোগ্যতা",
+        footer_about: "সম্পর্কে",
+        footer_about_section: "আমাদের সম্পর্কে",
+        footer_last_updated: "শেষ আপডেট: ১৬-০৩-২০২৬",
+        footer_copyright: "© ২০২৬ ভারত ফার্ম। ভারতীয় কৃষির ক্ষমতায়ন।",
+        // Bottom Nav
+        nav_home: "হোম",
+        nav_weather: "আবহাওয়া",
+        nav_market: "মার্কেট",
+        nav_about: "সম্পর্কে",
+        nav_crops: "ফসল",
+        nav_wiki: "উইকি",
+        nav_quiz: "কুইজ",
+        nav_calc: "হিসাব",
+        // About Page
+        about_tagline: "স্মার্ট এগ্রিকালচার প্ল্যাটফর্ম",
+        about_heading: "ভারতফার্ম সম্পর্কে",
+        about_desc: "ভারতফার্ম একটি ব্যাপক ওয়েব অ্যাপ্লিকেশন যা ভারতীয় কৃষকদের আধুনিক প্রযুক্তি এবং ডেটা-চালিত অন্তর্দৃষ্টি দিয়ে ক্ষমতায়নের জন্য ডিজাইন করা হয়েছে। আমাদের প্ল্যাটফর্ম কৃষকদের আরও ভালো সিদ্ধান্ত নিতে এবং উৎপাদনশীলতা বাড়াতে সাহায্য করার জন্য ফসল পরিকল্পনা, রোগ নির্ণয়, আবহাওয়া পর্যবেক্ষণ এবং আর্থিক পরিকল্পনার জন্য বুদ্ধিমান সরঞ্জাম সরবরাহ করে।",
+        key_features_title: "প্রধান বৈশিষ্ট্য",
+        ai_assistant_title: "এআই কৃষি সহকারী",
+        ai_assistant_desc: "ব্যক্তিগতকৃত কৃষি বিশেষজ্ঞের পরামর্শের জন্য ২৪/৭ স্মার্ট চ্যাটবট",
+        smart_market_about: "স্মার্ট মার্কেটপ্লেস",
+        smart_market_about_desc: "বীজ, সরঞ্জাম এবং সারের জন্য সমন্বিত ই-কমার্স পোর্টাল",
+        ai_scanner_about: "এআই রোগ স্ক্যানার",
+        ai_scanner_about_desc: "ফসলের স্বাস্থ্য এবং রোগের জন্য উন্নত জেমিনি-চালিত নির্ণয়",
+        weather_monitor_about: "আবহাওয়া পর্যবেক্ষণ",
+        weather_monitor_about_desc: "স্মার্ট সুরক্ষা সতর্কতা সহ রিয়েল-টাইম স্থানীয় আবহাওয়ার ডেটা",
+        cost_calc_about: "খরচ ক্যালকুলেটর",
+        cost_calc_about_desc: "ফসল বিনিয়োগ এবং লাভের জন্য এআই-বর্ধিত আর্থিক পরিকল্পনা",
+        activity_roadmap_about: "কার্যকলাপ রোডম্যাপ",
+        activity_roadmap_about_desc: "অনুকূলিত চাষের জন্য বুদ্ধিমান প্রতিদিনের সময়সূচী",
+        dev_team: "উন্নয়ন দল",
+        team_intro_text: "ভারতফার্ম ভারতীয় কৃষিকে সমর্থন করার জন্য প্রযুক্তির ব্যবহার সম্পর্কে উত্সাহী শিক্ষার্থীদের একটি নিবেদিত দল দ্বারা তৈরি করা হয়েছিল:",
+        lead_dev: "প্রধান বিকাশকারী",
+        full_stack_dev: "ফুল স্ট্যাক ডেভেলপার",
+        backend_dev: "ব্যাকএন্ড ডেভেলপার",
+        frontend_dev: "ফ্রন্টএন্ড ডেভেলপার",
+        connect_btn: "সংযোগ করুন",
+        our_mission: "আমাদের লক্ষ্য",
+        mission_desc: "ঐতিহ্যবাহী চাষাবাদ পদ্ধতি এবং আধুনিক প্রযুক্তির মধ্যে ব্যবধান দূর করা, উন্নত কৃষি সরঞ্জামগুলি ভারতের প্রতিটি কৃষকের কাছে অ্যাক্সেসযোগ্য করে তোলা। আমরা বিশ্বাস করি যে সঠিক তথ্য এবং সরঞ্জামের সাহায্যে, কৃষকরা তাদের ফলন উল্লেখযোগ্যভাবে উন্নত করতে, খরচ কমাতে এবং আরও তথ্যসম্মত সিদ্ধান্ত নিতে পারে।",
+        all_rights: "© ২০২৬ ভারতফার্ম - সর্বস্বত্ব সংরক্ষিত",
+        made_with_love: "ভারতীয় কৃষকদের জন্য ❤ দিয়ে তৈরি",
+        // Schemes Extras
+        scheme_matchmaker_title: "স্কিম ম্যাচমেকার",
+        find_govt_schemes_desc: "আপনি যে সরকারি কৃষি প্রকল্পগুলির জন্য যোগ্য তা খুঁজুন",
+        land_details_title: "জমির বিবরণ",
+        how_much_land: "আপনার কতটুকু চাষযোগ্য জমি আছে? (একরে)",
+        landless_note: "আপনি যদি ভূমিহীন কৃষক বা ভাগচাষী হন তবে 0 লিখুন।",
+        location_step_title: "অবস্থান",
+        crop_info_step_title: "ফসলের তথ্য",
+        primary_crop_q: "আপনার প্রধান ফসল কী? (ঐচ্ছিক)",
+        searching_text: "খোঁজা হচ্ছে...",
+        check_another: "অন্য প্রোফাইল পরীক্ষা করুন",
+        matched_text: "মেলেছে",
+        // Dashboard Extras
+        dash_activity_desc: "সঠিক ফসলের জীবনচক্র এবং হাইপার-লোকাল ডেটার উপর ভিত্তি করে স্মার্ট টাস্ক শিডিউলিং।",
+        open_roadmap_cta: "রোডম্যাপ খুলুন",
+        dash_weather_desc: "আপনার ফলন রক্ষা করতে রিয়েল-টাইম হাইপার-লোকাল আবহাওয়া ট্র্যাকিং।",
+        view_forecast: "পূর্বাভাস দেখুন",
+        dash_wiki_title: "ফসল স্বাস্থ্য উইকি",
+        dash_wiki_desc: "উদ্ভিদের রোগ, কীটপতঙ্গ এবং মাটির স্বাস্থ্যের জন্য এআই-চালিত বিশ্বকোষ।",
+        open_wiki: "উইকি খুলুন",
+        // Session Dashboard
+        current_session: "বর্তমান কৃষি সেশন",
+        session_crop: "ফसल",
+        session_started: "শুরু হয়েছে",
+        session_input_cost: "ইনপুট খরচ",
+        session_revenue: "রাজস্ব",
+        // Quiz
+        loading_question: "প্রশ্ন লোড হচ্ছে..."
     }
 };
 
@@ -778,12 +1387,109 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         // Apply saved language
         currentLanguage = selectedLang;
-        updateLanguage();
+        translatePage();
     }
 });
 
 // ============================================
-// SHOW LANGUAGE MODAL
+// CORE TRANSLATION HELPERS
+// ============================================
+
+/**
+ * Returns the translated string for a given key.
+ * If the key is not found in the current language, falls back to English.
+ * If not found in English, returns the key itself.
+ */
+function t(key) {
+    if (translations[currentLanguage] && translations[currentLanguage][key]) {
+        return translations[currentLanguage][key];
+    }
+    // Fallback to English
+    if (translations['en'] && translations['en'][key]) {
+        return translations['en'][key];
+    }
+    // Final fallback: return the key itself
+    return key;
+}
+
+/**
+ * Scans the DOM for elements with 'data-i18n' attribute
+ * and updates their textContent or placeholder.
+ */
+function translatePage() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translatedText = t(key);
+        
+        // Handle placeholders for input/textarea
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            if (el.type === 'submit' || el.type === 'button') {
+                 el.value = translatedText;
+            } else {
+                 el.placeholder = translatedText;
+            }
+        } 
+        // Handle tooltips or titles
+        else if (el.hasAttribute('title')) {
+            el.setAttribute('title', translatedText);
+        }
+        // Special case for elements containing icons AND text
+        else if (el.children.length > 0 && el.innerHTML.includes('<i class=')) {
+            // Usually, icon is the first child. Let's keep the icon and replace the text node
+            // A simple approach is to extract the icon HTML, then append the text
+            const iconHtml = el.querySelector('i') ? el.querySelector('i').outerHTML : '';
+            // If the element relies on specific internal structure, you might need fine-tuning.
+            // For general cases where it's just <i class="..."></i> Text
+            el.innerHTML = iconHtml + ' ' + translatedText;
+        }
+        // Standard text replacement
+        else {
+            el.textContent = translatedText;
+        }
+    });
+
+    // Notify other dynamic components to refresh their localized content
+    refreshDynamicContent();
+}
+
+/**
+ * Sets the active language, updates local storage, and translates the page.
+ */
+function setLanguage(lang) {
+    if (!translations[lang]) {
+        console.error(`Language ${lang} not supported.`);
+        return;
+    }
+    currentLanguage = lang;
+    localStorage.setItem('bharatfarm_language', lang);
+    
+    // Immediately translate static HTML elements
+    translatePage();
+    
+    // Close modal if open
+    closeLanguageModal();
+}
+
+/**
+ * Calls re-render functions for dynamic sections (e.g. Weather, Roadmap, Marketplace)
+ * that generate HTML on the fly.
+ */
+function refreshDynamicContent() {
+    // Dispatch a custom event that other scripts can listen to
+    const event = new CustomEvent('languageChanged', { detail: { language: currentLanguage } });
+    document.dispatchEvent(event);
+    
+    // Fallback for direct global function calls if they exist to re-render dynamic content
+    if (typeof updateDashboard === 'function') {
+        try { updateDashboard(); } catch (e) {}
+    }
+    if (typeof fetchCrops === 'function') {
+        try { fetchCrops(); } catch (e) {}
+    }
+}
+
+// ============================================
+// SHOW/HIDE LANGUAGE MODAL
 // ============================================
 function showLanguageModal() {
     const modal = document.getElementById('languageModal');
@@ -800,502 +1506,26 @@ function closeLanguageModal() {
 }
 
 // ============================================
-// SELECT LANGUAGE
-// ============================================
-function selectLanguage(lang) {
-    // Save language preference
-    localStorage.setItem('bharatfarm_language', lang);
-    currentLanguage = lang;
-    
-    // Hide modal
-    const modal = document.getElementById('languageModal');
-    if (modal) {
-        modal.classList.remove('active');
-    }
-    
-    // Apply translations
-    updateLanguage();
-    
-
-}
-
-// ============================================
-// UPDATE ALL UI TEXT WITH TRANSLATIONS
-// ============================================
-function updateLanguage() {
-    const t = translations[currentLanguage];
-    
-    // Update Loading Page
-    const loadingSubtitle = document.querySelector('.loading-subtitle');
-    if (loadingSubtitle) loadingSubtitle.textContent = t.loading_subtitle;
-    
-    // Update Login Page
-    const loginTagline = document.querySelector('.login-left p');
-    if (loginTagline) loginTagline.textContent = t.login_tagline;
-    
-    const authTitle = document.getElementById('authTitle');
-    if (authTitle && authTitle.textContent === 'Welcome Back') {
-        authTitle.textContent = t.welcome_back;
-    }
-    
-    const authSubtitle = document.getElementById('authSubtitle');
-    if (authSubtitle && authSubtitle.textContent === 'Login to access your farming dashboard') {
-        authSubtitle.textContent = t.login_subtitle;
-    }
-    
-    // Update form labels (Auth page)
-    updateLabelText('Phone Number', t.phone_number);
-    updateLabelText('Password', t.password);
-    updateLabelText('Full Name', t.full_name);
-    updateLabelText('Confirm Password', t.confirm_password);
-    
-    // Update buttons
-    updateButtonText('Login', t.login, 'fa-sign-in-alt');
-    updateButtonText('Register', t.register, 'fa-user-plus');
-    updateButtonText('Logout', t.logout, 'fa-sign-out-alt');
-    
-    // Update Dashboard
-    const dashboardSubtitle = document.querySelector('.dashboard-hero p');
-    if (dashboardSubtitle) {
-        dashboardSubtitle.textContent = t.dashboard_subtitle;
-    }
-    
-    // Update Subscription Modal
-    const subTitle = document.querySelector('.subscription-header h2');
-    if (subTitle) subTitle.textContent = t.premium_plan_title;
-    const subSub = document.querySelector('.subscription-header p');
-    if (subSub) subSub.textContent = t.premium_plan_subtitle;
-    const highlightNote = document.querySelector('.highlight-note');
-    if (highlightNote) highlightNote.innerHTML = `<i class="fas fa-gift"></i> ${t.premium_free_month}`;
-    
-    // Update stat cards
-    updateStatCard(0, t.weather_status);
-    updateStatCard(1, t.leaf_scanner, t.scan_now, t.detect_disease);
-    updateStatCard(2, t.next_activity, null, t.view_roadmap);
-    updateStatCard(3, t.input_cost, null, t.calculate);
-    updateStatCard(4, t.revenue, null, t.view_details);
-    updateStatCard(5, t.marketplace_title, t.marketplace_label, t.marketplace_status);
-    updateStatCard(6, t.schemes_title_short, t.schemes_check_eligibility, t.schemes_matchmaker);
-    
-    // Update Card Headers
-    updateCardHeader('Quick Tips for Today', t.quick_tips, 'fa-lightbulb');
-    updateCardHeader('Leaf Disease Scanner', t.leaf_disease_scanner, 'fa-leaf');
-    updateCardHeader('Enter Your Location', t.enter_location, 'fa-map-marker-alt');
-    updateCardHeader('Crop Information', t.crop_info, 'fa-seedling');
-    updateCardHeader('Seed & Fertilizer Cost Calculator', t.cost_calculator, 'fa-calculator');
-    updateCardHeader('Cost Breakdown', t.cost_breakdown, 'fa-receipt');
-    updateCardHeader('Revenue Prediction', t.revenue_prediction, 'fa-chart-line');
-    updateCardHeader('Crop Activity Roadmap', t.crop_roadmap, 'fa-road');
-    updateCardHeader('Notifications & Alerts', t.notifications, 'fa-bell');
-    
-    // Update Scanner Section
-    const scannerBox = document.querySelector('.scanner-box');
-    if (scannerBox) {
-        const h3 = scannerBox.querySelector('h3');
-        const p = scannerBox.querySelector('p');
-        if (h3) h3.textContent = t.upload_leaf;
-        if (p) p.textContent = t.click_or_drag;
-    }
-    
-    const analyzeBtn = document.getElementById('analyzeBtn');
-    if (analyzeBtn) {
-        analyzeBtn.innerHTML = `<i class="fas fa-search"></i> ${t.analyze_leaf}`;
-    }
-    
-    const cameraBtn = document.querySelector('.camera-btn');
-    if (cameraBtn) {
-        cameraBtn.innerHTML = `<i class="fas fa-camera"></i> ${t.take_photo}`;
-    }
-    
-    // Update Weather Section
-    const getWeatherBtn = document.querySelector('.location-input button');
-    if (getWeatherBtn) {
-        getWeatherBtn.innerHTML = `<i class="fas fa-search"></i> ${t.get_weather}`;
-    }
-    
-    // Update weather detail cards
-    updateWeatherLabel('Rain Probability', t.rain_probability);
-    updateWeatherLabel('Humidity', t.humidity);
-    updateWeatherLabel('Wind Speed', t.wind);
-    updateWeatherLabel('Visibility', t.visibility);
-    
-    // Update Calculator Section
-    updateLabelText('Select Crop', t.select_crop);
-    updateLabelText('Select Land Unit', t.land_unit);
-    updateLabelText('Land Size', t.land_size);
-    
-    const calcBtn = document.querySelector('#calculator .btn-primary');
-    if (calcBtn && calcBtn.textContent.includes('Calculate')) {
-        calcBtn.innerHTML = `<i class="fas fa-calculator"></i> ${t.calculate}`;
-    }
-
-    // Update Free Version Card
-    const freeHeader = document.querySelector('.pricing-card.free h3');
-    if (freeHeader) freeHeader.textContent = t.free_version;
-    updateElementHTML('freeDashboard', `<i class="fas fa-check"></i> ${t.free_dashboard}`);
-    updateElementHTML('freeWeather', `<i class="fas fa-check"></i> ${t.free_weather}`);
-    updateElementHTML('freeCalculator', `<i class="fas fa-check"></i> ${t.free_calculator}`);
-    updateElementHTML('freeMarketplace', `<i class="fas fa-check"></i> ${t.free_marketplace}`);
-    updateElementHTML('lockedLeafScanner', `<i class="fas fa-times"></i> ${t.premium_leaf_scanner}`);
-    updateElementHTML('lockedRoadmap', `<i class="fas fa-times"></i> ${t.free_roadmap}`);
-    updateElementHTML('lockedSupport', `<i class="fas fa-times"></i> ${t.free_support}`);
-
-    // Update Premium Features List
-    updateElementHTML('premiumLeafScanner', `<i class="fas fa-check-circle"></i> <strong>${t.premium_leaf_scanner}</strong>`);
-    updateElementHTML('premiumRoadmap', `<i class="fas fa-check-circle"></i> <strong>${t.premium_roadmap}</strong>`);
-    updateElementHTML('premiumMarketplace', `<i class="fas fa-check-circle"></i> <strong>${t.premium_marketplace}</strong>`);
-    updateElementHTML('premiumTrade', `<i class="fas fa-check"></i> ${t.premium_trade}`);
-    updateElementHTML('premiumCommission', `<i class="fas fa-check"></i> ${t.premium_commission}`);
-    updateElementHTML('premiumWeather', `<i class="fas fa-check"></i> ${t.premium_weather}`);
-    updateElementHTML('premiumRevenue', `<i class="fas fa-check"></i> ${t.premium_revenue}`);
-    updateElementHTML('premiumSupport', `<i class="fas fa-check"></i> ${t.premium_support}`);
-    updateElementHTML('premiumAdFree', `<i class="fas fa-check"></i> ${t.premium_ad_free}`);
-    
-    // Update tips
-    updateTips(t);
-    
-    // Update Crop Section
-    updateCropSection(t);
-    
-    // Update Schemes Section
-    updateSchemesSection(t);
-    
-    // Update New Dashboard Redesign Section
-    updateDashboardSection(t);
-    
-    // Update Marketplace Section
-    updateMarketplaceSection(t);
-
-    // Update Header Components
-    updateElementHTML('headerPremiumLabel', t.header_premium);
-    updateElementHTML('headerLogoutLabel', t.header_logout);
-}
-
-// ============================================
-// HELPER FUNCTIONS
-// ============================================
-
-function updateLabelText(oldText, newText) {
-    const labels = document.querySelectorAll('label');
-    labels.forEach(label => {
-        if (label.textContent.trim() === oldText) {
-            label.textContent = newText;
-        }
-    });
-}
-
-function updateButtonText(oldText, newText, iconClass) {
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        const text = button.textContent.trim();
-        if (text === oldText || text.includes(oldText)) {
-            if (iconClass) {
-                button.innerHTML = `<i class="fas ${iconClass}"></i> ${newText}`;
-            } else {
-                button.textContent = newText;
-            }
-        }
-    });
-}
-
-function updateStatCard(index, title, valueText, status) {
-    const statCards = document.querySelectorAll('.stat-card');
-    if (statCards[index]) {
-        const h3 = statCards[index].querySelector('h3');
-        if (h3 && title) h3.textContent = title;
-        
-        if (valueText) {
-            const valueEl = statCards[index].querySelector('.value');
-            if (valueEl) valueEl.textContent = valueText;
-        }
-        
-        if (status) {
-            const statusEl = statCards[index].querySelector('.status');
-            if (statusEl) statusEl.textContent = status;
-        }
-    }
-}
-
-function updateElementHTML(id, html) {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = html;
-}
-
-function updateCardHeader(oldText, newText, iconClass) {
-    const headers = document.querySelectorAll('.card-header h2');
-    headers.forEach(header => {
-        if (header.textContent.includes(oldText)) {
-            if (iconClass) {
-                const parent = header.parentElement;
-                parent.innerHTML = `<i class="fas ${iconClass}"></i><h2>${newText}</h2>`;
-            } else {
-                header.textContent = newText;
-            }
-        }
-    });
-}
-
-function updateWeatherLabel(oldText, newText) {
-    const labels = document.querySelectorAll('.weather-detail-card .label');
-    labels.forEach(label => {
-        if (label.textContent === oldText) {
-            label.textContent = newText;
-        }
-    });
-}
-
-function updateTips(t) {
-    const tipsDiv = document.getElementById('dashboardTips');
-    if (tipsDiv) {
-        tipsDiv.innerHTML = `
-            <p><strong><i class="fas fa-check-circle" style="color: var(--success);"></i> ${t.tip_morning.split(':')[0]}:</strong> ${t.tip_morning.split(':')[1]}</p>
-            <p style="margin-top: var(--spacing-sm);"><strong><i class="fas fa-check-circle" style="color: var(--success);"></i> ${t.tip_afternoon.split(':')[0]}:</strong> ${t.tip_afternoon.split(':')[1]}</p>
-            <p style="margin-top: var(--spacing-sm);"><strong><i class="fas fa-check-circle" style="color: var(--success);"></i> ${t.tip_evening.split(':')[0]}:</strong> ${t.tip_evening.split(':')[1]}</p>
-        `;
-    }
-}
-
-// ============================================
-// UPDATE CROP SECTION WITH TRANSLATIONS
-// ============================================
-function updateCropSection(t) {
-    // Update category filter buttons
-    const catMap = { all: t.cat_all, cereal: t.cat_cereal, vegetable: t.cat_vegetable, fruit: t.cat_fruit, oilseed: t.cat_oilseed };
-    document.querySelectorAll('.category-filters .filter-btn').forEach(btn => {
-        const cat = btn.getAttribute('data-category');
-        if (cat && catMap[cat]) btn.textContent = catMap[cat];
-    });
-
-    // Update search placeholder
-    const searchInput = document.getElementById('cropSearchInput');
-    if (searchInput) searchInput.placeholder = t.crop_search_placeholder;
-
-    // Update crop section description
-    const cropDesc = document.querySelector('#crops .card > p');
-    if (cropDesc) cropDesc.textContent = t.crop_search_desc;
-
-    // Update loading text
-    const cropLoading = document.querySelector('#cropLoading p');
-    if (cropLoading) cropLoading.textContent = t.searching_crops;
-
-    // Update empty state text
-    const cropEmpty = document.querySelector('#cropEmptyState .empty-state p');
-    if (cropEmpty) cropEmpty.textContent = t.no_crops_found;
-
-    // Update pagination buttons
-    const prevBtn = document.getElementById('prevPageBtn');
-    const nextBtn = document.getElementById('nextPageBtn');
-    if (prevBtn) prevBtn.textContent = t.previous;
-    if (nextBtn) nextBtn.textContent = t.next;
-
-    // Update crop info detail labels (index-based since order is fixed)
-    const infoItems = document.querySelectorAll('#cropInfo .info-item h4');
-    const labelOrder = [t.scientific_name, t.climate_requirement, t.soil_type, t.total_duration, t.water_requirement, t.harvesting_period];
-    infoItems.forEach((h4, idx) => {
-        if (labelOrder[idx]) h4.textContent = labelOrder[idx];
-    });
-
-    // Update AI insights label
-    const aiLabel = document.querySelector('#cropAIInsights > div:first-child');
-    if (aiLabel) aiLabel.innerHTML = `<i class="fas fa-robot"></i> ${t.ai_insights}`;
-
-    // Update View Roadmap and Calculate Costs buttons in crop info
-    const cropBtns = document.querySelectorAll('#cropInfo .mt-lg button');
-    if (cropBtns[0]) cropBtns[0].innerHTML = `<i class="fas fa-road"></i> ${t.view_roadmap_btn}`;
-    if (cropBtns[1]) cropBtns[1].innerHTML = `<i class="fas fa-calculator"></i> ${t.calculate_costs_btn}`;
-
-    // Re-render crop cards with translated names
-    if (typeof fetchCrops === 'function') {
-        fetchCrops();
-    }
-}
-
-// ============================================
-// UPDATE SCHEMES SECTION WITH TRANSLATIONS
-// ============================================
-function updateSchemesSection(t) {
-    if (!t.schemes_title) return; // keys not loaded yet
-
-    // Header
-    const schTitle = document.getElementById('schemesPageTitle');
-    if (schTitle) schTitle.textContent = t.schemes_title;
-    const schSub = document.getElementById('schemesPageSubtitle');
-    if (schSub) schSub.textContent = t.schemes_subtitle;
-
-    // Step labels
-    const st1Label = document.getElementById('schemesStep1Label');
-    if (st1Label) st1Label.textContent = t.schemes_step1_label;
-    const st1Input = document.getElementById('schemeLandSize');
-    if (st1Input) st1Input.placeholder = t.schemes_step1_placeholder;
-
-    const st2Label = document.getElementById('schemesStep2Label');
-    if (st2Label) st2Label.textContent = t.schemes_step2_label;
-    const st2Opt = document.getElementById('schemesStateDefaultOpt');
-    if (st2Opt) st2Opt.textContent = t.schemes_step2_placeholder;
-
-    const st3Label = document.getElementById('schemesStep3Label');
-    if (st3Label) st3Label.textContent = t.schemes_step3_label;
-    const st3Input = document.getElementById('schemeCropSelect');
-    if (st3Input) st3Input.placeholder = t.schemes_step3_placeholder;
-
-    // Nav buttons
-    const prevBtns = document.querySelectorAll('.schemes-prev-btn');
-    prevBtns.forEach(b => b.textContent = t.schemes_prev);
-    const nextBtns = document.querySelectorAll('.schemes-next-btn');
-    nextBtns.forEach(b => { b.innerHTML = `${t.schemes_next} <i class="fas fa-arrow-right"></i>`; });
-    const findBtn = document.getElementById('schemesSubmitBtn');
-    if (findBtn) findBtn.innerHTML = `<i class="fas fa-search"></i> ${t.schemes_find}`;
-
-    // Results header
-    const eligibleTitle = document.getElementById('schemesEligibleTitle');
-    if (eligibleTitle) eligibleTitle.textContent = t.schemes_eligible;
-    const backBtn = document.getElementById('schemesBackBtn');
-    if (backBtn) backBtn.innerHTML = `<i class="fas fa-arrow-left"></i> ${t.schemes_back}`;
-
-    // Re-render matched schemes with new language (if results are visible)
-    const resultsEl = document.getElementById('schemesResults');
-    if (resultsEl && resultsEl.classList.contains('active')) {
-        if (typeof matchSchemes === 'function') matchSchemes();
-    }
-}
-
-// ============================================
-// UPDATE NEW DASHBOARD REDESIGN SECTION
-// ============================================
-function updateDashboardSection(t) {
-    if (!t.hero_title) return;
-
-    // Hero Section
-    updateElementHTML('dashHeroTitle', t.hero_title);
-    updateElementHTML('dashHeroAccent', t.hero_accent);
-    
-    // For hero_sub, we need to be careful not to overwrite the name if it's already set
-    const heroSub = document.getElementById('dashHeroSub');
-    if (heroSub) {
-        const currentName = document.getElementById('welcomeName')?.textContent || 'Farmer';
-        heroSub.innerHTML = t.hero_sub;
-        const newWelcomeName = document.getElementById('welcomeName');
-        if (newWelcomeName) newWelcomeName.textContent = currentName;
-    }
-    
-    updateButtonTextByID('dashHeroBtnStart', t.hero_get_started, 'fa-seedling');
-    updateButtonTextByID('dashHeroBtnExplore', t.hero_explore, 'fa-leaf');
-
-    // Floating Cards
-    updateElementHTML('dashFloatWeatherLabel', t.float_weather_label);
-    updateElementHTML('dashFloatActivityLabel', t.float_activity_label);
-    const activityStatus = document.getElementById('dashNextActivityStatus');
-    if (activityStatus) activityStatus.textContent = t.float_roadmap_status;
-
-    // Section Header
-    updateElementHTML('dashEcosystemTag', t.ecosystem_tag);
-    updateElementHTML('dashEcosystemTitle', t.ecosystem_title);
-
-    // Feature Grid
-    updateElementHTML('dashKbTitle', t.kb_title);
-    updateElementHTML('dashKbDesc', t.kb_desc);
-    updateElementHTML('dashKbCtaLabel', ` ${t.kb_cta}`);
-
-    updateElementHTML('dashLsTitle', t.ls_title);
-    updateElementHTML('dashLsDesc', t.ls_desc);
-    updateElementHTML('dashLsCtaLabel', t.ls_cta);
-
-    updateElementHTML('dashSmTitle', t.sm_title);
-    updateElementHTML('dashSmDesc', t.sm_desc);
-    updateElementHTML('dashSmCtaLabel', t.sm_cta);
-
-    updateElementHTML('dashHaTitle', t.ha_title);
-    updateElementHTML('dashHaDesc', t.ha_desc);
-    updateElementHTML('dashHaInputLabel', t.ha_input_label);
-    updateElementHTML('dashHaRevenueLabel', t.ha_revenue_label);
-
-    updateElementHTML('dashGsTitle', t.gs_title);
-    updateElementHTML('dashGsDesc', t.gs_desc);
-    updateElementHTML('dashGsCtaLabel', t.gs_cta);
-
-    // Impact Section
-    updateElementHTML('dashImpactTitle', t.impact_title);
-    updateElementHTML('dashImpactDesc', t.impact_desc);
-    updateElementHTML('dashImpactStat1Title', t.impact_stat1_title);
-    updateElementHTML('dashImpactStat1Desc', t.impact_stat1_desc);
-    updateElementHTML('dashImpactStat2Title', t.impact_stat2_title);
-    updateElementHTML('dashImpactStat2Desc', t.impact_stat2_desc);
-
-    // Gamification Section
-    updateElementHTML('gami-xp-label', t.gami_xp);
-    const gamiBtn = document.getElementById('gami-daily-btn');
-    if(gamiBtn) gamiBtn.textContent = t.gami_take_quiz;
-    const gamiBtnLvl = document.getElementById('gami-level');
-    if(gamiBtnLvl) gamiBtnLvl.innerHTML = `<i class="fas fa-medal"></i> ${t.gami_lvl} ${window.bfGamification ? window.bfGamification.state.level : 1}`;
-}
-
-function updateButtonTextByID(id, text, iconClass) {
-    const btn = document.getElementById(id);
-    if (btn) {
-        if (iconClass) {
-            btn.innerHTML = `<i class="fas ${iconClass}"></i> ${text}`;
-        } else {
-            btn.textContent = text;
-        }
-    }
-}
-
-// ============================================
-// UPDATE MARKETPLACE SECTION
-// ============================================
-function updateMarketplaceSection(t) {
-    if (!t.mk_browse) return;
-
-    // Marketplace Header/Tabs
-    updateElementHTML('mkTabBrowseLabel', t.mk_browse);
-    updateElementHTML('mkTabSellLabel', t.mk_sell);
-    updateElementHTML('mkSwitchRoleLabel', t.mk_switch_role);
-    
-    const mkRoleLabel = document.getElementById('mkRoleLabel');
-    if (mkRoleLabel) {
-        if (mkRoleLabel.textContent === 'Buyer') mkRoleLabel.textContent = t.mk_role_buyer;
-        else if (mkRoleLabel.textContent === 'Farmer') mkRoleLabel.textContent = t.mk_role_farmer;
-    }
-
-    // Search
-    const mkSearch = document.getElementById('marketplaceSearch');
-    if (mkSearch) mkSearch.placeholder = t.mk_search_placeholder;
-
-    // Add Listing Form
-    updateElementHTML('mkAddListingTitle', t.mk_add_listing);
-    updateElementHTML('mkLabelProductName', t.mk_product_name);
-    const prodInput = document.getElementById('sellProductName');
-    if (prodInput) prodInput.placeholder = t.mk_crop_placeholder;
-
-    updateElementHTML('mkLabelCategory', t.mk_category);
-    updateElementHTML('optVeg', t.mk_cat_veg);
-    updateElementHTML('optFruits', t.mk_cat_fruit);
-    updateElementHTML('optGrains', t.mk_cat_grain);
-    updateElementHTML('optSeeds', t.mk_cat_seed);
-    updateElementHTML('optMachinery', t.mk_cat_machinery);
-
-    updateElementHTML('mkLabelPrice', t.mk_price);
-    updateElementHTML('mkLabelUnit', t.mk_unit);
-    updateElementHTML('unitKg', t.unit_kg);
-    updateElementHTML('unitQuintal', t.unit_quintal);
-    updateElementHTML('unitPiece', t.unit_piece);
-    updateElementHTML('unitTon', t.unit_ton);
-
-    updateElementHTML('mkLabelQuantity', t.mk_quantity);
-    updateElementHTML('mkLabelState', t.mk_state);
-    updateElementHTML('mkLabelDistrict', t.mk_district);
-    updateElementHTML('mkLabelLocality', t.mk_locality);
-    updateElementHTML('mkSubmitBtn', t.mk_submit_listing);
-}
-
-// ============================================
 // MAKE FUNCTIONS GLOBALLY ACCESSIBLE
 // ============================================
-window.selectLanguage = selectLanguage;
-window.showLanguageModal = showLanguageModal;
-window.closeLanguageModal = closeLanguageModal;
-window.updateLanguage = updateLanguage;
-window.updateSchemesSection = updateSchemesSection;
+window.t = t;
+window.translatePage = translatePage;
+window.setLanguage = setLanguage;
 window.currentLanguage = currentLanguage;
 window.translations = translations;
+window.selectLanguage = setLanguage; // Alias for backward compatibility with onclick="selectLanguage('bn')"
+window.showLanguageModal = showLanguageModal;
+window.closeLanguageModal = closeLanguageModal;
+
+// Re-render Dynamic Content on Language Change
+document.addEventListener('languageChanged', () => {
+    // Re-render marketplace or other sections if needed
+    if (typeof renderWikiGrid === 'function' && typeof wikiData !== 'undefined') {
+        try { renderWikiGrid(wikiData); } catch (e) {}
+    }
+    // Update weather UI text
+    if (typeof updateWeatherUI === 'function' && typeof userLocationName !== 'undefined') {
+        try { updateWeatherUI(userLocationName); } catch(e) {}
+    }
+});
 
