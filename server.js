@@ -9,6 +9,7 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const PORT = process.env.PORT || 5000;
+const DESIRED_PORT = parseInt(PORT, 10) || 5000;
 
 // ── API Key (move to a .env file for production) ──────────────────────────────
 // To use .env: npm install dotenv  →  add require('dotenv').config(); at top
@@ -553,10 +554,57 @@ Do not include any markdown formatting like \`\`\`json in your response. Just re
     });
 });
 
-server.listen(PORT, () => {
+function onStarted(port) {
     console.log(`\n===========================================`);
     console.log(`🚀 BharatFarm Backend Server Running`);
-    console.log(`👉 Open: http://localhost:${PORT}`);
-    console.log(`🤖 KrishiBot API: POST http://localhost:${PORT}/api/chat`);
+    console.log(`👉 Open: http://localhost:${port}`);
+    console.log(`🤖 KrishiBot API: POST http://localhost:${port}/api/chat`);
     console.log(`===========================================\n`);
+}
+
+// Try listening on a port, and if it's in use, increment until a free port is found.
+const triedPorts = new Set();
+function tryListen(port, maxAttempts = 20) {
+    if (triedPorts.has(port)) {
+        console.error(`Already attempted port ${port} — aborting to avoid loop.`);
+        process.exit(1);
+    }
+    triedPorts.add(port);
+
+    server.once('listening', () => {
+        // Remove any pending 'error' listeners for cleanliness
+        server.removeAllListeners('error');
+        onStarted(port);
+    });
+
+    server.once('error', (err) => {
+        server.removeAllListeners('listening');
+        if (err && err.code === 'EADDRINUSE') {
+            console.error(`Error: listen EADDRINUSE: address already in use ::${port}`);
+            const next = port + 1;
+            if (triedPorts.size >= maxAttempts) {
+                console.error(`Reached max port attempts (${maxAttempts}). Exiting.`);
+                process.exit(1);
+            }
+            console.log(`Trying fallback port ${next}...`);
+            tryListen(next, maxAttempts);
+            return;
+        }
+        console.error('Server error:', err);
+        process.exit(1);
+    });
+
+    server.listen(port);
+}
+
+tryListen(DESIRED_PORT);
+
+// Graceful shutdown on Ctrl+C
+process.on('SIGINT', () => {
+    console.log('\nReceived SIGINT, shutting down server...');
+    try {
+        server.close(() => process.exit(0));
+    } catch (e) {
+        process.exit(0);
+    }
 });
