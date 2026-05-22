@@ -85,11 +85,22 @@ async function initiateOTP(action, email, formData) {
     if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending OTP…'; }
 
     try {
-        const res  = await fetch('/api/otp/send', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, action })
-        });
+        // 15-second timeout — prevents infinite 'Sending OTP...' freeze
+        const controller = new AbortController();
+        const timeoutId  = setTimeout(() => controller.abort(), 15000);
+
+        let res;
+        try {
+            res = await fetch('/api/otp/send', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ email, action }),
+                signal:  controller.signal
+            });
+        } finally {
+            clearTimeout(timeoutId);
+        }
+
         const data = await res.json();
 
         if (!data.success) {
@@ -105,7 +116,11 @@ async function initiateOTP(action, email, formData) {
 
     } catch (err) {
         const errId = `${action}Error`;
-        showAuthError(errId, 'Server error. Make sure the server is running and SMTP is configured in .env');
+        if (err.name === 'AbortError') {
+            showAuthError(errId, '⏱️ Request timed out. The server may be starting up — please try again in a moment.');
+        } else {
+            showAuthError(errId, '❌ Cannot reach server. Make sure the backend is running locally (npm run dev).');
+        }
     } finally {
         if (btn) {
             btn.disabled = false;
@@ -259,11 +274,21 @@ async function verifyOTPAndProceed() {
 
     try {
         // 1. Verify & Authenticate
-        const vRes  = await fetch('/api/otp/verify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, otp, action, ...formData })
-        });
+        const vController = new AbortController();
+        const vTimeoutId  = setTimeout(() => vController.abort(), 15000);
+
+        let vRes;
+        try {
+            vRes = await fetch('/api/otp/verify', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ email, otp, action, ...formData }),
+                signal:  vController.signal
+            });
+        } finally {
+            clearTimeout(vTimeoutId);
+        }
+
         const vData = await vRes.json();
 
         if (!vData.success) {
@@ -283,7 +308,11 @@ async function verifyOTPAndProceed() {
         showLoadingPage();
 
     } catch (err) {
-        showAuthError('otpError', 'Server error during verification. Please try again.');
+        if (err.name === 'AbortError') {
+            showAuthError('otpError', '⏱️ Verification timed out. Please try again.');
+        } else {
+            showAuthError('otpError', '❌ Server error during verification. Please try again.');
+        }
     }
 
     if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify & Continue'; }
