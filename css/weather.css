@@ -153,3 +153,117 @@
     outline: none;
     border-color: var(--primary);
 }
+
+.weather-refresh-btn {
+    min-width: 120px;
+}
+
+.weather-fade {
+    transition: opacity 220ms ease-in-out, transform 220ms ease-in-out;
+}
+
+.weather-loading-state {
+    transform: translateY(2px);
+}
+
+.weather-error-banner {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.35);
+    color: #b03a2e;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .weather-error-banner {
+    color: #ffb5ad;
+    background: rgba(231, 76, 60, 0.15);
+    border-color: rgba(231, 76, 60, 0.45);
+}
+
+.weather-offline-note {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(243, 156, 18, 0.14);
+    border: 1px solid rgba(243, 156, 18, 0.35);
+    color: #8a5a00;
+    font-size: 0.88rem;
+}
+
+[data-theme="dark"] .weather-offline-note {
+    color: #ffd37a;
+    background: rgba(243, 156, 18, 0.2);
+    border-color: rgba(243, 156, 18, 0.45);
+}
+
+#weatherLoading {
+    margin-top: var(--spacing-md);
+}
+
+.weather-skeleton-main {
+    width: 100%;
+    height: 180px;
+    border-radius: 16px;
+    margin-bottom: var(--spacing-md);
+    background: #dfe6e9;
+}
+
+.weather-skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--spacing-md);
+}
+
+.weather-skeleton-card {
+    height: 92px;
+    border-radius: 12px;
+    background: #dfe6e9;
+}
+
+[data-theme="dark"] .weather-skeleton-main,
+[data-theme="dark"] .weather-skeleton-card {
+    background: #243447;
+}
+
+.weather-skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.weather-skeleton-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    animation: weatherShimmer 1.2s infinite;
+}
+
+[data-theme="dark"] .weather-skeleton-shimmer::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+@keyframes weatherShimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@media (max-width: 768px) {
+    .weather-skeleton-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .weather-skeleton-main {
+        height: 150px;
+    }
+
+    .weather-refresh-btn {
+        min-width: 100px;
+    }
+}

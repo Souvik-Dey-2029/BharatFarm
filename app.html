@@ -1413,11 +1413,24 @@
                 <button class="btn btn-primary btn-lg" onclick="fetchWeather()" style="border-radius: 8px;">
                     <i class="fas fa-search"></i> Get Weather
                 </button>
+                <button id="weatherRefreshBtn" class="btn btn-outline btn-lg weather-refresh-btn"
+                    onclick="fetchWeather({ force: true })" style="border-radius: 8px;">
+                    <i class="fas fa-rotate-right"></i> Refresh
+                </button>
             </div>
+            <p id="weatherOfflineNote" class="weather-offline-note hidden"><i class="fas fa-wifi"></i> You are offline.
+                Cached weather will be shown when available.</p>
+            <p id="weatherError" class="weather-error-banner hidden"></p>
         </div>
 
         <div id="weatherLoading" class="hidden">
-            <div class="spinner"></div>
+            <div class="weather-skeleton-main weather-skeleton-shimmer"></div>
+            <div class="weather-skeleton-grid">
+                <div class="weather-skeleton-card weather-skeleton-shimmer"></div>
+                <div class="weather-skeleton-card weather-skeleton-shimmer"></div>
+                <div class="weather-skeleton-card weather-skeleton-shimmer"></div>
+                <div class="weather-skeleton-card weather-skeleton-shimmer"></div>
+            </div>
             <p class="text-center">Fetching weather data...</p>
         </div>
 
