@@ -63,7 +63,10 @@ const EMAIL_PASS = (process.env.EMAIL_PASS || '').trim();
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
-    auth: { user: EMAIL_USER, pass: EMAIL_PASS }
+    auth: { user: EMAIL_USER, pass: EMAIL_PASS },
+    connectionTimeout: 10000,   // 10s — fail fast if SMTP unreachable
+    greetingTimeout:  10000,   // 10s — fail if server doesn't greet
+    socketTimeout:    15000    // 15s — fail if send stalls mid-way
 });
 
 transporter.verify((err) => {
