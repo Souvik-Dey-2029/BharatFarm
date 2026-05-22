@@ -8,7 +8,10 @@ let calculatedCosts = null;
 function setLandUnit(unit) {
     currentLandUnit = unit;
     document.querySelectorAll('.land-unit-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    const activeBtn = document.querySelector(`.land-unit-btn[onclick*="'${unit}'"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
 
     const labels = { acre: 'Acres', bigha: 'Bigha', katha: 'Katha' };
     document.getElementById('landUnitLabel').textContent = labels[unit];

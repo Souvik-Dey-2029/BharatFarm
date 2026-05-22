@@ -377,7 +377,7 @@ function renderMarketplaceProducts() {
                             <i class="fas fa-cart-plus"></i> Add to Cart
                         </button>
                         <div style="display:flex; flex-direction:column; gap: 8px; width:100%; animation: fadeIn 0.4s ease-out; margin-top: 5px;">
-                            <a href="https://wa.me/${p.whatsapp || p.contact.replace(/\D/g, '')}" target="_blank" style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 12px; padding: 12px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);">
+                            <a href="https://wa.me/${p.whatsapp || (p.contact ? p.contact.replace(/\D/g, '') : '')}" target="_blank" style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 12px; padding: 12px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);">
                                 <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> WhatsApp Chat
                             </a>
                             <a href="tel:${p.contact}" style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; border-radius: 12px; padding: 12px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);">

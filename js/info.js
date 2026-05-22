@@ -105,7 +105,7 @@ const infoContent = {
 
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const pageKey = urlParams.get('page') || 'guide';
+    const pageKey = urlParams.get('page') || 'about';
     
     const titleEl = document.getElementById('infoTitle');
     const labelEl = document.getElementById('infoLabel');

@@ -181,7 +181,7 @@ function placeOrder() {
     // Group items by farmer
     const byFarmer = {};
     cartState.items.forEach(i => {
-        const key = i.product.whatsapp || i.product.contact.replace(/\D/g, '');
+        const key = i.product.whatsapp || (i.product.contact ? i.product.contact.replace(/\D/g, '') : '');
         if (!byFarmer[key]) byFarmer[key] = { farmer: i.product.farmerName, location: i.product.location, items: [] };
         byFarmer[key].items.push(i);
     });

@@ -6,8 +6,9 @@ let currentUser = null;
 
 function switchAuthTab(tab) {
     document.querySelectorAll('.auth-tabs button').forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) {
-        event.target.classList.add('active');
+    const activeBtn = document.querySelector(`.auth-tabs button[onclick*="'${tab}'"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
     }
 
     if (tab === 'login') {

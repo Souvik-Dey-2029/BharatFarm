@@ -105,8 +105,8 @@ const server = http.createServer(async (req, res) => {
                 const systemNote = `You are KrishiBot, a friendly AI for Indian farmers on BharatFarm. Respond in ${language}. Keep answers very short (2-3 sentences max) as they will be read aloud.`;
 
                 const messages = history.slice(-6).map(msg => ({
-                    role: msg.role === 'ai' ? 'assistant' : 'user',
-                    content: msg.text
+                    role: (msg.role === 'ai' || msg.role === 'assistant') ? 'assistant' : 'user',
+                    content: msg.content || msg.text || ''
                 }));
 
                 messages.unshift({
@@ -524,10 +524,71 @@ Do not include any markdown formatting like \`\`\`json in your response. Just re
         return;
     }
 
+    // ── GET /api/unsplash ──────────────────────────────────────────────────────
+    if (req.url.startsWith('/api/unsplash') && req.method === 'GET') {
+        const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
+        const query = parsedUrl.searchParams.get('query');
+        const apiKey = process.env.UNSPLASH_API_KEY;
+
+        if (!apiKey) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Unsplash API Key not configured' }));
+            return;
+        }
+
+        try {
+            const r = await fetch(
+                `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&client_id=${apiKey}`
+            );
+            const data = await r.json();
+            res.writeHead(r.status, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(data));
+        } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to fetch from Unsplash' }));
+        }
+        return;
+    }
+
+    // ── GET /api/pexels ────────────────────────────────────────────────────────
+    if (req.url.startsWith('/api/pexels') && req.method === 'GET') {
+        const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
+        const query = parsedUrl.searchParams.get('query');
+        const apiKey = process.env.PEXELS_API_KEY;
+
+        if (!apiKey) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Pexels API Key not configured' }));
+            return;
+        }
+
+        try {
+            const r = await fetch(
+                `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&page=1&per_page=1`,
+                { headers: { 'Authorization': apiKey } }
+            );
+            const data = await r.json();
+            res.writeHead(r.status, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(data));
+        } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Failed to fetch from Pexels' }));
+        }
+        return;
+    }
+
     // ── Static file serving ────────────────────────────────────────────────────
-    let filePath = '.' + req.url;
-    if (filePath === './') filePath = './index.html';
-    filePath = filePath.split('?')[0]; // strip query params
+    const requestPath = req.url.split('?')[0]; // strip query params
+    
+    // Normalize and resolve path to prevent directory traversal
+    let filePath = path.join(__dirname, requestPath === '/' ? '/index.html' : requestPath);
+    
+    // Security check: Ensure the resolved path is within the project directory
+    if (!filePath.startsWith(__dirname)) {
+        res.writeHead(403);
+        res.end('403 Forbidden');
+        return;
+    }
 
     const ext = String(path.extname(filePath)).toLowerCase();
     const mimeTypes = {

@@ -357,7 +357,10 @@ function filterActivities(type) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    event.target.classList.add('active');
+    const activeBtn = document.querySelector(`.filter-btn[onclick*="'${type}'"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
 
     // Display filtered activities
     displayActivities(type);
