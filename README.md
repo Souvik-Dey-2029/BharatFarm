@@ -213,10 +213,10 @@ By adopting the BharatFarm ecosystem, a typical rural farming community can expe
 
 | Developer | Role | Profile |
 | :--- | :--- | :--- |
-| **Souvik Dey** | Lead Developer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/souvik-dey-400497366/) |
-| **Partha Sarathi Sarkar**| Prompt Engineer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/partha-sarathi-sarkar-7385a8367/) |
-| **Samrat Chatterjee** | AI Integration Architect | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/samrat-chatterjee-2aa543368/) |
-| **Snehasis Chakroborty**| Prompt Engineer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/snehasis-chakraborty-2b68823a6/) |
+| **Souvik Dey** | Lead Developer, Project Structure & UI Polishing | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/souvik-dey-400497366/) |
+| **Partha Sarathi Sarkar**| Frontend Developer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/partha-sarathi-sarkar-7385a8367/) |
+| **Samrat Chatterjee** | Chatbot Integration | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/samrat-chatterjee-2aa543368/) |
+| **Snehasis Chakroborty**| Idea Conceptualization & Developer | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/snehasis-chakraborty-2b68823a6/) |
 
 ---
 
