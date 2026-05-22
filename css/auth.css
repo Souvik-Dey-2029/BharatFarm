@@ -279,3 +279,282 @@
 .login-box .btn:active {
     transform: translateY(-1px);
 }
+/* ============================================================
+   OTP AUTHENTICATION STYLES
+   BharatFarm — Production SMS OTP System
+   ============================================================ */
+
+/* ── Error / Success messages ─────────────────────────────── */
+.auth-message {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+    display: none;
+    line-height: 1.4;
+}
+.auth-message--error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #dc2626;
+}
+.auth-message--success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    color: #16a34a;
+}
+[data-theme="dark"] .auth-message--error  { color: #fca5a5; }
+[data-theme="dark"] .auth-message--success { color: #86efac; }
+
+/* ── Field hint (small caption below inputs) ──────────────── */
+.field-hint {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    padding-left: 2px;
+}
+
+/* ── Input with eye-toggle button ────────────────────────── */
+.input-icon--with-toggle {
+    position: relative;
+}
+.input-icon--with-toggle input {
+    padding-right: 42px !important;
+}
+.pw-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.2s;
+}
+.pw-toggle:hover { color: var(--primary); }
+
+/* ── Select inside input-icon ─────────────────────────────── */
+.input-icon--select select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.input-icon--select::after {
+    content: '\f107';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-muted);
+}
+[data-theme="dark"] .input-icon--select select { background: transparent; }
+
+/* ── Security badge on left panel ────────────────────────── */
+.auth-security-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    padding: 8px 18px;
+    margin-top: var(--spacing-lg);
+    font-size: 0.85rem;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+.auth-security-badge i { font-size: 1rem; }
+
+/* ── OTP Step container ───────────────────────────────────── */
+#otpStep {
+    animation: fadeInUp 0.35s ease-out;
+}
+.otp-step-enter {
+    animation: otpSlideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes otpSlideIn {
+    from { opacity: 0; transform: translateY(18px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ── OTP header ───────────────────────────────────────────── */
+.otp-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+.otp-phone-icon {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+.otp-phone-icon i {
+    font-size: 3rem;
+    color: var(--primary);
+}
+.otp-ping {
+    position: absolute;
+    top: 2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    background: #22c55e;
+    border-radius: 50%;
+    border: 2px solid var(--bg-primary);
+    animation: ping 1.4s ease-in-out infinite;
+}
+@keyframes ping {
+    0%, 100% { transform: scale(1);   opacity: 1;   }
+    50%       { transform: scale(1.5); opacity: 0.6; }
+}
+.otp-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+.otp-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+.otp-note {
+    font-size: 0.8rem !important;
+    margin-top: 4px !important;
+    color: var(--text-muted);
+}
+
+/* ── 6-box OTP input ──────────────────────────────────────── */
+.otp-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: var(--spacing-md);
+}
+.otp-box {
+    width: 48px;
+    height: 56px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 2px solid var(--border-color, #e2e8f0);
+    border-radius: 10px;
+    background: var(--bg-tertiary, #f8fafc);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    -webkit-appearance: none;
+    caret-color: var(--primary);
+}
+.otp-box:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.18);
+    transform: scale(1.06);
+    background: var(--bg-primary);
+}
+.otp-box.otp-box-error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    animation: shake 0.35s ease-out;
+}
+.otp-box.otp-box-success {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.06);
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-6px); }
+    40%       { transform: translateX(6px); }
+    60%       { transform: translateX(-4px); }
+    80%       { transform: translateX(4px); }
+}
+/* Smaller boxes on narrow screens */
+@media (max-width: 400px) {
+    .otp-boxes { gap: 6px; }
+    .otp-box   { width: 40px; height: 48px; font-size: 1.3rem; border-radius: 8px; }
+}
+
+/* ── Resend row ───────────────────────────────────────────── */
+.otp-resend-row {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    min-height: 28px;
+}
+.otp-timer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+#otpCountdown {
+    font-weight: 700;
+    color: var(--primary);
+}
+.btn-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: underline;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s;
+}
+.btn-link:hover { color: var(--primary-dark, #1565c0); }
+
+/* ── Back button (ghost style) ────────────────────────────── */
+.otp-back-btn {
+    background: transparent !important;
+    border: 1px solid var(--border-color, #e2e8f0) !important;
+    color: var(--text-muted) !important;
+    margin-top: 8px;
+}
+.otp-back-btn:hover {
+    background: var(--bg-tertiary, #f8fafc) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ── Password reset success header ───────────────────────── */
+.otp-success-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+.otp-success-icon {
+    font-size: 2.8rem;
+    color: #22c55e;
+    margin-bottom: 10px;
+}
+.otp-success-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ── Dark-mode border overrides for OTP boxes ─────────────── */
+[data-theme="dark"] .otp-box {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+[data-theme="dark"] .otp-box:focus {
+    border-color: var(--primary);
+    background: rgba(33, 150, 243, 0.1);
+}
