@@ -1333,7 +1333,14 @@ app.post('/api/otp/send', async (req, res) => {
     };
 
     try {
-        await transporter.sendMail(mailOptions);
+        if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+            await transporter.sendMail(mailOptions);
+        } else {
+            console.log(`\n========================================`);
+            console.log(`[DEV MODE] Mock Email to ${email}`);
+            console.log(`Your OTP is: ${otp}`);
+            console.log(`========================================\n`);
+        }
         res.status(200).json({ success: true, message: 'OTP sent successfully' });
     } catch (error) {
         console.error('[OTP SEND ERROR]', error);
