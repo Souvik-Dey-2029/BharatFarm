@@ -1302,6 +1302,80 @@ app.get('/api/weather', async (req, res, next) => {
     }
 });
 
+// ── EMAIL OTP AUTHENTICATION ────────────────────────────────────────────────
+const nodemailer = require('nodemailer');
+const otpStore = new Map(); // Simple in-memory store: email -> { otp, expiresAt }
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+app.post('/api/otp/send', async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+        return res.status(400).json({ success: false, error: 'Email is required' });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+    otpStore.set(email, { otp, expiresAt });
+
+    const mailOptions = {
+        from: `BharatFarm <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: 'Your BharatFarm Login OTP',
+        text: `Welcome to BharatFarm! Your OTP is: ${otp}. It is valid for 10 minutes.`
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ success: true, message: 'OTP sent successfully' });
+    } catch (error) {
+        console.error('[OTP SEND ERROR]', error);
+        res.status(500).json({ success: false, error: 'Failed to send OTP email' });
+    }
+});
+
+app.post('/api/otp/verify', (req, res) => {
+    const { email, otp, action, name, userType } = req.body;
+    if (!email || !otp) {
+        return res.status(400).json({ success: false, error: 'Email and OTP are required' });
+    }
+
+    const record = otpStore.get(email);
+    if (!record) {
+        return res.status(400).json({ success: false, error: 'No OTP found for this email or it has expired' });
+    }
+
+    if (Date.now() > record.expiresAt) {
+        otpStore.delete(email);
+        return res.status(400).json({ success: false, error: 'OTP has expired' });
+    }
+
+    if (record.otp !== otp) {
+        return res.status(400).json({ success: false, error: 'Invalid OTP' });
+    }
+
+    // OTP is valid
+    otpStore.delete(email);
+
+    // Mock user creation/login
+    const user = {
+        id: 'u_' + Date.now().toString(36),
+        name: name || email.split('@')[0],
+        email: email,
+        userType: userType || 'Farmer',
+        joined: new Date().toISOString()
+    };
+
+    res.status(200).json({ success: true, user: user });
+});
+
 // ── STATIC ARCHITECTURE (HTML/JS/CSS client-serving) ────────────────────────
 app.use(express.static(path.join(__dirname)));
 
