@@ -1,19 +1,22 @@
 /**
  * Financial Suite - Calculator Screen
  * Includes Bigha/Katha/Acre converters, seed & fertilizer cost breakdowns, profit margin simulations.
+ * Upgraded to high-fidelity dark glassmorphic styling, glowing selectors, and premium cost simulators.
  */
 
 import React, { useState } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, Pressable
+  View, Text, StyleSheet, ScrollView, Pressable, Dimensions, Platform
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import ScreenHeader from '../../components/ScreenHeader';
-import GradientCard from '../../components/GradientCard';
 import AppInput from '../../components/AppInput';
 import AppButton from '../../components/AppButton';
 import { useThemeStore } from '../../store/themeStore';
 import { typography, spacing, borderRadius } from '../../theme';
 import { convertLand, formatINR } from '../../utils/helpers';
+
+const { width } = Dimensions.get('window');
 
 export default function CalculatorScreen({ navigation }) {
   const theme = useThemeStore(s => s.theme);
@@ -30,7 +33,7 @@ export default function CalculatorScreen({ navigation }) {
   const [projection, setProjection] = useState(null);
 
   const handleConvert = () => {
-    if (!landValue.trim()) return;
+    if (!landValue.trim()) return null;
     const val = parseFloat(landValue);
 
     // Calculate conversions
@@ -80,7 +83,10 @@ export default function CalculatorScreen({ navigation }) {
   const conversionResults = handleConvert();
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: '#000000' }]}>
+      {/* Background ambient lighting */}
+      <View style={styles.calcAmbientGlow} />
+
       <ScreenHeader
         title="Financial Suite"
         subtitle="Precision land & cost calculators"
@@ -88,10 +94,14 @@ export default function CalculatorScreen({ navigation }) {
       />
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Land converter */}
-        <GradientCard style={styles.card}>
-          <Text style={[typography.h3, { color: theme.text, marginBottom: spacing.md }]}>
+        
+        {/* Area Unit Converter Glass */}
+        <View style={styles.cardGlass}>
+          <Text style={styles.cardHeading}>
             📏 Area Unit Converter
+          </Text>
+          <Text style={styles.cardSubText}>
+            Instantly swap standard regional measurements
           </Text>
 
           <AppInput
@@ -102,7 +112,7 @@ export default function CalculatorScreen({ navigation }) {
             keyboardType="numeric"
           />
 
-          <Text style={[typography.bodySmall, { color: theme.textSecondary, marginBottom: 8, fontWeight: '600' }]}>
+          <Text style={styles.inputLabelText}>
             Convert From Unit:
           </Text>
           <View style={styles.unitRow}>
@@ -111,12 +121,11 @@ export default function CalculatorScreen({ navigation }) {
                 key={unit}
                 onPress={() => setUnitFrom(unit)}
                 style={[
-                  styles.unitBtn,
-                  { borderColor: theme.border },
-                  unitFrom === unit && { backgroundColor: theme.primary, borderColor: theme.primary }
+                  styles.unitBtnGlass,
+                  unitFrom === unit && styles.unitBtnActive
                 ]}
               >
-                <Text style={{ color: unitFrom === unit ? '#FFF' : theme.text, fontWeight: '600' }}>
+                <Text style={{ color: unitFrom === unit ? '#000000' : '#E8F5EC', fontWeight: '700', fontSize: 13 }}>
                   {unit.toUpperCase()}
                 </Text>
               </Pressable>
@@ -124,27 +133,30 @@ export default function CalculatorScreen({ navigation }) {
           </View>
 
           {conversionResults && (
-            <View style={[styles.resultsArea, { backgroundColor: theme.surfaceElevated, borderColor: theme.border }]}>
+            <View style={styles.resultsAreaGlass}>
               <View style={styles.resultItem}>
-                <Text style={{ color: theme.textSecondary }}>Acres:</Text>
-                <Text style={{ color: theme.text, fontWeight: '700' }}>{conversionResults.acre}</Text>
+                <Text style={styles.resultItemLabel}>Acres:</Text>
+                <Text style={styles.resultItemVal}>{conversionResults.acre}</Text>
               </View>
               <View style={styles.resultItem}>
-                <Text style={{ color: theme.textSecondary }}>Bighas:</Text>
-                <Text style={{ color: theme.text, fontWeight: '700' }}>{conversionResults.bigha}</Text>
+                <Text style={styles.resultItemLabel}>Bighas:</Text>
+                <Text style={styles.resultItemVal}>{conversionResults.bigha}</Text>
               </View>
               <View style={styles.resultItem}>
-                <Text style={{ color: theme.textSecondary }}>Kathas:</Text>
-                <Text style={{ color: theme.text, fontWeight: '700' }}>{conversionResults.katha}</Text>
+                <Text style={styles.resultItemLabel}>Kathas:</Text>
+                <Text style={styles.resultItemVal}>{conversionResults.katha}</Text>
               </View>
             </View>
           )}
-        </GradientCard>
+        </View>
 
-        {/* Projections Suite */}
-        <GradientCard style={[styles.card, { marginTop: spacing.lg }]}>
-          <Text style={[typography.h3, { color: theme.text, marginBottom: spacing.md }]}>
+        {/* Projections Suite Glass */}
+        <View style={[styles.cardGlass, { marginTop: spacing.lg }]}>
+          <Text style={styles.cardHeading}>
             💰 Yield & Profit Simulator
+          </Text>
+          <Text style={styles.cardSubText}>
+            Simulate seasonal costs, projected yield, and expected market revenue
           </Text>
 
           <AppInput
@@ -173,80 +185,199 @@ export default function CalculatorScreen({ navigation }) {
 
           {projection && (
             <View style={styles.projContainer}>
-              <Text style={[typography.label, { color: theme.accent, marginTop: spacing.md }]}>
-                Pro-Forma Expense Breakdown
+              <Text style={styles.projHeadingAccent}>
+                Expense Analysis
               </Text>
               <View style={styles.projRow}>
-                <Text style={{ color: theme.textSecondary }}>Required Seeds ({projection.seedQty} kg):</Text>
-                <Text style={{ color: theme.text }}>{formatINR(projection.seedCost)}</Text>
+                <Text style={styles.projRowLabel}>Required Seeds ({projection.seedQty} kg):</Text>
+                <Text style={styles.projRowValue}>{formatINR(projection.seedCost)}</Text>
               </View>
               <View style={styles.projRow}>
-                <Text style={{ color: theme.textSecondary }}>Fertilizers ({projection.fertilizerQty} kg):</Text>
-                <Text style={{ color: theme.text }}>{formatINR(projection.fertilizerCost)}</Text>
+                <Text style={styles.projRowLabel}>Fertilizers ({projection.fertilizerQty} kg):</Text>
+                <Text style={styles.projRowValue}>{formatINR(projection.fertilizerCost)}</Text>
               </View>
-              <View style={[styles.projRow, { borderBottomWidth: 1, borderBottomColor: theme.divider, paddingBottom: 8 }]}>
-                <Text style={{ color: theme.text, fontWeight: '600' }}>Total Input Expense:</Text>
-                <Text style={{ color: theme.text, fontWeight: '700' }}>{formatINR(projection.totalExpense)}</Text>
+              <View style={[styles.projRow, { borderBottomWidth: 1, borderBottomColor: 'rgba(76, 175, 80, 0.15)', paddingBottom: 8 }]}>
+                <Text style={styles.projRowLabelBold}>Total Input Expense:</Text>
+                <Text style={styles.projRowValueBold}>{formatINR(projection.totalExpense)}</Text>
               </View>
 
-              <Text style={[typography.label, { color: theme.primary, marginTop: spacing.md }]}>
+              <Text style={styles.projHeadingPrimary}>
                 Yield & Revenue Estimation
               </Text>
               <View style={styles.projRow}>
-                <Text style={{ color: theme.textSecondary }}>Expected Crop Yield:</Text>
-                <Text style={{ color: theme.text }}>{projection.yieldQty} kg</Text>
+                <Text style={styles.projRowLabel}>Expected Crop Yield:</Text>
+                <Text style={styles.projRowValue}>{projection.yieldQty} kg</Text>
               </View>
               <View style={styles.projRow}>
-                <Text style={{ color: theme.textSecondary }}>Assumed Market Price:</Text>
-                <Text style={{ color: theme.text }}>{formatINR(projection.rate)} / kg</Text>
+                <Text style={styles.projRowLabel}>Assumed Market Price:</Text>
+                <Text style={styles.projRowValue}>{formatINR(projection.rate)} / kg</Text>
               </View>
               <View style={styles.projRow}>
-                <Text style={{ color: theme.text, fontWeight: '600' }}>Expected Revenue:</Text>
-                <Text style={{ color: theme.text, fontWeight: '700' }}>{formatINR(projection.expectedRevenue)}</Text>
+                <Text style={styles.projRowLabelBold}>Expected Revenue:</Text>
+                <Text style={styles.projRowValueBold}>{formatINR(projection.expectedRevenue)}</Text>
               </View>
 
-              <View style={[styles.profitCard, { backgroundColor: theme.primary + '20', borderColor: theme.primary }]}>
-                <Text style={{ color: theme.primary, fontWeight: '700', fontSize: 13 }}>
+              <View style={styles.profitCardGlass}>
+                <Text style={styles.profitCardLabel}>
                   SIMULATED NET PROFIT:
                 </Text>
-                <Text style={{ color: theme.primary, fontSize: 22, fontWeight: '800' }}>
+                <Text style={styles.profitCardValue}>
                   {formatINR(projection.profit)}
                 </Text>
               </View>
             </View>
           )}
-        </GradientCard>
+        </View>
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scrollContent: { padding: spacing.base, paddingBottom: 60 },
-  card: { padding: spacing.base },
-  unitRow: { flexDirection: 'row', marginBottom: spacing.md },
-  unitBtn: {
+  container: {
+    flex: 1,
+  },
+  calcAmbientGlow: {
+    position: 'absolute',
+    top: 80,
+    left: -100,
+    width: width * 0.7,
+    height: width * 0.7,
+    borderRadius: (width * 0.7) / 2,
+    backgroundColor: 'rgba(76, 175, 80, 0.08)',
+    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
+  },
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 60,
+  },
+  cardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    padding: 20,
+  },
+  cardHeading: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  cardSubText: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    marginBottom: 20,
+    lineHeight: 16,
+  },
+  inputLabelText: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    marginBottom: 8,
+    fontWeight: '700',
+  },
+  unitRow: {
+    flexDirection: 'row',
+    marginBottom: spacing.md,
+    gap: 6,
+  },
+  unitBtnGlass: {
     flex: 1,
     paddingVertical: 10,
     borderRadius: borderRadius.sm,
     borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.15)',
     alignItems: 'center',
-    marginHorizontal: 2,
+    backgroundColor: 'rgba(12, 22, 14, 0.5)',
   },
-  resultsArea: {
-    padding: spacing.md,
+  unitBtnActive: {
+    backgroundColor: '#4CAF50',
+    borderColor: '#4CAF50',
+  },
+  resultsAreaGlass: {
+    padding: 14,
     borderRadius: borderRadius.md,
     borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
-  resultItem: { flexDirection: 'row', justifyContent: 'space-between', marginVertical: 4 },
-  projContainer: { marginTop: spacing.sm },
-  projRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 6 },
-  profitCard: {
-    padding: spacing.md,
+  resultItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 4,
+  },
+  resultItemLabel: {
+    color: '#A2C2AC',
+    fontSize: 13,
+  },
+  resultItemVal: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  projContainer: {
+    marginTop: spacing.sm,
+  },
+  projHeadingAccent: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#FCD34D',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginTop: spacing.md,
+    marginBottom: spacing.xs,
+  },
+  projHeadingPrimary: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#4CAF50',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginTop: spacing.md,
+    marginBottom: spacing.xs,
+  },
+  projRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 6,
+  },
+  projRowLabel: {
+    color: '#A2C2AC',
+    fontSize: 13,
+  },
+  projRowValue: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  projRowLabelBold: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  projRowValueBold: {
+    color: '#FFFFFF',
+    fontWeight: '800',
+    fontSize: 13,
+  },
+  profitCardGlass: {
+    padding: 16,
     borderRadius: borderRadius.md,
     borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.35)',
+    backgroundColor: 'rgba(76, 175, 80, 0.15)',
     alignItems: 'center',
     marginTop: spacing.md,
+  },
+  profitCardLabel: {
+    color: '#4CAF50',
+    fontWeight: '800',
+    fontSize: 11,
+    letterSpacing: 0.5,
+  },
+  profitCardValue: {
+    color: '#4CAF50',
+    fontSize: 24,
+    fontWeight: '800',
+    marginTop: 4,
   },
 });

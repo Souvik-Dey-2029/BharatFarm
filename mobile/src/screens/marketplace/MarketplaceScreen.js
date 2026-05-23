@@ -2,11 +2,12 @@
  * KrishiMart Marketplace Screen
  * Farmer marketplace where users can browse listings, list crops for direct sale, upload photos,
  * use WhatsApp link integration, and filter by agricultural categories.
+ * Upgraded to high-fidelity dark glassmorphic layout, glowing golden price indicators, and frosted forms.
  */
 
 import React, { useState } from 'react';
 import {
-  View, Text, StyleSheet, FlatList, TextInput, Pressable, Image, Alert, Linking, ScrollView
+  View, Text, StyleSheet, FlatList, TextInput, Pressable, Image, Alert, Linking, ScrollView, Dimensions, Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ScreenHeader from '../../components/ScreenHeader';
@@ -16,6 +17,8 @@ import AppInput from '../../components/AppInput';
 import { useThemeStore } from '../../store/themeStore';
 import { typography, spacing, borderRadius } from '../../theme';
 import { formatINR } from '../../utils/helpers';
+
+const { width } = Dimensions.get('window');
 
 const INITIAL_LISTINGS = [
   {
@@ -123,15 +126,18 @@ export default function MarketplaceScreen({ navigation }) {
   });
 
   const categories = [
-    { id: 'all', label: 'All', icon: '🌾' },
-    { id: 'vegetables', label: 'Veg', icon: '🥬' },
+    { id: 'all', label: 'All Crops', icon: '🌾' },
+    { id: 'vegetables', label: 'Vegetables', icon: '🥬' },
     { id: 'fruits', label: 'Fruits', icon: '🍎' },
     { id: 'grains', label: 'Grains', icon: '🌾' },
     { id: 'seeds', label: 'Seeds', icon: '🌱' },
   ];
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: '#000000' }]}>
+      {/* Background ambient lighting */}
+      <View style={styles.marketAmbientGlow} />
+
       <ScreenHeader
         title="KrishiMart"
         subtitle="Direct farmer-to-buyer trade"
@@ -142,68 +148,72 @@ export default function MarketplaceScreen({ navigation }) {
 
       {isAdding ? (
         <ScrollView contentContainerStyle={styles.formContainer} showsVerticalScrollIndicator={false}>
-          <Text style={[typography.h3, { color: theme.text, marginBottom: spacing.md }]}>
-            🆕 List Your Produce
-          </Text>
+          <View style={styles.glassFormCard}>
+            <Text style={styles.formTitle}>
+              🆕 List Your Produce
+            </Text>
+            <Text style={styles.formSubtitle}>
+              Directly advertise to wholesale bulk agricultural buyers
+            </Text>
 
-          <AppInput label="Product Title" placeholder="e.g. Fresh Organic Tomatoes" value={newTitle} onChangeText={setNewTitle} />
+            <AppInput label="Product Title" placeholder="e.g. Organic Potatoes" value={newTitle} onChangeText={setNewTitle} />
 
-          <View style={styles.formRow}>
-            <View style={{ flex: 2, marginRight: 8 }}>
-              <AppInput label="Price (₹)" placeholder="e.g. 40" value={newPrice} onChangeText={setNewPrice} keyboardType="numeric" />
+            <View style={styles.formRow}>
+              <View style={{ flex: 2, marginRight: 8 }}>
+                <AppInput label="Price (₹)" placeholder="e.g. 40" value={newPrice} onChangeText={setNewPrice} keyboardType="numeric" />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.inputLabelStyle}>Unit</Text>
+                <Pressable
+                  onPress={() => setNewUnit(newUnit === 'kg' ? 'quintal' : 'kg')}
+                  style={styles.unitSelectorGlass}
+                >
+                  <Text style={{ color: '#FFFFFF', fontWeight: '700' }}>{newUnit.toUpperCase()}</Text>
+                </Pressable>
+              </View>
             </View>
-            <View style={{ flex: 1 }}>
-              <Text style={[typography.bodySmall, { color: theme.textSecondary, marginBottom: 8, fontWeight: '600' }]}>Unit</Text>
-              <Pressable
-                onPress={() => setNewUnit(newUnit === 'kg' ? 'quintal' : 'kg')}
-                style={[styles.unitSelector, { borderColor: theme.border, backgroundColor: theme.inputBg }]}
-              >
-                <Text style={{ color: theme.text }}>{newUnit.toUpperCase()}</Text>
-              </Pressable>
+
+            <AppInput label="Available Quantity" placeholder="e.g. 500 kg / 2 tons" value={newQty} onChangeText={setNewQty} />
+
+            <Text style={styles.inputLabelStyle}>Category</Text>
+            <View style={styles.categoryRow}>
+              {categories.slice(1).map(cat => (
+                <Pressable
+                  key={cat.id}
+                  onPress={() => setNewCategory(cat.id)}
+                  style={[
+                    styles.categorySelectBtn,
+                    newCategory === cat.id && styles.categorySelectBtnActive
+                  ]}
+                >
+                  <Text style={{ color: newCategory === cat.id ? '#000000' : '#E8F5EC', fontWeight: '700', fontSize: 12 }}>
+                    {cat.icon} {cat.label}
+                  </Text>
+                </Pressable>
+              ))}
             </View>
+
+            <AppInput label="Location" placeholder="e.g. Hooghly, West Bengal" value={newLocation} onChangeText={setNewLocation} />
+            <AppInput label="WhatsApp Number" placeholder="10-digit number" value={newPhone} onChangeText={setNewPhone} keyboardType="phone-pad" />
+
+            <AppButton title="Publish Product" variant="primary" icon="checkmark-circle-outline" onPress={handleCreateListing} style={{ marginTop: spacing.md }} />
           </View>
-
-          <AppInput label="Available Quantity" placeholder="e.g. 500 kg / 2 tons" value={newQty} onChangeText={setNewQty} />
-
-          <Text style={[typography.bodySmall, { color: theme.textSecondary, marginBottom: 8, fontWeight: '600' }]}>Category</Text>
-          <View style={styles.categoryRow}>
-            {categories.slice(1).map(cat => (
-              <Pressable
-                key={cat.id}
-                onPress={() => setNewCategory(cat.id)}
-                style={[
-                  styles.categorySelectBtn,
-                  { borderColor: theme.border },
-                  newCategory === cat.id && { backgroundColor: theme.primary, borderColor: theme.primary }
-                ]}
-              >
-                <Text style={{ color: newCategory === cat.id ? '#FFF' : theme.text }}>
-                  {cat.icon} {cat.label}
-                </Text>
-              </Pressable>
-            ))}
-          </View>
-
-          <AppInput label="Location" placeholder="e.g. Hooghly, West Bengal" value={newLocation} onChangeText={setNewLocation} />
-          <AppInput label="WhatsApp Number" placeholder="10-digit number" value={newPhone} onChangeText={setNewPhone} keyboardType="phone-pad" />
-
-          <AppButton title="Publish Product" variant="primary" icon="checkmark-circle-outline" onPress={handleCreateListing} style={{ marginTop: spacing.md }} />
         </ScrollView>
       ) : (
         <View style={{ flex: 1 }}>
-          {/* Search Bar */}
-          <View style={[styles.searchBarContainer, { backgroundColor: theme.surface, borderBottomColor: theme.border }]}>
-            <Ionicons name="search-outline" size={20} color={theme.textMuted} style={{ marginRight: 8 }} />
+          {/* Glowing Search Bar */}
+          <View style={styles.searchBarGlass}>
+            <Ionicons name="search-outline" size={18} color="#688E75" style={{ marginRight: 8 }} />
             <TextInput
-              style={[styles.searchInput, { color: theme.text }]}
+              style={styles.searchInput}
               placeholder="Search crops, farmers or locations..."
-              placeholderTextColor={theme.inputPlaceholder}
+              placeholderTextColor="#688E75"
               value={searchQuery}
               onChangeText={setSearchQuery}
             />
           </View>
 
-          {/* Categories Tab */}
+          {/* Categories Frosted Horizontal Tab Row */}
           <View style={styles.tabContainer}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabScroll}>
               {categories.map(cat => (
@@ -211,12 +221,11 @@ export default function MarketplaceScreen({ navigation }) {
                   key={cat.id}
                   onPress={() => setActiveCategory(cat.id)}
                   style={[
-                    styles.tab,
-                    { borderColor: theme.border },
-                    activeCategory === cat.id && { backgroundColor: theme.primary, borderColor: theme.primary }
+                    styles.tabGlass,
+                    activeCategory === cat.id && styles.tabActiveStyle
                   ]}
                 >
-                  <Text style={[styles.tabText, { color: activeCategory === cat.id ? '#FFF' : theme.textSecondary }]}>
+                  <Text style={[styles.tabText, { color: activeCategory === cat.id ? '#000000' : '#A2C2AC' }]}>
                     {cat.icon} {cat.label}
                   </Text>
                 </Pressable>
@@ -224,57 +233,62 @@ export default function MarketplaceScreen({ navigation }) {
             </ScrollView>
           </View>
 
-          {/* Listings List */}
+          {/* Listings Grid */}
           <FlatList
             data={filteredListings}
             keyExtractor={item => item.id}
             contentContainerStyle={styles.listContainer}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
-              <GradientCard style={styles.card}>
+              <View style={styles.listingCardGlass}>
                 <Image source={{ uri: item.image }} style={styles.cardImage} />
                 <View style={styles.cardDetails}>
                   <View style={styles.badgeRow}>
-                    <View style={[styles.catBadge, { backgroundColor: theme.primary + '20' }]}>
-                      <Text style={{ color: theme.primary, fontSize: 10, fontWeight: '700' }}>
+                    <View style={styles.catBadgeGlass}>
+                      <Text style={styles.catBadgeText}>
                         {item.category.toUpperCase()}
                       </Text>
                     </View>
-                    <Text style={[typography.caption, { color: theme.accent, fontWeight: '700' }]}>
+                    <Text style={styles.quantityTag}>
                       {item.quantity}
                     </Text>
                   </View>
 
-                  <Text style={[typography.h4, { color: theme.text, marginTop: 4 }]}>
+                  <Text style={styles.itemTitleText}>
                     {item.title}
                   </Text>
 
-                  <Text style={[typography.caption, { color: theme.textSecondary, marginTop: 2 }]}>
+                  <Text style={styles.itemMetaText}>
                     📍 {item.location}
                   </Text>
 
-                  <Text style={[typography.caption, { color: theme.textMuted, marginTop: 2 }]}>
+                  <Text style={styles.itemFarmerText}>
                     👤 By {item.farmer}
                   </Text>
 
                   <View style={styles.priceRow}>
-                    <Text style={[typography.h3, { color: theme.text }]}>
-                      {formatINR(item.price)} / {item.unit}
+                    <Text style={styles.priceText}>
+                      {formatINR(item.price)} <Text style={styles.priceUnitText}>/ {item.unit}</Text>
                     </Text>
+                    
                     <Pressable
                       onPress={() => handleContact(item.phone, item.title)}
-                      style={[styles.contactBtn, { backgroundColor: '#25D366' }]}
+                      style={({ pressed }) => [
+                        styles.contactBtnStyle,
+                        pressed && { opacity: 0.9, transform: [{ scale: 0.96 }] }
+                      ]}
                     >
-                      <Ionicons name="logo-whatsapp" size={16} color="#FFF" style={{ marginRight: 4 }} />
+                      <Ionicons name="logo-whatsapp" size={14} color="#000000" style={{ marginRight: 4 }} />
                       <Text style={styles.contactBtnText}>Contact</Text>
                     </Pressable>
                   </View>
                 </View>
-              </GradientCard>
+              </View>
             )}
             ListEmptyComponent={() => (
               <View style={styles.emptyContainer}>
-                <Ionicons name="alert-circle-outline" size={48} color={theme.textMuted} />
-                <Text style={[typography.body, { color: theme.textMuted, marginTop: spacing.sm }]}>
+                <Ionicons name="alert-circle-outline" size={44} color="#688E75" />
+                <Text style={{ color: '#688E75', marginTop: spacing.sm, fontSize: 13 }}>
                   No active listings found in this category.
                 </Text>
               </View>
@@ -287,63 +301,214 @@ export default function MarketplaceScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  formContainer: { padding: spacing.base, paddingBottom: 40 },
-  formRow: { flexDirection: 'row', alignItems: 'flex-end' },
-  unitSelector: {
+  container: {
+    flex: 1,
+  },
+  marketAmbientGlow: {
+    position: 'absolute',
+    top: 120,
+    right: -100,
+    width: width * 0.7,
+    height: width * 0.7,
+    borderRadius: (width * 0.7) / 2,
+    backgroundColor: 'rgba(76, 175, 80, 0.07)',
+    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
+  },
+  formContainer: {
+    padding: 20,
+    paddingBottom: 40,
+  },
+  glassFormCard: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    padding: 20,
+  },
+  formTitle: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  formSubtitle: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    marginBottom: 20,
+    lineHeight: 16,
+  },
+  formRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  inputLabelStyle: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    marginBottom: 8,
+    fontWeight: '700',
+  },
+  unitSelectorGlass: {
     height: 52,
     borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
     borderRadius: borderRadius.md,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.4)',
     marginBottom: spacing.base,
   },
-  categoryRow: { flexDirection: 'row', flexWrap: 'wrap', marginBottom: spacing.md },
+  categoryRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: spacing.md,
+    gap: 6,
+  },
   categorySelectBtn: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     borderRadius: borderRadius.sm,
     borderWidth: 1,
-    marginRight: 6,
-    marginBottom: 6,
+    borderColor: 'rgba(76, 175, 80, 0.15)',
+    backgroundColor: 'transparent',
   },
-  searchBarContainer: {
+  categorySelectBtnActive: {
+    backgroundColor: '#4CAF50',
+    borderColor: '#4CAF50',
+  },
+  searchBarGlass: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: spacing.base,
+    paddingHorizontal: 16,
     height: 48,
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
     borderBottomWidth: 1,
+    borderBottomColor: 'rgba(76, 175, 80, 0.15)',
   },
-  searchInput: { flex: 1, fontSize: 14 },
-  tabContainer: { marginVertical: spacing.sm },
-  tabScroll: { paddingHorizontal: spacing.base },
-  tab: {
-    paddingHorizontal: spacing.md,
+  searchInput: {
+    flex: 1,
+    fontSize: 14,
+    color: '#E8F5EC',
+  },
+  tabContainer: {
+    marginVertical: spacing.sm,
+  },
+  tabScroll: {
+    paddingHorizontal: 20,
+    gap: 6,
+  },
+  tabGlass: {
+    paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: borderRadius.sm,
     borderWidth: 1,
-    marginRight: 6,
+    borderColor: 'rgba(76, 175, 80, 0.15)',
+    backgroundColor: 'rgba(12, 22, 14, 0.5)',
   },
-  tabText: { fontSize: 13, fontWeight: '600' },
-  listContainer: { padding: spacing.base, paddingBottom: 60 },
-  card: { padding: 0, marginBottom: spacing.base, flexDirection: 'row', overflow: 'hidden' },
-  cardImage: { width: 110, height: 150 },
-  cardDetails: { flex: 1, padding: spacing.md },
-  badgeRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  catBadge: { paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4 },
+  tabActiveStyle: {
+    backgroundColor: '#4CAF50',
+    borderColor: '#4CAF50',
+  },
+  tabText: {
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  listContainer: {
+    padding: 20,
+    paddingBottom: 80,
+  },
+  listingCardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    marginBottom: spacing.md,
+    flexDirection: 'row',
+    overflow: 'hidden',
+  },
+  cardImage: {
+    width: 110,
+    height: 154,
+  },
+  cardDetails: {
+    flex: 1,
+    padding: 14,
+    justifyContent: 'space-between',
+  },
+  badgeRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  catBadgeGlass: {
+    backgroundColor: 'rgba(76, 175, 80, 0.15)',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.25)',
+  },
+  catBadgeText: {
+    color: '#81C784',
+    fontSize: 8,
+    fontWeight: '800',
+  },
+  quantityTag: {
+    fontSize: 11,
+    color: '#FCD34D',
+    fontWeight: '700',
+  },
+  itemTitleText: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: 4,
+  },
+  itemMetaText: {
+    fontSize: 11,
+    color: '#A2C2AC',
+    marginTop: 2,
+  },
+  itemFarmerText: {
+    fontSize: 10,
+    color: '#688E75',
+    marginTop: 2,
+  },
   priceRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: spacing.md,
+    marginTop: 8,
   },
-  contactBtn: {
+  priceText: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  priceUnitText: {
+    fontSize: 11,
+    color: '#A2C2AC',
+    fontWeight: '500',
+  },
+  contactBtnStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: spacing.md,
-    paddingVertical: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: borderRadius.sm,
+    backgroundColor: '#4CAF50',
+    shadowColor: '#4CAF50',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 3,
   },
-  contactBtnText: { color: '#FFF', fontSize: 12, fontWeight: '700' },
-  emptyContainer: { alignItems: 'center', justifyContent: 'center', marginTop: 100 },
+  contactBtnText: {
+    color: '#000000',
+    fontSize: 11,
+    fontWeight: '800',
+  },
+  emptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 100,
+  },
 });

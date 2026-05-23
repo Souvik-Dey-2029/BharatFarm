@@ -124,39 +124,39 @@ export const lightTheme = {
 
 export const darkTheme = {
   mode: 'dark',
-  primary: palette.emerald,
-  primaryDark: palette.emeraldDark,
-  primaryLight: palette.emeraldLight,
+  primary: '#4CAF50',
+  primaryDark: '#2E7D32',
+  primaryLight: '#81C784',
   accent: palette.saffron,
   accentDark: palette.saffronDark,
   accentLight: palette.saffronLight,
 
-  background: '#030D07',
-  backgroundSecondary: '#061210',
-  surface: '#0C1F14',
-  surfaceElevated: '#122B1B',
+  background: '#000000', // Cinematic pitch black background
+  backgroundSecondary: '#050E09', // Mysterious deep organic forest black
+  surface: 'rgba(16, 26, 18, 0.65)', // Semi-transparent glassmorphism
+  surfaceElevated: 'rgba(26, 44, 30, 0.85)',
 
   text: '#E8F5EC',
-  textSecondary: '#94B8A0',
-  textMuted: '#5F8A6E',
+  textSecondary: '#A2C2AC', // Highly legible muted sage green
+  textMuted: '#688E75',
   textInverse: palette.gray900,
 
-  border: '#1A3D28',
-  borderSecondary: '#1A3D28',
-  divider: '#1A3D28',
+  border: 'rgba(76, 175, 80, 0.22)', // Glowing thin green border
+  borderSecondary: 'rgba(76, 175, 80, 0.15)',
+  divider: 'rgba(76, 175, 80, 0.15)',
 
-  card: '#0C1F14',
-  cardBorder: '#1A3D28',
+  card: 'rgba(12, 22, 14, 0.7)', // Frosted glassmorphism card background
+  cardBorder: 'rgba(76, 175, 80, 0.25)', // Elegant glowing card border
 
-  navBar: '#061210',
-  navBarBorder: '#1A3D28',
-  tabActive: palette.emerald,
-  tabInactive: '#5F8A6E',
+  navBar: '#030704', // Deep organic dark nav bar
+  navBarBorder: 'rgba(76, 175, 80, 0.15)',
+  tabActive: '#4CAF50',
+  tabInactive: 'rgba(255, 255, 255, 0.45)',
 
-  inputBg: '#0C1F14',
-  inputBorder: '#1A3D28',
+  inputBg: 'rgba(10, 18, 12, 0.9)',
+  inputBorder: 'rgba(76, 175, 80, 0.22)',
   inputText: '#E8F5EC',
-  inputPlaceholder: '#5F8A6E',
+  inputPlaceholder: '#688E75',
 
   success: palette.success,
   warning: palette.warning,
@@ -164,29 +164,29 @@ export const darkTheme = {
   info: palette.info,
 
   gradient: {
-    primary: ['#064E3B', '#065F46'],
-    header: ['#030D07', '#061210', '#0C1F14'],
-    hero: ['#030D07', '#061210', '#0C1F14'],
-    card: ['rgba(16, 185, 129, 0.08)', 'rgba(16, 185, 129, 0.03)'],
+    primary: ['#2E7D32', '#4CAF50'],
+    header: ['#000000', 'rgba(5, 14, 9, 0.9)', 'transparent'],
+    hero: ['#050E09', '#000000'],
+    card: ['rgba(76, 175, 80, 0.15)', 'rgba(76, 175, 80, 0.02)'],
     accent: [palette.saffronDark, palette.gold],
   },
 
   shadow: {
-    color: 'rgba(0, 0, 0, 0.5)',
-    sm: { shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.3, shadowRadius: 4, elevation: 2 },
-    md: { shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.4, shadowRadius: 12, elevation: 4 },
-    lg: { shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.5, shadowRadius: 24, elevation: 8 },
+    color: 'rgba(76, 175, 80, 0.15)', // Green-tinted premium ambient shadows
+    sm: { shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 6, elevation: 3 },
+    md: { shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.25, shadowRadius: 16, elevation: 6 },
+    lg: { shadowOffset: { width: 0, height: 12 }, shadowOpacity: 0.3, shadowRadius: 28, elevation: 10 },
   },
 
   glass: {
-    background: 'rgba(12, 31, 20, 0.85)',
-    border: 'rgba(16, 185, 129, 0.15)',
+    background: 'rgba(12, 22, 14, 0.65)',
+    border: 'rgba(76, 175, 80, 0.25)',
   },
 
   xp: {
     bronze: '#CD7F32',
     silver: '#C0C0C0',
     gold: '#FFD700',
-    emerald: '#50C878',
+    emerald: '#4CAF50',
   },
 };

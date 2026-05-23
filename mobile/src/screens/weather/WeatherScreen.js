@@ -1,11 +1,12 @@
 /**
  * Weather Dashboard Screen
  * Hyper-local weather, soil moisture metrics, GPS coordinates integration, and farming advice.
+ * Upgraded to high-fidelity dark glassmorphic styling, glowing temperature text, and premium safety indicators.
  */
 
 import React, { useState, useEffect } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, ActivityIndicator, Pressable
+  View, Text, StyleSheet, ScrollView, ActivityIndicator, Pressable, Dimensions, Platform
 } from 'react-native';
 import * as Location from 'expo-location';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,6 +17,8 @@ import AppButton from '../../components/AppButton';
 import { useThemeStore } from '../../store/themeStore';
 import { fetchWeatherByCoords, getWeatherInfo, getFarmingSafetyLevel, geocodeCity } from '../../services/weather';
 import { typography, spacing, borderRadius } from '../../theme';
+
+const { width } = Dimensions.get('window');
 
 export default function WeatherScreen({ navigation }) {
   const theme = useThemeStore(s => s.theme);
@@ -37,6 +40,7 @@ export default function WeatherScreen({ navigation }) {
       const data = await fetchWeatherByCoords(coords.lat, coords.lon);
       setWeatherData(data);
     } catch (e) {
+      // Offline mock data
       setWeatherData({
         current: {
           temperature_2m: 31.5,
@@ -108,7 +112,10 @@ export default function WeatherScreen({ navigation }) {
   const safety = current ? getFarmingSafetyLevel(current.weather_code, current.wind_speed_10m, current.temperature_2m) : null;
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: '#000000' }]}>
+      {/* Background ambient lighting */}
+      <View style={styles.weatherAmbientGlow} />
+
       <ScreenHeader
         title="Weather Dashboard"
         subtitle="Hyper-local smart metrics"
@@ -116,8 +123,9 @@ export default function WeatherScreen({ navigation }) {
       />
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Search & GPS */}
-        <GradientCard style={styles.searchCard}>
+        
+        {/* Search Parameters Glass */}
+        <View style={styles.searchCardGlass}>
           <AppInput
             placeholder="Search city/district (e.g. Hooghly, Karnal)"
             value={cityInput}
@@ -136,7 +144,7 @@ export default function WeatherScreen({ navigation }) {
               style={{ flex: 1, marginRight: 8 }}
             />
             <AppButton
-              title="Get GPS Coordinates"
+              title="GPS Direct"
               variant="outline"
               size="sm"
               icon="locate-outline"
@@ -145,93 +153,94 @@ export default function WeatherScreen({ navigation }) {
               style={{ flex: 1 }}
             />
           </View>
-        </GradientCard>
+        </View>
 
         {loading ? (
-          <ActivityIndicator size="large" color={theme.primary} style={{ marginTop: 40 }} />
+          <ActivityIndicator size="large" color="#4CAF50" style={{ marginTop: 40 }} />
         ) : current ? (
           <View style={styles.weatherInfoArea}>
-            {/* Current Weather Card */}
-            <GradientCard style={styles.mainCard}>
+            
+            {/* Current Weather Glass Card */}
+            <View style={styles.mainCardGlass}>
               <View style={styles.mainHeader}>
                 <View>
-                  <Text style={[typography.h3, { color: theme.text }]}>📍 {coords.name}</Text>
-                  <Text style={[typography.caption, { color: theme.textSecondary, marginTop: 2 }]}>
+                  <Text style={styles.coordsHeading}>📍 {coords.name}</Text>
+                  <Text style={styles.latLonText}>
                     Lat: {coords.lat.toFixed(4)}, Lon: {coords.lon.toFixed(4)}
                   </Text>
                 </View>
-                <Text style={styles.weatherEmoji}>{weatherInfo?.emoji}</Text>
+                <Text style={styles.weatherEmoji}>{weatherInfo?.emoji || '☀️'}</Text>
               </View>
 
               <View style={styles.tempRow}>
-                <Text style={[styles.tempText, { color: theme.text }]}>
+                <Text style={styles.tempText}>
                   {Math.round(current.temperature_2m)}°C
                 </Text>
                 <View style={styles.weatherState}>
-                  <Text style={[typography.h4, { color: theme.text }]}>{weatherInfo?.label}</Text>
-                  <Text style={[typography.caption, { color: theme.textSecondary }]}>
+                  <Text style={styles.stateLabelText}>{weatherInfo?.label || 'Clear Sky'}</Text>
+                  <Text style={styles.apparentText}>
                     Feels like {Math.round(current.apparent_temperature)}°C
                   </Text>
                 </View>
               </View>
 
               {/* Status Alert Badge */}
-              <View style={[styles.safetyBadge, { backgroundColor: safety?.color + '20', borderColor: safety?.color }]}>
-                <Ionicons name="shield-checkmark-outline" size={16} color={safety?.color} style={{ marginRight: 6 }} />
-                <Text style={[styles.safetyText, { color: safety?.color }]}>
-                  {safety?.level} index: {safety?.message}
+              <View style={[styles.safetyBadgeGlass, { borderColor: safety?.color || '#4CAF50', backgroundColor: (safety?.color || '#4CAF50') + '15' }]}>
+                <Ionicons name="shield-checkmark-outline" size={16} color={safety?.color || '#4CAF50'} style={{ marginRight: 8 }} />
+                <Text style={[styles.safetyText, { color: safety?.color || '#4CAF50' }]}>
+                  {safety?.level || 'SAFE'} index: {safety?.message || 'Ideal sowing window.'}
                 </Text>
               </View>
-            </GradientCard>
+            </View>
 
             {/* Micro-Metrics Row */}
             <View style={styles.statsRow}>
-              <GradientCard style={styles.statCard}>
-                <Ionicons name="water-outline" size={24} color={theme.primary} />
-                <Text style={[typography.body, { color: theme.text, marginTop: 4, fontWeight: '700' }]}>
+              <View style={styles.statCardGlass}>
+                <Ionicons name="water-outline" size={20} color="#4CAF50" />
+                <Text style={styles.statValueText}>
                   {current.relative_humidity_2m}%
                 </Text>
-                <Text style={[typography.caption, { color: theme.textSecondary }]}>Humidity</Text>
-              </GradientCard>
-              <GradientCard style={styles.statCard}>
-                <Ionicons name="speedometer-outline" size={24} color={theme.primary} />
-                <Text style={[typography.body, { color: theme.text, marginTop: 4, fontWeight: '700' }]}>
+                <Text style={styles.statLabelTextSub}>Humidity</Text>
+              </View>
+              <View style={styles.statCardGlass}>
+                <Ionicons name="speedometer-outline" size={20} color="#4CAF50" />
+                <Text style={styles.statValueText}>
                   {current.wind_speed_10m} km/h
                 </Text>
-                <Text style={[typography.caption, { color: theme.textSecondary }]}>Wind Speed</Text>
-              </GradientCard>
-              <GradientCard style={styles.statCard}>
-                <Ionicons name="earth-outline" size={24} color={theme.primary} />
-                <Text style={[typography.body, { color: theme.text, marginTop: 4, fontWeight: '700' }]}>
+                <Text style={styles.statLabelTextSub}>Wind Speed</Text>
+              </View>
+              <View style={styles.statCardGlass}>
+                <Ionicons name="earth-outline" size={20} color="#4CAF50" />
+                <Text style={styles.statValueText}>
                   38%
                 </Text>
-                <Text style={[typography.caption, { color: theme.textSecondary }]}>Soil Moisture</Text>
-              </GradientCard>
+                <Text style={styles.statLabelTextSub}>Soil Moisture</Text>
+              </View>
             </View>
 
-            {/* Farming Pro-Advice */}
-            <Text style={[typography.h3, { color: theme.text, marginBottom: spacing.base, marginTop: spacing.xl }]}>
+            {/* Farming Pro-Advice ( Frosted Card ) */}
+            <Text style={[typography.h3, { color: '#FFFFFF', marginBottom: spacing.md, marginTop: spacing.xl }]}>
               💡 AI Smart Farming Advice
             </Text>
-            <GradientCard>
+            <View style={styles.adviceCardGlass}>
               <View style={styles.adviceItem}>
-                <Ionicons name="checkmark-circle" size={18} color={theme.success} style={{ marginRight: 8 }} />
-                <Text style={[typography.bodySmall, { color: theme.textSecondary, flex: 1 }]}>
+                <Ionicons name="checkmark-circle" size={18} color="#4CAF50" style={{ marginRight: 10, marginTop: 1 }} />
+                <Text style={styles.adviceItemText}>
                   Excellent day to inspect crops for aphids or mites as humidity levels are favorable.
                 </Text>
               </View>
               <View style={styles.adviceItem}>
-                <Ionicons name="close-circle" size={18} color={theme.danger} style={{ marginRight: 8 }} />
-                <Text style={[typography.bodySmall, { color: theme.textSecondary, flex: 1 }]}>
+                <Ionicons name="close-circle" size={18} color="#EF4444" style={{ marginRight: 10, marginTop: 1 }} />
+                <Text style={styles.adviceItemText}>
                   Postpone urea fertilizer application if light rain develops in the coming hours to avoid runoff.
                 </Text>
               </View>
-            </GradientCard>
+            </View>
           </View>
         ) : (
           <View style={{ alignItems: 'center', marginTop: 40 }}>
-            <Ionicons name="cloud-offline-outline" size={48} color={theme.textMuted} />
-            <Text style={[typography.body, { color: theme.textMuted, marginTop: spacing.sm }]}>
+            <Ionicons name="cloud-offline-outline" size={44} color="#688E75" />
+            <Text style={{ color: '#688E75', marginTop: spacing.sm, fontSize: 13 }}>
               Could not resolve weather parameters.
             </Text>
           </View>
@@ -242,27 +251,143 @@ export default function WeatherScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scrollContent: { padding: spacing.base, paddingBottom: 60 },
-  searchCard: { padding: spacing.base, marginBottom: spacing.base },
-  actionRow: { flexDirection: 'row' },
-  weatherInfoArea: { marginTop: spacing.sm },
-  mainCard: { padding: spacing.base, marginBottom: spacing.base },
-  mainHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  weatherEmoji: { fontSize: 44 },
-  tempRow: { flexDirection: 'row', alignItems: 'center', marginVertical: spacing.md },
-  tempText: { fontSize: 48, fontWeight: '800', marginRight: spacing.md },
-  weatherState: { flex: 1 },
-  safetyBadge: {
+  container: {
+    flex: 1,
+  },
+  weatherAmbientGlow: {
+    position: 'absolute',
+    top: 80,
+    right: -100,
+    width: width * 0.7,
+    height: width * 0.7,
+    borderRadius: (width * 0.7) / 2,
+    backgroundColor: 'rgba(76, 175, 80, 0.08)',
+    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
+  },
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 60,
+  },
+  searchCardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    padding: 16,
+    marginBottom: spacing.base,
+  },
+  actionRow: {
+    flexDirection: 'row',
+  },
+  weatherInfoArea: {
+    marginTop: spacing.sm,
+  },
+  mainCardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.25)',
+    padding: 20,
+    marginBottom: spacing.base,
+  },
+  mainHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  coordsHeading: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  latLonText: {
+    fontSize: 11,
+    color: '#A2C2AC',
+    marginTop: 2,
+  },
+  weatherEmoji: {
+    fontSize: 44,
+  },
+  tempRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: spacing.md,
+    marginVertical: spacing.md,
+  },
+  tempText: {
+    fontSize: 48,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginRight: 16,
+    letterSpacing: -1,
+  },
+  weatherState: {
+    flex: 1,
+  },
+  stateLabelText: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#FFFFFF',
+  },
+  apparentText: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    marginTop: 2,
+  },
+  safetyBadgeGlass: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 12,
     borderRadius: borderRadius.md,
     borderWidth: 1,
     marginTop: spacing.sm,
   },
-  safetyText: { fontSize: 13, fontWeight: '700', flex: 1 },
-  statsRow: { flexDirection: 'row' },
-  statCard: { flex: 1, alignItems: 'center', padding: spacing.md, marginHorizontal: 2 },
-  adviceItem: { flexDirection: 'row', alignItems: 'flex-start', marginVertical: 8 },
+  safetyText: {
+    fontSize: 12,
+    fontWeight: '700',
+    flex: 1,
+    lineHeight: 16,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  statCardGlass: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.md,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    padding: 12,
+  },
+  statValueText: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: 6,
+  },
+  statLabelTextSub: {
+    fontSize: 10,
+    color: '#A2C2AC',
+    marginTop: 2,
+  },
+  adviceCardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.md,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  adviceItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginVertical: 8,
+  },
+  adviceItemText: {
+    fontSize: 13,
+    color: '#A2C2AC',
+    flex: 1,
+    lineHeight: 18,
+  },
 });

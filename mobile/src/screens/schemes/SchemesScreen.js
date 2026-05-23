@@ -2,11 +2,12 @@
  * Government Scheme Assistant Screen
  * AI-powered central and state government scheme matcher for Indian farmers.
  * Filters by land size, state, and primary crops.
+ * Upgraded to high-fidelity dark glassmorphism, golden rewards ribbon styling, and clear action step guides.
  */
 
 import React, { useState } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, Alert, ActivityIndicator, Linking
+  View, Text, StyleSheet, ScrollView, Alert, ActivityIndicator, Linking, Dimensions, Pressable, Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ScreenHeader from '../../components/ScreenHeader';
@@ -16,6 +17,8 @@ import GradientCard from '../../components/GradientCard';
 import { useThemeStore } from '../../store/themeStore';
 import apiService from '../../services/api';
 import { typography, spacing, borderRadius } from '../../theme';
+
+const { width } = Dimensions.get('window');
 
 export default function SchemesScreen({ navigation }) {
   const theme = useThemeStore(s => s.theme);
@@ -49,6 +52,7 @@ export default function SchemesScreen({ navigation }) {
         throw new Error(res.error || 'Server error');
       }
     } catch (e) {
+      // Offline fallback government schemes match
       setSchemes([
         {
           id: 'pm-kisan',
@@ -83,18 +87,24 @@ export default function SchemesScreen({ navigation }) {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: '#000000' }]}>
+      {/* Background ambient lighting */}
+      <View style={styles.schemesAmbientGlow} />
+
       <ScreenHeader
         title="Scheme Matcher"
-        subtitle="AI-driven eligible government subsidies"
+        subtitle="AI eligible government subsidies"
         onBack={() => navigation.goBack()}
       />
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {!schemes ? (
-          <GradientCard style={styles.formCard}>
-            <Text style={[typography.h3, { color: theme.text, marginBottom: spacing.md }]}>
+          <View style={styles.formCardGlass}>
+            <Text style={styles.cardHeading}>
               📋 Eligibility Parameters
+            </Text>
+            <Text style={styles.cardSubText}>
+              Find fully subsidized financial schemes provided by both the Central Government and your state
             </Text>
 
             <AppInput
@@ -128,58 +138,58 @@ export default function SchemesScreen({ navigation }) {
               style={{ marginTop: spacing.md }}
               fullWidth
             />
-          </GradientCard>
+          </View>
         ) : (
           <View>
             <View style={styles.resultsHeader}>
-              <Text style={[typography.h3, { color: theme.text }]}>
+              <Text style={styles.resultsHeadingText}>
                 🏛️ Match Results ({schemes.length})
               </Text>
               <Pressable onPress={() => setSchemes(null)} style={styles.resetBtn}>
-                <Text style={{ color: theme.primary, fontWeight: '700' }}>Modify Profile</Text>
+                <Text style={{ color: '#4CAF50', fontWeight: '700' }}>Modify Profile</Text>
               </Pressable>
             </View>
 
             {schemes.map((scheme, idx) => (
-              <GradientCard key={idx} style={styles.schemeCard}>
+              <View key={idx} style={styles.schemeCardGlass}>
                 <View style={styles.schemeHeader}>
-                  <View style={[styles.typeBadge, { backgroundColor: theme.primary + '20' }]}>
-                    <Text style={{ color: theme.primary, fontSize: 10, fontWeight: '700' }}>
+                  <View style={styles.typeBadgeGlass}>
+                    <Text style={styles.typeBadgeText}>
                       {scheme.type?.toUpperCase()} SCHEME
                     </Text>
                   </View>
-                  <Ionicons name="ribbon-outline" size={20} color={theme.accent} />
+                  <Ionicons name="ribbon" size={20} color="#F59E0B" />
                 </View>
 
-                <Text style={[typography.h4, { color: theme.text, marginTop: spacing.sm }]}>
+                <Text style={styles.schemeTitleText}>
                   {scheme.name}
                 </Text>
 
-                <Text style={[typography.bodySmall, { color: theme.textSecondary, marginTop: spacing.xs, lineHeight: 18 }]}>
+                <Text style={styles.schemeDescText}>
                   {scheme.description}
                 </Text>
 
                 {/* Benefits */}
-                <Text style={[typography.label, { color: theme.accent, marginTop: spacing.md, marginBottom: spacing.xs }]}>
+                <Text style={styles.subHeadingText}>
                   🎁 Subsidies & Benefits
                 </Text>
                 {scheme.benefits && scheme.benefits.map((benefit, bIdx) => (
                   <View key={bIdx} style={styles.bulletRow}>
-                    <Ionicons name="gift-outline" size={14} color={theme.accent} style={{ marginRight: 6, marginTop: 2 }} />
-                    <Text style={[typography.caption, { color: theme.textSecondary, flex: 1 }]}>
+                    <Ionicons name="gift-outline" size={14} color="#F59E0B" style={{ marginRight: 8, marginTop: 2 }} />
+                    <Text style={styles.bulletText}>
                       {benefit}
                     </Text>
                   </View>
                 ))}
 
                 {/* Apply Steps */}
-                <Text style={[typography.label, { color: theme.primary, marginTop: spacing.md, marginBottom: spacing.xs }]}>
+                <Text style={styles.subHeadingTextGreen}>
                   📝 How to Apply
                 </Text>
                 {scheme.applySteps && scheme.applySteps.map((step, sIdx) => (
                   <View key={sIdx} style={styles.bulletRow}>
-                    <Text style={[styles.stepNum, { color: theme.primary }]}>{sIdx + 1}.</Text>
-                    <Text style={[typography.caption, { color: theme.textSecondary, flex: 1 }]}>
+                    <Text style={styles.stepNumText}>{sIdx + 1}.</Text>
+                    <Text style={styles.bulletText}>
                       {step}
                     </Text>
                   </View>
@@ -194,7 +204,7 @@ export default function SchemesScreen({ navigation }) {
                   style={{ marginTop: spacing.lg }}
                   fullWidth
                 />
-              </GradientCard>
+              </View>
             ))}
           </View>
         )}
@@ -204,19 +214,127 @@ export default function SchemesScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scrollContent: { padding: spacing.base, paddingBottom: 60 },
-  formCard: { padding: spacing.base },
+  container: {
+    flex: 1,
+  },
+  schemesAmbientGlow: {
+    position: 'absolute',
+    top: 80,
+    left: -100,
+    width: width * 0.7,
+    height: width * 0.7,
+    borderRadius: (width * 0.7) / 2,
+    backgroundColor: 'rgba(76, 175, 80, 0.08)',
+    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
+  },
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 60,
+  },
+  formCardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    padding: 20,
+  },
+  cardHeading: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  cardSubText: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    marginBottom: 20,
+    lineHeight: 16,
+  },
   resultsHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: spacing.md,
   },
-  resetBtn: { padding: 4 },
-  schemeCard: { padding: spacing.base, marginBottom: spacing.base },
-  schemeHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  typeBadge: { paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4 },
-  bulletRow: { flexDirection: 'row', alignItems: 'flex-start', marginVertical: 4 },
-  stepNum: { fontSize: 11, fontWeight: '700', marginRight: 6, width: 14 },
+  resultsHeadingText: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  resetBtn: {
+    padding: 4,
+  },
+  schemeCardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    padding: 20,
+    marginBottom: spacing.base,
+  },
+  schemeHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  typeBadgeGlass: {
+    backgroundColor: 'rgba(76, 175, 80, 0.15)',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.25)',
+  },
+  typeBadgeText: {
+    color: '#81C784',
+    fontSize: 8,
+    fontWeight: '800',
+  },
+  schemeTitleText: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: spacing.sm,
+  },
+  schemeDescText: {
+    fontSize: 13,
+    color: '#A2C2AC',
+    lineHeight: 18,
+    marginTop: 6,
+  },
+  subHeadingText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#FCD34D',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginTop: spacing.md,
+    marginBottom: spacing.xs,
+  },
+  subHeadingTextGreen: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#4CAF50',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginTop: spacing.md,
+    marginBottom: spacing.xs,
+  },
+  bulletRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginVertical: 4,
+  },
+  bulletText: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    flex: 1,
+    lineHeight: 16,
+  },
+  stepNumText: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#4CAF50',
+    marginRight: 8,
+    width: 14,
+  },
 });

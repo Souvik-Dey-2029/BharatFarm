@@ -1,11 +1,12 @@
 /**
  * Profile Screen
  * Farmer profile management, onboarding configuration details, XP badge awards overview, and settings.
+ * Upgraded to high-fidelity dark glassmorphic styling, glowing rewards grid, and organic details row.
  */
 
 import React, { useState } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, Alert, Pressable
+  View, Text, StyleSheet, ScrollView, Alert, Pressable, Dimensions, Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ScreenHeader from '../../components/ScreenHeader';
@@ -16,6 +17,8 @@ import { useThemeStore } from '../../store/themeStore';
 import { useAuthStore } from '../../store/authStore';
 import { useGamificationStore } from '../../store/gamificationStore';
 import { typography, spacing, borderRadius } from '../../theme';
+
+const { width } = Dimensions.get('window');
 
 export default function ProfileScreen({ navigation }) {
   const theme = useThemeStore(s => s.theme);
@@ -59,7 +62,10 @@ export default function ProfileScreen({ navigation }) {
   const unlockedBadges = achievements.filter(badge => badges.includes(badge.id));
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: '#000000' }]}>
+      {/* Background ambient lighting */}
+      <View style={styles.profileAmbientGlow} />
+
       <ScreenHeader
         title="My Profile"
         subtitle="Farmer smart settings"
@@ -69,22 +75,25 @@ export default function ProfileScreen({ navigation }) {
       />
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Avatar/Stats area */}
+        
+        {/* Glowing Avatar stats replication */}
         <View style={styles.avatarSection}>
-          <View style={[styles.avatarCircle, { backgroundColor: theme.primary }]}>
-            <Text style={styles.avatarText}>🧑‍🌾</Text>
+          <View style={styles.avatarGlowOuter}>
+            <View style={styles.avatarGlowInner}>
+              <Text style={styles.avatarText}>🧑‍🌾</Text>
+            </View>
           </View>
-          <Text style={[typography.h2, { color: theme.text, marginTop: spacing.sm }]}>
+          <Text style={styles.avatarNameText}>
             {currentUser?.name || 'Farmer'}
           </Text>
-          <Text style={[typography.caption, { color: theme.textSecondary }]}>
+          <Text style={styles.avatarLevelText}>
             Level {level} Cultivator • {xp} XP Accumulated
           </Text>
         </View>
 
         {isEditing ? (
-          <GradientCard style={styles.card}>
-            <Text style={[typography.h3, { color: theme.text, marginBottom: spacing.md }]}>
+          <View style={styles.cardGlass}>
+            <Text style={styles.cardHeading}>
               🔧 Edit Details
             </Text>
             <AppInput label="Full Name" value={name} onChangeText={setName} />
@@ -100,44 +109,44 @@ export default function ProfileScreen({ navigation }) {
               style={{ marginTop: spacing.md }}
               fullWidth
             />
-          </GradientCard>
+          </View>
         ) : (
           <View>
-            <GradientCard style={styles.card}>
-              <Text style={[typography.h3, { color: theme.text, marginBottom: spacing.md }]}>
+            <View style={styles.cardGlass}>
+              <Text style={styles.cardHeading}>
                 📝 Account details
               </Text>
               <View style={styles.detailsRow}>
-                <Text style={{ color: theme.textSecondary }}>Registered Phone:</Text>
-                <Text style={{ color: theme.text, fontWeight: '600' }}>{currentUser?.phone}</Text>
+                <Text style={styles.detailsRowLabel}>Registered Phone:</Text>
+                <Text style={styles.detailsRowVal}>{currentUser?.phone}</Text>
               </View>
               <View style={styles.detailsRow}>
-                <Text style={{ color: theme.textSecondary }}>State Jurisdiction:</Text>
-                <Text style={{ color: theme.text, fontWeight: '600' }}>{currentUser?.state || 'West Bengal'}</Text>
+                <Text style={styles.detailsRowLabel}>State Jurisdiction:</Text>
+                <Text style={styles.detailsRowVal}>{currentUser?.state || 'West Bengal'}</Text>
               </View>
-              <View style={styles.detailsRow}>
-                <Text style={{ color: theme.textSecondary }}>Cultivable Acreage:</Text>
-                <Text style={{ color: theme.text, fontWeight: '600' }}>
+              <View style={[styles.detailsRow, { borderBottomWidth: 0 }]}>
+                <Text style={styles.detailsRowLabel}>Cultivable Acreage:</Text>
+                <Text style={styles.detailsRowVal}>
                   {currentUser?.landSize ? `${currentUser.landSize} Acres` : 'Not set'}
                 </Text>
               </View>
-            </GradientCard>
+            </View>
 
-            {/* Badges section */}
-            <Text style={[typography.h3, { color: theme.text, marginVertical: spacing.md }]}>
+            {/* Badges section grid matching website achievements */}
+            <Text style={[typography.h3, { color: '#FFFFFF', marginVertical: spacing.md, marginTop: spacing.xl }]}>
               🏆 Achievements & Badges ({unlockedBadges.length})
             </Text>
             {unlockedBadges.length > 0 ? (
               <View style={styles.badgesRow}>
                 {unlockedBadges.map(badge => (
-                  <View key={badge.id} style={[styles.badgeItem, { backgroundColor: theme.surface, borderColor: theme.border }]}>
-                    <View style={[styles.badgeIcon, { backgroundColor: theme.primary + '20' }]}>
-                      <Ionicons name={badge.icon} size={24} color={theme.primary} />
+                  <View key={badge.id} style={styles.badgeItemGlass}>
+                    <View style={styles.badgeIconWrapper}>
+                      <Ionicons name={badge.icon} size={24} color="#4CAF50" />
                     </View>
-                    <Text style={[typography.bodySmall, { color: theme.text, fontWeight: '700', marginTop: 4 }]} numberOfLines={1}>
+                    <Text style={styles.badgeTitleText} numberOfLines={1}>
                       {badge.title}
                     </Text>
-                    <Text style={[typography.caption, { color: theme.textSecondary, textAlign: 'center' }]} numberOfLines={1}>
+                    <Text style={styles.badgeDescText} numberOfLines={1}>
                       {badge.description}
                     </Text>
                   </View>
@@ -145,8 +154,8 @@ export default function ProfileScreen({ navigation }) {
               </View>
             ) : (
               <GradientCard style={{ alignItems: 'center', padding: spacing.lg }}>
-                <Ionicons name="trophy-outline" size={32} color={theme.textMuted} />
-                <Text style={[typography.bodySmall, { color: theme.textSecondary, marginTop: 4 }]}>
+                <Ionicons name="trophy-outline" size={32} color="#688E75" />
+                <Text style={{ color: '#A2C2AC', marginTop: 8, fontSize: 13, textAlign: 'center' }}>
                   No achievements unlocked yet. Scan leaves or talk to KrishiBot to earn badges!
                 </Text>
               </GradientCard>
@@ -168,33 +177,129 @@ export default function ProfileScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scrollContent: { padding: spacing.base, paddingBottom: 60 },
-  avatarSection: { alignItems: 'center', marginVertical: spacing.lg },
-  avatarCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+  container: {
+    flex: 1,
+  },
+  profileAmbientGlow: {
+    position: 'absolute',
+    top: 80,
+    right: -100,
+    width: width * 0.7,
+    height: width * 0.7,
+    borderRadius: (width * 0.7) / 2,
+    backgroundColor: 'rgba(76, 175, 80, 0.08)',
+    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
+  },
+  scrollContent: {
+    padding: 20,
+    paddingBottom: 60,
+  },
+  avatarSection: {
+    alignItems: 'center',
+    marginVertical: spacing.lg,
+  },
+  avatarGlowOuter: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: 'rgba(76, 175, 80, 0.12)',
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.25)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#4CAF50',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 6,
+  },
+  avatarGlowInner: {
+    width: 74,
+    height: 74,
+    borderRadius: 37,
+    backgroundColor: 'rgba(16, 26, 18, 0.9)',
+    borderWidth: 1.5,
+    borderColor: '#4CAF50',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  avatarText: { fontSize: 44 },
-  card: { padding: spacing.base },
-  detailsRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#E2E8F0' },
-  badgesRow: { flexDirection: 'row', flexWrap: 'wrap', marginHorizontal: -4 },
-  badgeItem: {
-    width: '48%',
-    padding: spacing.md,
+  avatarText: {
+    fontSize: 40,
+  },
+  avatarNameText: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: spacing.sm,
+  },
+  avatarLevelText: {
+    fontSize: 12,
+    color: '#A2C2AC',
+    marginTop: 2,
+  },
+  cardGlass: {
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
+    borderRadius: borderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.22)',
+    padding: 20,
+  },
+  cardHeading: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginBottom: spacing.md,
+  },
+  detailsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(76, 175, 80, 0.15)',
+  },
+  detailsRowLabel: {
+    color: '#A2C2AC',
+    fontSize: 13,
+  },
+  detailsRowVal: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  badgesRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  badgeItemGlass: {
+    width: (width - 40 - 8) / 2, // Perfect 2-column grid
+    backgroundColor: 'rgba(12, 22, 14, 0.65)',
     borderRadius: borderRadius.md,
     borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.25)',
+    padding: 14,
     alignItems: 'center',
-    margin: 4,
   },
-  badgeIcon: {
+  badgeIconWrapper: {
     width: 44,
     height: 44,
     borderRadius: 22,
+    backgroundColor: 'rgba(76, 175, 80, 0.15)',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(76, 175, 80, 0.28)',
+  },
+  badgeTitleText: {
+    fontSize: 13,
+    color: '#FFFFFF',
+    fontWeight: '800',
+    marginTop: 6,
+  },
+  badgeDescText: {
+    fontSize: 10,
+    color: '#A2C2AC',
+    marginTop: 2,
+    textAlign: 'center',
   },
 });
