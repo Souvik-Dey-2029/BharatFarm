@@ -350,7 +350,6 @@ const styles = StyleSheet.create({
     height: width * 0.7,
     borderRadius: (width * 0.7) / 2,
     backgroundColor: 'rgba(76, 175, 80, 0.08)',
-    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
   },
   langBarGlass: {
     flexDirection: 'row',
@@ -462,7 +461,6 @@ const styles = StyleSheet.create({
   waveRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 3,
   },
   waveBar: {
     width: 2,

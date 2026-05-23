@@ -42,7 +42,8 @@
     "start-offline": "node scripts/start-stable.js --offline --clear",
     "android": "expo start --android --lan",
     "ios": "expo start --ios --lan",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "doctor": "npx expo-doctor"
   },
   "private": true
 }

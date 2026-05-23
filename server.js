@@ -403,7 +403,7 @@ const corsOptions = {
     origin: '*', // For React Native Expo clients, open access is necessary as mobile IPs are dynamic
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-    credentials: true
+    credentials: false
 };
 app.use(cors(corsOptions));
 
@@ -1381,6 +1381,298 @@ app.post('/api/otp/verify', (req, res) => {
     };
 
     res.status(200).json({ success: true, user: user });
+});
+
+// ── APK CONFIG SYSTEM & DOWNLOAD FLOW ───────────────────────────────────────
+function renderDownloadPage(apkUrl, expoUrl) {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download BharatFarm APK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4caf50;
+            --primary-glow: rgba(76, 175, 80, 0.4);
+            --bg-dark: #0a0f0a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8a0;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at center, #0f1f10 0%, var(--bg-dark) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary), transparent 40%, transparent 60%, var(--primary));
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        .logo {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px var(--primary-glow);
+            animation: pulse 2s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px var(--primary-glow)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--primary)); }
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #c8e6c9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px var(--primary-glow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(76, 175, 80, 0.6);
+            background: linear-gradient(135deg, #66bb6a 0%, #388e3c 100%);
+        }
+        .download-btn:active {
+            transform: translateY(1px);
+        }
+        .badge-ver {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+        .instructions-title {
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 30px 0 15px;
+            color: #ffffff;
+            border-left: 3px solid var(--primary);
+            padding-left: 10px;
+        }
+        .steps {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .step {
+            display: flex;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.015);
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.2s;
+        }
+        .step:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: rgba(76, 175, 80, 0.15);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .step-text {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+        .step-text strong {
+            color: #ffffff;
+        }
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .fallback-container {
+            padding: 20px 0;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(76, 175, 80, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <i class="logo fas fa-seedling"></i>
+        <h1>BharatFarm Mobile</h1>
+        <div class="badge-ver">v1.0.0 • Production Release</div>
+        
+        ${apkUrl ? `
+            <p class="subtitle">Empowering Indian farmers with real-time AI advice, automated disease scanning, localized weather, and direct market trade.</p>
+            <a href="${apkUrl}" class="download-btn">
+                <i class="fab fa-android"></i> Download Production APK
+            </a>
+            
+            <div class="instructions-title">Installation Instructions</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">Tap the <strong>Download Production APK</strong> button above to start downloading the file.</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">Open the downloaded <strong>.apk</strong> file from your notification tray or Downloads folder.</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">If prompted by Android/your browser, enable <strong>"Install from Unknown Sources"</strong> or <strong>"Allow from this source"</strong>.</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text">Tap <strong>Install</strong>, open the app, and experience offline-first AI smart farming!</div>
+                </div>
+            </div>
+        ` : `
+            <div class="fallback-container">
+                <div class="spinner"></div>
+                <h3 style="margin-bottom:10px; color:#ffe082;"><i class="fas fa-hammer"></i> Android Build Running</h3>
+                <p class="subtitle" style="margin-bottom:20px;">The production standalone APK build is currently being compiled on our EAS server. Please check back in a few minutes.</p>
+                ${expoUrl ? `
+                    <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:15px;">Are you a presenter or judge? You can launch the live session instantly in Expo Go:</p>
+                    <a href="${expoUrl}" class="download-btn btn-secondary">
+                        <i class="fas fa-external-link-alt"></i> Open in Expo Go
+                    </a>
+                ` : ''}
+            </div>
+        `}
+        
+        <p class="footer-note">&copy; 2026 BharatFarm. Built for the future of Indian agriculture.</p>
+    </div>
+</body>
+</html>`;
+}
+
+app.get('/download-app', (req, res) => {
+    const apkUrl = BHARATFARM_APK_URL || '';
+    const expoUrl = expoSessionRegistry.expoUrl || '';
+    res.setHeader('Content-Type', 'text/html');
+    res.status(200).send(renderDownloadPage(apkUrl, expoUrl));
+});
+
+app.get('/download-apk-placeholder', (req, res) => {
+    res.redirect('/download-app');
+});
+
+app.get('/api/mobile-config', (req, res) => {
+    const currentExpoSession = expoSessionRegistry.expoUrl || '';
+    const config = deriveExpoSessionState(expoSessionRegistry);
+    const MOBILE_APP_CONFIG = {
+        apkUrl: BHARATFARM_APK_URL || '',
+        expoUrl: currentExpoSession,
+        version: '1.0.0',
+        mode: BHARATFARM_APK_URL ? 'apk' : 'expo-go',
+        releaseNotes: [
+            'Standalone Android APK distribution',
+            'Render-backed API with smart offline fallback',
+            'Mobile parity for AI, scanner, weather, schemes, marketplace, wiki, crops, analytics, and gamification'
+        ],
+        buildStatus: BHARATFARM_APK_URL ? 'available' : 'pending',
+        downloadPageUrl: `${req.protocol}://${req.get('host')}/download-app`,
+        qrTargetUrl: config.qrTargetUrl,
+        hasLiveDemo: config.hasLiveDemo,
+        demoUrl: config.demoUrl || ''
+    };
+    res.setHeader('Cache-Control', 'no-store, max-age=0');
+    res.status(200).json(MOBILE_APP_CONFIG);
 });
 
 // ── STATIC ARCHITECTURE (HTML/JS/CSS client-serving) ────────────────────────

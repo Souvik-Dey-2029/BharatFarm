@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const apkLink = appSection.querySelector('[data-apk-link]');
                 
                 // Static direct or config-based production APK URL
-                const productionApkUrl = config.apkUrl || 'https://bharatfarm-api.onrender.com/download-apk-placeholder';
+                const productionApkUrl = window.location.origin + '/download-app';
                 
                 if (apkQrImage) {
                     apkQrImage.src = `/api/expo-qr.svg?url=${encodeURIComponent(productionApkUrl)}`;

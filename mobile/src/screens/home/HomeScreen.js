@@ -9,7 +9,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, RefreshControl, Dimensions, Pressable,
-  ActivityIndicator, Image, Animated
+  ActivityIndicator, Image, Animated, Alert
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -127,7 +127,7 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.brandRow}>
             <Text style={styles.brandText}>Bharat<Text style={{ color: '#4CAF50' }}>Farm</Text></Text>
             <View style={styles.crownBadge}>
-              <Ionicons name="crown" size={10} color="#F59E0B" />
+                <Ionicons name="ribbon-outline" size={10} color="#F59E0B" />
               <Text style={styles.crownBadgeText}>Premium</Text>
             </View>
           </View>
@@ -174,7 +174,7 @@ export default function HomeScreen({ navigation }) {
                 onPress={() => navigation.navigate('LeafScanner')}
                 style={styles.heroPrimaryBtn}
               >
-                <Ionicons name="seedling-outline" size={16} color="#FFFFFF" style={{ marginRight: 6 }} />
+                <Ionicons name="leaf-outline" size={16} color="#FFFFFF" style={{ marginRight: 6 }} />
                 <Text style={styles.heroPrimaryBtnText}>Get Started</Text>
               </Pressable>
               <Pressable
@@ -221,7 +221,7 @@ export default function HomeScreen({ navigation }) {
             </View>
 
             <Pressable onPress={handleTakeDailyQuiz} style={styles.takeQuizBtn}>
-              <Ionicons name="brain-outline" size={15} color="#000000" style={{ marginRight: 6 }} />
+              <Ionicons name="school-outline" size={15} color="#000000" style={{ marginRight: 6 }} />
               <Text style={styles.takeQuizBtnText}>Take Daily Quiz</Text>
             </Pressable>
           </LinearGradient>
@@ -231,7 +231,7 @@ export default function HomeScreen({ navigation }) {
             
             {/* CARD 1: Next Activity (Roadmap) */}
             <Pressable
-              onPress={() => navigation.navigate('Calculator')}
+              onPress={() => navigation.navigate('Crops')}
               style={styles.cardItem}
             >
               <View style={styles.glassCard}>
@@ -369,6 +369,36 @@ export default function HomeScreen({ navigation }) {
                 </View>
               </View>
             </Pressable>
+            
+            <Pressable
+              onPress={() => navigation.navigate('Wiki')}
+              style={styles.cardItem}
+            >
+              <View style={styles.glassCard}>
+                <Text style={styles.cardMiniLabel}>Crop Health Wiki</Text>
+                <Text style={styles.marketTitle}>Disease Encyclopedia</Text>
+                <Text style={styles.marketDesc}>Offline-ready disease, pest, and soil health playbooks.</Text>
+                <View style={styles.wikiIconRow}>
+                  <Ionicons name="book-outline" size={24} color="#81C784" />
+                  <Ionicons name="medical-outline" size={24} color="#4CAF50" />
+                  <Ionicons name="shield-checkmark-outline" size={24} color="#F59E0B" />
+                </View>
+              </View>
+            </Pressable>
+
+            <Pressable
+              onPress={() => navigation.navigate('Leaderboard')}
+              style={styles.cardItem}
+            >
+              <View style={styles.glassCard}>
+                <Text style={styles.cardMiniLabel}>Leaderboard</Text>
+                <Text style={styles.marketTitle}>Farmer League</Text>
+                <Text style={styles.marketDesc}>XP ranks, badges, streaks, and quiz momentum.</Text>
+                <View style={styles.rankPreview}>
+                  <Text style={styles.rankPreviewText}>#{Math.max(1, 6 - Math.floor(xp / 250))}</Text>
+                </View>
+              </View>
+            </Pressable>
 
           </View>
 
@@ -379,9 +409,18 @@ export default function HomeScreen({ navigation }) {
               style={styles.shortcutCard}
             >
               <View style={styles.shortcutGlass}>
-                <Ionicons name="landmark-outline" size={18} color="#4CAF50" style={{ marginRight: 8 }} />
+                <Ionicons name="business-outline" size={18} color="#4CAF50" style={{ marginRight: 8 }} />
                 <Text style={styles.shortcutText}>Govt Subsidy Matchmaker</Text>
-              </Pressable>
+              </View>
+            </Pressable>
+            <Pressable
+              onPress={() => navigation.navigate('Notifications')}
+              style={[styles.shortcutCard, { marginTop: 10 }]}
+            >
+              <View style={styles.shortcutGlass}>
+                <Ionicons name="notifications-outline" size={18} color="#F59E0B" style={{ marginRight: 8 }} />
+                <Text style={styles.shortcutText}>Smart Alerts & Offline Queue</Text>
+              </View>
             </Pressable>
           </View>
 
@@ -463,7 +502,6 @@ const styles = StyleSheet.create({
     height: width * 0.8,
     borderRadius: (width * 0.8) / 2,
     backgroundColor: 'rgba(76, 175, 80, 0.12)',
-    filter: Platform.OS === 'ios' ? 'blur(60px)' : undefined,
   },
   topBar: {
     flexDirection: 'row',
@@ -541,14 +579,20 @@ const styles = StyleSheet.create({
   },
   heroBgImage: {
     position: 'absolute',
-    inset: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
     width: '100%',
     height: 290,
     resizeMode: 'cover',
   },
   heroOverlay: {
     position: 'absolute',
-    inset: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
   heroContent: {
     paddingHorizontal: 20,
@@ -819,7 +863,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 35,
-    gap: 4,
     marginTop: 8,
   },
   waveformBar: {
@@ -827,6 +870,31 @@ const styles = StyleSheet.create({
     height: 12,
     backgroundColor: '#4CAF50',
     borderRadius: 1.5,
+    marginHorizontal: 2,
+  },
+  wikiIconRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 14,
+    paddingHorizontal: 8,
+  },
+  rankPreview: {
+    alignSelf: 'flex-start',
+    marginTop: 16,
+    width: 58,
+    height: 58,
+    borderRadius: 29,
+    borderWidth: 1,
+    borderColor: 'rgba(245,158,11,0.45)',
+    backgroundColor: 'rgba(245,158,11,0.12)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rankPreviewText: {
+    color: '#FCD34D',
+    fontSize: 18,
+    fontWeight: '900',
   },
   // Leaf Scanner
   scannerThumbnail: {

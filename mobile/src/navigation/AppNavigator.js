@@ -19,6 +19,10 @@ import MarketplaceScreen from '../screens/marketplace/MarketplaceScreen';
 import SchemesScreen from '../screens/schemes/SchemesScreen';
 import CalculatorScreen from '../screens/calculator/CalculatorScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import CropsScreen from '../screens/crops/CropsScreen';
+import WikiScreen from '../screens/wiki/WikiScreen';
+import NotificationsScreen from '../screens/notifications/NotificationsScreen';
+import LeaderboardScreen from '../screens/leaderboard/LeaderboardScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -99,6 +103,10 @@ export default function AppNavigator() {
           <Stack.Screen name="Schemes" component={SchemesScreen} />
           <Stack.Screen name="Calculator" component={CalculatorScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Crops" component={CropsScreen} />
+          <Stack.Screen name="Wiki" component={WikiScreen} />
+          <Stack.Screen name="Notifications" component={NotificationsScreen} />
+          <Stack.Screen name="Leaderboard" component={LeaderboardScreen} />
         </>
       )}
     </Stack.Navigator>

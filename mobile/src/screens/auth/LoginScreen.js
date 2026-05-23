@@ -25,7 +25,7 @@ const ONBOARDING_SLIDES = [
     badge: 'Next Gen Farming',
     title: 'The Future of Agriculture',
     desc: 'BharatFarm integrates cutting-edge AI, machine learning, and comprehensive crop data to bring an entire farming ecosystem right to your mobile device.',
-    icon: 'seedling-outline',
+    icon: 'leaf-outline',
     color: '#4CAF50',
     details: ['🤖 Voice Assistant', '🔬 Disease Scanner']
   },
@@ -468,7 +468,6 @@ const styles = StyleSheet.create({
     height: width * 0.8,
     borderRadius: (width * 0.8) / 2,
     backgroundColor: 'rgba(76, 175, 80, 0.16)',
-    filter: Platform.OS === 'ios' ? 'blur(60px)' : undefined,
   },
   glowCircle2: {
     position: 'absolute',
@@ -478,7 +477,6 @@ const styles = StyleSheet.create({
     height: width * 0.7,
     borderRadius: (width * 0.7) / 2,
     backgroundColor: 'rgba(16, 185, 129, 0.08)',
-    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
   },
   gridLinesOverlay: {
     position: 'absolute',

@@ -1,7 +1,8 @@
-/**
- * BharatFarm Weather Service
- * Uses Open-Meteo (free, no API key needed) for weather data
- */
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const API_BASE_URL = 'https://bharatfarm-api.onrender.com';
+const WEATHER_CACHE_KEY = 'bharatfarm_cached_weather_v1';
+const GEOCODE_CACHE_KEY = 'bharatfarm_cached_geocode_v1';
 
 const WEATHER_ICONS = {
   0: { icon: 'sun', label: 'Clear Sky', emoji: '☀️' },
@@ -42,13 +43,23 @@ export function getFarmingSafetyLevel(weatherCode, windSpeed, temp) {
 
 export async function fetchWeatherByCoords(lat, lon) {
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=auto&forecast_days=7`;
+    const url = `${API_BASE_URL}/api/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`;
 
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Weather API error: ${response.status}`);
-    return await response.json();
+    const payload = await response.json();
+    const data = payload?.data || payload;
+    await AsyncStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data }));
+    return data;
   } catch (error) {
     console.warn('[Weather Service] Failed to fetch. Using high-fidelity mock weather fallback.', error.message);
+    try {
+      const cached = await AsyncStorage.getItem(WEATHER_CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed?.data?.current) return parsed.data;
+      }
+    } catch (_) {}
     // Return high-fidelity mock weather data structure matching Open-Meteo format
     return {
       current: {
@@ -73,13 +84,22 @@ export async function fetchWeatherByCoords(lat, lon) {
 
 export async function geocodeCity(cityName) {
   try {
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=5&language=en&format=json`;
+    const url = `${API_BASE_URL}/api/weather/geocode?city=${encodeURIComponent(cityName)}`;
     const response = await fetch(url);
     if (!response.ok) throw new Error('Geocoding failed');
     const data = await response.json();
-    return data.results || [];
+    const results = data.results || data.data?.results || [];
+    await AsyncStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), cityName, results }));
+    return results;
   } catch (error) {
     console.warn('[Geocoding Service] Failed. Using mock city geocoding fallback.', error.message);
+    try {
+      const cached = await AsyncStorage.getItem(GEOCODE_CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed?.results) && parsed.results.length) return parsed.results;
+      }
+    } catch (_) {}
     const mockLocations = {
       'hooghly': [{ name: 'Hooghly', latitude: 22.90, longitude: 88.39, country: 'India', admin1: 'West Bengal' }],
       'kolkata': [{ name: 'Kolkata', latitude: 22.57, longitude: 88.36, country: 'India', admin1: 'West Bengal' }],

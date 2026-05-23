@@ -245,7 +245,6 @@ const styles = StyleSheet.create({
     height: width * 0.7,
     borderRadius: (width * 0.7) / 2,
     backgroundColor: 'rgba(76, 175, 80, 0.08)',
-    filter: Platform.OS === 'ios' ? 'blur(50px)' : undefined,
   },
   scrollContent: {
     padding: 20,
@@ -278,7 +277,6 @@ const styles = StyleSheet.create({
   unitRow: {
     flexDirection: 'row',
     marginBottom: spacing.md,
-    gap: 6,
   },
   unitBtnGlass: {
     flex: 1,
