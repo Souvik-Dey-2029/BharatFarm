@@ -59,11 +59,27 @@ try {
     // No persisted Expo session yet.
 }
 
-if (OPENROUTER_API_KEY) {
-    console.log(`[Auth] API Key detected (starts with: ${OPENROUTER_API_KEY.substring(0, 7)}...)`);
-} else {
-    console.warn('[Auth] WARNING: OPENROUTER_API_KEY is missing from environment variables!');
-}
+// ── PRODUCTION STARTUP DIAGNOSTICS ──────────────────────────────────────────
+(function validateEnvironment() {
+    const diagnostics = {
+        NODE_ENV: process.env.NODE_ENV || 'development',
+        PORT: PORT,
+        OPENROUTER_API_KEY: OPENROUTER_API_KEY ? `✅ Configured (${OPENROUTER_API_KEY.substring(0, 7)}...)` : '⚠️  MISSING — Smart Fallback AI will be used',
+        BHARATFARM_APK_URL: BHARATFARM_APK_URL ? '✅ Configured' : '⚠️  Not set — APK download will be disabled',
+        BHARATFARM_EXPO_URL: BHARATFARM_EXPO_URL ? '✅ Configured' : 'ℹ️  Not set (optional)',
+        PLATFORM: process.platform,
+        NODE_VERSION: process.version,
+        MEMORY: `${Math.round(process.memoryUsage().rss / 1024 / 1024)}MB RSS`
+    };
+
+    console.log('\n┌─────────────────────────────────────────────┐');
+    console.log('│  BharatFarm Production Environment Check    │');
+    console.log('├─────────────────────────────────────────────┤');
+    for (const [key, value] of Object.entries(diagnostics)) {
+        console.log(`│  ${key.padEnd(22)} ${String(value).substring(0, 35)}`);
+    }
+    console.log('└─────────────────────────────────────────────┘\n');
+})();
 
 function normalizeExpoSessionUrl(url) {
     const trimmed = (url || "").trim();
@@ -185,86 +201,122 @@ function deriveExpoSessionState(session = expoSessionRegistry) {
     const hasLiveExpo = !!session?.expoUrl;
     const hasApk = !!BHARATFARM_APK_URL;
     const isFresh = ageMs <= EXPO_SESSION_STALE_MS;
-    const lanExpoUrl = `exp://${SERVER_LAN_IP}:8081`;
 
-    let mode = 'expo-go';
+    // ── Primary mode (what the QR card shows) ─────────────────────────
+    let mode = hasApk ? 'apk' : 'expo-go';
     let status = 'pending';
     let active = false;
-    let primaryUrl = session?.expoUrl || '';
+    let primaryUrl = '';
     let qrTargetUrl = DEFAULT_EXPO_GO_URL;
-    let qrBadge = 'Waiting for Live Session';
-    let qrValidity = 'Start Expo to activate live mobile onboarding';
-    let sessionTitle = 'Expo Session Pending';
-    let sessionSubtitle = 'Start Expo to activate the live mobile experience';
+    let qrBadge = 'Get BharatFarm';
+    let qrValidity = 'Download the app to get started';
+    let sessionTitle = 'BharatFarm Mobile';
+    let sessionSubtitle = 'Your AI farming companion';
     let guideSteps = [
-        'Start the Expo dev server in the /mobile folder.',
-        'Keep Expo Go open so the runtime can publish its URL.',
-        'Use the copy link button while the live session is connecting.'
+        'Scan the QR code with your phone camera.',
+        'Download and install BharatFarm.',
+        'Open the app and start farming smarter!'
     ];
-    let lanFallbackUrl = lanExpoUrl;
-    let wifiNote = `Connect phone to same WiFi as ${SERVER_LAN_IP}`;
 
+    // ── Expo live demo state ──────────────────────────────────────────
+    let demoStatus = 'inactive';
+    let demoUrl = '';
+    let demoQrTargetUrl = '';
+    let demoBadge = 'Live Demo';
+    let demoValidity = 'Start a demo session to try instantly';
+    let demoGuideSteps = [
+        'Scan the QR code with your phone camera.',
+        'BharatFarm opens instantly for testing.',
+        'No install needed — try all features live!'
+    ];
+
+    // Determine Expo demo state
+    if (hasLiveExpo && isFresh) {
+        demoStatus = 'live';
+        demoUrl = session.expoUrl;
+        demoQrTargetUrl = session.expoUrl;
+        demoBadge = 'Live Demo Active';
+        demoValidity = 'Scan to try BharatFarm instantly';
+        demoGuideSteps = [
+            'Scan the QR code with your phone camera.',
+            'BharatFarm opens instantly on your phone.',
+            'Try crop scanning, weather, KrishiBot & more!'
+        ];
+    } else if (hasLiveExpo && !isFresh) {
+        demoStatus = 'reconnecting';
+        demoUrl = session.expoUrl;
+        demoQrTargetUrl = session.expoUrl;
+        demoBadge = 'Demo Reconnecting';
+        demoValidity = 'Session refreshing — try again shortly';
+        demoGuideSteps = [
+            'Demo session is reconnecting.',
+            'Try again in a moment.',
+            'Or install the APK for permanent access!'
+        ];
+    }
+
+    // Determine APK / primary state
     if (hasApk) {
         mode = 'apk';
         status = 'apk';
         active = true;
         primaryUrl = BHARATFARM_APK_URL;
         qrTargetUrl = BHARATFARM_APK_URL;
-        qrBadge = 'Production APK Available';
-        qrValidity = 'Scan to install BharatFarm Mobile';
-        sessionTitle = 'Production APK Available';
-        sessionSubtitle = 'Scan to install BharatFarm Mobile';
+        qrBadge = 'BharatFarm for Android';
+        qrValidity = 'Scan to install on your phone';
+        sessionTitle = 'Install BharatFarm';
+        sessionSubtitle = 'Download the Android app';
         guideSteps = [
-            'Scan the QR to download the APK.',
-            'Install BharatFarm on Android.',
-            'Open the app and continue without Expo Go.'
+            'Scan the QR code to download the APK.',
+            'Install BharatFarm on your Android phone.',
+            'Open the app and start farming smarter!'
         ];
     } else if (hasLiveExpo && isFresh) {
+        // No APK configured — Expo becomes the primary
         mode = 'expo-go';
         status = 'live';
         active = true;
         primaryUrl = session.expoUrl;
         qrTargetUrl = session.expoUrl;
-        qrBadge = 'Live BharatFarm Mobile Session';
-        qrValidity = 'Scan to open instantly in Expo Go';
-        sessionTitle = 'Live BharatFarm Mobile Session';
-        sessionSubtitle = 'Scan to open instantly in Expo Go';
+        qrBadge = 'BharatFarm Live';
+        qrValidity = 'Scan to open BharatFarm instantly';
+        sessionTitle = 'Try BharatFarm';
+        sessionSubtitle = 'Scan to open the live demo';
         guideSteps = [
-            'Scan the QR with Expo Go to open the live session.',
-            'Allow BharatFarm to load inside Expo Go.',
-            'Use the copy link button if you need to relaunch manually.'
+            'Scan the QR code with your phone camera.',
+            'BharatFarm opens instantly on your phone.',
+            'Try crop scanning, weather, KrishiBot & more!'
         ];
     } else if (hasLiveExpo && !isFresh) {
-        // Stale session — fallback to LAN URL
         mode = 'expo-go';
-        status = 'lan-fallback';
+        status = 'reconnecting';
         active = true;
-        primaryUrl = lanExpoUrl;
-        qrTargetUrl = lanExpoUrl;
-        qrBadge = 'LAN Session (Auto-Detected)';
-        qrValidity = wifiNote;
-        sessionTitle = 'LAN Expo Session';
-        sessionSubtitle = wifiNote;
+        primaryUrl = session.expoUrl;
+        qrTargetUrl = session.expoUrl;
+        qrBadge = 'BharatFarm Mobile';
+        qrValidity = 'Reconnecting to live session...';
+        sessionTitle = 'BharatFarm Mobile';
+        sessionSubtitle = 'Reconnecting — please wait a moment';
         guideSteps = [
-            'Connect your phone to the same WiFi network.',
-            `Open Expo Go and enter: ${lanExpoUrl}`,
-            'Once live, the QR will switch automatically.'
+            'Scan the QR code with your phone camera.',
+            'If the app doesn\'t open, try again in a moment.',
+            'The connection will restore automatically.'
         ];
     } else {
-        // No session at all — generate LAN fallback QR
-        mode = 'expo-go';
-        status = 'lan-fallback';
-        active = true;
-        primaryUrl = lanExpoUrl;
-        qrTargetUrl = lanExpoUrl;
-        qrBadge = 'LAN Session (Auto-Generated)';
-        qrValidity = wifiNote;
-        sessionTitle = 'Local LAN Session';
-        sessionSubtitle = wifiNote;
+        // Nothing configured — show placeholder
+        mode = 'pending';
+        status = 'pending';
+        active = false;
+        primaryUrl = DEFAULT_EXPO_GO_URL;
+        qrTargetUrl = DEFAULT_EXPO_GO_URL;
+        qrBadge = 'BharatFarm Mobile';
+        qrValidity = 'APK coming soon';
+        sessionTitle = 'BharatFarm Mobile';
+        sessionSubtitle = 'Download available soon';
         guideSteps = [
-            `Run \`npm run start-stable\` from the /mobile folder.`,
-            'Connect your phone to the same WiFi network.',
-            `Open Expo Go and scan the QR or enter: ${lanExpoUrl}`
+            'APK download will be available soon.',
+            'Or try the live demo when available.',
+            'Check back shortly!'
         ];
     }
 
@@ -285,15 +337,21 @@ function deriveExpoSessionState(session = expoSessionRegistry) {
         qrImageUrl,
         qrTargetUrl,
         fallbackUrl: DEFAULT_EXPO_GO_URL,
-        lanFallbackUrl,
-        lanIp: SERVER_LAN_IP,
-        wifiNote,
+        hasApk: hasApk,
+        apkUrl: BHARATFARM_APK_URL || '',
         qrBadge,
         qrValidity,
         sessionTitle,
         sessionSubtitle,
         guideSteps,
-        hasApk: hasApk,
+        // ── Expo Demo Card Data ──────────────────────────────────────
+        demoStatus,
+        demoUrl,
+        demoQrTargetUrl,
+        demoBadge,
+        demoValidity,
+        demoGuideSteps,
+        hasLiveDemo: demoStatus === 'live',
         sessionAgeMs: Number.isFinite(ageMs) ? ageMs : null,
         source: session?.source || 'heartbeat'
     };
@@ -640,6 +698,16 @@ app.get('/api/expo-session', (req, res) => {
         sessionTitle: config.sessionTitle,
         sessionSubtitle: config.sessionSubtitle,
         guideSteps: config.guideSteps,
+        hasApk: config.hasApk,
+        apkUrl: config.apkUrl,
+        // ── Demo card data ──
+        demoStatus: config.demoStatus,
+        demoUrl: config.demoUrl,
+        demoQrTargetUrl: config.demoQrTargetUrl,
+        demoBadge: config.demoBadge,
+        demoValidity: config.demoValidity,
+        demoGuideSteps: config.demoGuideSteps,
+        hasLiveDemo: config.hasLiveDemo,
         data: config
     });
 });
@@ -697,16 +765,17 @@ app.get('/api/expo-qr', (req, res) => {
 
 app.get('/api/expo-qr.svg', async (req, res) => {
     const config = deriveExpoSessionState(expoSessionRegistry);
+    const targetUrl = req.query.url || config.qrTargetUrl;
 
     try {
-        if (!config.qrTargetUrl) {
-            const fallbackSvg = buildExpoFallbackSvg('Expo URL unavailable', 'Set BHARATFARM_EXPO_URL to a live Expo session');
+        if (!targetUrl) {
+            const fallbackSvg = buildExpoFallbackSvg('URL unavailable', 'No session or APK URL was provided');
             res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
             res.setHeader('Cache-Control', 'no-store, max-age=0');
             return res.status(200).send(fallbackSvg);
         }
 
-        const svg = await QRCode.toString(config.qrTargetUrl, {
+        const svg = await QRCode.toString(targetUrl, {
             type: 'svg',
             errorCorrectionLevel: 'M',
             margin: 1,
@@ -734,7 +803,7 @@ app.get('/api/diagnostics', (req, res) => {
         modelName: OPENROUTER_MODEL,
         platform: process.platform,
         nodeVersion: process.version,
-        lanIp: SERVER_LAN_IP,
+        uptime: Math.floor(process.uptime()),
         memoryUsage: process.memoryUsage(),
         rateLimitConfig: {
             windowMinutes: 15,
@@ -743,48 +812,28 @@ app.get('/api/diagnostics', (req, res) => {
     });
 });
 
-// ── NETWORK DIAGNOSTICS (Windows LAN/Firewall/Port Check) ──────────────────
+// ── SYSTEM DIAGNOSTICS ─────────────────────────────────────────────────────
 app.get('/api/network-diagnostics', (req, res) => {
-    const interfaces = os.networkInterfaces();
-    const lanInterfaces = [];
-    for (const [name, addrs] of Object.entries(interfaces)) {
-        for (const addr of addrs) {
-            if (addr.family === 'IPv4' && !addr.internal) {
-                lanInterfaces.push({
-                    name,
-                    address: addr.address,
-                    netmask: addr.netmask,
-                    mac: addr.mac
-                });
-            }
-        }
-    }
-
     const expoConfig = deriveExpoSessionState(expoSessionRegistry);
 
     res.status(200).json({
         success: true,
-        lanIp: SERVER_LAN_IP,
-        lanInterfaces,
-        ports: {
-            backend: PORT,
-            metro: 8081
-        },
-        expoSession: {
+        environment: process.env.NODE_ENV || 'production',
+        platform: process.platform,
+        nodeVersion: process.version,
+        uptime: Math.floor(process.uptime()),
+        port: PORT,
+        apiKeyConfigured: !!OPENROUTER_API_KEY,
+        apkConfigured: !!BHARATFARM_APK_URL,
+        mobileSession: {
             status: expoConfig.status,
             active: expoConfig.active,
-            expoUrl: expoConfig.expoUrl,
-            lanFallbackUrl: expoConfig.lanFallbackUrl,
-            qrTargetUrl: expoConfig.qrTargetUrl
+            mode: expoConfig.mode
         },
-        hints: [
-            `Backend LAN URL: http://${SERVER_LAN_IP}:${PORT}`,
-            `Expo LAN URL: exp://${SERVER_LAN_IP}:8081`,
-            'Ensure phone is on the same WiFi network.',
-            process.platform === 'win32'
-                ? 'Windows: Check that ports 5000 and 8081 are allowed through Windows Firewall.'
-                : 'Ensure no firewall is blocking ports 5000 and 8081.'
-        ]
+        memoryUsage: {
+            rss: `${Math.round(process.memoryUsage().rss / 1024 / 1024)}MB`,
+            heapUsed: `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`
+        }
     });
 });
 
@@ -1279,20 +1328,17 @@ app.use((err, req, res, next) => {
 
 // ── STARTUP SEQUENCE ────────────────────────────────────────────────────────
 function onStarted(port) {
-    const lanExpoUrl = `exp://${SERVER_LAN_IP}:8081`;
-    console.log(`\n======================================================`);
-    console.log(`🚀 BHARATFARM SECURE BACKEND SERVICE STARTED`);
-    console.log(`👉 Environment: ${process.env.NODE_ENV || 'production'}`);
-    console.log(`👉 Server Port: ${port}`);
-    console.log(`👉 Bind Address: 0.0.0.0 (all interfaces)`);
-    console.log(`👉 LAN IP: ${SERVER_LAN_IP}`);
-    console.log(`👉 LAN Backend: http://${SERVER_LAN_IP}:${port}`);
-    console.log(`👉 LAN Expo URL: ${lanExpoUrl}`);
-    console.log(`👉 Health Check: GET http://localhost:${port}/api/health`);
-    console.log(`👉 Diagnostics: GET http://localhost:${port}/api/diagnostics`);
-    console.log(`👉 Network Diag: GET http://localhost:${port}/api/network-diagnostics`);
-    console.log(`👉 KrishiBot endpoint: POST http://localhost:${port}/api/chat`);
-    console.log(`======================================================\n`);
+    console.log(`\n══════════════════════════════════════════════════════`);
+    console.log(`🚀 BHARATFARM PRODUCTION SERVER ONLINE`);
+    console.log(`══════════════════════════════════════════════════════`);
+    console.log(`  Environment : ${process.env.NODE_ENV || 'production'}`);
+    console.log(`  Port        : ${port}`);
+    console.log(`  AI Engine   : ${OPENROUTER_API_KEY ? 'Cloud AI (OpenRouter)' : 'Smart Fallback AI'}`);
+    console.log(`  APK Mode    : ${BHARATFARM_APK_URL ? 'Production APK configured' : 'APK URL not set'}`);
+    console.log(`  Health      : /api/health`);
+    console.log(`  Diagnostics : /api/diagnostics`);
+    console.log(`  KrishiBot   : POST /api/chat`);
+    console.log(`══════════════════════════════════════════════════════\n`);
 }
 
 const triedPorts = new Set();
@@ -1303,7 +1349,7 @@ function tryListen(port, maxAttempts = 20) {
     }
     triedPorts.add(port);
 
-    // Bind on 0.0.0.0 so the server is accessible from LAN devices (phones on same WiFi)
+    // Bind on 0.0.0.0 for cloud deployment (Render, Heroku, etc.)
     const serverInstance = app.listen(port, '0.0.0.0', () => {
         onStarted(port);
     });

@@ -137,170 +137,150 @@
         <div class="app-showcase-bg-glow"></div>
         <div class="app-showcase-grid-lines"></div>
 
-        <div class="app-showcase-inner">
-            <!-- Left Column: Text + Features -->
-            <div class="app-showcase-info">
-            <!-- Live Demo Banner -->
-            <div class="demo-live-banner" id="demo-live-banner">
-                <span class="live-dot"></span>
-                <div>
-                    <span class="live-text">Live Demo Available</span>
-                    <span class="live-sub"> — Scan to open BharatFarm Mobile instantly</span>
-                </div>
-            </div>
-
+        <div class="app-showcase-header">
             <div class="app-showcase-badge">
-                <i class="fas fa-mobile-alt"></i> BharatFarm Mobile
+                <i class="fas fa-mobile-alt"></i> BharatFarm Ecosystem
             </div>
-                <h2 class="app-showcase-title">
-                    Your AI Farm Advisor,<br>
-                    <span>Now in Your Pocket</span>
-                </h2>
-                <p class="app-showcase-subtitle">
-                    Carry the full power of BharatFarm everywhere. Get instant crop diagnosis, real-time weather,
-                    government scheme matching, and KrishiBot AI — all inside Expo Go for hackathon demos.
-                </p>
+            <h2 class="app-showcase-title">Get <span>BharatFarm Mobile</span></h2>
+            <p class="app-showcase-subtitle">
+                Choose the installation path that suits you best. Farmers can download the standalone production APK for full, independent, offline-first access. Judges and presenters can scan the Live Demo QR to try the app instantly.
+            </p>
+        </div>
 
-                <div class="app-install-live-meta">
-                    <span class="app-live-badge" data-qr-status-badge>Requires Expo Go</span>
-                    <span class="app-live-note" data-qr-validity-text>Refreshing live Expo session…</span>
-                    <span class="app-live-note app-live-note--muted" data-mobile-support-note>Android support ready</span>
+        <div class="app-cards-container">
+            <!-- CARD 1: PRIMARY APK DISTRIBUTION -->
+            <div class="app-card primary-card" id="apk-card">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <span class="card-badge primary-badge"><i class="fab fa-android"></i> RECOMMENDED</span>
+                    <h3>Standalone Android APK</h3>
+                    <p>Ideal for farmers. Full production-grade app, works independently and offline-first anywhere in the world.</p>
                 </div>
+                
+                <div class="card-body">
+                    <!-- Features list -->
+                    <div class="card-features">
+                        <span><i class="fas fa-check-circle"></i> No third-party apps required</span>
+                        <span><i class="fas fa-check-circle"></i> Works 100% Offline with smart local data</span>
+                        <span><i class="fas fa-check-circle"></i> Connects directly to Render cloud API</span>
+                    </div>
 
-                <!-- Feature Pills -->
-                <div class="app-feature-pills">
-                    <div class="app-pill">
-                        <i class="fas fa-robot"></i>
-                        <span>KrishiBot AI</span>
+                    <div class="qr-box">
+                        <div class="qr-glow-ring"></div>
+                        <div class="qr-scan-line"></div>
+                        <!-- We will generate the APK direct download QR or fallback in landing.js -->
+                        <img class="qr-code-img" data-apk-qr-image
+                            src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+                            alt="Scan to download BharatFarm APK" />
+                        <span class="qr-label"><i class="fas fa-qrcode"></i> Scan to Download APK</span>
                     </div>
-                    <div class="app-pill">
-                        <i class="fas fa-leaf"></i>
-                        <span>Leaf Scanner</span>
-                    </div>
-                    <div class="app-pill">
-                        <i class="fas fa-cloud-sun"></i>
-                        <span>Smart Weather</span>
-                    </div>
-                    <div class="app-pill">
-                        <i class="fas fa-store"></i>
-                        <span>Marketplace</span>
-                    </div>
-                </div>
 
-                <!-- Download Buttons -->
-                <div class="app-download-row">
-                    <a href="#" class="app-dl-btn app-dl-android" target="_blank" rel="noopener noreferrer"
-                        data-open-expo-link>
-                        <i class="fas fa-wifi"></i>
-                        <div>
-                            <span class="app-dl-small">Primary route</span>
-                            <strong>Open in Expo Go</strong>
+                    <div class="guide-steps">
+                        <div class="step-item">
+                            <span class="step-num">1</span>
+                            <p>Scan QR code or click Download button below</p>
                         </div>
-                    </a>
-                    <a href="#" class="app-dl-btn app-dl-apk" target="_blank" rel="noopener noreferrer"
-                        data-apk-link>
+                        <div class="step-item">
+                            <span class="step-num">2</span>
+                            <p>Open and install the downloaded APK file</p>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-num">3</span>
+                            <p>Launch the app and start farming offline-first</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <a href="#" class="app-dl-btn app-dl-android" target="_blank" rel="noopener noreferrer" data-apk-link>
                         <i class="fab fa-android"></i>
                         <div>
-                            <span class="app-dl-small">Future release</span>
-                            <strong>Production APK Coming Soon</strong>
+                            <span class="app-dl-small">Download Standalone</span>
+                            <strong>Download APK File</strong>
                         </div>
                     </a>
-                    <button class="app-dl-btn app-dl-expo" type="button" data-copy-expo-link>
-                        <i class="fas fa-copy"></i>
-                        <div>
-                            <span class="app-dl-small">Fallback route</span>
-                            <strong>Copy Expo Link</strong>
-                        </div>
-                    </button>
                 </div>
             </div>
 
-            <!-- Right Column: QR Card + Phone Mockup Area -->
-            <div class="app-showcase-visual">
-                <!-- Phone Mockup Frame -->
-                <div class="phone-mockup">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="phone-screen-content">
-                            <i class="fas fa-seedling phone-app-icon"></i>
-                            <span class="phone-app-name">BharatFarm</span>
-                            <span class="phone-app-tagline">AI Farming Companion</span>
-                            <div class="phone-features-mini">
-                                <span>🌾 Crops</span>
-                                <span>🔬 Scanner</span>
-                                <span>☁️ Weather</span>
+            <!-- CARD 2: SECONDARY LIVE EXPO DEMO -->
+            <div class="app-card secondary-card" id="demo-card">
+                <div class="card-header">
+                    <!-- Live dot dynamically updated by landing.js -->
+                    <span class="card-badge demo-badge" id="demo-live-badge">
+                        <span class="live-dot"></span> <span data-qr-status-badge>Live Demo</span>
+                    </span>
+                    <h3>Live Presenter Demo</h3>
+                    <p>Ideal for judges & hackathon presentations. Launch the app instantly inside Expo Go with live Metro hot-reloading.</p>
+                </div>
+
+                <div class="card-body">
+                    <div class="card-features">
+                        <span><i class="fas fa-bolt"></i> Instant trial without standard installation</span>
+                        <span><i class="fas fa-sync"></i> Real-time presentation updates & sync</span>
+                        <span><i class="fas fa-project-diagram"></i> Expo Go sandbox environment</span>
+                    </div>
+
+                    <div class="qr-box">
+                        <div class="qr-glow-ring"></div>
+                        <div class="qr-scan-line"></div>
+                        <div class="qr-loading-state" data-qr-loading-state>
+                            <span class="qr-loading-spinner"></span>
+                            <span>Awaiting session...</span>
+                        </div>
+                        <a class="qr-code-link" href="#" target="_blank" rel="noopener noreferrer" data-qr-link>
+                            <img class="qr-code-img" data-qr-image
+                                src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+                                alt="Scan to open Live Demo" />
+                        </a>
+                        <span class="qr-label"><i class="fas fa-qrcode"></i> Scan with Expo Go App</span>
+                    </div>
+
+                    <div class="guide-steps">
+                        <div class="step-item">
+                            <span class="step-num">1</span>
+                            <p>Download <a href="https://expo.dev/go" target="_blank" style="color:var(--primary); text-decoration: underline;">Expo Go</a> from Play Store</p>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-num">2</span>
+                            <p>Scan this QR code using your phone camera</p>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-num">3</span>
+                            <p>Explore the live trial linked to cloud API</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="demo-actions">
+                        <a href="#" class="app-dl-btn app-dl-expo" target="_blank" rel="noopener noreferrer" data-open-expo-link>
+                            <i class="fas fa-external-link-alt"></i>
+                            <div>
+                                <span class="app-dl-small">Instant Onboarding</span>
+                                <strong>Launch Demo Session</strong>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Floating QR Card -->
-                <div class="qr-floating-card">
-                    <div class="qr-glow-ring"></div>
-                    <div class="qr-scan-line"></div>
-                    <div class="qr-loading-state" data-qr-loading-state>
-                        <span class="qr-loading-spinner"></span>
-                        <span>Generating live Expo QR…</span>
-                    </div>
-                    <a class="qr-code-link" href="#" target="_blank" rel="noopener noreferrer" data-qr-link>
-                        <img class="qr-code-img"
-                            src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-                            alt="Scan to install BharatFarm Mobile" width="300" height="300" loading="eager"
-                            decoding="async" data-qr-image />
-                    </a>
-                    <div class="qr-status-row">
-                        <span class="qr-status-badge" data-qr-status-badge>Requires Expo Go</span>
-                        <span class="qr-validity-text" data-qr-validity-text>Live Expo session ready</span>
-                    </div>
-                    <div class="qr-scan-label">
-                        <i class="fas fa-qrcode"></i> Scan to Open <span data-qr-destination-text>Expo Go</span>
-                    </div>
-                    <div class="qr-fallback-actions">
-                        <a class="qr-fallback-btn" href="#" target="_blank" rel="noopener noreferrer"
-                            data-open-expo-link>Open Expo Go</a>
-                        <button class="qr-fallback-btn secondary" type="button" data-copy-expo-link>Copy Expo
-                            Link</button>
-                        <button class="qr-fallback-btn ghost" type="button" data-retry-qr-link>Retry QR</button>
-                    </div>
-                    <div class="qr-refresh-note" data-qr-last-updated>Last synced just now</div>
-                </div>
-
-                <!-- Install Steps (floating) -->
-                <div class="install-steps-float">
-                    <div class="install-step-item">
-                        <span class="install-step-num">1</span>
-                        <div>
-                            <strong>Scan QR Code</strong>
-                            <p data-qr-guide-step>Point your camera at the live Expo QR</p>
-                        </div>
-                    </div>
-                    <div class="install-step-item">
-                        <span class="install-step-num">2</span>
-                        <div>
-                            <strong>Open in Expo Go</strong>
-                            <p data-qr-guide-step>Use the live Expo session from the QR card</p>
-                        </div>
-                    </div>
-                    <div class="install-step-item">
-                        <span class="install-step-num">3</span>
-                        <div>
-                            <strong>Start Farming Smart</strong>
-                            <p data-qr-guide-step>Scan leaves, check weather, consult AI</p>
-                        </div>
+                        </a>
+                        <button class="app-dl-btn app-dl-copy" type="button" data-copy-expo-link>
+                            <i class="fas fa-copy"></i>
+                            <div>
+                                <span class="app-dl-small">Share Expo URL</span>
+                                <strong id="copy-btn-text">Copy Link</strong>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Available On badge at bottom -->
+        <!-- Available On strip -->
         <div class="app-available-strip">
-            <span><i class="fas fa-mobile-alt"></i> Requires Expo Go</span>
+            <span><i class="fab fa-android"></i> Standalone APK</span>
             <span class="app-strip-dot"></span>
-            <span><i class="fas fa-qrcode"></i> Live Expo QR</span>
+            <span><i class="fas fa-bolt"></i> Expo Go presentation bridge</span>
             <span class="app-strip-dot"></span>
-            <span><i class="fab fa-android"></i> APK Coming Soon</span>
+            <span><i class="fas fa-wifi"></i> Works 100% Offline-First</span>
             <span class="app-strip-dot"></span>
-            <span><i class="fas fa-shield-alt"></i> Secure & Private</span>
+            <span><i class="fas fa-server"></i> Cloud API synchronization</span>
         </div>
     </section>
 

@@ -1343,3 +1343,242 @@ button.app-dl-btn {
         font-size: 1rem;
     }
 }
+
+/* ==========================================================================
+   HYBRID DUAL-CARD LAYOUT STYLES
+   ========================================================================== */
+
+.app-showcase-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    position: relative;
+    z-index: 10;
+}
+
+.app-showcase-header .app-showcase-badge {
+    margin-bottom: 16px;
+}
+
+.app-cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto 50px;
+    position: relative;
+    z-index: 10;
+}
+
+.app-card {
+    background: rgba(15, 15, 15, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.app-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(76, 175, 80, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(76, 175, 80, 0.05);
+}
+
+/* Glow effect specifically for recommended card */
+.primary-card {
+    border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.primary-card .card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.card-header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 24px;
+}
+
+.card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+}
+
+.primary-badge {
+    background: rgba(61, 220, 132, 0.15);
+    color: #3ddc84;
+    border: 1px solid rgba(61, 220, 132, 0.3);
+}
+
+.demo-badge {
+    background: rgba(76, 175, 80, 0.15);
+    color: #81c784;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.app-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px 0;
+}
+
+.app-card p {
+    color: #aaa;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.card-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex-grow: 1;
+    margin-bottom: 30px;
+}
+
+.card-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-features span {
+    font-size: 0.85rem;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-features i {
+    color: #4caf50;
+    font-size: 0.95rem;
+}
+
+/* Beautiful Centered QR box */
+.qr-box {
+    align-self: center;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 200px;
+    position: relative;
+}
+
+.qr-box .qr-code-img {
+    width: 168px;
+    height: 168px;
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px;
+}
+
+.qr-box .qr-label {
+    font-size: 0.72rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Step list inside card */
+.guide-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.step-num {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.step-item p {
+    color: #888;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.card-footer {
+    position: relative;
+    z-index: 1;
+}
+
+.card-footer .app-dl-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.demo-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.demo-actions .app-dl-expo {
+    flex: 1.4;
+}
+
+.demo-actions .app-dl-copy {
+    flex: 0.8;
+}
+
+/* Responsive adjustment for the dual-card cards */
+@media (max-width: 900px) {
+    .app-cards-container {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        gap: 24px;
+    }
+}

@@ -192,20 +192,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const appSection = document.querySelector('.app-showcase-section');
     if (appSection) {
         // Set initial hidden state
-        const infoCol = appSection.querySelector('.app-showcase-info');
-        const visualCol = appSection.querySelector('.app-showcase-visual');
+        const header = appSection.querySelector('.app-showcase-header');
+        const cardsContainer = appSection.querySelector('.app-cards-container');
         const strip = appSection.querySelector('.app-available-strip');
         let refreshTimer = null;
 
-        if (infoCol) {
-            infoCol.style.opacity = '0';
-            infoCol.style.transform = 'translateY(40px)';
-            infoCol.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+        if (header) {
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(30px)';
+            header.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
         }
-        if (visualCol) {
-            visualCol.style.opacity = '0';
-            visualCol.style.transform = 'translateY(40px)';
-            visualCol.style.transition = 'opacity 0.9s ease-out 0.15s, transform 0.9s ease-out 0.15s';
+        if (cardsContainer) {
+            cardsContainer.style.opacity = '0';
+            cardsContainer.style.transform = 'translateY(40px)';
+            cardsContainer.style.transition = 'opacity 0.9s ease-out 0.15s, transform 0.9s ease-out 0.15s';
         }
         if (strip) {
             strip.style.opacity = '0';
@@ -215,13 +215,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (infoCol) {
-                        infoCol.style.opacity = '1';
-                        infoCol.style.transform = 'translateY(0)';
+                    if (header) {
+                        header.style.opacity = '1';
+                        header.style.transform = 'translateY(0)';
                     }
-                    if (visualCol) {
-                        visualCol.style.opacity = '1';
-                        visualCol.style.transform = 'translateY(0)';
+                    if (cardsContainer) {
+                        cardsContainer.style.opacity = '1';
+                        cardsContainer.style.transform = 'translateY(0)';
                     }
                     if (strip) {
                         strip.style.opacity = '1';
@@ -233,19 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         observer.observe(appSection);
 
-        const defaultExpoGoUrl = 'https://expo.dev/go';
-
-        const setSectionState = (config = {}) => {
-            const state = config.status || 'pending';
-            const mode = config.mode || 'expo-go';
-            appSection.dataset.sessionState = state;
-            appSection.dataset.sessionMode = mode;
-        };
-
         const renderFallbackQr = (qrImage, loadingState, message, detail) => {
-            if (!qrImage) {
-                return;
-            }
+            if (!qrImage) return;
 
             qrImage.src = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
@@ -269,16 +258,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        const loadQrImage = (qrImage, loadingState, targetUrl, fallbackUrl, message, detail) => {
-            if (!qrImage) {
-                return;
-            }
+        const loadQrImage = (qrImage, loadingState, targetUrl) => {
+            if (!qrImage) return;
 
-            qrImage.style.opacity = '0';
+            qrImage.style.opacity = '0.3';
             if (loadingState) {
                 loadingState.classList.remove('is-hidden');
             }
 
+            const qrUrl = `/api/expo-qr.svg?url=${encodeURIComponent(targetUrl)}&t=${Date.now()}`;
             const preload = new Image();
             preload.onload = () => {
                 qrImage.src = preload.src;
@@ -288,239 +276,143 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
             preload.onerror = () => {
-                if (fallbackUrl && qrImage.src !== fallbackUrl) {
-                    qrImage.src = fallbackUrl;
-                    return;
-                }
-
-                renderFallbackQr(qrImage, loadingState, message, detail);
+                renderFallbackQr(qrImage, loadingState, 'Connection Lost', 'Live trial offline');
             };
-            preload.src = targetUrl;
+            preload.src = qrUrl;
         };
 
         const scheduleRefresh = (delay) => {
             if (refreshTimer) {
                 window.clearTimeout(refreshTimer);
             }
-            refreshTimer = window.setTimeout(refreshExpoSessionState, delay);
+            refreshTimer = window.setTimeout(refreshSessionState, delay);
         };
 
-        async function refreshExpoSessionState() {
+        async function refreshSessionState() {
             try {
                 const response = await fetch('/api/expo-session', {
                     cache: 'no-store'
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Session request failed with status ${response.status}`);
+                    throw new Error(`Request failed with status ${response.status}`);
                 }
 
                 const payload = await response.json();
                 const config = payload?.data || payload;
 
                 if (!config) {
-                    throw new Error('Session payload is missing');
+                    throw new Error('Payload is missing');
                 }
 
-                setSectionState(config);
+                // ── Update Card 1: Standalone APK Card ──
+                const apkQrImage = appSection.querySelector('[data-apk-qr-image]');
+                const apkLink = appSection.querySelector('[data-apk-link]');
+                
+                // Static direct or config-based production APK URL
+                const productionApkUrl = config.apkUrl || 'https://bharatfarm-api.onrender.com/download-apk-placeholder';
+                
+                if (apkQrImage) {
+                    apkQrImage.src = `/api/expo-qr.svg?url=${encodeURIComponent(productionApkUrl)}`;
+                }
+                if (apkLink) {
+                    apkLink.href = productionApkUrl;
+                }
 
+                // ── Update Card 2: Live Demo Card ──
                 const qrImage = appSection.querySelector('[data-qr-image]');
                 const qrLink = appSection.querySelector('[data-qr-link]');
                 const openExpoLink = appSection.querySelector('[data-open-expo-link]');
                 const copyExpoButton = appSection.querySelector('[data-copy-expo-link]');
-                const retryQrButton = appSection.querySelector('[data-retry-qr-link]');
-                const apkButton = appSection.querySelector('[data-apk-link]');
                 const loadingState = appSection.querySelector('[data-qr-loading-state]');
-                const supportNote = appSection.querySelector('[data-mobile-support-note]');
-                const statusBadges = appSection.querySelectorAll('[data-qr-status-badge]');
-                const validityNodes = appSection.querySelectorAll('[data-qr-validity-text]');
-                const destinationNodes = appSection.querySelectorAll('[data-qr-destination-text]');
-                const lastUpdatedNodes = appSection.querySelectorAll('[data-qr-last-updated]');
-                const guideNodes = appSection.querySelectorAll('[data-qr-guide-step]');
-                const state = config.status || 'pending';
-                const mode = config.mode || 'expo-go';
-                const primaryUrl = config.primaryUrl || config.expoUrl || config.fallbackUrl || defaultExpoGoUrl;
-                const qrTargetUrl = config.qrTargetUrl || primaryUrl;
-                const qrImageUrl = config.qrImageUrl || config.qrUrl || '';
-                const fallbackSvgUrl = `/api/expo-qr.svg?t=${Date.now()}`;
-                const qrMessage = config.sessionTitle || config.qrBadge || 'BharatFarm';
-                const qrDetail = config.qrValidity || 'Waiting for live session';
+                const statusBadge = appSection.querySelector('[data-qr-status-badge]');
+                const liveBadgeContainer = appSection.querySelector('#demo-live-badge');
+                
+                const demoStatus = config.demoStatus || 'inactive';
+                const demoUrl = config.demoUrl || '';
 
-                if (qrImage) {
-                    qrImage.dataset.expoUrl = config.expoUrl || '';
-                    qrImage.dataset.primarySrc = qrImageUrl || fallbackSvgUrl;
-                    qrImage.dataset.fallbackSrc = fallbackSvgUrl;
-                    loadQrImage(
-                        qrImage,
-                        loadingState,
-                        qrImageUrl || fallbackSvgUrl,
-                        fallbackSvgUrl,
-                        qrMessage,
-                        qrDetail
-                    );
+                if (liveBadgeContainer) {
+                    if (demoStatus === 'live') {
+                        liveBadgeContainer.style.background = 'rgba(76, 175, 80, 0.2)';
+                        liveBadgeContainer.style.borderColor = 'rgba(76, 175, 80, 0.4)';
+                        liveBadgeContainer.style.color = '#81c784';
+                        if (statusBadge) statusBadge.textContent = 'Live Session Active';
+                    } else if (demoStatus === 'reconnecting') {
+                        liveBadgeContainer.style.background = 'rgba(255, 193, 7, 0.15)';
+                        liveBadgeContainer.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+                        liveBadgeContainer.style.color = '#ffe7a8';
+                        if (statusBadge) statusBadge.textContent = 'Reconnecting...';
+                    } else {
+                        liveBadgeContainer.style.background = 'rgba(255, 255, 255, 0.08)';
+                        liveBadgeContainer.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                        liveBadgeContainer.style.color = '#888';
+                        if (statusBadge) statusBadge.textContent = 'Awaiting Metro Boot';
+                    }
+                }
 
-                    if (copyExpoButton) {
-                        copyExpoButton.onclick = async () => {
-                            try {
-                                await navigator.clipboard.writeText(primaryUrl || defaultExpoGoUrl);
-                                copyExpoButton.textContent = config.expoUrl ? 'Copied Live Link' : 'Copied Expo Go Link';
+                if (demoStatus === 'live' && demoUrl) {
+                    if (qrImage) loadQrImage(qrImage, loadingState, demoUrl);
+                    if (qrLink) qrLink.href = demoUrl;
+                    if (openExpoLink) openExpoLink.href = demoUrl;
+                } else {
+                    if (qrImage) {
+                        renderFallbackQr(
+                            qrImage, 
+                            loadingState, 
+                            'Demo Offline', 
+                            'Run npx expo start --tunnel'
+                        );
+                    }
+                    if (qrLink) qrLink.href = '#';
+                    if (openExpoLink) openExpoLink.href = '#';
+                }
+
+                if (copyExpoButton) {
+                    copyExpoButton.onclick = async () => {
+                        if (!demoUrl || demoUrl === '#') {
+                            alert('No live session active to copy!');
+                            return;
+                        }
+                        try {
+                            await navigator.clipboard.writeText(demoUrl);
+                            const textNode = copyExpoButton.querySelector('#copy-btn-text');
+                            if (textNode) {
+                                textNode.textContent = 'Copied!';
                                 window.setTimeout(() => {
-                                    copyExpoButton.textContent = 'Copy Expo Link';
+                                    textNode.textContent = 'Copy Link';
                                 }, 1800);
-                            } catch (_copyError) {
-                                copyExpoButton.textContent = 'Copy Failed';
                             }
-                        };
-                    }
-
-                    if (retryQrButton) {
-                        retryQrButton.onclick = () => {
-                            if (!qrImage) {
-                                return;
-                            }
-                            loadQrImage(
-                                qrImage,
-                                loadingState,
-                                qrImageUrl || fallbackSvgUrl,
-                                fallbackSvgUrl,
-                                qrMessage,
-                                qrDetail
-                            );
-                        };
-                    }
-
-                    if (apkButton) {
-                        const hasApk = mode === 'apk' && !!primaryUrl;
-                        apkButton.href = hasApk ? primaryUrl : '#';
-                        apkButton.setAttribute('aria-disabled', hasApk ? 'false' : 'true');
-                        apkButton.classList.toggle('is-disabled', !hasApk);
-                        const apkLabel = apkButton.querySelector('strong');
-                        const apkSmall = apkButton.querySelector('.app-dl-small');
-                        if (apkLabel) {
-                            apkLabel.textContent = hasApk ? 'Download APK' : 'Production APK Coming Soon';
+                        } catch (_err) {
+                            console.warn('Copy failed');
                         }
-                        if (apkSmall) {
-                            apkSmall.textContent = hasApk ? 'Android install' : 'Future release';
-                        }
-                    }
+                    };
                 }
 
-                if (qrLink) {
-                    qrLink.href = primaryUrl || defaultExpoGoUrl;
-                }
-
-                if (openExpoLink) {
-                    openExpoLink.href = primaryUrl || defaultExpoGoUrl;
-                    const openExpoLabel = openExpoLink.querySelector('strong');
-                    const openExpoSmall = openExpoLink.querySelector('.app-dl-small');
-                    if (openExpoLabel) {
-                        openExpoLabel.textContent = state === 'live'
-                            ? 'Open Live Session'
-                            : state === 'lan-fallback'
-                                ? 'Open LAN Session'
-                                : mode === 'apk'
-                                    ? 'Install APK'
-                                    : 'Open in Expo Go';
-                    }
-                    if (openExpoSmall) {
-                        openExpoSmall.textContent = state === 'live'
-                            ? 'Live route'
-                            : state === 'lan-fallback'
-                                ? 'Same WiFi required'
-                                : mode === 'apk'
-                                    ? 'Primary route'
-                                    : 'Primary route';
-                    }
-                }
-
-                const destinationLabel = mode === 'apk' ? 'APK' : 'Expo Go';
-
-                statusBadges.forEach((node) => {
-                    node.textContent = config.qrBadge || 'Requires Expo Go';
-                });
-
-                validityNodes.forEach((node) => {
-                    node.textContent = config.qrValidity || 'Waiting for the live Expo session';
-                });
-
-                destinationNodes.forEach((node) => {
-                    node.textContent = destinationLabel;
-                });
-
-                if (supportNote) {
-                    supportNote.textContent = state === 'live'
-                        ? 'Live Expo session publishing now'
-                        : state === 'apk'
-                            ? 'Android APK ready'
-                            : state === 'lan-fallback'
-                                ? (config.wifiNote || 'Connect phone to same WiFi')
-                                : state === 'offline'
-                                    ? 'Expo session offline, waiting for heartbeat'
-                                    : 'Expo Go required';
-                }
-
-                guideNodes.forEach((node, index) => {
-                    const stepText = Array.isArray(config.guideSteps) && config.guideSteps[index]
-                        ? config.guideSteps[index]
-                        : node.textContent;
-                    node.textContent = stepText;
-                });
-
-                lastUpdatedNodes.forEach((node) => {
-                    const updatedAt = new Date(config.updatedAt || Date.now());
-                    node.textContent = `Last synced ${updatedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-                });
-
-                if (loadingState) {
-                    loadingState.classList.add('is-hidden');
-                }
-
-                scheduleRefresh(state === 'live' ? 15000 : 4000);
+                scheduleRefresh(demoStatus === 'live' ? 12000 : 6000);
             } catch (error) {
-                console.warn('[BharatFarm QR] Expo session config refresh failed:', error.message);
-
-                setSectionState({ status: 'lan-fallback', mode: 'expo-go' });
-
+                console.warn('[BharatFarm] Dynamic showcase update error:', error.message);
+                
+                // Offline/error fallbacks
                 const qrImage = appSection.querySelector('[data-qr-image]');
                 const loadingState = appSection.querySelector('[data-qr-loading-state]');
-
-                // Generate a local LAN QR fallback when API is unreachable
+                
                 if (qrImage) {
-                    renderFallbackQr(qrImage, loadingState, 'LAN Session', 'Connect phone to same WiFi');
+                    renderFallbackQr(
+                        qrImage, 
+                        loadingState, 
+                        'Awaiting Session', 
+                        'Run npx expo start'
+                    );
                 }
-
-                const validityNodes = appSection.querySelectorAll('[data-qr-validity-text]');
-                validityNodes.forEach((node) => {
-                    node.textContent = 'Connect phone to same WiFi network and retry.';
-                });
-
-                if (loadingState) {
-                    loadingState.classList.add('is-hidden');
-                }
-
-                const supportNote = appSection.querySelector('[data-mobile-support-note]');
-                if (supportNote) {
-                    supportNote.textContent = 'LAN session — same WiFi required';
-                }
-
-                const guideNodes = appSection.querySelectorAll('[data-qr-guide-step]');
-                guideNodes.forEach((node, index) => {
-                    const fallbackSteps = [
-                        'Connect your phone to the same WiFi network.',
-                        'Run npm run start-stable in the mobile folder.',
-                        'Scan the QR code or enter the exp:// URL manually.'
-                    ];
-                    node.textContent = fallbackSteps[index] || node.textContent;
-                });
-
-                scheduleRefresh(4000);
+                
+                scheduleRefresh(8000);
             }
         }
 
-        refreshExpoSessionState();
+        refreshSessionState();
         window.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
-                refreshExpoSessionState();
+                refreshSessionState();
             }
         });
     }

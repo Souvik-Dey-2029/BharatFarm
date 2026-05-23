@@ -1,12 +1,11 @@
 {
   "name": "bharatfarm",
   "version": "1.0.0",
-  "description": "BharatFarm Local & Cloud Backend",
+  "description": "BharatFarm Production Backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "start-stable": "node server.js & cd mobile && node scripts/start-stable.js --clear"
+    "dev": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

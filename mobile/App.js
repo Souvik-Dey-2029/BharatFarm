@@ -9,7 +9,7 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import Constants from 'expo-constants';
+
 import * as SplashScreen from 'expo-splash-screen';
 import { Ionicons } from '@expo/vector-icons';
 import { useThemeStore } from './src/store/themeStore';
@@ -104,8 +104,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // Fire once and never block app startup on bridge publication.
-    apiService.publishExpoSession().catch(() => { });
+    // Publish Expo developer Metro session (fails/skips silently in production APK standalone)
+    apiService.publishExpoSession().catch(() => {});
   }, []);
 
   if (!ready) {

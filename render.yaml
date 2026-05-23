@@ -5,6 +5,7 @@ services:
     plan: free
     buildCommand: npm install
     startCommand: npm start
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
@@ -13,10 +14,8 @@ services:
       - key: OPENROUTER_API_KEY
         sync: false # Must be entered securely in the Render Dashboard
       - key: UNSPLASH_API_KEY
-        sync: false # Optional
+        sync: false # Optional — for crop images
       - key: PEXELS_API_KEY
-        sync: false # Optional
-      - key: BHARATFARM_EXPO_URL
-        sync: false # Optional — LAN IP is auto-detected at runtime
+        sync: false # Optional — for crop images
       - key: BHARATFARM_APK_URL
-        sync: false # Optional — production APK download URL
+        sync: false # Production APK download URL (e.g. Google Drive / GitHub Releases link)
