@@ -1,4 +1,4 @@
-#  🌾 BharatFarm — The Future of Indian Agriculture
+#  🌾 BharatFarm --> The Future of Indian Agriculture
 
 ![BharatFarm Banner](https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80)
 
