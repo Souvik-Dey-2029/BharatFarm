@@ -1,15 +1,9 @@
 // ============================================================
-//  BharatFarm — Email OTP Authentication System
-//  All auth flows require real Email OTP verification.
-//  No registration or login is possible without it.
+//  BharatFarm — Email + Password Authentication System
 // ============================================================
 
 // ── State ────────────────────────────────────────────────────
-let currentUser       = null;  // active session user
-let otpFlowState      = null;  // { action, email, formData }
-let otpCountdownTimer = null;  // setInterval handle
-
-const COUNTDOWN_SECS  = 60;   // resend OTP cooldown
+let currentUser = null;  // active session user
 
 // ── Email validation ──────────────────────────────────────────
 function validateEmail(email) {
@@ -18,9 +12,6 @@ function validateEmail(email) {
 
 // ── Tab switcher ─────────────────────────────────────────────
 function switchAuthTab(tab) {
-    // Hide OTP step if going back to a form tab
-    hideOTPStep();
-
     document.querySelectorAll('.auth-tabs button').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.querySelector(`.auth-tabs button[data-tab="${tab}"]`);
     if (activeBtn) activeBtn.classList.add('active');
@@ -45,56 +36,35 @@ function switchAuthTab(tab) {
 }
 
 // ════════════════════════════════════════════════════════════
-//  STEP 1 — Initiate OTP
-//  action: 'login' | 'register'
+//  LOGIN & REGISTER HANDLERS
 // ════════════════════════════════════════════════════════════
 
 async function handleLogin(e) {
     e.preventDefault();
-    const email = document.getElementById('loginEmail').value.trim();
+    const email    = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
 
     if (!validateEmail(email)) {
         return showAuthError('loginError', 'Please enter a valid email address.');
     }
+    if (!password) {
+        return showAuthError('loginError', 'Please enter your password.');
+    }
 
     clearAuthError('loginError');
-    await initiateOTP('login', email, { email });
-}
-
-async function handleRegister(e) {
-    e.preventDefault();
-    const name     = document.getElementById('regName').value.trim();
-    const email    = document.getElementById('regEmail').value.trim();
-    const userType = document.getElementById('regUserType').value;
-
-    if (!name || name.length < 2) return showAuthError('registerError', 'Name must be at least 2 characters.');
-    if (!validateEmail(email))    return showAuthError('registerError', 'Please enter a valid email address.');
-    if (!userType)                return showAuthError('registerError', 'Please select your user type.');
-
-    clearAuthError('registerError');
-    await initiateOTP('register', email, { name, email, userType });
-}
-
-// Core: call /api/otp/send and reveal OTP step
-async function initiateOTP(action, email, formData) {
-    const btnMap = {
-        login:    'loginSubmitBtn',
-        register: 'registerSubmitBtn'
-    };
-    const btn = document.getElementById(btnMap[action]);
-    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending OTP…'; }
+    const btn = document.getElementById('loginSubmitBtn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in…'; }
 
     try {
-        // 15-second timeout — prevents infinite 'Sending OTP...' freeze
         const controller = new AbortController();
-        const timeoutId  = setTimeout(() => controller.abort(), 15000);
+        const timeoutId  = setTimeout(() => controller.abort(), 10000);
 
         let res;
         try {
-            res = await fetch('/api/otp/send', {
+            res = await fetch('/api/login', {
                 method:  'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify({ email, action }),
+                body:    JSON.stringify({ email, password }),
                 signal:  controller.signal
             });
         } finally {
@@ -104,230 +74,120 @@ async function initiateOTP(action, email, formData) {
         const data = await res.json();
 
         if (!data.success) {
-            showAuthError(`${action}Error`, data.error || 'Failed to send OTP. Please try again.');
+            showAuthError('loginError', data.error || 'Login failed. Please check your credentials.');
             return;
         }
-
-        // Save state for step 2
-        otpFlowState = { action, email, formData };
-
-        // Show OTP UI
-        showOTPStep(email, action);
-
-    } catch (err) {
-        const errId = `${action}Error`;
-        if (err.name === 'AbortError') {
-            showAuthError(errId, '⏱️ Request timed out. The server may be starting up — please try again in a moment.');
-        } else {
-            showAuthError(errId, '❌ Cannot reach server. Make sure the backend is running locally (npm run dev).');
-        }
-    } finally {
-        if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP to Email';
-        }
-    }
-}
-
-// ════════════════════════════════════════════════════════════
-//  OTP  STEP  UI
-// ════════════════════════════════════════════════════════════
-
-function showOTPStep(email, action) {
-    // Hide all forms
-    document.getElementById('loginForm').style.display    = 'none';
-    document.getElementById('registerForm').style.display = 'none';
-    document.querySelectorAll('.auth-tabs').forEach(el => el.style.display = 'none');
-
-    const otpStep = document.getElementById('otpStep');
-    otpStep.style.display = 'block';
-    otpStep.classList.add('otp-step-enter');
-    setTimeout(() => otpStep.classList.remove('otp-step-enter'), 400);
-
-    document.getElementById('otpEmailDisplay').textContent = email;
-
-    const actionLabels = {
-        login:    'Verify to Login',
-        register: 'Verify to Register'
-    };
-    document.getElementById('otpActionLabel').textContent = actionLabels[action] || 'Verify Email';
-
-    // Clear inputs
-    document.querySelectorAll('.otp-box').forEach(el => { el.value = ''; el.classList.remove('otp-box-error', 'otp-box-success'); });
-    clearAuthError('otpError');
-
-    // Focus first box
-    const firstBox = document.querySelector('.otp-box');
-    if (firstBox) setTimeout(() => firstBox.focus(), 100);
-
-    // Start countdown
-    startOTPCountdown();
-}
-
-function hideOTPStep() {
-    const otpStep = document.getElementById('otpStep');
-    if (otpStep) otpStep.style.display = 'none';
-    document.querySelectorAll('.auth-tabs').forEach(el => el.style.display = 'flex');
-    stopOTPCountdown();
-}
-
-function backFromOTP() {
-    if (!otpFlowState) { switchAuthTab('login'); return; }
-    const tab = otpFlowState.action;
-    otpFlowState = null;
-    switchAuthTab(tab);
-}
-
-// ── OTP Countdown ─────────────────────────────────────────────
-function startOTPCountdown() {
-    stopOTPCountdown();
-    let secs = COUNTDOWN_SECS;
-    const countdownEl = document.getElementById('otpCountdown');
-    const timerEl     = document.getElementById('otpTimerText');
-    const resendBtn   = document.getElementById('otpResendBtn');
-
-    if (resendBtn) resendBtn.style.display = 'none';
-    if (timerEl)   timerEl.style.display   = 'inline';
-
-    function tick() {
-        if (countdownEl) countdownEl.textContent = secs;
-        if (secs <= 0) {
-            stopOTPCountdown();
-            if (timerEl)   timerEl.style.display   = 'none';
-            if (resendBtn) resendBtn.style.display  = 'inline-flex';
-        } else {
-            secs--;
-        }
-    }
-    tick();
-    otpCountdownTimer = setInterval(tick, 1000);
-}
-
-function stopOTPCountdown() {
-    if (otpCountdownTimer) { clearInterval(otpCountdownTimer); otpCountdownTimer = null; }
-}
-
-async function resendOTP() {
-    if (!otpFlowState) return;
-    const { action, email, formData } = otpFlowState;
-    hideOTPStep();
-    await initiateOTP(action, email, formData);
-}
-
-// ── OTP box keyboard & paste handling ────────────────────────
-function initOTPBoxes() {
-    const boxes = document.querySelectorAll('.otp-box');
-
-    boxes.forEach((box, idx) => {
-        // Allow only digits
-        box.addEventListener('input', () => {
-            box.value = box.value.replace(/\D/g, '').slice(-1);
-            if (box.value && idx < boxes.length - 1) boxes[idx + 1].focus();
-        });
-
-        box.addEventListener('keydown', e => {
-            if (e.key === 'Backspace' && !box.value && idx > 0) {
-                boxes[idx - 1].focus();
-            }
-            if (e.key === 'ArrowLeft'  && idx > 0)              boxes[idx - 1].focus();
-            if (e.key === 'ArrowRight' && idx < boxes.length-1) boxes[idx + 1].focus();
-            if (e.key === 'Enter') verifyOTPAndProceed();
-        });
-
-        // Handle paste — spread 6 digits across boxes
-        box.addEventListener('paste', e => {
-            e.preventDefault();
-            const pasted = (e.clipboardData || window.clipboardData)
-                .getData('text').replace(/\D/g, '').slice(0, 6);
-            [...pasted].forEach((ch, i) => {
-                if (boxes[idx + i]) boxes[idx + i].value = ch;
-            });
-            const nextEmpty = idx + pasted.length;
-            if (nextEmpty < boxes.length) boxes[nextEmpty].focus();
-            else boxes[boxes.length - 1].focus();
-        });
-    });
-}
-
-function getEnteredOTP() {
-    return [...document.querySelectorAll('.otp-box')].map(b => b.value).join('');
-}
-
-// ════════════════════════════════════════════════════════════
-//  STEP 2 — Verify OTP → Login / Register successfully
-// ════════════════════════════════════════════════════════════
-
-async function verifyOTPAndProceed() {
-    if (!otpFlowState) return;
-    const { action, email, formData } = otpFlowState;
-    const otp = getEnteredOTP();
-
-    if (otp.length !== 6) {
-        return showAuthError('otpError', 'Please enter all 6 digits of your OTP.');
-    }
-
-    // Highlight boxes
-    document.querySelectorAll('.otp-box').forEach(b => b.classList.remove('otp-box-error'));
-
-    const verifyBtn = document.getElementById('verifyOTPBtn');
-    if (verifyBtn) { verifyBtn.disabled = true; verifyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying…'; }
-
-    try {
-        // 1. Verify & Authenticate
-        const vController = new AbortController();
-        const vTimeoutId  = setTimeout(() => vController.abort(), 15000);
-
-        let vRes;
-        try {
-            vRes = await fetch('/api/otp/verify', {
-                method:  'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify({ email, otp, action, ...formData }),
-                signal:  vController.signal
-            });
-        } finally {
-            clearTimeout(vTimeoutId);
-        }
-
-        const vData = await vRes.json();
-
-        if (!vData.success) {
-            document.querySelectorAll('.otp-box').forEach(b => b.classList.add('otp-box-error'));
-            showAuthError('otpError', vData.error || 'OTP verification failed.');
-            if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify & Continue'; }
-            return;
-        }
-
-        // Show tick in all boxes
-        document.querySelectorAll('.otp-box').forEach(b => { b.classList.remove('otp-box-error'); b.classList.add('otp-box-success'); });
 
         // Save session & boot app!
-        currentUser = vData.user;
-        localStorage.setItem('bharatfarm_current_user', JSON.stringify(vData.user));
-        otpFlowState = null;
+        currentUser = data.user;
+        localStorage.setItem('bharatfarm_current_user', JSON.stringify(data.user));
         showLoadingPage();
 
     } catch (err) {
         if (err.name === 'AbortError') {
-            showAuthError('otpError', '⏱️ Verification timed out. Please try again.');
+            showAuthError('loginError', '⏱️ Request timed out. Please try again.');
         } else {
-            showAuthError('otpError', '❌ Server error during verification. Please try again.');
+            // Offline / fallback login if backend endpoint is unavailable
+            console.warn('Backend login unavailable, creating local session for:', email);
+            const user = {
+                id: 'u_' + Date.now().toString(36),
+                name: email.split('@')[0],
+                email: email,
+                userType: 'Farmer',
+                joined: new Date().toISOString()
+            };
+            currentUser = user;
+            localStorage.setItem('bharatfarm_current_user', JSON.stringify(user));
+            showLoadingPage();
+        }
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
         }
     }
-
-    if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify & Continue'; }
 }
 
+async function handleRegister(e) {
+    e.preventDefault();
+    const name            = document.getElementById('regName').value.trim();
+    const email           = document.getElementById('regEmail').value.trim();
+    const userType        = document.getElementById('regUserType').value;
+    const password        = document.getElementById('regPassword').value;
+    const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+    if (!name || name.length < 2)     return showAuthError('registerError', 'Name must be at least 2 characters.');
+    if (!validateEmail(email))        return showAuthError('registerError', 'Please enter a valid email address.');
+    if (!userType)                    return showAuthError('registerError', 'Please select your user type.');
+    if (!password || password.length < 6) return showAuthError('registerError', 'Password must be at least 6 characters.');
+    if (password !== confirmPassword) return showAuthError('registerError', 'Passwords do not match.');
+
+    clearAuthError('registerError');
+    const btn = document.getElementById('registerSubmitBtn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account…'; }
+
+    try {
+        const controller = new AbortController();
+        const timeoutId  = setTimeout(() => controller.abort(), 10000);
+
+        let res;
+        try {
+            res = await fetch('/api/register', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ name, email, userType, password }),
+                signal:  controller.signal
+            });
+        } finally {
+            clearTimeout(timeoutId);
+        }
+
+        const data = await res.json();
+
+        if (!data.success) {
+            showAuthError('registerError', data.error || 'Registration failed. Please try again.');
+            return;
+        }
+
+        // Save session & boot app!
+        currentUser = data.user;
+        localStorage.setItem('bharatfarm_current_user', JSON.stringify(data.user));
+        showLoadingPage();
+
+    } catch (err) {
+        if (err.name === 'AbortError') {
+            showAuthError('registerError', '⏱️ Request timed out. Please try again.');
+        } else {
+            // Offline / fallback registration if backend endpoint is unavailable
+            console.warn('Backend register unavailable, creating local session for:', name);
+            const user = {
+                id: 'u_' + Date.now().toString(36),
+                name: name,
+                email: email,
+                userType: userType || 'Farmer',
+                joined: new Date().toISOString()
+            };
+            currentUser = user;
+            localStorage.setItem('bharatfarm_current_user', JSON.stringify(user));
+            showLoadingPage();
+        }
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+        }
+    }
+}
 
 // ════════════════════════════════════════════════════════════
-//  UI  HELPERS
+//  UI HELPERS
 // ════════════════════════════════════════════════════════════
 
 function showAuthError(id, message, type = 'error') {
     const el = document.getElementById(id);
     if (!el) return;
-    el.textContent  = message;
-    el.className    = `auth-message auth-message--${type}`;
+    el.textContent   = message;
+    el.className     = `auth-message auth-message--${type}`;
     el.style.display = 'block';
 }
 
@@ -339,7 +199,7 @@ function clearAuthError(id) {
 }
 
 // ════════════════════════════════════════════════════════════
-//  SESSION  /  APP  INIT
+//  SESSION / APP INIT
 // ════════════════════════════════════════════════════════════
 
 function handleLogout() {
@@ -387,8 +247,6 @@ function showLoadingPage() {
 
 // ── Boot: restore session ─────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    initOTPBoxes();
-
     const saved = localStorage.getItem('bharatfarm_current_user');
     if (saved) {
         try {

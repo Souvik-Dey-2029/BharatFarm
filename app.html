@@ -125,8 +125,8 @@
             <h1>Bharat Farm</h1>
             <p>Your smart farming companion for better crop planning and higher productivity</p>
             <div class="auth-security-badge">
-                <i class="fas fa-envelope-shield"></i>
-                <span>Email OTP Verified · Secure Login</span>
+                <i class="fas fa-shield-alt"></i>
+                <span>Encrypted &amp; Secure Authentication</span>
             </div>
         </div>
 
@@ -152,13 +152,23 @@
                         <label>Email Address</label>
                         <div class="input-icon">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" id="loginEmail" placeholder="Enter your registered email" autocomplete="email" required>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="email" required>
                         </div>
-                        <small class="field-hint">We will send a one-time passcode to this email.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" required>
+                            <button type="button" class="pw-toggle-btn" onclick="togglePwVisibility('loginPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-block" id="loginSubmitBtn">
-                        <i class="fas fa-paper-plane"></i> Send OTP to Email
+                        <i class="fas fa-sign-in-alt"></i> Login
                     </button>
                 </form>
 
@@ -182,7 +192,6 @@
                             <i class="fas fa-envelope"></i>
                             <input type="email" id="regEmail" placeholder="Enter your email address" autocomplete="email" required>
                         </div>
-                        <small class="field-hint">A verification code will be sent to this email.</small>
                     </div>
 
                     <div class="form-group">
@@ -199,61 +208,35 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="regPassword" placeholder="Create a password" minlength="6" autocomplete="new-password" required>
+                            <button type="button" class="pw-toggle-btn" onclick="togglePwVisibility('regPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="regConfirmPassword" placeholder="Confirm your password" minlength="6" autocomplete="new-password" required>
+                            <button type="button" class="pw-toggle-btn" onclick="togglePwVisibility('regConfirmPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-lg btn-block" id="registerSubmitBtn">
-                        <i class="fas fa-paper-plane"></i> Send OTP to Email
+                        <i class="fas fa-user-plus"></i> Create Account
                     </button>
                 </form>
 
-                <!-- ═══════════════════════════════════════════
-                     OTP VERIFICATION STEP
-                ═══════════════════════════════════════════ -->
-                <div id="otpStep" style="display:none;">
-
-                    <!-- Main OTP area -->
-                    <div id="otpMainArea">
-                        <div class="otp-header">
-                            <div class="otp-phone-icon">
-                                <i class="fas fa-envelope-open-text"></i>
-                                <span class="otp-ping"></span>
-                            </div>
-                            <h3 id="otpActionLabel">Verify Email</h3>
-                            <p>OTP sent to <strong id="otpEmailDisplay"></strong></p>
-                            <p class="otp-note">Check your email inbox (including spam folder). Valid for <strong>5 minutes</strong>.</p>
-                        </div>
-
-                        <div id="otpError" class="auth-message" style="display:none;"></div>
-
-                        <!-- 6-box OTP input -->
-                        <div class="otp-boxes">
-                            <input class="otp-box" type="tel" inputmode="numeric" maxlength="1" autocomplete="one-time-code">
-                            <input class="otp-box" type="tel" inputmode="numeric" maxlength="1">
-                            <input class="otp-box" type="tel" inputmode="numeric" maxlength="1">
-                            <input class="otp-box" type="tel" inputmode="numeric" maxlength="1">
-                            <input class="otp-box" type="tel" inputmode="numeric" maxlength="1">
-                            <input class="otp-box" type="tel" inputmode="numeric" maxlength="1">
-                        </div>
-
-                        <!-- Resend countdown -->
-                        <div class="otp-resend-row">
-                            <span id="otpTimerText" class="otp-timer">
-                                Resend OTP in <span id="otpCountdown">60</span>s
-                            </span>
-                            <button id="otpResendBtn" class="btn-link" style="display:none;" onclick="resendOTP()">
-                                <i class="fas fa-redo-alt"></i> Resend OTP
-                            </button>
-                        </div>
-
-                        <button class="btn btn-primary btn-lg btn-block" id="verifyOTPBtn" onclick="verifyOTPAndProceed()">
-                            <i class="fas fa-check-circle"></i> Verify &amp; Continue
-                        </button>
-                        <button class="btn btn-ghost btn-lg btn-block otp-back-btn" onclick="backFromOTP()">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </button>
-                    </div>
-                </div><!-- /otpStep -->
-
                 <div class="login-footer">
-                    <p><i class="fas fa-lock" style="font-size:0.75rem;"></i> OTP-verified &nbsp;·&nbsp; By continuing, you agree to our Terms of Service</p>
+                    <p><i class="fas fa-lock" style="font-size:0.75rem;"></i> Secure Login &nbsp;·&nbsp; By continuing, you agree to our Terms of Service</p>
                 </div>
             </div>
         </div>
