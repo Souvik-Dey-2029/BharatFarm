@@ -26,7 +26,7 @@ export default async function handler(req, res) {
                 modalities: ["audio", "text"],
                 voice: "verse",
                 instructions: "You are KrishiBot, a friendly and knowledgeable AI voice assistant for BharatFarm, an Indian agricultural platform. You help farmers and buyers with crop planning, market prices, weather guidance, and farming best practices. Keep your responses very concise and conversational.",
-                input_audio_transcription: { model: "whisper-1" },
+                input_audio_transcription: { model: "gpt-live-transcribe" },
                 turn_detection: {
                     type: "server_vad",
                     threshold: 0.5,
